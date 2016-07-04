@@ -1,0 +1,11 @@
+@import 'colors.scss';
+@import url('https://code.cdn.mozilla.net/fonts/fira.css');
+
+body {
+	background-color: $background;
+	font-family: 'fira sans';
+}
+
+p {
+	margin: 0;
+}

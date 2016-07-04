@@ -1,0 +1,62 @@
+@import '../../../style/colors.scss';
+
+.PaperList {
+	> h1 {
+		text-align: center;
+	}
+}
+
+.PaperList__Button {
+	font-size: 32px;
+	cursor: pointer;
+	color: white;
+
+	.mdi {
+		padding: 10px;
+		background-color: $green;
+		border-radius: 50%;
+	}
+}
+
+.PaperList__Header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.PaperList__Paper {
+	margin: 10px 0;
+	padding: 10px;
+
+	border: 1px solid $blue;
+	border-radius: 3px;
+	background-color: $background-card;
+	box-shadow: 0 0 5px $gray;
+
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+
+	&:hover {
+		box-shadow: 0 0 5px $blue;
+	}
+}
+
+.PaperList__PaperRead {
+	margin-right: 5px;
+	font-size: 16pt;
+}
+
+.PaperList__NoTitle {
+	color: $gray;
+}
+
+.PaperList__Search {
+	margin: 20px 0;
+	margin-right: 40px;
+	display: flex;
+	justify-content: flex-end;
+
+	.Search {
+		width: 50%;
+	}
+}

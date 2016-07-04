@@ -1,0 +1,54 @@
+@import '../../../style/colors.scss';
+
+.PaperEdit {
+	> h1 {
+		text-align: center;
+	}
+
+	> h2 {
+		margin-left: 30px;
+	}
+}
+
+.PaperEdit__Button {
+	font-size: 32px;
+	cursor: pointer;
+	color: white;
+
+	.mdi {
+		padding: 10px;
+		background-color: $blue;
+		border-radius: 50%;
+	}
+}
+
+.PaperEdit__Header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.PaperEdit__Button--danger {
+	font-size: 32px;
+	cursor: pointer;
+	color: white;
+
+	.mdi {
+		padding: 10px;
+		background-color: $red;
+		border-radius: 50%;
+	}
+}
+
+.PaperEdit__TitleField {
+	margin-top: 40px;
+}
+
+.PaperEdit__SummaryField {
+    min-height: 200px;
+	margin-top: 10px;
+}
+
+.PaperEdit__Footer {
+	margin-top: 20px;
+	text-align: right;
+}

@@ -1,0 +1,18 @@
+@import '../../../style/colors.scss';
+
+.Tag {
+	border: 1px solid $blue;
+	border-radius: 10px;
+	padding: 3px 10px;
+
+	display: flex;
+	align-items: center;
+
+	background-color: $background-card;
+}
+
+.Tag__ClearButton {
+	font-size: 12px;
+	cursor: pointer;
+	margin-left: 3px;
+}
