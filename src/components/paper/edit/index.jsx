@@ -150,9 +150,10 @@ class PaperEdit extends Component {
           value={paper.get('title')}
         />
         <CheckBox
-          onChange={this.onReadChange}
-          text='test'
           checked={paper.get('read')}
+          classes={{ PaperEdit__Read: true }}
+          onChange={this.onReadChange}
+          text='I have read that paper'
         />
         <TextArea
           className={{ PaperEdit__SummaryField: true }}
