@@ -49,11 +49,13 @@ module.exports = {
     }]
   },
   resolve: {
+    root: path.resolve('./src'),
     extensions: ['', '.js', '.jsx']
   },
   output: {
     path: path.join(__dirname, '/dist'),
     publicPath: '/',
+    sourceMapFilename: '[file].map',
     filename: 'bundle.js'
   },
   devServer: {
@@ -65,5 +67,6 @@ module.exports = {
   ],
   sassLoader: {
     includePaths: [path.resolve(__dirname)]
-  }
+  },
+  devtool: 'source-map'
 };

@@ -27,7 +27,7 @@
 	margin: 10px 0;
 	padding: 10px;
 
-	border: 1px solid $blue;
+	border: 1px solid $gray;
 	border-radius: 3px;
 	background-color: $background-card;
 	box-shadow: 0 0 5px $gray;
@@ -37,6 +37,7 @@
 	cursor: pointer;
 
 	&:hover {
+		border: 1px solid $blue;
 		box-shadow: 0 0 5px $blue;
 	}
 }

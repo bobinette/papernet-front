@@ -1,5 +1,4 @@
 import qs from 'qs';
-
 import 'whatwg-fetch';
 
 import { RECEIVE_PAPERS, SEARCH_PAPERS } from '../constants/events';

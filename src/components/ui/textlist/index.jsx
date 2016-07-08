@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Map } from 'immutable';
 
 import classNames from 'classnames';
 
@@ -16,6 +17,7 @@ class TextList extends Component {
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
     style: PropTypes.oneOf(['tags', 'vertical']),
+    type: PropTypes.oneOf(['number', 'string']),
     values: PropTypes.object
   }
 
@@ -24,15 +26,17 @@ class TextList extends Component {
     label: '',
     placeholder: '',
     style: 'tags',
+    type: 'string',
     values: List()
   }
 
   constructor(props) {
     super(props);
 
+    this.onChange = this.onChange.bind(this);
+    this.onClear = this.onClear.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
-    this.onChange = this.onChange.bind(this);
 
     this.state = {
       currentText: ''
@@ -41,15 +45,28 @@ class TextList extends Component {
 
   onKeyPress(e) {
     if (e.key == 'Enter') {
-      const { values } = this.props;
+      const { type, values } = this.props;
       const { currentText } = this.state;
-      this.onChange(values.push(currentText));
+
+      let v = currentText;
+      switch (type) {
+      case 'number': v = Number(currentText);
+      }
+      this.onChange(values.push(v));
       this.setState({ currentText: '' });
     }
   }
 
   onChange(values) {
     const { onChange } = this.props;
+    onChange(values);
+  }
+
+  onClear(value) {
+    const { values, onChange } = this.props;
+    const index = values.toSeq().findKey(v => v.get('key') === value.get('id'));
+    if (index === -1) return;
+
     onChange(values);
   }
 
@@ -60,7 +77,12 @@ class TextList extends Component {
   renderTagList(style, values) {
     if (style !== 'tags') return null;
 
-    return <TagList tags={values} onChange={this.onChange}/>;
+    return (
+      <TagList
+        tags={values.toSeq().map(v => Map({ value: v, label: v }))}
+        onClear={this.onClear}
+      />
+    );
   }
 
   render() {

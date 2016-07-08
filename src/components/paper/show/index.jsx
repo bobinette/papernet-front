@@ -19,9 +19,9 @@ class PaperShow extends Component {
     return (
       <div className='PaperShow__Authors'>
         {
-          paper.get('authors').toJS().map(author => {
+          paper.get('authors').toJS().map((author, i) => {
             return (
-              <div>{author}</div>
+              <div key={i}>{author}</div>
             );
           })
         }
@@ -48,9 +48,9 @@ class PaperShow extends Component {
     return (
       <ul className='PaperShow__References'>
         {
-          paper.get('references').toJS().map(ref => {
+          paper.get('references').toSeq().map((ref, i) => {
             return (
-              <li key={'Ref-'+ref}><Link to={`/papers/${ref}`}>{ref}</Link></li>
+              <li key={'Ref-'+ref} key={i}><Link to={`/papers/${ref.get('id')}`}>{ref.get('title')}</Link></li>
             );
           })
         }
@@ -64,9 +64,9 @@ class PaperShow extends Component {
     return (
       <div className='PaperShow__Tags'>
         {
-          paper.get('tags').toJS().map(tag => {
+          paper.get('tags').toJS().map((tag, i) => {
             return (
-                <div className='PaperShow__Tag'><Tag text={tag}/></div>
+                <div className='PaperShow__Tag' key={i}><Tag text={tag}/></div>
             );
           })
         }
