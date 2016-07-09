@@ -83,7 +83,7 @@ class PaperShow extends Component {
     return (
       <div className='PaperShow'>
         {this.renderHeader(paper)}
-        <h1 className='PaperShow__Title'>{title}</h1>
+        <h1 className='PaperShow__Title'>{title} ({paper.get('year')})</h1>
         <div className='PaperShow__Metadata'>
           {this.renderAuthors(paper)}
           {this.renderTags(paper)}

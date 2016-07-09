@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 import Dropdown from 'components/ui/dropdown';
+import NumberInput from 'components/ui/text/number';
 import Radio from 'components/ui/radio';
 import Select from 'components/ui/select';
 import TagList from 'components/ui/tag/list';
@@ -32,6 +33,7 @@ class PaperEdit extends Component {
     this.onDelete = this.onDelete.bind(this);
     this.onReadChange = this.onReadChange.bind(this);
     this.onRefsChange = this.onRefsChange.bind(this);
+    this.onPublishYearChange = this.onPublishYearChange.bind(this);
     this.onSave = this.onSave.bind(this);
     this.onSelectReference = this.onSelectReference.bind(this);
     this.onSummaryChange = this.onSummaryChange.bind(this);
@@ -79,6 +81,11 @@ class PaperEdit extends Component {
   onRefsChange(refs) {
     const { dispatch } = this.props;
     dispatch(updatePaper('references', refs));
+  }
+
+  onPublishYearChange(year) {
+    const { dispatch } = this.props;
+    dispatch(updatePaper('year', year));
   }
 
   onSummaryChange(summary) {
@@ -183,6 +190,13 @@ class PaperEdit extends Component {
           onChange={this.onSummaryChange}
           placeholder='Summary...'
           value={paper.get('summary')}
+        />
+        <NumberInput
+          classes={{ PaperEdit__PublishYear: true }}
+          label='Release year'
+          onChange={this.onPublishYearChange}
+          placeholder='ex: 2016...'
+          value={paper.get('year')}
         />
         <TextList
           label='Tags'
