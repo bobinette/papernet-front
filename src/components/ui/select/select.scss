@@ -1,7 +1,6 @@
-@import '../../../style/colors.scss';
+@import '../../../style/base.scss';
 
 .Select {
-	// z-index: 100;
 	display: flex;
 	min-height: 35px;
 }
@@ -10,7 +9,7 @@
 	background-color: $background-card;
 	position: absolute;
 	width: 100%;
-	border-radius: 0px 0px 5px 5px;
+	border-radius: 0px 0px 2px 2px;
 	border: 1px solid $blue;
 	border-top: none;
 	margin-bottom: 20px;
@@ -26,7 +25,7 @@
 }
 
 .Select__Choice--last {
-	border-radius: 0px 0px 5px 5px;
+	border-radius: 0px 0px $border-radius $border-radius;
 }
 
 .Select__Label {

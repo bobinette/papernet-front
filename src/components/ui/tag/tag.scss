@@ -1,8 +1,8 @@
-@import '../../../style/colors.scss';
+@import '../../../style/base.scss';
 
 .Tag {
 	border: 1px solid $blue;
-	border-radius: 10px;
+	border-radius: 2*$border-radius;
 	padding: 3px 10px;
 
 	display: flex;

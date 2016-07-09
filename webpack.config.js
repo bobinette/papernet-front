@@ -11,11 +11,10 @@ module.exports = {
     loaders: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loaders: ['react-hot', 'babel?presets[]=es2015&presets[]=react&presets[]=stage-0'],
-      include: path.join(__dirname, 'src')
+      loaders: ['react-hot', 'babel?presets[]=es2015&presets[]=react&presets[]=stage-0']
     }, {
       test: /\.css$/,
-      loader: 'style!css' // We add the css loader
+      loader: 'style!css'
     }, {
       test: /\.scss$/,
       loaders: ['style', 'css', 'sass']

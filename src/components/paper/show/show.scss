@@ -1,4 +1,4 @@
-@import '../../../style/colors.scss';
+@import '../../../style/base.scss';
 
 .PaperShow {
 	> h1 {
@@ -12,8 +12,8 @@
 
 .PaperShow__Summary {
 	background-color: $background-card;
-	border: 2px solid $gray-light;
-	border-radius: 10px;
+	border: 1px solid $gray-light;
+	border-radius: $border-radius;
 	padding: 10px;
 }
 

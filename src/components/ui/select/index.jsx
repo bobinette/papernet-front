@@ -73,7 +73,7 @@ class Select extends Component {
   onSelect(option) {
     const { onSelect } = this.props;
     onSelect(option);
-    this.handleClickOutside()
+    this.handleClickOutside();
   }
 
   onUnselect(option) {

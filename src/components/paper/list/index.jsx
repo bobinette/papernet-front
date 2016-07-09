@@ -63,10 +63,19 @@ class PaperList extends Component {
       paper.get('title') ? paper.get('title') :
       <em className='PaperList__NoTitle'>No title</em>
     );
+
+    const paperTypeClasses = {
+      mdi: true,
+      'mdi-file-outline': paper.get('type') === 0,
+      'mdi-book-open-page-variant': paper.get('type') === 1,
+      'mdi-presentation': paper.get('type') === 2
+    };
+
     return (
       <div className='PaperList__Paper' onClick={onClick} key={paper.get('id')}>
         <div className='PaperList__PaperRead'><i className={classNames(classes)} /></div>
-        {title}
+        <div className='PaperList__PaperTitle'>{title}</div>
+        <div className='PaperList__PaperType'><i className={classNames(paperTypeClasses)} /></div>
       </div>
     );
   }

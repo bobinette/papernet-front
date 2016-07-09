@@ -4,12 +4,15 @@ import { Link } from 'react-router';
 
 import { connect } from 'react-redux';
 
-import CheckBox from 'components/ui/checkbox';
+import Dropdown from 'components/ui/dropdown';
+import Radio from 'components/ui/radio';
 import Select from 'components/ui/select';
 import TagList from 'components/ui/tag/list';
-import Text from '../../../components/ui/text';
-import TextArea from '../../../components/ui/textarea';
-import TextList from '../../../components/ui/textlist';
+import Text from 'components/ui/text';
+import TextArea from 'components/ui/textarea';
+import TextList from 'components/ui/textlist';
+
+import { paperTypes } from 'constants/paper';
 
 import { deletePaper, savePaper, updatePaper } from '../../../actions/paper';
 
@@ -34,7 +37,12 @@ class PaperEdit extends Component {
     this.onSummaryChange = this.onSummaryChange.bind(this);
     this.onTagsChange = this.onTagsChange.bind(this);
     this.onTitleChange = this.onTitleChange.bind(this);
+    this.onTypeChange = this.onTypeChange.bind(this);
     this.onUnselectReference = this.onUnselectReference.bind(this);
+
+    this.state = {
+      readOptions: [{ value: true, label: 'Yes' }, { value: false, label: 'No' }]
+    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -65,7 +73,7 @@ class PaperEdit extends Component {
 
   onReadChange(read) {
     const { dispatch } = this.props;
-    dispatch(updatePaper('read', read));
+    dispatch(updatePaper('read', read.value));
   }
 
   onRefsChange(refs) {
@@ -105,6 +113,11 @@ class PaperEdit extends Component {
     dispatch(updatePaper('title', title));
   }
 
+  onTypeChange(type) {
+    const { dispatch } = this.props;
+    dispatch(updatePaper('type', type));
+  }
+
   onUnselectReference(ref) {
     const { dispatch, paper } = this.props;
     const refs = paper.get('references');
@@ -137,6 +150,7 @@ class PaperEdit extends Component {
 
   render() {
     const { paper } = this.props;
+    const { readOptions } = this.state;
 
     return (
       <div className='PaperEdit'>
@@ -149,11 +163,19 @@ class PaperEdit extends Component {
           placeholder='Title...'
           value={paper.get('title')}
         />
-        <CheckBox
-          checked={paper.get('read')}
+        <Radio
           classes={{ PaperEdit__Read: true }}
+          label='Read'
           onChange={this.onReadChange}
-          text='I have read that paper'
+          options={readOptions}
+          value={paper.get('read')}
+        />
+        <Dropdown
+          classes={{ PaperEdit__PaperType: true }}
+          label='Type'
+          options={paperTypes}
+          onChange={this.onTypeChange}
+          value={paperTypes.find(p => p.value === paper.get('type'))}
         />
         <TextArea
           className={{ PaperEdit__SummaryField: true }}

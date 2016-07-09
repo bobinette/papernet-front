@@ -21,6 +21,7 @@
 .PaperList__Header {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .PaperList__Paper {
@@ -44,6 +45,15 @@
 
 .PaperList__PaperRead {
 	margin-right: 5px;
+	font-size: 16pt;
+}
+
+.PaperList__PaperTitle {
+	flex: 1;
+}
+
+.PaperList__PaperType {
+	margin: 0 5px;
 	font-size: 16pt;
 }
 
