@@ -9,7 +9,7 @@ class CheckBox extends Component {
     checked: PropTypes.bool,
     classes: PropTypes.object,
     onChange: PropTypes.func.isRequired,
-    text: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
@@ -35,14 +35,14 @@ class CheckBox extends Component {
   }
 
   render() {
-    const { checked, classes, text } = this.props;
+    const { checked, classes, label } = this.props;
 
     classes.CheckBox = true;
     const onClick = this.onClick.bind(this, !checked);
     return (
       <div className={classNames(classes)}>
         <input type='checkbox' checked={checked} onChange={this.onChange}/>
-        <div className='CheckBox__Text' onClick={onClick}>{text}</div>
+        <div className='CheckBox__Label' onClick={onClick}>{label}</div>
       </div>
     );
   }

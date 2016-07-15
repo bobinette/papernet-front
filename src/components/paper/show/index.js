@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Link} from 'react-router';
+import katex from 'katex';
+import sanitize from 'sanitize-caja';
 
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'react-remarkable';
 
 import Tag from '../../../components/ui/tag';
 
@@ -11,6 +13,14 @@ class PaperShow extends Component {
 
   static propTypes = {
     paper: PropTypes.object.isRequired
+  }
+
+  componentDidUpdate() {
+    const elts = document.getElementsByClassName('math');
+    Array.prototype.forEach.call(elts, function(elt) {
+      // Do stuff here
+      katex.render(elt.innerHTML, elt, { displayMode: true });
+    });
   }
 
   renderAuthors(paper) {
@@ -74,26 +84,39 @@ class PaperShow extends Component {
     );
   }
 
+  renderSummary(summary) {
+    const mathSummary = summary.replace(
+      '<eq>', '<div class="math">'
+    ).replace('</eq>', '</div>');
+
+    return (
+      <div id='PaperShow__Summary'>
+        <Markdown
+          source={sanitize(mathSummary)}
+          options={{ html: true }}
+        />
+      </div>
+    );
+  }
+
   render() {
     const { paper } = this.props;
 
     const title = paper.get('title') ? paper.get('title') : <em>No title</em>;
     const summary = paper.get('summary') || '';
 
+    const year = paper.get('year');
     return (
       <div className='PaperShow'>
         {this.renderHeader(paper)}
-        <h1 className='PaperShow__Title'>{title} ({paper.get('year')})</h1>
+        <h1 className='PaperShow__Title'>{title} {year > 0 ? '(' + year + ')' : null}</h1>
         <div className='PaperShow__Metadata'>
           {this.renderAuthors(paper)}
           {this.renderTags(paper)}
         </div>
         <h2>Summary</h2>
         <div className='PaperShow__Summary'>
-          <ReactMarkdown
-            source={summary}
-            escapeHTML
-          />
+          {this.renderSummary(summary)}
         </div>
         <h2>References</h2>
         {this.renderReferences(paper)}

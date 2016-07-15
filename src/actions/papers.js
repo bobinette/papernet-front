@@ -1,7 +1,9 @@
 import qs from 'qs';
 import 'whatwg-fetch';
 
-import { RECEIVE_PAPERS, SEARCH_PAPERS } from '../constants/events';
+import { error } from 'actions/notifications';
+
+import { RECEIVE_PAPERS, SEARCH_PAPERS } from 'constants/events';
 
 const base_url = 'http://localhost:8081';
 
@@ -11,13 +13,20 @@ export const getPapers = () => (dispatch, getState) => {
   const url = base_url + '/papers?' + qs.stringify(papers.get('filters').toJS());
 
   return fetch(url).then(
-    (response) => response.json()
+    (response) => {
+      const json = response.json();
+      if (response.ok) {
+        return json;
+      } else {
+        return json.then(Promise.reject.bind(Promise));
+      }
+    }
   ).then(
     (response) => {
       const papers = response.data;
       return dispatch({ type: RECEIVE_PAPERS, papers});
     },
-    (error) => {console.log(error);}
+    (err) => {error('Error getting papers', err.message ? err.message : null);}
   );
 };
 

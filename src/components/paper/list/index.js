@@ -9,6 +9,8 @@ import { search } from '../../../actions/papers';
 
 import Search from '../../ui/text/search';
 
+import katex from 'katex';
+
 import './list.scss';
 
 class PaperList extends Component {
