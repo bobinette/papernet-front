@@ -41,6 +41,7 @@ class PaperEdit extends Component {
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onTypeChange = this.onTypeChange.bind(this);
     this.onUnselectReference = this.onUnselectReference.bind(this);
+    this.onURLsChanged = this.onURLsChanged.bind(this);
 
     this.state = {
       readOptions: [{ value: true, label: 'Yes' }, { value: false, label: 'No' }]
@@ -134,6 +135,11 @@ class PaperEdit extends Component {
     dispatch(updatePaper('references', refs.remove(index)));
   }
 
+  onURLsChanged(urls) {
+    const { dispatch } = this.props;
+    dispatch(updatePaper('urls', urls));
+  }
+
   renderHeader(paper) {
     return (
       <div className='PaperEdit__Header'>
@@ -218,6 +224,12 @@ class PaperEdit extends Component {
           placeholder='This paper references...'
           searchURL='http://localhost:8081/papers'
           value={paper.get('references') ? paper.get('references') : []}
+        />
+        <TextList
+          label='URLs'
+          onChange={this.onURLsChanged}
+          placeholder='New URL...'
+          values={paper.get('urls')}
         />
         {this.renderFooter()}
       </div>

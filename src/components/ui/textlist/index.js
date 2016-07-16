@@ -64,10 +64,10 @@ class TextList extends Component {
 
   onClear(value) {
     const { values, onChange } = this.props;
-    const index = values.toSeq().findKey(v => v.get('key') === value.get('id'));
+    const index = values.toSeq().findKey(v => v === value.get('value'));
     if (index === -1) return;
 
-    onChange(values);
+    onChange(values.remove(index));
   }
 
   onTextChange(value) {

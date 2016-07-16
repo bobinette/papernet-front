@@ -60,7 +60,7 @@ class PaperShow extends Component {
         {
           paper.get('references').toSeq().map((ref, i) => {
             return (
-              <li key={'Ref-'+ref} key={i}><Link to={`/papers/${ref.get('id')}`}>{ref.get('title')}</Link></li>
+              <li key={'Ref-'+ref}><Link to={`/papers/${ref.get('id')}`}>{ref.get('title')}</Link></li>
             );
           })
         }
@@ -74,9 +74,9 @@ class PaperShow extends Component {
     return (
       <div className='PaperShow__Tags'>
         {
-          paper.get('tags').toJS().map((tag, i) => {
+          paper.get('tags').toJS().map((tag) => {
             return (
-                <div className='PaperShow__Tag' key={i}><Tag text={tag}/></div>
+                <div className='PaperShow__Tag' key={'Tag-'+tag}><Tag text={tag}/></div>
             );
           })
         }
@@ -96,6 +96,18 @@ class PaperShow extends Component {
           options={{ html: true }}
         />
       </div>
+    );
+  }
+
+  renderURLs(urls) {
+    if (!urls) return null;
+
+    return (
+      <ul className='PaperShow__URLs'>
+        {
+          urls.toSeq().map((url) => <li key={'URL-'+url}><a href={url}>{url}</a></li>)
+        }
+      </ul>
     );
   }
 
@@ -120,6 +132,8 @@ class PaperShow extends Component {
         </div>
         <h2>References</h2>
         {this.renderReferences(paper)}
+        <h2>URLs</h2>
+        {this.renderURLs(paper.get('urls'))}
       </div>
     );
   }
