@@ -16,3 +16,9 @@
 	cursor: pointer;
 	margin-left: 3px;
 }
+
+.Tag__Text {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}

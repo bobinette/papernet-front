@@ -31,6 +31,8 @@ class Tag extends Component {
   render() {
     const { classes, text } = this.props;
 
+    classes.Tag__Text = true;
+
     return (
       <div className='Tag'>
         <span className={classNames(classes)} key={'Tag-'+text}>
