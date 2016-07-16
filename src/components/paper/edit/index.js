@@ -15,9 +15,9 @@ import Text from 'components/ui/text';
 import TextArea from 'components/ui/textarea';
 import TextList from 'components/ui/textlist';
 
-import { paperTypes } from 'constants/paper';
+import { paperTypes, readingStatuses } from 'constants/paper';
 
-import { deletePaper, savePaper, updatePaper } from '../../../actions/paper';
+import { deletePaper, savePaper, updatePaper } from 'actions/paper';
 
 import './edit.scss';
 
@@ -44,10 +44,6 @@ class PaperEdit extends Component {
     this.onTypeChange = this.onTypeChange.bind(this);
     this.onUnselectReference = this.onUnselectReference.bind(this);
     this.onURLsChanged = this.onURLsChanged.bind(this);
-
-    this.state = {
-      readOptions: [{ value: true, label: 'Yes' }, { value: false, label: 'No' }]
-    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -172,7 +168,6 @@ class PaperEdit extends Component {
 
   render() {
     const { paper } = this.props;
-    const { readOptions } = this.state;
 
     return (
       <div className='PaperEdit'>
@@ -189,7 +184,7 @@ class PaperEdit extends Component {
           classes={{ PaperEdit__Read: true }}
           label='Read'
           onChange={this.onReadChange}
-          options={readOptions}
+          options={readingStatuses}
           value={paper.get('read')}
         />
         <Dropdown

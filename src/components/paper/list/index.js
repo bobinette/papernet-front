@@ -54,10 +54,12 @@ class PaperList extends Component {
   renderPaper(paper) {
     const onClick = this.onClick.bind(this, paper.get('id'));
 
+    const readingStatus = paper.get('read');
     const classes = {
       mdi: true,
-      'mdi-checkbox-marked-circle-outline': paper.get('read'),
-      'mdi-checkbox-blank-circle-outline': !paper.get('read'),
+      'mdi-checkbox-blank-circle-outline': readingStatus == null || readingStatus === 0,
+      'mdi-checkbox-marked-circle-outline': readingStatus === 1,
+      'mdi-dots-horizontal': readingStatus === 2
     };
 
     const title = (
