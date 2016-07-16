@@ -1,13 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { hashHistory } from 'react-router';
 import { Link} from 'react-router';
+import { Map } from 'immutable';
+
 import katex from 'katex';
 import sanitize from 'sanitize-caja';
 
 import Markdown from 'react-remarkable';
 
 import Button from 'components/ui/button';
-import Tag from 'components/ui/tag';
+import TagList from 'components/ui/tag/list';
 
 import './show.scss';
 
@@ -41,6 +43,16 @@ class PaperShow extends Component {
     );
   }
 
+  renderEmpty(section) {
+    const { paper } = this.props;
+    return (
+      <div className='PaperShow__Empty'>
+        <em className='PaperShow__EmptyMessage'>No {section} - </em>
+        <Link to={'/papers/' + paper.get('id') + '/edit'}>Edit</Link>
+      </div>
+    );
+  }
+
   renderHeader(paper) {
     const gotoEdit = () => {hashHistory.push('/papers/' + paper.get('id') + '/edit');};
     const gotoHome = () => {hashHistory.push('/');};
@@ -59,13 +71,13 @@ class PaperShow extends Component {
     );
   }
 
-  renderReferences(paper) {
-    if (!paper.get('references')) return null;
+  renderReferences(references) {
+    if (!references || references.size === 0) return this.renderEmpty('references');
 
     return (
       <ul className='PaperShow__References'>
         {
-          paper.get('references').toSeq().map((ref, i) => {
+          references.toSeq().map((ref) => {
             return (
               <li key={'Ref-'+ref}><Link to={`/papers/${ref.get('id')}`}>{ref.get('title')}</Link></li>
             );
@@ -80,24 +92,22 @@ class PaperShow extends Component {
 
     return (
       <div className='PaperShow__Tags'>
-        {
-          paper.get('tags').toJS().map((tag) => {
-            return (
-                <div className='PaperShow__Tag' key={'Tag-'+tag}><Tag text={tag}/></div>
-            );
-          })
-        }
+        <TagList
+          tags={paper.get('tags').toSeq().map(tag => Map({ value: tag, label: tag }))}
+        />
       </div>
     );
   }
 
   renderSummary(summary) {
+    if (!summary) return this.renderEmpty('summary');
+
     const mathSummary = summary.replace(
       '<eq>', '<div class="math">'
     ).replace('</eq>', '</div>');
 
     return (
-      <div id='PaperShow__Summary'>
+      <div className='PaperShow__Summary'>
         <Markdown
           source={sanitize(mathSummary)}
           options={{ html: true }}
@@ -107,12 +117,14 @@ class PaperShow extends Component {
   }
 
   renderURLs(urls) {
-    if (!urls) return null;
+    if (!urls || urls.size === 0) return this.renderEmpty('urls');
 
     return (
       <ul className='PaperShow__URLs'>
         {
-          urls.toSeq().map((url) => <li key={'URL-'+url}><a href={url}>{url}</a></li>)
+          urls.toSeq().map((url) => (
+            <li key={'URL-'+url}><a href={url} target='_blank'>{url}</a></li>
+          ))
         }
       </ul>
     );
@@ -125,6 +137,7 @@ class PaperShow extends Component {
     const summary = paper.get('summary') || '';
 
     const year = paper.get('year');
+
     return (
       <div className='PaperShow'>
         {this.renderHeader(paper)}
@@ -134,12 +147,10 @@ class PaperShow extends Component {
           {this.renderTags(paper)}
         </div>
         <h2>Summary</h2>
-        <div className='PaperShow__Summary'>
-          {this.renderSummary(summary)}
-        </div>
+        {this.renderSummary(summary)}
         <h2>References</h2>
-        {this.renderReferences(paper)}
-        <h2>URLs</h2>
+        {this.renderReferences(paper.get('references'))}
+        <h2>Resources</h2>
         {this.renderURLs(paper.get('urls'))}
       </div>
     );

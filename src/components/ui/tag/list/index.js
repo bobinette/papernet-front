@@ -2,38 +2,34 @@ import React, { Component, PropTypes } from 'react';
 
 import classNames from 'classnames';
 
-import Tag from '..';
+import Tag from 'components/ui/tag';
 
 import './list.scss';
 
 class TagList extends Component {
   static propTypes = {
     classes: PropTypes.object,
-    onClear: PropTypes.func.isRequired,
+    onClear: PropTypes.func,
     tags: PropTypes.object.isRequired
   }
 
   static defaultProps = {
-    classes: {}
-  }
-
-  onClear(tag) {
-    const { onClear } = this.props;
-    onClear(tag);
+    classes: {},
+    onClear: null
   }
 
   render() {
-    const { classes, tags } = this.props;
+    const { classes, onClear, tags } = this.props;
 
     classes.TagList__Values = true;
     return (
       <div className={classNames(classes)}>
         {
           tags.toSeq().map((tag) => {
-            const onClear = this.onClear.bind(this, tag);
+            const onClearTag = onClear && onClear.bind(this, tag);
             return (
               <div className='TagList__Tag' key={tag.get('value')}>
-                <Tag text={tag.get('label')} onClear={onClear}/>
+                <Tag text={tag.get('label')} onClear={onClearTag}/>
               </div>
             );
           }).toJS()
