@@ -40,15 +40,3 @@
 	display: flex;
 	justify-content: space-between;
 }
-
-.PaperShow__HeaderButton {
-	font-size: 32px;
-	cursor: pointer;
-	color: white;
-
-	.mdi {
-		padding: 10px;
-		background-color: $blue;
-		border-radius: 50%;
-	}
-}

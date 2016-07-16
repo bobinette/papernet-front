@@ -6,18 +6,6 @@
 	}
 }
 
-.PaperList__Button {
-	font-size: 32px;
-	cursor: pointer;
-	color: white;
-
-	.mdi {
-		padding: 10px;
-		background-color: $green;
-		border-radius: 50%;
-	}
-}
-
 .PaperList__Header {
 	display: flex;
 	justify-content: space-between;

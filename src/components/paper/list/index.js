@@ -4,12 +4,11 @@ import { connect } from 'react-redux';
 
 import classNames from 'classnames';
 
-import { createPaper } from '../../../actions/paper';
-import { search } from '../../../actions/papers';
+import { createPaper } from 'actions/paper';
+import { search } from 'actions/papers';
 
-import Search from '../../ui/text/search';
-
-import katex from 'katex';
+import Button from 'components/ui/button';
+import Search from 'components/ui/text/search';
 
 import './list.scss';
 
@@ -45,9 +44,11 @@ class PaperList extends Component {
     return (
       <div className='PaperList__Header'>
         <h1 className='PaperList__Title'>Papernet</h1>
-        <div className='PaperList__Button'  onClick={this.onAdd} >
-          <i className='mdi mdi-plus'/>
-        </div>
+        <Button
+          onClick={this.onAdd}
+          content={<i className='mdi mdi-plus'/>}
+          type='valid'
+        />
       </div>
     );
   }

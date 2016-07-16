@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+import { hashHistory } from 'react-router';
 import { Link} from 'react-router';
 import katex from 'katex';
 import sanitize from 'sanitize-caja';
 
 import Markdown from 'react-remarkable';
 
-import Tag from '../../../components/ui/tag';
+import Button from 'components/ui/button';
+import Tag from 'components/ui/tag';
 
 import './show.scss';
 
@@ -40,14 +42,19 @@ class PaperShow extends Component {
   }
 
   renderHeader(paper) {
+    const gotoEdit = () => {hashHistory.push('/papers/' + paper.get('id') + '/edit');};
+    const gotoHome = () => {hashHistory.push('/');};
+
     return (
       <div className='PaperShow__Header'>
-        <Link to={'/'} className='PaperShow__HeaderButton'>
-          <i className='mdi mdi-home' />
-        </Link>
-        <Link to={`/papers/${paper.get('id')}/edit`} className='PaperShow__HeaderButton'>
-          <i className='mdi mdi-pencil' />
-        </Link>
+        <Button
+          content={<i className='mdi mdi-home' />}
+          onClick={gotoHome}
+        />
+        <Button
+          content={<i className='mdi mdi-pencil' />}
+          onClick={gotoEdit}
+        />
       </div>
     );
   }

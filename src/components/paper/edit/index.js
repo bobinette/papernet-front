@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
+import { hashHistory } from 'react-router';
 import { fromJS, List, Map } from 'immutable';
 import { Link } from 'react-router';
 
 import { connect } from 'react-redux';
 
+import Button from 'components/ui/button';
 import Dropdown from 'components/ui/dropdown';
 import NumberInput from 'components/ui/text/number';
 import Radio from 'components/ui/radio';
@@ -141,12 +143,17 @@ class PaperEdit extends Component {
   }
 
   renderHeader(paper) {
+    const gotoPaper = () => {hashHistory.push('/papers/' + paper.get('id'));};
     return (
       <div className='PaperEdit__Header'>
-        <Link to={`/papers/${paper.get('id')}`} className='PaperEdit__Button'>
-          <i className='mdi mdi-close' />
-        </Link>
-        <div className='PaperEdit__Button'><i className='mdi mdi-check' onClick={this.onSave} /></div>
+        <Button
+          content={<i className='mdi mdi-close'/>}
+          onClick={gotoPaper}
+        />
+        <Button
+          content={<i className='mdi mdi-check'/>}
+          onClick={this.onSave}
+        />
       </div>
     );
   }
@@ -154,9 +161,11 @@ class PaperEdit extends Component {
   renderFooter() {
     return (
       <div className='PaperEdit__Footer'>
-        <div className='PaperEdit__Button--danger' onClick={this.onDelete}>
-          <i className='mdi mdi-delete' />
-        </div>
+        <Button
+          content={<i className='mdi mdi-delete'/>}
+          onClick={this.onDelete}
+          type='danger'
+        />
       </div>
     );
   }

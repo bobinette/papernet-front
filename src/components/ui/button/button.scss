@@ -1,0 +1,34 @@
+@import '../../../style/base.scss';
+
+.Button {
+	font-size: 32px;
+	cursor: pointer;
+	color: white;
+	background-color: $blue;
+	border: none;
+	border-radius: 50%;
+
+	.mdi {
+		padding: 10px; // Square button
+	}
+
+	&:hover {
+		box-shadow: 0 0 3px $blue;
+	}
+
+	&--danger {
+		background-color: $red;
+
+		&:hover {
+			box-shadow: 0 0 3px $red;
+		}
+	}
+
+	&--valid {
+		background-color: $green;
+
+		&:hover {
+			box-shadow: 0 0 3px $green;
+		}
+	}
+}

@@ -10,33 +10,9 @@
 	}
 }
 
-.PaperEdit__Button {
-	font-size: 32px;
-	cursor: pointer;
-	color: white;
-
-	.mdi {
-		padding: 10px;
-		background-color: $blue;
-		border-radius: 50%;
-	}
-}
-
 .PaperEdit__Header {
 	display: flex;
 	justify-content: space-between;
-}
-
-.PaperEdit__Button--danger {
-	font-size: 32px;
-	cursor: pointer;
-	color: white;
-
-	.mdi {
-		padding: 10px;
-		background-color: $red;
-		border-radius: 50%;
-	}
 }
 
 .PaperEdit__Read {
