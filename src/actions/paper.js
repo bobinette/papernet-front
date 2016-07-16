@@ -21,18 +21,6 @@ export const getPaper = (id) => (dispatch) => {
   );
 };
 
-export const createPaper = () => () => {
-  return fetch(url + '/papers', {method: 'POST', body: {}}).then(handleJSON).then(
-    (response) => {
-      const paper = response.data;
-      hashHistory.push('/papers/' + paper.id + '/edit');
-    },
-    (err) => {
-      error('Could not create paper', err.message ? err.message : null);
-    }
-  );
-};
-
 export const updatePaper = (key, value) => {
   return {
     type: UPDATE_PAPER,
@@ -53,14 +41,21 @@ export const deletePaper = (id) => () => {
 };
 
 export const savePaper = (paper) => (dispatch) => {
-  return fetch(url + '/papers/' + paper.get('id'), {
-    method: 'PUT',
+  let saveURL = url + '/papers';
+  let method = 'POST';
+  if (paper.get('id')) {
+    saveURL += '/' + paper.get('id');
+    method = 'PUT';
+  }
+
+  return fetch(saveURL, {
+    method,
     body: JSON.stringify(paper)
   }).then(handleJSON).then(
     (response) => {
       const paper = response.data;
       dispatch({ type: RECEIVE_PAPER, paper });
-      success('Saved');
+      success('Saved!');
       hashHistory.push('/papers/' + paper.id);
     },
     (err) => {

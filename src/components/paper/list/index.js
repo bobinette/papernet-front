@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import classNames from 'classnames';
 
-import { createPaper } from 'actions/paper';
 import { search } from 'actions/papers';
 
 import Button from 'components/ui/button';
@@ -27,8 +26,7 @@ class PaperList extends Component {
   }
 
   onAdd() {
-    const { dispatch } = this.props;
-    dispatch(createPaper());
+    hashHistory.push('/papers/new');
   }
 
   onClick(id) {

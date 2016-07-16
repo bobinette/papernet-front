@@ -217,13 +217,13 @@ class PaperEdit extends Component {
           label='Tags'
           onChange={this.onTagsChange}
           placeholder='New tag...'
-          values={paper.get('tags')}
+          values={paper.get('tags') ? paper.get('tags') : List()}
         />
         <TextList
           label='Autors'
           onChange={this.onAuthorsChange}
           placeholder='New author...'
-          values={paper.get('authors')}
+          values={paper.get('authors') ? paper.get('authors') : List()}
         />
         <Select
           label='References'
@@ -232,13 +232,13 @@ class PaperEdit extends Component {
           mapper={(o) => Map(({ value: o.get('id'), label: o.get('title') }))}
           placeholder='This paper references...'
           searchURL='http://localhost:8081/papers'
-          value={paper.get('references') ? paper.get('references') : []}
+          value={paper.get('references') ? paper.get('references') : List()}
         />
         <TextList
           label='URLs'
           onChange={this.onURLsChanged}
           placeholder='New URL...'
-          values={paper.get('urls')}
+          values={paper.get('urls') ? paper.get('urls') : List()}
         />
         {this.renderFooter()}
       </div>

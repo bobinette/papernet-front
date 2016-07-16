@@ -15,9 +15,10 @@ import 'react-redux-toastr/src/less/index.less';
 import 'katex/dist/katex.min.css';
 
 // Containers
-import ShowContainer from 'containers/show';
+import CreateContainer from 'containers/create';
 import EditContainer from 'containers/edit';
 import ListContainer from 'containers/list';
+import ShowContainer from 'containers/show';
 
 // Reducers
 import paper from 'reducers/paper';
@@ -54,6 +55,7 @@ ReactDOM.render(
         <Route path='/'>
           <IndexRedirect to='/papers' />
           <Route path='papers' component={ListContainer} />
+          <Route path='papers/new' component={CreateContainer} />
           <Route path='papers/:paperId' component={ShowContainer} />
           <Route path='papers/:paperId/edit' component={EditContainer} />
         </Route>
