@@ -16,12 +16,13 @@
 	border-radius: $border-radius;
 	padding: 10px;
 
-	.katex-html {
-		font-size: 16pt;
-	}
-
 	pre code {
 		white-space: normal;
+		word-break: normal;
+	}
+
+	h4 {
+		margin-top: 20px;
 	}
 }
 

@@ -121,7 +121,7 @@ class PaperEdit extends Component {
 
   onTypeChange(type) {
     const { dispatch } = this.props;
-    dispatch(updatePaper('type', type));
+    dispatch(updatePaper('type', type.value));
   }
 
   onUnselectReference(ref) {
