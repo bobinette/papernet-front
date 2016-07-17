@@ -16,6 +16,11 @@
 
 	.Text__InputField {
 		border: none;
+		background-color: transparent;
+
+		&:focus {
+			box-shadow: none;
+		}
 	}
 }
 

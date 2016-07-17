@@ -19,7 +19,6 @@ class Search extends Component {
     this.onChange = this.onChange.bind(this);
     this.onClear = this.onClear.bind(this);
     this.onFocus = this.onFocus.bind(this);
-    this.onKeyPress = this.onKeyPress.bind(this);
 
     this.state = {
       focus: false,
@@ -28,7 +27,10 @@ class Search extends Component {
   }
 
   onChange(text) {
+    const { onSearch } = this.props;
+
     this.setState({ text });
+    onSearch(text);
   }
 
   onClear() {
@@ -42,13 +44,10 @@ class Search extends Component {
     this.setState({ focus });
   }
 
-  onKeyPress(e) {
-    const { onSearch } = this.props;
-    const { text } = this.state;
+  renderClear(text) {
+    if (!text) return null;
 
-    if (e.key == 'Enter') {
-      onSearch(text);
-    }
+    return <div className='mdi mdi-close Search__Clear' onClick={this.onClear}/>;
   }
 
   render() {
@@ -66,11 +65,10 @@ class Search extends Component {
         <Text
           onChange={this.onChange}
           onFocus={this.onFocus}
-          onKeyPress={this.onKeyPress}
           placeholder={placeholder}
           value={text}
         />
-        <div className='mdi mdi-close Search__Clear' onClick={this.onClear}/>
+        {this.renderClear(text)}
       </div>
     );
   }

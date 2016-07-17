@@ -8,10 +8,7 @@ class Tag extends Component {
   static propTypes = {
     classes: PropTypes.object,
     onClear: PropTypes.func,
-    text: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string
-    ]).isRequired
+    text: PropTypes.node.isRequired
   }
 
   static defaultProps = {

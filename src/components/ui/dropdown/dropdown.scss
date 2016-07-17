@@ -42,7 +42,7 @@
 }
 
 .Dropdown-option {
-	padding: 2px 5px;
+	padding: 7px 5px;
 	cursor: pointer;
 
 	&:hover {
@@ -76,8 +76,16 @@
 
 	.Dropdown-control {
 		border: 1px solid $blue;
+
+		outline: none;
+		border-color: $blue;
+		box-shadow: 0 0 5px $blue;
 	}
 	.Dropdown-menu {
 		border: 1px solid $blue;
+
+		outline: none;
+		border-color: $blue;
+		box-shadow: 0 0 5px $blue;
 	}
 }

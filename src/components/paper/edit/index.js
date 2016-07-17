@@ -181,46 +181,49 @@ class PaperEdit extends Component {
           value={paper.get('title')}
         />
         <Radio
-          classes={{ PaperEdit__Read: true }}
+          classes={{ PaperEdit__Block: true }}
           label='Read'
           onChange={this.onReadChange}
           options={readingStatuses}
           value={paper.get('read')}
         />
-        <Dropdown
-          classes={{ PaperEdit__PaperType: true }}
-          label='Type'
-          options={paperTypes}
-          onChange={this.onTypeChange}
-          value={paperTypes.find(p => p.value === paper.get('type'))}
-        />
-        <TextArea
-          className={{ PaperEdit__SummaryField: true }}
-          label='Summary'
-          onChange={this.onSummaryChange}
-          placeholder='Summary...'
-          value={paper.get('summary')}
-        />
         <NumberInput
-          classes={{ PaperEdit__PublishYear: true }}
+          classes={{ PaperEdit__Block: true }}
           label='Release year'
           onChange={this.onPublishYearChange}
           placeholder='ex: 2016...'
           value={paper.get('year')}
         />
+        <Radio
+          classes={{ PaperEdit__Block: true }}
+          label='Type'
+          onChange={this.onTypeChange}
+          options={paperTypes}
+          value={paper.get('type')}
+        />
+        <TextArea
+          className={{ PaperEdit__Block: true, PaperEdit__SummaryField: true }}
+          label='Summary'
+          onChange={this.onSummaryChange}
+          placeholder='Summary...'
+          value={paper.get('summary')}
+        />
         <TextList
+          classes={{ PaperEdit__Block: true }}
           label='Tags'
           onChange={this.onTagsChange}
           placeholder='New tag...'
           values={paper.get('tags') ? paper.get('tags') : List()}
         />
         <TextList
+          classes={{ PaperEdit__Block:true }}
           label='Autors'
           onChange={this.onAuthorsChange}
           placeholder='New author...'
           values={paper.get('authors') ? paper.get('authors') : List()}
         />
         <Select
+          classes={{ PaperEdit__Block: true }}
           label='References'
           onSelect={this.onSelectReference}
           onUnselect={this.onUnselectReference}
@@ -230,9 +233,10 @@ class PaperEdit extends Component {
           value={paper.get('references') ? paper.get('references') : List()}
         />
         <TextList
-          label='URLs'
+          classes={{ PaperEdit__Block: true }}
+          label='Resources'
           onChange={this.onURLsChanged}
-          placeholder='New URL...'
+          placeholder='New resource...'
           values={paper.get('urls') ? paper.get('urls') : List()}
         />
         {this.renderFooter()}

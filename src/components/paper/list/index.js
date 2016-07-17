@@ -71,7 +71,8 @@ class PaperList extends Component {
       mdi: true,
       'mdi-file-outline': paper.get('type') === 0,
       'mdi-book-open-page-variant': paper.get('type') === 1,
-      'mdi-presentation': paper.get('type') === 2
+      'mdi-presentation': paper.get('type') === 2,
+      'mdi-cloud-outline': paper.get('type') === 3
     };
 
     return (

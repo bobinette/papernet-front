@@ -22,10 +22,10 @@
 
 	border: 1px solid $gray;
 	border-radius: $border-radius;
-	resize: none;
 }
 
 .TextArea__InputField:focus {
 	outline: none;
-	border: 1px solid $blue;
+	border-color: $blue;
+	box-shadow: 0 0 5px $blue;
 }

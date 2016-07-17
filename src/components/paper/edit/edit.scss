@@ -15,11 +15,7 @@
 	justify-content: space-between;
 }
 
-.PaperEdit__Read {
-	margin: 10px 0;
-}
-
-.PaperEdit__PaperType {
+.PaperEdit__Block {
 	margin: 10px 0;
 }
 
@@ -29,15 +25,10 @@
 
 .PaperEdit__SummaryField {
     min-height: 200px;
-	margin-top: 10px;
 }
 
 .PaperEdit__Footer {
 	margin-top: 20px;
 	display: flex;
 	justify-content: flex-end;
-}
-
-.PaperEdit__PublishYear {
-	margin-top: 10px;
 }

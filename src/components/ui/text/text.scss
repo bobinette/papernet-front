@@ -20,16 +20,18 @@
 }
 
 .Text__InputField {
-	background: transparent;
+	background: $background-card;
 
 	width: 100%;
 	height: 35px;
 
-	border: none;
-	border-bottom: 1px solid $gray;
+	border: 1px solid $gray;
+	padding: 5px;
+
 }
 
 .Text__InputField:focus {
 	outline: none;
-	border-bottom: 1px solid $blue;
+	border-color: $blue;
+	box-shadow: 0 0 5px $blue;
 }

@@ -12,7 +12,7 @@ import './textlist.scss';
 
 class TextList extends Component {
   static propTypes = {
-    className: PropTypes.object,
+    classes: PropTypes.object,
     label: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
@@ -22,7 +22,7 @@ class TextList extends Component {
   }
 
   static defaultProps = {
-    className: {},
+    classes: {},
     label: '',
     placeholder: '',
     style: 'tags',
@@ -86,9 +86,9 @@ class TextList extends Component {
   }
 
   render() {
-    const { className, label, placeholder, style, values } = this.props;
+    const { classes, label, placeholder, style, values } = this.props;
 
-    className.TextList = true;
+    classes.TextList = true;
 
     const labelClasses = {
       TextList__Label: !!label
@@ -102,7 +102,7 @@ class TextList extends Component {
     const { currentText } = this.state;
 
     return (
-      <div className={classNames(className)}>
+      <div className={classNames(classes)}>
         <div className={classNames(labelClasses)}>
           {label}
         </div>
