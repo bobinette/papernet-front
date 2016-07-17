@@ -99,7 +99,7 @@ class PaperEdit extends Component {
 
   onSelectReference(ref) {
     const { dispatch, paper } = this.props;
-    const refs = paper.get('references');
+    const refs = paper.get('references') ? paper.get('references') : List();
     const index = refs.toSeq().findKey(r => r.get('id') === ref.get('id'));
     if (typeof index !== 'undefined') return;
 
