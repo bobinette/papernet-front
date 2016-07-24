@@ -1,0 +1,87 @@
+@import '../style/base.scss';
+
+.Paper__Header {
+	height: 100px;
+	width: 90%;
+	margin: auto;
+	margin-top: 30px;
+	padding: 10px;
+
+	background-color: $background-card;
+	box-shadow: 0 0 5px $gray;
+	border: 1px solid $gray;
+
+	display: flex;
+	align-items: center;
+}
+
+.Paper__Title {
+	width: 100%;
+}
+
+.Paper__Body {
+	width: 95%;
+	margin: auto;
+}
+
+.Paper {
+	> h2 {
+		margin-left: 30px;
+	}
+}
+
+.Paper__Summary {
+	background-color: $background-card;
+	border: 1px solid $gray-light;
+	border-radius: $border-radius;
+	padding: 10px;
+
+	pre code {
+		white-space: normal;
+		word-break: normal;
+	}
+
+	h4 {
+		margin-top: 20px;
+	}
+}
+
+.Paper__Tags {
+	width: 90%;
+	margin: auto;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.Paper__Tag {
+	margin: 0px 3px;
+}
+
+.Paper__Empty {
+	margin-left: 80px;
+}
+
+.Paper__EmptyMessage {
+	color: $gray-dark;
+}
+
+.Paper__EditButton {
+	padding: 3px 15px;
+
+	color: $blue;
+	font-size: 12pt;
+
+	border: 1px solid $blue;
+	border-radius: 3px;
+
+	display: flex;
+	align-items: center;
+
+	cursor: pointer;
+
+	&:hover {
+		color: white;
+		background-color: $blue;
+	}
+}

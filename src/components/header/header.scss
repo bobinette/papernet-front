@@ -1,0 +1,13 @@
+@import '../../style/base.scss';
+
+.Header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 20px;
+
+	background-color: $background-card;
+	border: 1px solid $gray;
+	border-radius: 2px;
+	box-shadow: 0 0 5px $gray;
+}

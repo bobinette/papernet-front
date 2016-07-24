@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { IndexRedirect, Router, Route, hashHistory } from 'react-router';
+import { IndexRedirect, Router, Route } from 'react-router';
+
+import history from 'routing';
 
 // Redux
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
@@ -20,9 +22,14 @@ import EditContainer from 'containers/edit';
 import ListContainer from 'containers/list';
 import ShowContainer from 'containers/show';
 
+import HomeContainer from 'home/container';
+import PaperContainer from 'paper/container';
+import UserLogin from 'login';
+
 // Reducers
 import paper from 'reducers/paper';
 import papers from 'reducers/papers';
+import user from 'reducers/user';
 
 // Styles
 import 'bootstrap/dist/css/bootstrap.css';
@@ -32,6 +39,7 @@ import './style/base.scss';
 const reducers = {
   paper,
   papers,
+  user,
   toastr: toastrReducer
 };
 const reducer = combineReducers(reducers);
@@ -51,12 +59,14 @@ ReactDOM.render(
         newestOnTop={false}
         position='top-right'
       />
-      <Router history={hashHistory}>
+      <Router history={history}>
         <Route path='/'>
-          <IndexRedirect to='/papers' />
+          <IndexRedirect to='/toto' />
+          <Route path='home' component={HomeContainer} />
+          <Route path='login' component={UserLogin} />
           <Route path='papers' component={ListContainer} />
           <Route path='papers/new' component={CreateContainer} />
-          <Route path='papers/:paperId' component={ShowContainer} />
+          <Route path='papers/:paperId' component={PaperContainer} />
           <Route path='papers/:paperId/edit' component={EditContainer} />
         </Route>
       </Router>

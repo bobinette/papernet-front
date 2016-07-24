@@ -1,7 +1,7 @@
 @import '../../../style/base.scss';
 
 .Tag {
-	border: 1px solid $blue;
+	border: 1px solid $gray;
 	border-radius: 2*$border-radius;
 	padding: 3px 10px;
 
@@ -15,6 +15,10 @@
 	font-size: 12px;
 	cursor: pointer;
 	margin-left: 5px;
+
+	&:hover {
+		color: $red;
+	}
 }
 
 .Tag__Text {

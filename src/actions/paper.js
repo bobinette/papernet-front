@@ -1,4 +1,4 @@
-import { hashHistory } from 'react-router';
+import history from 'routing';
 
 import 'whatwg-fetch';
 
@@ -33,7 +33,7 @@ export const deletePaper = (id) => () => {
   return fetch(url + '/papers/' + id, {
     method: 'DELETE'
   }).then(
-    () => { hashHistory.push('/papers'); },
+    () => { history.push('home'); },
     (err) => {
       error('Could not delete paper', err.message ? err.message : null);
     }
@@ -56,7 +56,6 @@ export const savePaper = (paper) => (dispatch) => {
       const paper = response.data;
       dispatch({ type: RECEIVE_PAPER, paper });
       success('Saved!');
-      hashHistory.push('/papers/' + paper.id);
     },
     (err) => {
       error('Could not save paper', err.message ? err.message : null);

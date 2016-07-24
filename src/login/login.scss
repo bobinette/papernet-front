@@ -1,0 +1,47 @@
+@import '../style/base.scss';
+
+.Login__Title {
+	text-align: center;
+}
+
+.Login__Login {
+	margin-top: 100px;
+}
+
+.Login__Input {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.Text {
+		min-width: 300px;
+	}
+}
+
+.Login__Label {
+	margin-right: 5px;
+}
+
+.Login__ButtonContainer {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.Login_Button {
+	margin-top: 5px;
+	padding: 5px;
+	width: 100px;
+	border-radius: 2px;
+	font-size: 12pt;
+	text-align: center;
+}
+
+.Login__SignUp {
+	margin-top: 5px;
+	text-align: center;
+
+	a {
+		cursor: pointer;
+	}
+}

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { hashHistory } from 'react-router';
 import { fromJS, List, Map } from 'immutable';
 import { Link } from 'react-router';
 
@@ -15,9 +14,10 @@ import Text from 'components/ui/text';
 import TextArea from 'components/ui/textarea';
 import TextList from 'components/ui/textlist';
 
-import { paperTypes, readingStatuses } from 'constants/paper';
+import history from 'routing';
 
 import { deletePaper, savePaper, updatePaper } from 'actions/paper';
+import { paperTypes, readingStatuses } from 'constants/paper';
 
 import './edit.scss';
 
@@ -30,6 +30,8 @@ class PaperEdit extends Component {
 
   constructor(props) {
     super(props);
+
+    this.gotoPaper = this.gotoPaper.bind(this);
 
     this.onAuthorsChange = this.onAuthorsChange.bind(this);
     this.onDelete = this.onDelete.bind(this);
@@ -60,6 +62,16 @@ class PaperEdit extends Component {
         }).toList() : List()
       });
     }
+  }
+
+  gotoPaper() {
+    const { paper } = this.props;
+    let addr = 'papers/' + paper.get('id');
+    if (typeof paper.get('id') === 'undefined') {
+      addr = 'home';
+    }
+
+    history.push(addr);
   }
 
   onAuthorsChange(authors) {
@@ -94,7 +106,7 @@ class PaperEdit extends Component {
 
   onSave() {
     const { dispatch, paper } = this.props;
-    dispatch(savePaper(paper));
+    dispatch(savePaper(paper)).then(() => {history.push('papers/' + paper.get('id'));});
   }
 
   onSelectReference(ref) {
@@ -138,13 +150,12 @@ class PaperEdit extends Component {
     dispatch(updatePaper('urls', urls));
   }
 
-  renderHeader(paper) {
-    const gotoPaper = () => {hashHistory.push('/papers/' + paper.get('id'));};
+  renderHeader() {
     return (
       <div className='PaperEdit__Header'>
         <Button
           content={<i className='mdi mdi-close'/>}
-          onClick={gotoPaper}
+          onClick={this.gotoPaper}
         />
         <Button
           content={<i className='mdi mdi-check'/>}
@@ -171,10 +182,9 @@ class PaperEdit extends Component {
 
     return (
       <div className='PaperEdit'>
-        {this.renderHeader(paper)}
-        <h1 className='PaperEdit__Title'>{paper.get('title')} - Edit</h1>
+        {this.renderHeader()}
         <Text
-          className={{ PaperEdit__TitleField: true }}
+          className={{ PaperEdit__Block: true }}
           label='Title'
           onChange={this.onTitleChange}
           placeholder='Title...'

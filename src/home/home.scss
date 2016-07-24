@@ -1,18 +1,39 @@
-@import '../../../style/base.scss';
+@import '../style/base.scss';
 
-.PaperList {
-	> h1 {
-		text-align: center;
+.Home__List {
+	width: 90%;
+	margin: auto;
+
+	margin-top: 30px;
+}
+
+.Home__Add {
+	margin: 10px 0;
+	padding: 10px;
+
+	color: $blue;
+	border: 1px dotted $blue;
+	border-radius: 3px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+
+	.mdi {
+		font-size: 13pt;
+		margin-right: 3px;
+	}
+
+	&:hover {
+		border-style: solid;
+		background-color: $blue;
+		color: white;
+		box-shadow: 0 0 5px $blue;
 	}
 }
 
-.PaperList__Header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.PaperList__Paper {
+.Home__Paper {
 	margin: 10px 0;
 	padding: 10px;
 
@@ -31,25 +52,25 @@
 	}
 }
 
-.PaperList__PaperRead {
+.Home__PaperRead {
 	margin-right: 5px;
 	font-size: 16pt;
 }
 
-.PaperList__PaperTitle {
+.Home__PaperTitle {
 	flex: 1;
 }
 
-.PaperList__PaperType {
+.Home__Row__Icon {
 	margin: 0 5px;
 	font-size: 16pt;
 }
 
-.PaperList__NoTitle {
+.Home__NoTitle {
 	color: $gray;
 }
 
-.PaperList__Search {
+.Home__Search {
 	margin: 20px 0;
 	margin-right: 40px;
 	display: flex;

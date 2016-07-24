@@ -1,27 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Map } from 'immutable';
 
-import NavBar from 'components/navbar';
-import PaperShow from 'components/paper/show';
+import { getPaper } from 'actions/paper';
+import { loadCookie } from 'login/actions';
 
-import { getPaper } from '../actions/paper';
+import Paper from '.';
 
-import './container.scss';
+import './paper.scss';
 
 const mapStateToProps = (state) => ({
   paper: state.paper,
   user: state.user
 });
 
-class ShowContainer extends Component {
+class PaperContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
-    paper: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    paper: PropTypes.object
   }
 
   componentDidMount() {
     const { dispatch, params } = this.props;
+    dispatch(loadCookie());
     dispatch(getPaper(params.paperId));
   }
 
@@ -37,14 +38,14 @@ class ShowContainer extends Component {
     const { paper, user } = this.props;
 
     return (
-      <div className='Container'>
-        <NavBar username={user.get('name') || ''} />
-        <div className='Page'>
-          <PaperShow paper={paper} />
-        </div>
+      <div className='PaperContainer'>
+        <Paper
+          paper={paper || Map()}
+          user={user}
+        />
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps)(ShowContainer);
+export default connect(mapStateToProps)(PaperContainer);
