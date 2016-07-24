@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { List } from 'immutable';
 
 import classNames from 'classnames';
 
+import { bookmark } from 'actions/user';
 import { search } from 'actions/papers';
 
 import NavBar from 'components/navbar';
@@ -42,11 +44,8 @@ class Home extends Component {
   }
 
   onBookmark(id) {
-    const { dispatch, papers } = this.props;
-
-    const paper = papers.find((p) => p.get('id') === id);
-    console.log(paper);
-    // dispatch(bookmark(paper.get('id')));
+    const { dispatch } = this.props;
+    dispatch(bookmark(id));
   }
 
   renderList() {
@@ -67,6 +66,8 @@ class Home extends Component {
   }
 
   renderPaper(paper) {
+    const { user } = this.props;
+
     const onClick = this.onClick.bind(this, paper.get('id'));
 
     const readingStatus = paper.get('read');
@@ -90,10 +91,13 @@ class Home extends Component {
       'mdi-cloud-outline': paper.get('type') === 3
     };
 
+    const bookmarks = user.get('bookmarks') || List();
+    const index = bookmarks.toSeq().findKey(i => i === paper.get('id'));
+    const bookmarked = typeof index !== 'undefined';
     const bookmarkClasses = {
       mdi: true,
-      'mdi-bookmark-outline': !paper.get('bookmarked'),
-      'mdi-bookmark': paper.get('bookmarked')
+      'mdi-bookmark-outline': !bookmarked,
+      'mdi-bookmark': bookmarked
     };
     const onBookmark = (event) => {
       event.preventDefault();
@@ -122,7 +126,7 @@ class Home extends Component {
       <div className='Home'>
         <NavBar
           activeIndex={0}
-          username={user.get('name')}
+          username={user.get('name') || ''}
         />
         <div className='Home__Search'>
           <Search

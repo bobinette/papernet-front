@@ -8,3 +8,4 @@ export const SEARCH_PAPERS = 'SEARCH_PAPERS';
 
 // User
 export const RECEIVE_USER = 'RECEIVE_USER';
+export const UPDATE_USER = 'UPDATE_USER';

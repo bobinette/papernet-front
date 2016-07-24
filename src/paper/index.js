@@ -135,7 +135,7 @@ class Paper extends Component {
     const summary = paper.get('summary') || '';
     return (
       <div>
-        <NavBar username={user.get('name')} />
+        <NavBar username={user.get('name') || ''} />
         {this.renderHeader(paper)}
         {this.renderTags(paper)}
 
