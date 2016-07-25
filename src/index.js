@@ -22,6 +22,7 @@ import EditContainer from 'containers/edit';
 
 import HomeContainer from 'home/container';
 import PaperContainer from 'paper/container';
+import ReadingListContainer from 'readinglist/container';
 import UserLogin from 'login';
 
 // Reducers
@@ -65,6 +66,7 @@ ReactDOM.render(
           <Route path='papers/new' component={CreateContainer} />
           <Route path='papers/:paperId' component={PaperContainer} />
           <Route path='papers/:paperId/edit' component={EditContainer} />
+          <Route path='readinglist' component={ReadingListContainer} />
         </Route>
       </Router>
     </div>

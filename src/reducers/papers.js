@@ -1,11 +1,12 @@
 import {fromJS} from 'immutable';
 
-import { RECEIVE_PAPERS, SEARCH_PAPERS } from '../constants/events';
+import { FILTER_PAPERS, RECEIVE_PAPERS, SEARCH_PAPERS } from '../constants/events';
 
 const initialState = fromJS({
   list: [],
   filters: {
-    q: '',
+    ids: [],
+    q: ''
   }
 });
 
@@ -19,10 +20,16 @@ const search = (search, state) => {
   return newState;
 };
 
+const filterPapers = (ids, state) => {
+  const newState = state.setIn(['filters', 'ids'], ids);
+  return newState;
+};
+
 export default (state=initialState, action) => {
   switch(action.type) {
   case RECEIVE_PAPERS: return receivePapers(action.papers, state);
   case SEARCH_PAPERS: return search(action.search, state);
+  case FILTER_PAPERS: return filterPapers(action.ids, state);
   }
   return state;
 };

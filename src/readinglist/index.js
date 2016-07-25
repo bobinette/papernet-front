@@ -4,17 +4,14 @@ import { List } from 'immutable';
 
 import classNames from 'classnames';
 
-import { bookmark } from 'actions/user';
-import { search } from 'actions/papers';
-
 import NavBar from 'components/navbar';
 import Search from 'components/ui/text/search';
 
 import history from 'routing';
 
-import './home.scss';
+import './ReadingList.scss';
 
-class Home extends Component {
+class ReadingList extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     papers: PropTypes.object.isRequired,
@@ -25,9 +22,7 @@ class Home extends Component {
     super(props);
 
     this.onAdd = this.onAdd.bind(this);
-    this.onBookmark = this.onBookmark.bind(this);
     this.onClick = this.onClick.bind(this);
-    this.onSearch = this.onSearch.bind(this);
   }
 
   onAdd() {
@@ -38,22 +33,12 @@ class Home extends Component {
     history.push('papers/' + id);
   }
 
-  onSearch(s) {
-    const { dispatch } = this.props;
-    dispatch(search(s));
-  }
-
-  onBookmark(id) {
-    const { dispatch } = this.props;
-    dispatch(bookmark(id));
-  }
-
   renderList() {
     const { papers } = this.props;
 
     return (
-      <div className='Home__List'>
-        <div className='Home__Add' onClick={this.onAdd}>
+      <div className='ReadingList__List'>
+        <div className='ReadingList__Add' onClick={this.onAdd}>
           <i className='mdi mdi-plus-circle' />New paper
         </div>
         {
@@ -66,8 +51,6 @@ class Home extends Component {
   }
 
   renderPaper(paper) {
-    const { user } = this.props;
-
     const onClick = this.onClick.bind(this, paper.get('id'));
 
     const readingStatus = paper.get('read');
@@ -80,7 +63,7 @@ class Home extends Component {
 
     const title = (
       paper.get('title') ? paper.get('title') :
-      <em className='Home__NoTitle'>No title</em>
+      <em className='ReadingList__NoTitle'>No title</em>
     );
 
     const paperTypeClasses = {
@@ -91,29 +74,19 @@ class Home extends Component {
       'mdi-cloud-outline': paper.get('type') === 3
     };
 
-    const bookmarks = user.get('bookmarks') || List();
-    const index = bookmarks.toSeq().findKey(i => i === paper.get('id'));
-    const bookmarked = typeof index !== 'undefined';
     const bookmarkClasses = {
       mdi: true,
-      'mdi-bookmark-outline': !bookmarked,
-      'mdi-bookmark': bookmarked
-    };
-    const onBookmark = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      this.onBookmark(paper.get('id'));
+      'mdi-bookmark': true
     };
 
     return (
-      <div className='Home__Paper' onClick={onClick} key={paper.get('id')}>
-        <div className='Home__PaperRead'><i className={classNames(classes)} /></div>
-        <div className='Home__PaperTitle'>{title}</div>
-        <div className='Home__Row__Icon' onClick={onBookmark}>
+      <div className='ReadingList__Paper' onClick={onClick} key={paper.get('id')}>
+        <div className='ReadingList__PaperRead'><i className={classNames(classes)} /></div>
+        <div className='ReadingList__PaperTitle'>{title}</div>
+        <div className='ReadingList__Row__Icon'>
           <i className={classNames(bookmarkClasses)} />
         </div>
-        <div className='Home__Row__Icon'><i className={classNames(paperTypeClasses)} /></div>
+        <div className='ReadingList__Row__Icon'><i className={classNames(paperTypeClasses)} /></div>
       </div>
     );
   }
@@ -122,20 +95,15 @@ class Home extends Component {
     const { user } = this.props;
 
     return (
-      <div className='Home'>
+      <div className='ReadingList'>
         <NavBar
-          activeIndex={0}
+          activeIndex={1}
           username={user.get('name') || ''}
         />
-        <div className='Home__Search'>
-          <Search
-            onSearch={this.onSearch}
-          />
-        </div>
         {this.renderList()}
       </div>
     );
   }
 }
 
-export default connect()(Home);
+export default connect()(ReadingList);

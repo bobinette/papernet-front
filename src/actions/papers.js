@@ -3,15 +3,14 @@ import 'whatwg-fetch';
 
 import { error } from 'actions/notifications';
 
-import { RECEIVE_PAPERS, SEARCH_PAPERS } from 'constants/events';
+import { FILTER_PAPERS, RECEIVE_PAPERS, SEARCH_PAPERS } from 'constants/events';
 
 const base_url = 'http://localhost:8081';
 
 export const getPapers = () => (dispatch, getState) => {
   const { papers } = getState();
 
-  const url = base_url + '/papers?' + qs.stringify(papers.get('filters').toJS());
-
+  const url = base_url + '/papers?' + qs.stringify(papers.get('filters').toJS(), { arrayFormat: 'brackets' });
   return fetch(url).then(
     (response) => {
       const json = response.json();
@@ -34,5 +33,12 @@ export const search = (q) => {
   return {
     type: SEARCH_PAPERS,
     search: q
+  };
+};
+
+export const filterPapers = (ids) => {
+  return {
+    type: FILTER_PAPERS,
+    ids: ids
   };
 };

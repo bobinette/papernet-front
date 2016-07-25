@@ -5,9 +5,7 @@ import { List } from 'immutable';
 import { filterPapers, getPapers } from 'actions/papers';
 import { loadCookie } from 'login/actions';
 
-import Home from '.';
-
-import './home.scss';
+import ReadingList from '.';
 
 const mapStateToProps = (state) => ({
   filters: state.papers.get('filters'),
@@ -15,7 +13,7 @@ const mapStateToProps = (state) => ({
   user: state.user
 });
 
-class HomeContainer extends Component {
+class ReadingListContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func,
     filters: PropTypes.object,
@@ -25,16 +23,21 @@ class HomeContainer extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(loadCookie());
-    dispatch(getPapers());
+    dispatch(loadCookie()).then(
+      () => {
+        const { user } = this.props; // Load user
+        dispatch(filterPapers(user.get('bookmarks')));
+      }
+    ).then(
+      () => dispatch(getPapers())
+    );
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, filters } = this.props;
+    const { dispatch, filters, user } = this.props;
 
-    if (nextProps.filters.get('ids').size > 0) {
-      dispatch(filterPapers([]));
-      dispatch(getPapers());
+    if (user !== nextProps.user) {
+      dispatch(filterPapers(user.get('bookmarks')));
     }
 
     if (filters !== nextProps.filters) {
@@ -46,8 +49,8 @@ class HomeContainer extends Component {
     const { papers, user } = this.props;
 
     return (
-      <div className='HomeContainer'>
-        <Home
+      <div className='ReadingListContainer'>
+        <ReadingList
           papers={papers || List()}
           user={user}
         />
@@ -56,4 +59,4 @@ class HomeContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps)(HomeContainer);
+export default connect(mapStateToProps)(ReadingListContainer);
