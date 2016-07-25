@@ -27,7 +27,6 @@ export const logIn = (name) => (dispatch) => {
     (user) => {
       dispatch({ type: RECEIVE_USER, user });
       cookie.save('username', name, { path: '/' });
-      // history.push('/home');
     },
     (err) => {
       this.setState({ loginFailed: true });
@@ -48,7 +47,6 @@ export const signUp = (name) => (dispatch) => {
         type: RECEIVE_USER,
         user: user
       });
-      // history.push('home');
     },
     (err) => {
       error('Could not connect: ' + (err.message ? err.message : 'Unknown error'));

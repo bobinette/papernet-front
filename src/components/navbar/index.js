@@ -14,7 +14,7 @@ const tabs = [
     index: 0,
     label: 'Home',
     icon: 'mdi-home',
-    href: 'home'
+    href: 'papers'
   },
   {
     index: 1,

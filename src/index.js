@@ -19,8 +19,6 @@ import 'katex/dist/katex.min.css';
 // Containers
 import CreateContainer from 'containers/create';
 import EditContainer from 'containers/edit';
-import ListContainer from 'containers/list';
-import ShowContainer from 'containers/show';
 
 import HomeContainer from 'home/container';
 import PaperContainer from 'paper/container';
@@ -61,10 +59,9 @@ ReactDOM.render(
       />
       <Router history={history}>
         <Route path='/'>
-          <IndexRedirect to='/toto' />
-          <Route path='home' component={HomeContainer} />
+          <IndexRedirect to='/papers' />
+          <Route path='papers' component={HomeContainer} />
           <Route path='login' component={UserLogin} />
-          <Route path='papers' component={ListContainer} />
           <Route path='papers/new' component={CreateContainer} />
           <Route path='papers/:paperId' component={PaperContainer} />
           <Route path='papers/:paperId/edit' component={EditContainer} />
