@@ -239,7 +239,7 @@ class PaperEdit extends Component {
           onUnselect={this.onUnselectReference}
           mapper={(o) => Map(({ value: o.get('id'), label: o.get('title') }))}
           placeholder='This paper references...'
-          searchURL='http://localhost:8081/papers'
+          searchURL='http://localhost:8080/api/papers'
           value={paper.get('references') ? paper.get('references') : List()}
         />
         <TextList

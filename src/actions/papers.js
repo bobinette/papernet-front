@@ -5,7 +5,7 @@ import { error } from 'actions/notifications';
 
 import { FILTER_PAPERS, RECEIVE_PAPERS, SEARCH_PAPERS } from 'constants/events';
 
-const base_url = 'http://localhost:8081';
+const base_url = 'http://localhost:8080/api';
 
 export const getPapers = () => (dispatch, getState) => {
   const { papers } = getState();

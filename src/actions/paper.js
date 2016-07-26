@@ -7,7 +7,7 @@ import { RECEIVE_PAPER, UPDATE_PAPER } from '../constants/events';
 import { handleJSON } from 'actions/handleResponse';
 import { success, error } from 'actions/notifications';
 
-const url = 'http://localhost:8081';
+const url = 'http://localhost:8080/api';
 
 export const getPaper = (id) => (dispatch) => {
   return fetch(url + '/papers/' + id, {}).then(handleJSON).then(

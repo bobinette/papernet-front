@@ -4,7 +4,7 @@
   "description": "Front-end of the Papernet project",
   "main": "index.js",
   "scripts": {
-    "dev": "./node_modules/.bin/webpack-dev-server",
+    "dev": "./node_modules/.bin/webpack-dev-server --port 1705",
     "lint": "eslint ./src ./tests",
     "test": "BABEL_ENV=test NODE_PATH=\"$PWD:$PWD/src\" mocha --opts mocha.opts",
     "test:watch": "npm run test -- --watch --watch-extensions js"

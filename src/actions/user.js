@@ -7,7 +7,7 @@ import { RECEIVE_USER, UPDATE_USER } from 'constants/events';
 import { handleJSON } from 'actions/handleResponse';
 import { success, error } from 'actions/notifications';
 
-const url = 'http://localhost:8081';
+const url = 'http://localhost:8080/api';
 
 export const bookmark = (id) => (dispatch, getState) => {
   const user = getState().user;

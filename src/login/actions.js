@@ -8,7 +8,7 @@ import { RECEIVE_USER } from 'constants/events';
 
 import history from 'routing';
 
-const url = 'http://localhost:8081';
+const url = 'http://localhost:8080/api';
 
 export const loadCookie = () => (dispatch) => {
   const username = cookie.load('username');
