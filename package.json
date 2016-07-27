@@ -4,6 +4,7 @@
   "description": "Front-end of the Papernet project",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --config webpack-prod.config.js --progress -p && cp src/index.html app/index.html && cp images/papernet.png app/papernet.png",
     "dev": "./node_modules/.bin/webpack-dev-server --port 1705",
     "lint": "eslint ./src ./tests",
     "test": "BABEL_ENV=test NODE_PATH=\"$PWD:$PWD/src\" mocha --opts mocha.opts",

@@ -1,3 +1,26 @@
 language: node_js
 node_js:
   - '6'
+
+# Installation and testing as default
+
+# Deployment
+before_deploy:
+  - npm run build
+  - zip -r papernet-front.zip app
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: iC2ekvIG4mgJ74Aq/PBxc+OEJ/kC0MP+HoVcRNu1ap7dD8e+LtqR1HGSRQT79+ROaB4Lw3Ywt5Xd8Bv3S+RDKGm2kC2qcM1qwZ63JnPh/IXsAf2TeaeLgZFdtGGvoN8BoLJ80oiZjAg3kiZtvcBMbJehE6GWGjoC+wdEUQvHwCPscsXWPS2iFzmOAcCZHljXS7Yu6KASQpU1ts0/TrvlhlolMDlAcb95O2e0sWhPmRCMIs7sk/O5Y32VKNPek/mlmWlKhr1wasTuzUBtsmMmYvC8J5G2Aq02z8HqOhQi301+adkwEnMlNLjy7jp7EQ6GfV3qyEp9+3SnhWqZh3n0Anog8UwvJIz8i+UnHVnkWHVLXTFD/miZYAuTI6TxyWXx0OEHtyAEXPpBhmQ+Ycqk2buX6OVhBNhuf7sEIVGfoiMqY22Fc7KKqOFxH8J4u998VRwJoq17CAg/0vECDbHsKBSJbpOncIOjO9a1LgAlgdueHvT84m8mBrmovfRgVkr+HDLKabmkssVU3IrSeVRxhjI8fAE88RPChSW2TsX2EjbVDSXShNKjTGcldJEJiCrP6+Cfpf1TwJ5kIHa5X0iUrL5PahrmzM4f9hrN71OP2cMmPUdmQVFelDnynZqTENo2+Gs+KfH9FLyqcbdiJwjplNFm7EQB9PPgYEH+pDyGzNY=
+  file: 'papernet-front.zip'
+  on:
+    tags: true
+    repo: bobinette/papernet-front
+
+# Notify only on build status change
+notifications:
+  email:
+    on_success: change
+    on_failure: change
