@@ -3,21 +3,16 @@ import { Link } from 'react-router';
 import { Map } from 'immutable';
 import { connect } from 'react-redux';
 
-
-import katex from 'katex';
-import sanitize from 'sanitize-caja';
-
 import classNames from 'classnames';
 
-import Markdown from 'react-remarkable';
 import { Textfit } from 'react-textfit';
 
 import history from 'routing';
 
 import Header from 'components/header';
 import NavBar from 'components/navbar';
+import RichText from 'components/richtext';
 import TagList from 'components/ui/tag/list';
-import Text from 'components/ui/text';
 
 import './paper.scss';
 
@@ -26,14 +21,6 @@ class Paper extends Component {
     dispatch: PropTypes.func,
     paper: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired
-  }
-
-  componentDidUpdate() {
-    const elts = document.getElementsByClassName('math');
-    Array.prototype.forEach.call(elts, function(elt) {
-      // Do stuff here
-      katex.render(elt.innerHTML, elt, { displayMode: true });
-    });
   }
 
   onEdit(paperId) {
@@ -89,16 +76,9 @@ class Paper extends Component {
   renderSummary(summary) {
     if (!summary) return this.renderEmpty('summary');
 
-    const mathSummary = summary.replace(
-      '<eq>', '<div class="math">'
-    ).replace('</eq>', '</div>');
-
     return (
       <div className='Paper__Summary'>
-        <Markdown
-          source={sanitize(mathSummary)}
-          options={{ html: true }}
-        />
+        <RichText value={summary} />
       </div>
     );
   }

@@ -30,22 +30,6 @@
 	}
 }
 
-.Paper__Summary {
-	background-color: $background-card;
-	border: 1px solid $gray-light;
-	border-radius: $border-radius;
-	padding: 10px;
-
-	pre code {
-		white-space: normal;
-		word-break: normal;
-	}
-
-	h4 {
-		margin-top: 20px;
-	}
-}
-
 .Paper__Tags {
 	width: 90%;
 	margin: auto;
