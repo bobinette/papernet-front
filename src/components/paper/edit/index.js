@@ -68,7 +68,7 @@ class PaperEdit extends Component {
     const { paper } = this.props;
     let addr = 'papers/' + paper.get('id');
     if (typeof paper.get('id') === 'undefined') {
-      addr = 'home';
+      addr = 'papers';
     }
 
     history.push(addr);

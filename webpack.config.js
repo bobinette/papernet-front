@@ -61,7 +61,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: './src',
     hot: true
   },
   plugins: [
