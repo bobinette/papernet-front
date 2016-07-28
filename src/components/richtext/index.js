@@ -47,7 +47,6 @@ class RichText extends Component {
   }
 
   changeMode(editMode) {
-    console.log(editMode)
     this.setState({ editMode });
   }
 
