@@ -6,7 +6,7 @@ import './textarea.scss';
 
 class TextArea extends Component {
   static propTypes = {
-    className: PropTypes.object,
+    classes: PropTypes.object,
     label: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
@@ -14,7 +14,7 @@ class TextArea extends Component {
   }
 
   static defaultProps = {
-    className: {},
+    classes: {},
     placeholder: '',
     value: ''
   }
@@ -31,9 +31,9 @@ class TextArea extends Component {
   }
 
   render() {
-    const { className, label, placeholder, value } = this.props;
+    const { classes, label, placeholder, value } = this.props;
 
-    className.TextArea = true;
+    classes.TextArea = true;
 
     const labelClasses = {
       TextArea__Label: !!label
@@ -44,7 +44,7 @@ class TextArea extends Component {
     };
 
     return (
-      <div className={classNames(className)}>
+      <div className={classNames(classes)}>
         <div className={classNames(labelClasses)}>
           {label}
         </div>
