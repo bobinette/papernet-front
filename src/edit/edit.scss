@@ -21,8 +21,17 @@
 	margin: 10px 0;
 }
 
+.PaperEdit__Summary {
+	display: flex;
+}
+
 .PaperEdit__SummaryField {
     min-height: 200px;
+    width: 80%;
+}
+
+.PaperEdit__SummaryLabel{
+	width: 20%;
 }
 
 .PaperEdit__Footer {

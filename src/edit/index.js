@@ -4,6 +4,8 @@ import { Link } from 'react-router';
 
 import { connect } from 'react-redux';
 
+import classNames from 'classnames';
+
 import Button from 'components/ui/button';
 import Dropdown from 'components/ui/dropdown';
 import NumberInput from 'components/ui/text/number';
@@ -11,7 +13,7 @@ import Radio from 'components/ui/radio';
 import Select from 'components/ui/select';
 import TagList from 'components/ui/tag/list';
 import Text from 'components/ui/text';
-import TextArea from 'components/ui/textarea';
+import RichText from 'components/richtext';
 import TextList from 'components/ui/textlist';
 
 import history from 'routing';
@@ -211,13 +213,16 @@ class PaperEdit extends Component {
           options={paperTypes}
           value={paper.get('type')}
         />
-        <TextArea
-          className={{ PaperEdit__Block: true, PaperEdit__SummaryField: true }}
-          label='Summary'
-          onChange={this.onSummaryChange}
-          placeholder='Summary...'
-          value={paper.get('summary')}
-        />
+        <div className={classNames({ PaperEdit__Summary: true, PaperEdit__Block: true })}>
+          <div className='PaperEdit__SummaryLabel'>Summary</div>
+          <RichText
+            classes={{ PaperEdit__SummaryField: true }}
+            editable
+            onChange={this.onSummaryChange}
+            placeholder='Summary...'
+            value={paper.get('summary') || ''}
+          />
+        </div>
         <TextList
           classes={{ PaperEdit__Block: true }}
           label='Tags'
