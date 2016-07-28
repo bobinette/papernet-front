@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import PaperEdit from '../components/paper/edit';
+import PaperEdit from 'edit';
 
-import { getPaper } from '../actions/paper';
+import { getPaper } from 'actions/paper';
 
 import './container.scss';
 
