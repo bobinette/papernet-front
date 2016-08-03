@@ -9,7 +9,7 @@ import Search from 'components/ui/text/search';
 
 import history from 'routing';
 
-import './ReadingList.scss';
+import './readinglist.scss';
 
 class ReadingList extends Component {
   static propTypes = {

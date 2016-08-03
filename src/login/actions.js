@@ -29,8 +29,7 @@ export const logIn = (name) => (dispatch) => {
       cookie.save('username', name, { path: '/' });
     },
     (err) => {
-      this.setState({ loginFailed: true });
-      error('Could not connect: ' + (err.message ? err.message : 'Unknown error'));
+      error('Could not log in', (err.message ? err.message : 'Unknown error'));
     }
   );
 };
