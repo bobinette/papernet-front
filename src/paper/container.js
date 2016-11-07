@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 class PaperContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    paper: PropTypes.object.isRequired,
+    paper: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
     params: PropTypes.shape({
       id: PropTypes.string,
     }).isRequired,

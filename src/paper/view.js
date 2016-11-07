@@ -5,7 +5,7 @@ import { Textfit } from 'react-textfit';
 
 import Markdown from 'components/markdown';
 
-class PaperView extends Component {
+class PaperView extends Component { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     paper: ImmutablePropTypes.shape({
       title: ImmutablePropTypes.string,
