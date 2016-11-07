@@ -59,6 +59,10 @@ class EnrichedMarkdown extends Component {
       }
       return `${preTag}${codeTag}${escapedCode}</code></pre>`;
     };
+    this.markdownRenderer.heading = (text, level) => {
+      const lvl = level + 1 <= 6 ? level + 1 : level;
+      return `<h${lvl}>${text}</h${lvl}>`;
+    };
   }
 
   renderMarkdown() {
