@@ -2,20 +2,26 @@
   "extends": "eslint-config-airbnb",
   "plugins": [
     "react",
-    "import"
+    "import",
+    "mocha"
   ],
   "settings": {
     "import/parser": "babel-eslint",
-    "import/resolver": "webpack"
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules", "."]
+      }
+    }
   },
   "parser": "babel-eslint",
   "env": {
-    "browser": true
+    "browser": true,
+    "mocha": true
   },
   "rules": {
     "new-cap": [2, {"capIsNewExceptions": ["List", "Map", "OrderedSet", "Range"]}],
     "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}],
     "react/no-unused-prop-types": [1, {"skipShapeProps": true}],
-    "max-len": [1, {"ignoreTrailingComments": true, "code": 120}]
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true }]
   }
 }
