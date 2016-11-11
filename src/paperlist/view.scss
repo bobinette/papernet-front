@@ -1,0 +1,26 @@
+@import '../style/base.scss';
+
+.PaperListViewRow {
+	background: $background-card;
+
+	margin: 2.5px 0;
+	padding: 10px;
+	border: 1px solid $gray-light;
+
+	color: $foreground;
+
+	&:visited {
+		text-decoration: none;
+	}
+
+	&:hover {
+		color: $blue;
+		text-decoration: none;
+		cursor: pointer;
+	}
+}
+
+.PaperListView {
+	display: flex;
+	flex-direction: column;
+}

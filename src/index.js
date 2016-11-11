@@ -9,6 +9,9 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
 
+// Paper list page
+import PaperListContainer from 'paperlist/container';
+import paperListReducer from 'paperlist/reducer';
 
 // Paper page
 import PaperViewContainer from 'paper/view/container';
@@ -24,6 +27,7 @@ import 'style/base.scss';
 // Create store
 const reducers = {
   paper: paperReducer,
+  paperList: paperListReducer,
 };
 const reducer = combineReducers(reducers);
 const middlewares = compose(
@@ -38,6 +42,7 @@ ReactDOM.render(
       <Router history={history}>
         <Route path="/">
           <IndexRedirect to="/papers" />
+          <Route path="papers" component={PaperListContainer} />
           <Route path="papers/new" component={PaperEditContainer} />
           <Route path="papers/:id" component={PaperViewContainer} />
           <Route path="papers/:id/edit" component={PaperEditContainer} />

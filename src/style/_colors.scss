@@ -8,7 +8,8 @@ $gray-light: #F0F0F0;
 $gray-lighter: #F9F9F9;
 
 $blue: #6fa4d5;
-$blue-light: #edf4fa; // lighten 32%
+$blue-light: lighten($blue, 32);
+$blue-dark: darken($blue, 32);
 
 $red: #d52c36;
 $green: #5ab458;
