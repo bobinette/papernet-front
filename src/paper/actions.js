@@ -1,12 +1,12 @@
 import 'whatwg-fetch';
 
 import handleJSON from 'utils/actions/handleResponse';
-import { PapernetURL } from 'utils/constants';
+import { papernetURL } from 'utils/constants';
 
-import { RECEIVE_PAPER } from './constants';
+import { RECEIVE_PAPER, UPDATE_PAPER } from './constants';
 
-export const getPaper = id => dispatch => ( // eslint-disable-line import/prefer-default-export
-  fetch(`${PapernetURL}/papernet/papers/${id}`, {}).then(handleJSON).then(
+export const getPaper = id => dispatch => (
+  fetch(`${papernetURL}/papers/${id}`, {}).then(handleJSON).then(
     (response) => {
       const paper = response.data;
       return dispatch({ type: RECEIVE_PAPER, paper });
@@ -16,3 +16,32 @@ export const getPaper = id => dispatch => ( // eslint-disable-line import/prefer
     }
   )
 );
+
+export const updatePaper = (key, value) => dispatch => (
+  dispatch({ type: UPDATE_PAPER, key, value })
+);
+
+export const savePaper = () => (dispatch, getState) => {
+  const paper = getState().paper;
+
+  let saveURL = `${papernetURL}/papers`;
+  let method = 'POST';
+  if (paper.get('id')) {
+    saveURL += `/${paper.get('id')}`;
+    method = 'PUT';
+  }
+
+  return fetch(saveURL, {
+    method,
+    body: JSON.stringify(paper.toJS()),
+  }).then(handleJSON).then(
+    (response) => {
+      const respPaper = response.data;
+      dispatch({ type: RECEIVE_PAPER, paper: respPaper });
+      return respPaper.id;
+    },
+    (err) => {
+      console.error('Could not save paper', err.message ? err.message : null); // eslint-disable-line no-console
+    }
+  );
+};

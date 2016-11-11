@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 
-import classNames from 'classnames';
-
 import katex from 'katex';
 
 import marked from 'marked';
@@ -22,12 +20,12 @@ const escape = (html, encode) => (
 
 class EnrichedMarkdown extends Component {
   static propTypes = {
-    classes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    className: PropTypes.string,
     text: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
-    classes: {},
+    className: '',
   };
 
   constructor(props) {
@@ -72,20 +70,19 @@ class EnrichedMarkdown extends Component {
     return (
       <div
         className="Markdown__View"
-        dangerouslySetInnerHTML={{ __html: marked(text, { renderer: this.markdownRenderer }) }} // eslint-disable-line react/no-danger
+        dangerouslySetInnerHTML={{  // eslint-disable-line react/no-danger
+          __html: marked(text, { renderer: this.markdownRenderer }),
+        }}
       />
     );
   }
 
   render() {
-    const { classes } = this.props;
+    const { className } = this.props;
 
-    classes.Markdown = true;
     return (
-      <div className={classNames(classes)}>
-        <div className="Markdown__Content Markdown__Source">
-          {this.renderMarkdown()}
-        </div>
+      <div className={`Markdown ${className}`}>
+        {this.renderMarkdown()}
       </div>
     );
   }

@@ -11,7 +11,8 @@ import { Provider } from 'react-redux';
 
 
 // Paper page
-import PaperContainer from 'paper/container';
+import PaperViewContainer from 'paper/view/container';
+import PaperEditContainer from 'paper/edit/container';
 import paperReducer from 'paper/reducer';
 
 // Styles
@@ -37,7 +38,9 @@ ReactDOM.render(
       <Router history={history}>
         <Route path="/">
           <IndexRedirect to="/papers" />
-          <Route path="papers/:id" component={PaperContainer} />
+          <Route path="papers/new" component={PaperEditContainer} />
+          <Route path="papers/:id" component={PaperViewContainer} />
+          <Route path="papers/:id/edit" component={PaperEditContainer} />
         </Route>
       </Router>
     </div>

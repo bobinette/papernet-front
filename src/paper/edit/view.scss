@@ -1,0 +1,56 @@
+@import '../../style/base.scss';
+
+.PaperEditView__ButtonGroup {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.PaperEditView__SaveButton {
+	// position: absolute;
+	// bottom: 10px;
+	// right: 10px;
+
+	background: white;
+	border: 1px solid $green;
+	border-radius: 2px;
+
+	color: $green;
+	font-size: 14pt;
+
+	&:hover {
+		color: white;
+		background: $green;
+	}
+}
+
+.PaperEditView__Title {
+	display: flex;
+
+	input {
+		outline: none;
+		border: none;
+		border-bottom: 1px solid lightgray;
+
+		flex: 1;
+		margin: 10px;
+
+		font-size: 23px;
+	}
+}
+
+.PaperEditView__Summary {
+	display: flex;
+
+	textarea {
+		outline: none;
+		border: 1px solid lightgray;
+
+		resize: vertical;
+		// Handle the height better. Nothing goes under the textarea, meaning that
+		// the window height can be used for it
+		height: 400px;
+
+		flex: 1;
+		margin: 10px;
+	}
+}

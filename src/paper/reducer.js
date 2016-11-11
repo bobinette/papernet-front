@@ -2,7 +2,10 @@ import { fromJS } from 'immutable';
 
 import { RECEIVE_PAPER, UPDATE_PAPER } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  title: '',
+  summary: '',
+});
 
 export default (state = initialState, action) => {
   let newState = state;
@@ -11,7 +14,7 @@ export default (state = initialState, action) => {
       newState = fromJS(action.paper);
       break;
     case UPDATE_PAPER:
-      newState = state.set(action.key, action.value);
+      newState = state.setIn(action.key, action.value);
       break;
     default:
   }

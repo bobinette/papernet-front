@@ -1,0 +1,50 @@
+import React, { Component, PropTypes } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+
+import TextArea from 'components/input/textarea';
+
+import { ValueKeyPropType } from 'components/field/propTypes';
+
+class MarkdownForm extends Component {
+  static propTypes = {
+    onChange: PropTypes.func.isRequired,
+    value: ImmutablePropTypes.map.isRequired,
+    valueKey: ValueKeyPropType.isRequired,
+    extra: PropTypes.shape({
+      className: PropTypes.object,
+      placeholder: PropTypes.string,
+    }),
+  };
+
+  static defaultProps = {
+    extra: {
+      className: {},
+      placeholder: '',
+    },
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(newValue) {
+    this.props.onChange(this.props.valueKey, newValue);
+  }
+
+  render() {
+    const { extra, value, valueKey } = this.props;
+
+    return (
+      <TextArea
+        className={extra.className}
+        onChange={this.onChange}
+        placeholder={extra.placeholder}
+        value={value.getIn(valueKey)}
+      />
+    );
+  }
+}
+
+export default MarkdownForm;
