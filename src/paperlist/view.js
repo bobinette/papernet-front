@@ -19,6 +19,9 @@ PaperListViewRow.propTypes = {
 
 const PaperListView = ({ paperList }) => (
   <div className="PaperListView">
+    <Link className="PaperListView__AddButton" to="/papers/new">
+      <i className="mdi mdi-plus-circle" />Add paper
+    </Link>
     {paperList.map((paper, i) => <PaperListViewRow paper={paper} key={i} />)}
   </div>
 );

@@ -26,4 +26,20 @@
 .PaperListView {
 	display: flex;
 	flex-direction: column;
+
+	padding: 10px 20px;
+}
+
+.PaperListView__AddButton {
+	text-align: center;
+	text-decoration: none;
+	color: $foreground;
+
+	.mdi {
+		margin-right: 3px;
+	}
+
+	&:hover {
+		color: $green;
+	}
 }
