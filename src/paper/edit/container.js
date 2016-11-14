@@ -6,7 +6,7 @@ import history from 'routing';
 import { paperPropType } from 'utils/constants';
 
 import { deletePaper, getPaper, savePaper, updatePaper } from '../actions';
-import { RECEIVE_PAPER } from '../constants';
+import { RESET_PAPER } from '../constants';
 
 import PaperEditView from './view';
 
@@ -39,7 +39,7 @@ class PaperEditContainer extends Component {
     if (params.id) {
       dispatch(getPaper(params.id));
     } else {
-      dispatch({ type: RECEIVE_PAPER, paper: {} });
+      dispatch({ type: RESET_PAPER });
     }
   }
 
@@ -50,7 +50,7 @@ class PaperEditContainer extends Component {
       if (nextProps.params.id) {
         dispatch(getPaper(nextProps.params.id));
       } else {
-        dispatch({ type: RECEIVE_PAPER, paper: {} });
+        dispatch({ type: RESET_PAPER });
       }
     }
   }

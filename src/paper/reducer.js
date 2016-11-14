@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 
-import { FECTH_PAPER, RECEIVE_PAPER, UPDATE_PAPER } from './constants';
+import { FECTH_PAPER, RECEIVE_PAPER, RESET_PAPER, UPDATE_PAPER } from './constants';
 
 const initialState = fromJS({
   paper: {
@@ -22,6 +22,9 @@ export default (state = initialState, action) => {
       break;
     case UPDATE_PAPER:
       newState = newState.setIn(['paper'].concat(action.key), action.value);
+      break;
+    case RESET_PAPER:
+      newState = newState.set('paper', initialState.get('paper'));
       break;
     default:
   }
