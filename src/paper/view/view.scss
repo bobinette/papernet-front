@@ -1,1 +1,43 @@
-@import '../style/base.scss';
+@import '../../style/base.scss';
+
+.PaperView {
+	display: flex;
+}
+
+.PaperView__LeftPanel {
+	width: 200px;
+	min-height: 100vh;
+
+	background: $foreground-light;
+	color: $background;
+	padding: 20px 10px;
+
+	a {
+		color: $background;
+
+		&:visited {
+			color: $background;
+			text-decoration: none;
+		}
+
+		&:hover {
+			color: $background;
+			text-decoration: underline;
+		}
+	}
+
+	.PaperView__LeftPanel__Links {
+		display: flex;
+		justify-content: space-between;
+
+		a:last-of-type {
+			margin-right: 5px;
+		}
+	}
+}
+
+.PaperView__Content {
+	flex: 1;
+	padding: 0 40px;
+	// margin-left: 200px;
+}

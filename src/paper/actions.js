@@ -45,3 +45,19 @@ export const savePaper = () => (dispatch, getState) => {
     }
   );
 };
+
+export const deletePaper = () => (dispatch, getState) => {
+  const paper = getState().paper;
+
+  if (!paper.get('id')) return new Promise();
+
+  const deleteURL = `${papernetURL}/papers/${paper.get('id')}`;
+  return fetch(deleteURL, { method: 'DELETE' }).then(handleJSON).then(
+    () => {
+      dispatch({ type: RECEIVE_PAPER, paper: {} });
+    },
+    (err) => {
+      console.error('Could not save paper', err.message ? err.message : null); // eslint-disable-line no-console
+    }
+  );
+};

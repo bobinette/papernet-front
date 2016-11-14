@@ -11,7 +11,7 @@ class MarkdownForm extends Component {
     value: ImmutablePropTypes.map.isRequired,
     valueKey: ValueKeyPropType.isRequired,
     extra: PropTypes.shape({
-      className: PropTypes.object,
+      className: PropTypes.string,
       placeholder: PropTypes.string,
     }),
   };

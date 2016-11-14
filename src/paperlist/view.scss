@@ -3,18 +3,21 @@
 .PaperListViewRow {
 	background: $background-card;
 
-	margin: 2.5px 0;
+	margin: 5px 2.5px;
 	padding: 10px;
-	border: 1px solid $gray-light;
+	border: 1px solid $gray;
+	border-radius: 3px;
 
 	color: $foreground;
+	box-shadow: 0 0 5px $gray;
 
 	&:visited {
 		text-decoration: none;
 	}
 
 	&:hover {
-		color: $blue;
+		box-shadow: 0 3px 14px 1.9px $gray;
+		color: $foreground;
 		text-decoration: none;
 		cursor: pointer;
 	}

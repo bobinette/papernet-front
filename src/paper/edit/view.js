@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
+import { Link } from 'react-router';
+
 import FormField from 'components/field/form';
 
 import './view.scss';
@@ -13,7 +15,7 @@ const form = {
       type: 'text',
       valueKey: ['title'],
       extra: {
-        className: { PaperEditView__Title: true },
+        className: 'PaperEdit__Title',
         placeholder: 'Title...',
       },
     },
@@ -21,34 +23,43 @@ const form = {
       type: 'markdown',
       valueKey: ['summary'],
       extra: {
-        className: { PaperEditView__Summary: true },
+        className: 'PaperEdit__Summary',
         placeholder: 'Summary, in markdown format',
       },
     },
   ],
 };
 
-const PaperEditView = ({ onChange, onSave, paper }) => (
-  <div className="PaperEditView">
-    <div className="PaperEditView__ButtonGroup">
-      <button className="PaperEditView__SaveButton" onClick={onSave}>
-        <i className="mdi mdi-check" />Save
-      </button>
+const PaperEdit = ({ onChange, onDelete, onSave, paper }) => (
+  <div className="PaperEdit">
+    <div className="PaperEdit__LeftPanel">
+      <div className="PaperEdit__LeftPanel__TopLinks">
+        <Link to={paper.get('id') ? `/papers/${paper.get('id')}` : 'papers'}>
+          <i className="mdi mdi-close" />Cancel
+        </Link>
+        <button onClick={onSave}><i className="mdi mdi-check" />Save</button>
+      </div>
+      <div className="PaperEdit__LeftPanel__BottomLinks">
+        <button onClick={onDelete}><i className="mdi mdi-delete" />Delete</button>
+      </div>
     </div>
-    <FormField
-      form={form}
-      onChange={onChange}
-      value={paper}
-    />
+    <div className="PaperEdit__Content">
+      <FormField
+        form={form}
+        onChange={onChange}
+        value={paper}
+      />
+    </div>
   </div>
 );
 
-PaperEditView.propTypes = {
+PaperEdit.propTypes = {
   onChange: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
   paper: ImmutablePropTypes.shape({
     title: ImmutablePropTypes.string,
   }).isRequired,
 };
 
-export default PaperEditView;
+export default PaperEdit;

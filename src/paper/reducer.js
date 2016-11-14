@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
       newState = fromJS(action.paper);
       break;
     case UPDATE_PAPER:
-      newState = state.setIn(action.key, action.value);
+      newState = newState.setIn(action.key, action.value);
       break;
     default:
   }

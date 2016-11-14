@@ -2,14 +2,17 @@
 // Base colors
 // ============================================================================
 
+$gray-darkest: #444;
+$gray-darker: #666;
 $gray-dark: #888888;
-$gray: #B8B8B8;
+$gray: #DDD;
 $gray-light: #F0F0F0;
-$gray-lighter: #F9F9F9;
+$gray-lighter: #FAFAFA;
+$gray-lightest: #FDFDFD;
 
 $blue: #6fa4d5;
-$blue-light: lighten($blue, 32);
-$blue-dark: darken($blue, 32);
+$blue-light: lighten($blue, 10);
+$blue-dark: darken($blue, 10);
 
 $red: #d52c36;
 $green: #5ab458;
@@ -21,4 +24,5 @@ $green: #5ab458;
 $background: $gray-lighter;
 $background-card: white;
 
-$foreground: #333;
+$foreground: $gray-darkest;
+$foreground-light: $gray-darker;

@@ -5,7 +5,7 @@ import history from 'routing';
 
 import { paperPropType } from 'utils/constants';
 
-import { getPaper, savePaper, updatePaper } from '../actions';
+import { deletePaper, getPaper, savePaper, updatePaper } from '../actions';
 import { RECEIVE_PAPER } from '../constants';
 
 import PaperEditView from './view';
@@ -26,8 +26,9 @@ class PaperEditContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.onChange = this.onChange.bind(this);
-    this.onSave = this.onSave.bind(this);
+    this.onChange = ::this.onChange;
+    this.onDelete = ::this.onDelete;
+    this.onSave = ::this.onSave;
   }
 
   componentWillMount() {
@@ -56,6 +57,12 @@ class PaperEditContainer extends Component {
     this.props.dispatch(updatePaper(key, value));
   }
 
+  onDelete() {
+    this.props.dispatch(deletePaper()).then(
+      () => { history.push('/papers'); }
+    );
+  }
+
   onSave() {
     this.props.dispatch(savePaper()).then(
       (paperId) => { history.push(`/papers/${paperId}`); }
@@ -69,6 +76,7 @@ class PaperEditContainer extends Component {
       <div className="PaperEditContainer">
         <PaperEditView
           onChange={this.onChange}
+          onDelete={this.onDelete}
           onSave={this.onSave}
           paper={paper}
         />
