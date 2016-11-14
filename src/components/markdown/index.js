@@ -22,7 +22,7 @@ class EnrichedMarkdown extends Component {
   static propTypes = {
     className: PropTypes.string,
     text: PropTypes.string.isRequired,
-  }
+  };
 
   static defaultProps = {
     className: '',
