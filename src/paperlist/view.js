@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import { Link } from 'react-router';
+
+import Text from 'components/input/text';
 
 import { paperPropType } from 'utils/constants';
 
@@ -17,17 +19,28 @@ PaperListViewRow.propTypes = {
   paper: paperPropType,
 };
 
-const PaperListView = ({ paperList }) => (
+const PaperListView = ({ onSearch, papers, search }) => (
   <div className="PaperListView">
+    <div className="PaperListView__Search">
+      <Text
+        className="PaperListView__Search__Input"
+        onChange={onSearch}
+        placeholder="Search by title..."
+        value={search}
+      />
+      <i className="mdi mdi-magnify" />
+    </div>
     <Link className="PaperListView__AddButton" to="/papers/new">
       <i className="mdi mdi-plus-circle" />Add paper
     </Link>
-    {paperList.map((paper, i) => <PaperListViewRow paper={paper} key={i} />)}
+    {papers.map((paper, i) => <PaperListViewRow paper={paper} key={i} />)}
   </div>
 );
 
 PaperListView.propTypes = {
-  paperList: ImmutablePropTypes.listOf(paperPropType).isRequired,
+  onSearch: PropTypes.func.isRequired,
+  papers: ImmutablePropTypes.listOf(paperPropType).isRequired,
+  search: PropTypes.string.isRequired,
 };
 
 export default PaperListView;

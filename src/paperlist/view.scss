@@ -43,3 +43,35 @@
 		color: $green;
 	}
 }
+
+.PaperListView__Search {
+	margin-left: 40%;
+	width: 60%;
+
+	display: flex;
+	align-items: center;
+	padding: 2.5px;
+
+	background: $background-card;
+	border: 1px solid $gray;
+	border-radius: 2px;
+
+	margin-bottom: 15px;
+
+	.mdi {
+		font-size: 14pt;
+		margin: 0 2px;
+	}
+}
+
+.PaperListView__Search__Input {
+	flex: 1;
+
+	input {
+		width: 100%;
+
+		outline: none;
+		border: none;
+		background: transparent;
+	}
+}

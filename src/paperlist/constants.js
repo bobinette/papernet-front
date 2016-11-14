@@ -1,1 +1,2 @@
-export const RECEIVE_PAPER_LIST = 'RECEIVE_PAPER_LIST'; // eslint-disable-line import/prefer-default-export
+export const RECEIVE_PAPER_LIST = 'RECEIVE_PAPER_LIST';
+export const SEARCH_PAPER_LIST = 'SEARCH_PAPER_LIST';
