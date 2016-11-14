@@ -7,12 +7,14 @@ import { getPaper } from '../actions';
 import PaperView from './view';
 
 const mapStateToProps = state => ({
-  paper: state.paper,
+  paper: state.paper.get('paper'),
+  loading: state.paper.get('loading'),
 });
 
 class PaperViewContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
     paper: paperPropType.isRequired,
     params: PropTypes.shape({
       id: PropTypes.string,
@@ -33,7 +35,10 @@ class PaperViewContainer extends Component {
   }
 
   render() {
-    const { paper } = this.props;
+    const { loading, paper } = this.props;
+
+    // Dangerous. Replace with a loading page.
+    if (loading) return null;
 
     return (
       <div className="PaperContainer">

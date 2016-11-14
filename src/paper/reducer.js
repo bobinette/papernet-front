@@ -1,20 +1,27 @@
 import { fromJS } from 'immutable';
 
-import { RECEIVE_PAPER, UPDATE_PAPER } from './constants';
+import { FECTH_PAPER, RECEIVE_PAPER, UPDATE_PAPER } from './constants';
 
 const initialState = fromJS({
-  title: '',
-  summary: '',
+  paper: {
+    title: '',
+    summary: '',
+  },
+  loading: false,
 });
 
 export default (state = initialState, action) => {
   let newState = state;
   switch (action.type) {
+    case FECTH_PAPER:
+      newState = newState.set('loading', true);
+      break;
     case RECEIVE_PAPER:
-      newState = fromJS(action.paper);
+      newState = newState.set('paper', fromJS(action.paper));
+      newState = newState.set('loading', false);
       break;
     case UPDATE_PAPER:
-      newState = newState.setIn(action.key, action.value);
+      newState = newState.setIn(['paper'].concat(action.key), action.value);
       break;
     default:
   }

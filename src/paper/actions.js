@@ -3,10 +3,11 @@ import 'whatwg-fetch';
 import handleJSON from 'utils/actions/handleResponse';
 import { papernetURL } from 'utils/constants';
 
-import { RECEIVE_PAPER, UPDATE_PAPER } from './constants';
+import { FECTH_PAPER, RECEIVE_PAPER, UPDATE_PAPER } from './constants';
 
-export const getPaper = id => dispatch => (
-  fetch(`${papernetURL}/papers/${id}`, {}).then(handleJSON).then(
+export const getPaper = id => (dispatch) => {
+  dispatch({ type: FECTH_PAPER });
+  return fetch(`${papernetURL}/papers/${id}`, {}).then(handleJSON).then(
     (response) => {
       const paper = response.data;
       return dispatch({ type: RECEIVE_PAPER, paper });
@@ -14,15 +15,15 @@ export const getPaper = id => dispatch => (
     (err) => {
       console.log('Could not get paper', err.message ? err.message : null); // eslint-disable-line no-console
     }
-  )
-);
+  );
+};
 
 export const updatePaper = (key, value) => dispatch => (
   dispatch({ type: UPDATE_PAPER, key, value })
 );
 
 export const savePaper = () => (dispatch, getState) => {
-  const paper = getState().paper;
+  const paper = getState().paper.get('paper');
 
   let saveURL = `${papernetURL}/papers`;
   let method = 'POST';
@@ -47,7 +48,7 @@ export const savePaper = () => (dispatch, getState) => {
 };
 
 export const deletePaper = () => (dispatch, getState) => {
-  const paper = getState().paper;
+  const paper = getState().paper.get('paper');
 
   if (!paper.get('id')) return new Promise();
 
