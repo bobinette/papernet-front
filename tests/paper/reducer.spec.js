@@ -20,7 +20,8 @@ describe('reducer', () => {
 
     const nextState = paper(initialState, action);
     expect(nextState).to.equal(fromJS({
-      title: 'Yolo tonight',
+      paper: { title: 'Yolo tonight' },
+      loading: false,
     }));
   });
 
@@ -33,7 +34,8 @@ describe('reducer', () => {
 
     const nextState = paper(initialState, action);
     expect(nextState).to.equal(fromJS({
-      title: 'Yolo tonight',
+      paper: { title: 'Yolo tonight' },
+      loading: false,
     }));
   });
 
@@ -45,7 +47,8 @@ describe('reducer', () => {
 
     const nextState = paper(undefined, action);
     expect(nextState).to.equal(fromJS({
-      title: 'Yolo tonight',
+      paper: { title: 'Yolo tonight' },
+      loading: false,
     }));
   });
 });
