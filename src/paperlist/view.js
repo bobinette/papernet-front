@@ -1,19 +1,29 @@
 import React, { PropTypes } from 'react';
+
+import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import { Link } from 'react-router';
 
+import TagList from 'components/taglist';
 import Text from 'components/input/text';
 
 import { paperPropType } from 'utils/constants';
 
 import './view.scss';
 
-const PaperListViewRow = ({ paper }) => (
-  <Link className="PaperListViewRow" to={`/papers/${paper.get('id')}`}>
-    {paper.get('title')}
-  </Link>
-);
+const PaperListViewRow = ({ paper }) => {
+  const tags = paper.get('tags') || List();
+  return (
+    <Link className="PaperListViewRow" to={`/papers/${paper.get('id')}`}>
+      <div className="PaperListViewRow__Title">{paper.get('title')}</div>
+      <div className="PaperListViewRow__Tags">
+        <TagList tags={tags} />
+        <i className="mdi mdi-tag" />
+      </div>
+    </Link>
+  );
+};
 
 PaperListViewRow.propTypes = {
   paper: paperPropType,

@@ -21,6 +21,37 @@
 		text-decoration: none;
 		cursor: pointer;
 	}
+
+	.PaperListViewRow__Tags {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+
+		color: $blue-light;
+		font-size: 9pt;
+	}
+
+	.mdi-tag {
+		margin-left: 3px;
+	}
+
+	.TagList {
+		.TagList__Tags {
+			display: flex;
+			flex-wrap: wrap;
+
+			.TagList__Tag {
+				border: 1px solid $blue-light;
+				border-radius: 2px;
+
+				margin: 1px;
+				padding: 1px 5px;
+
+				display: flex;
+				align-items: center;
+			}
+		}
+	}
 }
 
 .PaperListView {
