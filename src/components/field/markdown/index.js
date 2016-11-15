@@ -18,7 +18,7 @@ class MarkdownForm extends Component {
 
   static defaultProps = {
     extra: {
-      className: {},
+      className: '',
       placeholder: '',
     },
   };

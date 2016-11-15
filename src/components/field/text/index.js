@@ -18,7 +18,7 @@ class TextField extends Component {
 
   static defaultProps = {
     extra: {
-      className: {},
+      className: '',
       placeholder: '',
     },
   };

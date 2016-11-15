@@ -16,8 +16,8 @@
 	}
 
 	&:hover {
-		box-shadow: 0 3px 14px 1.9px $gray;
-		color: $foreground;
+		box-shadow: 0 0 5px $blue-light;
+		border-color: $blue-light;
 		text-decoration: none;
 		cursor: pointer;
 	}
@@ -35,12 +35,17 @@
 	text-decoration: none;
 	color: $foreground;
 
+	border: 1px dashed $gray;
+	margin: 5px 2.5px;
+	padding: 5px;
+
 	.mdi {
 		margin-right: 3px;
 	}
 
 	&:hover {
-		color: $green;
+		color: $blue;
+		border-color: $blue-light;
 	}
 }
 

@@ -5,16 +5,15 @@
 }
 
 .PaperEdit__LeftPanel {
-	width: 200px;
+	width: 20%;
 	min-height: 100vh;
 
-	background: $foreground-light;
+	background: $blue;
 	color: $background;
 	padding: 20px 10px;
 
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 
 	a, button {
 		color: $background;
@@ -43,12 +42,17 @@
 	}
 }
 
+.PaperEdit__LeftPanel__SpaceHolder {
+	flex: 1;
+}
+
 .PaperEdit__Content {
 	flex: 1;
 	padding: 0 40px;
 	padding-top: 10px;
 
 	color: $foreground;
+	box-shadow: 0 0 10px 3px $blue-darker;
 }
 
 .PaperEdit__Title {

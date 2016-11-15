@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 
-// import './text.scss';
-
 class Text extends Component {
   static propTypes = {
     className: PropTypes.string,

@@ -11,17 +11,21 @@ $gray-lighter: #FAFAFA;
 $gray-lightest: #FDFDFD;
 
 $blue: #6fa4d5;
-$blue-light: lighten($blue, 10);
 $blue-dark: darken($blue, 10);
+$blue-darker: darken($blue, 20);
+$blue-light: lighten($blue, 10);
+$blue-lighter: lighten($blue, 20);
 
 $red: #d52c36;
+
 $green: #5ab458;
+$green-light: lighten($green, 20);
 
 // ============================================================================
 // Roles
 // ============================================================================
 
-$background: $gray-lighter;
+$background: white;
 $background-card: white;
 
 $foreground: $gray-darkest;

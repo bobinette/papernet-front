@@ -20,7 +20,9 @@ describe('reducer', () => {
 
     const nextState = paper(initialState, action);
     expect(nextState).to.equal(fromJS({
-      paper: { title: 'Yolo tonight' },
+      paper: {
+        title: 'Yolo tonight',
+      },
       loading: false,
     }));
   });
@@ -29,12 +31,16 @@ describe('reducer', () => {
     const initialState = Map();
     const action = {
       type: 'RECEIVE_PAPER',
-      paper: { title: 'Yolo tonight' },
+      paper: {
+        title: 'Yolo tonight',
+      },
     };
 
     const nextState = paper(initialState, action);
     expect(nextState).to.equal(fromJS({
-      paper: { title: 'Yolo tonight' },
+      paper: {
+        title: 'Yolo tonight',
+      },
       loading: false,
     }));
   });
@@ -42,12 +48,16 @@ describe('reducer', () => {
   it('handles RECEIVE_PAPER without initial state', () => {
     const action = {
       type: 'RECEIVE_PAPER',
-      paper: { title: 'Yolo tonight' },
+      paper: {
+        title: 'Yolo tonight',
+      },
     };
 
     const nextState = paper(undefined, action);
     expect(nextState).to.equal(fromJS({
-      paper: { title: 'Yolo tonight' },
+      paper: {
+        title: 'Yolo tonight',
+      },
       loading: false,
     }));
   });

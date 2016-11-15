@@ -39,6 +39,7 @@ const PaperEdit = ({ onChange, onDelete, onSave, paper }) => (
         </Link>
         <button onClick={onSave}><i className="mdi mdi-check" />Save</button>
       </div>
+      <div className="PaperEdit__LeftPanel__SpaceHolder" />
       <div className="PaperEdit__LeftPanel__BottomLinks">
         <button onClick={onDelete}><i className="mdi mdi-delete" />Delete</button>
       </div>

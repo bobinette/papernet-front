@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 
-// import './textarea.scss';
-
 class TextArea extends Component {
   static propTypes = {
     className: PropTypes.string,

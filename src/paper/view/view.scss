@@ -5,10 +5,10 @@
 }
 
 .PaperView__LeftPanel {
-	width: 200px;
+	width: 20%;
 	min-height: 100vh;
 
-	background: $foreground-light;
+	background: $blue;
 	color: $background;
 	padding: 20px 10px;
 
@@ -39,5 +39,6 @@
 .PaperView__Content {
 	flex: 1;
 	padding: 0 40px;
-	// margin-left: 200px;
+
+	box-shadow: 0 0 10px 3px $blue-darker;
 }
