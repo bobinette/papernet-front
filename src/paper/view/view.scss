@@ -34,6 +34,29 @@
 			margin-right: 5px;
 		}
 	}
+
+	.TagList {
+		.TagList__Tags {
+			display: flex;
+			flex-wrap: wrap;
+			padding: 5px;
+
+			.TagList__Tag {
+				border: 1px solid $background;
+				border-radius: 2px;
+
+				margin: 2.5px;
+				padding: 2.5px 10px;
+
+				display: flex;
+				align-items: center;
+			}
+		}
+	}
+}
+
+.PaperView__LeftPanel__Tags {
+	margin-top: 30px;
 }
 
 .PaperView__Content {

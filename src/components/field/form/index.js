@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import { FormPropType } from 'components/field/propTypes';
+
 import MarkdownForm from 'components/field/markdown';
 import TextForm from 'components/field/text';
 

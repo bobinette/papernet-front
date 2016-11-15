@@ -6,6 +6,7 @@ const initialState = fromJS({
   paper: {
     title: '',
     summary: '',
+    tags: [],
   },
   loading: false,
 });
