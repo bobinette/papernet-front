@@ -15,8 +15,13 @@ $blue-dark: darken($blue, 10);
 $blue-darker: darken($blue, 20);
 $blue-light: lighten($blue, 10);
 $blue-lighter: lighten($blue, 20);
+$blue-lightest: lighten($blue, 35);
 
 $red: #d52c36;
+$red-dark: darken($red, 10);
+$red-light: lighten($red, 10);
+$red-lighter: lighten($red, 20);
+$red-lightest: lighten($red, 35);
 
 $green: #5ab458;
 $green-light: lighten($green, 20);

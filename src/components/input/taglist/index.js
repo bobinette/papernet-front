@@ -1,7 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import Text from 'components/input/text';
+import Autosuggest from 'react-autosuggest';
+
+import 'whatwg-fetch';
+import qs from 'qs';
+import handleJSON from 'utils/actions/handleResponse';
+import { papernetURL } from 'utils/constants';
+
+const renderSuggestion = suggestion => suggestion;
+const getSuggestionValue = suggestion => suggestion;
 
 class TagList extends Component {
   static propTypes = {
@@ -23,11 +31,18 @@ class TagList extends Component {
     this.onKeyPress = ::this.onKeyPress;
     this.onTextChange = ::this.onTextChange;
 
-    this.state = { text: '' };
+    this.onSuggestionsFetchRequested = ::this.onSuggestionsFetchRequested;
+    this.onSuggestionsClearRequested = ::this.onSuggestionsClearRequested;
+    this.onSuggestionSelected = ::this.onSuggestionSelected;
+
+    this.state = {
+      suggestions: [],
+      text: '',
+    };
   }
 
-  onTextChange(text) {
-    this.setState({ text });
+  onTextChange(_, { newValue }) {
+    this.setState({ text: newValue });
   }
 
   onDeleteTag(index) {
@@ -45,18 +60,52 @@ class TagList extends Component {
     }
   }
 
+  // Autosuggest will call this function every time you need to update suggestions.
+  // You already implemented this logic above, so just use it.
+  onSuggestionsFetchRequested({ value }) {
+    const url = `${papernetURL}/tags?${qs.stringify({ q: value }, { skipNulls: true })}`;
+    return fetch(url, {}).then(handleJSON).then(
+      (response) => {
+        const tags = response.data;
+        this.setState({ suggestions: tags });
+      },
+      (err) => {
+        console.log('Could not get paper list', err.message ? err.message : null); // eslint-disable-line no-console
+      }
+    );
+  }
+
+  // Autosuggest will call this function every time you need to clear suggestions.
+  onSuggestionsClearRequested() {
+    this.setState({ suggestions: [] });
+  }
+
+  onSuggestionSelected(_, { suggestion }) {
+    this.setState({ text: suggestion });
+  }
+
   render() {
     const { className, placeholder, value } = this.props;
-    const { text } = this.state;
+    const { suggestions, text } = this.state;
+
+    // Autosuggest will pass through all these props to the input element.
+    const inputProps = {
+      placeholder,
+      value: text,
+      onChange: this.onTextChange,
+      onKeyPress: this.onKeyPress,
+    };
 
     return (
       <div className={`TagList ${className}`}>
-        <Text
-          onChange={this.onTextChange}
-          onKeyPress={this.onKeyPress}
-          placeholder={placeholder}
-          type="text"
-          value={text}
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
+          onSuggestionSelected={this.onSuggestionSelected}
         />
         <div className="TagList__Tags">
           {value.map((tag, i) => (

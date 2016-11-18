@@ -42,9 +42,24 @@ class EnrichedMarkdown extends Component {
     });
 
     this.markdownRenderer = new marked.Renderer();
+
+    // Code
     this.markdownRenderer.code = (code, lang, escaped) => {
       if (lang === 'equation') {
-        return `<div class="Markdown__Equation">${katex.renderToString(code, { displayMode: true })}</div>`;
+        let eq = code;
+        let className = 'Markdown__Equation';
+        try {
+          eq = katex.renderToString(code, { displayMode: true });
+        } catch (e) {
+          eq = `
+<div class="Markdown__ErrorMessage">
+  <i class="mdi mdi-alert"></i>
+  Could not render equation: ${e.message}
+</div>
+${eq}`;
+          className = `${className} Markdown__Error`;
+        }
+        return `<div class="${className}">${eq}</div>`;
       }
 
       const preTag = '<pre class="Markdown__Code">';
@@ -57,9 +72,27 @@ class EnrichedMarkdown extends Component {
       }
       return `${preTag}${codeTag}${escapedCode}</code></pre>`;
     };
+
+    // Headers: remove one level of heading
     this.markdownRenderer.heading = (text, level) => {
       const lvl = level + 1 <= 6 ? level + 1 : level;
       return `<h${lvl}>${text}</h${lvl}>`;
+    };
+
+    // Inline code
+    this.markdownRenderer.codespan = (code) => {
+      if (code.startsWith('!')) {
+        let eq = code.substring(1);
+        let className = '';
+        try {
+          eq = katex.renderToString(eq, { displayMode: false });
+        } catch (_) {
+          className = 'mdi mdi-alert';
+        }
+        return `<span class="${className}">${eq}</span>`;
+      }
+
+      return `<code>${code}</code>`;
     };
   }
 

@@ -1,5 +1,21 @@
 @import '../../style/base.scss';
 
-.Markdown__View {
-	text-align: justify;
+.Markdown__Error {
+	background: $red-lightest;
+
+	border: 1px solid $red;
+	border-radius: 2px;
+	padding: 10px;
+	margin: 10px;
+
+	text-align: center;
+
+	.Markdown__ErrorMessage {
+		margin-bottom: 5px;
+	}
+
+	.mdi {
+		color: $red;
+		font-size: 14pt;
+	}
 }

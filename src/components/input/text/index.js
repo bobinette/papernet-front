@@ -21,9 +21,9 @@ class Text extends Component {
   constructor(props) {
     super(props);
 
-    this.onChange = this.onChange.bind(this);
-    this.onFocus = this.onFocus.bind(this);
-    this.onBlur = this.onBlur.bind(this);
+    this.onChange = ::this.onChange;
+    this.onFocus = ::this.onFocus;
+    this.onBlur = ::this.onBlur;
   }
 
   onBlur() {
