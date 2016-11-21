@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack-prod.config.js --progress -p && cp src/index.html app/index.html && cp images/papernet.png app/papernet.png",
     "dev": "./node_modules/.bin/webpack-dev-server --port 8080",
-    "lint": "eslint ./src ./tests",
+    "lint": "eslint ./src",
     "mocha": "BABEL_ENV=test NODE_PATH=\"$PWD:$PWD/src\" mocha --opts mocha.opts",
     "mocha:watch": "npm run test -- --watch --watch-extensions js",
     "test": "npm run lint && npm run mocha"
@@ -47,8 +47,7 @@
     "node-inspector": "^0.12.8",
     "node-sass": "^3.8.0",
     "react-addons-test-utils": "^15.2.0",
-    "react-hot-loader": "^1.3.0",
-    "react-tools": "^0.13.3",
+    "react-hot-loader": "^3.0.0-beta.6",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
@@ -71,12 +70,14 @@
     "highlight.js": "^9.8.0",
     "immutable": "^3.8.1",
     "json-loader": "^0.5.4",
+    "jsx-to-html": "^1.1.0",
+    "jsx-to-string": "^0.2.16",
     "katex": "^0.6.0",
     "marked": "^0.3.6",
     "mdi": "^1.6.50",
     "node-sass": "^3.12.2",
     "qs": "^6.2.0",
-    "react": "^15.2.0",
+    "react": "^15.4.0",
     "react-autosuggest": "^7.0.1",
     "react-cookie": "^0.4.7",
     "react-dom": "^15.2.0",
@@ -88,6 +89,8 @@
     "react-textfit": "^0.1.8",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
+    "remark": "^6.2.0",
+    "remark-parse": "^2.2.0",
     "sanitize-caja": "^0.1.3",
     "whatwg-fetch": "^1.1.0"
   }

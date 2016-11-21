@@ -11,7 +11,7 @@ module.exports = {
     loaders: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loaders: ['react-hot', 'babel']
+      loader: 'babel'
     }, {
       test: /\.css$/,
       loader: 'style!css'
@@ -23,7 +23,7 @@ module.exports = {
       loader: 'style!css!less'
     }, {
       test: /\.json$/,
-      loader: 'json'
+      loader: 'json-loader'
     },
     {
       test: /\.png$/,
@@ -51,8 +51,9 @@ module.exports = {
     }]
   },
   resolve: {
-    root: path.resolve('./src'),
-    extensions: ['', '.js', '.jsx']
+    // root: path.resolve('./src'),
+    modulesDirectories: ['./node_modules', './src'],
+    extensions: ['', '.js', '.jsx', '.json']
   },
   output: {
     path: path.join(__dirname, '/dist'),
