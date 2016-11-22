@@ -1,5 +1,37 @@
 @import '../../style/base.scss';
 
+.Markdown {
+	// because of equations and warning, move the pre tag css to
+	// the contained code tag
+	pre {
+		display: inherit;
+		padding: 0;
+		margin: 0;
+		font-size: inherit;
+		line-height: inherit;
+		color: inherit;
+		word-break: inherit;
+		word-wrap: inherit;
+		background-color: transparent;
+		border: none;
+		border-radius: 0;
+
+		code {
+			display: block;
+			padding: 9.5px;
+			margin: 0 0 10px;
+			font-size: 13px;
+			line-height: 1.42857143;
+			color: #333;
+			word-break: break-all;
+			word-wrap: break-word;
+			background-color: #f5f5f5;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+		}
+	}
+}
+
 .Markdown__Error {
 	background: $red-lightest;
 

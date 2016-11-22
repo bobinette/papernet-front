@@ -51,7 +51,6 @@ module.exports = {
     }]
   },
   resolve: {
-    // root: path.resolve('./src'),
     modulesDirectories: ['./node_modules', './src'],
     extensions: ['', '.js', '.jsx', '.json']
   },
