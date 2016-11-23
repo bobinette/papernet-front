@@ -33,6 +33,7 @@
 }
 
 .Markdown__Error {
+	display: block;
 	background: $red-lightest;
 
 	border: 1px solid $red;
@@ -41,6 +42,7 @@
 	margin: 10px;
 
 	text-align: center;
+	white-space: normal;
 
 	.Markdown__ErrorMessage {
 		margin-bottom: 5px;

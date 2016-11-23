@@ -51,7 +51,7 @@ const renderCode = (code, lang, key) => {
             <i className="mdi mdi-alert" />
             Could not render equation: ${e.message}
           </div>
-          {eq};
+          {eq}
         </div>
       );
       classes.Markdown__Error = true;
