@@ -41,7 +41,7 @@ class PaperViewContainer extends Component {
     if (loading) return null;
 
     return (
-      <div className="PaperContainer">
+      <div className="PaperContainer container">
         <PaperView paper={paper} />
       </div>
     );

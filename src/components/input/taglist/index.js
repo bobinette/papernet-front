@@ -112,7 +112,7 @@ class TagList extends Component {
             <div className="TagList__Tag" key={i}>
               <div>{tag}</div>
               <button
-                className="mdi mdi-close"
+                className="fa fa-times"
                 onClick={() => { this.onDeleteTag(i); }}
               />
             </div>

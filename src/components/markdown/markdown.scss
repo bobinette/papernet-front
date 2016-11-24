@@ -7,7 +7,7 @@
 		display: inherit;
 		padding: 0;
 		margin: 0;
-		font-size: inherit;
+		// font-size: inherit;
 		line-height: inherit;
 		color: inherit;
 		word-break: inherit;
@@ -20,7 +20,7 @@
 			display: block;
 			padding: 9.5px;
 			margin: 0 0 10px;
-			font-size: 13px;
+			// font-size: 13px;
 			line-height: 1.42857143;
 			color: #333;
 			word-break: break-all;
@@ -48,8 +48,7 @@
 		margin-bottom: 5px;
 	}
 
-	.mdi {
+	.fa {
 		color: $red;
-		font-size: 14pt;
 	}
 }

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 class TextArea extends Component {
   static propTypes = {
+    autoresize: PropTypes.bool,
     className: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
@@ -9,6 +10,7 @@ class TextArea extends Component {
   }
 
   static defaultProps = {
+    autoresize: false,
     className: '',
     placeholder: '',
     value: '',
@@ -26,11 +28,12 @@ class TextArea extends Component {
   }
 
   render() {
-    const { className, placeholder, value } = this.props;
+    const { autoresize, className, placeholder, value } = this.props;
 
     return (
       <div className={`TextArea ${className}`}>
         <textarea
+          is autoresize={autoresize}
           className="TextArea__InputField"
           onChange={this.onChange}
           placeholder={placeholder}

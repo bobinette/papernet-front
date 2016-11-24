@@ -78,10 +78,9 @@ class PaperEditContainer extends Component {
     if (loading) return null;
 
     return (
-      <div className="PaperEditContainer">
+      <div className="PaperEditContainer container">
         <PaperEditView
           onChange={this.onChange}
-          onDelete={this.onDelete}
           onSave={this.onSave}
           paper={paper}
         />

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
@@ -13,12 +13,13 @@ import './view.scss';
 const form = {
   type: 'list',
   valueKey: [],
+  extra: { className: 'col-md-10 offset-md-1' },
   children: [
     {
       type: 'text',
       valueKey: ['title'],
       extra: {
-        className: 'PaperEdit__Title',
+        className: 'PaperEdit__Title h3',
         placeholder: 'Title...',
       },
     },
@@ -26,6 +27,7 @@ const form = {
       type: 'markdown',
       valueKey: ['summary'],
       extra: {
+        autoresize: true,
         className: 'PaperEdit__Summary',
         placeholder: 'Summary, in markdown format',
       },
@@ -33,49 +35,78 @@ const form = {
   ],
 };
 
-const PaperEdit = ({ onChange, onDelete, onSave, paper }) => {
-  const tags = paper.get('tags') || List();
+const autoresize = (elt) => {
+  elt.style.height = 'auto'; // eslint-disable-line no-param-reassign
+  elt.style.height = `${elt.scrollHeight}px`; // eslint-disable-line no-param-reassign
+  elt.scrollTop = elt.scrollHeight; // eslint-disable-line no-param-reassign
+};
+const autoresizeListener = () => {
+  autoresize(this);
+  window.scrollTo(window.scrollLeft, (this.scrollTop + this.scrollHeight));
+};
 
-  return (
-    <div className="PaperEdit">
-      <div className="PaperEdit__LeftPanel">
-        <div className="PaperEdit__LeftPanel__TopLinks">
-          <Link to={paper.get('id') ? `/papers/${paper.get('id')}` : 'papers'}>
-            <i className="mdi mdi-close" />Cancel
-          </Link>
-          <button onClick={onSave}><i className="mdi mdi-check" />Save</button>
-        </div>
-        <div className="PaperView__LeftPanel__Tags">
-          <h3 className="PaperView__LeftPanel__TagsLabel"><i className="mdi mdi-tag" />Tags:</h3>
+class PaperEdit extends Component {
+
+  static propTypes = {
+    onChange: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
+    paper: ImmutablePropTypes.shape({
+      title: ImmutablePropTypes.string,
+    }).isRequired,
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.onTagsChange = ::this.onTagsChange;
+  }
+
+  componentDidMount() {
+    const resizingTextareas = [].slice.call(document.querySelectorAll('textarea[autoresize]'));
+    resizingTextareas.forEach((textarea) => {
+      textarea.addEventListener('input', autoresizeListener, false);
+      autoresize(textarea);
+    });
+  }
+
+  onTagsChange(tags) {
+    const { onChange } = this.props;
+    onChange('tags', tags);
+  }
+
+  render() {
+    const { paper, onChange, onSave } = this.props;
+    const tags = paper.get('tags') || List();
+
+    return (
+      <div className="PaperEdit">
+        <nav className="navbar navbar-light bg-faded">
+          <span className="navbar-brand">Papernet</span>
+          <ul className="nav navbar-nav pull-xs-right">
+            <li className="nav-item">
+              <Link className="nav-link" to={paper.get('id') ? `/papers/${paper.get('id')}` : 'papers'}>Cancel</Link>
+            </li>
+            <li className="nav-item">
+              <button className="btn btn-outline-success" onClick={onSave}>Save</button>
+            </li>
+          </ul>
+        </nav>
+        <div className="PaperEdit__Content row">
           <TagList
-            onChange={(newTags) => { onChange('tags', newTags); }}
+            className="col-md-10 offset-md-1"
+            onChange={this.onTagsChange}
             placeholder="Add tag..."
             value={tags}
           />
-        </div>
-        <div className="PaperEdit__LeftPanel__SpaceHolder" />
-        <div className="PaperEdit__LeftPanel__BottomLinks">
-          <button onClick={onDelete}><i className="mdi mdi-delete" />Delete</button>
+          <FormField
+            form={form}
+            onChange={onChange}
+            value={paper}
+          />
         </div>
       </div>
-      <div className="PaperEdit__Content">
-        <FormField
-          form={form}
-          onChange={onChange}
-          value={paper}
-        />
-      </div>
-    </div>
-  );
-};
-
-PaperEdit.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired,
-  paper: ImmutablePropTypes.shape({
-    title: ImmutablePropTypes.string,
-  }).isRequired,
-};
+    );
+  }
+}
 
 export default PaperEdit;

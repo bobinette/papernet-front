@@ -1,12 +1,17 @@
 @import 'colors.scss';
+@import 'variables.scss';
+
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 body {
-	font-family: 'Open Sans', Arial, sans-serif;
-	background: $background;
 	min-height: 100vh;
+	background: $background;
 
+	font-family: 'Open Sans', Arial, sans-serif;
 	color: $foreground;
 }
 

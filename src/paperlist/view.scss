@@ -28,10 +28,10 @@
 		justify-content: flex-end;
 
 		color: $blue-light;
-		font-size: 9pt;
+		// font-size: 9pt;
 	}
 
-	.mdi-tag {
+	.fa-tag {
 		margin-left: 3px;
 	}
 
@@ -70,7 +70,7 @@
 	margin: 5px 2.5px;
 	padding: 5px;
 
-	.mdi {
+	.fa {
 		margin-right: 3px;
 	}
 
@@ -94,8 +94,8 @@
 
 	margin-bottom: 15px;
 
-	.mdi {
-		font-size: 14pt;
+	.fa {
+		// font-size: 14pt;
 		margin: 0 2px;
 	}
 }

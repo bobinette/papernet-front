@@ -19,7 +19,7 @@ const PaperListViewRow = ({ paper }) => {
       <div className="PaperListViewRow__Title">{paper.get('title')}</div>
       <div className="PaperListViewRow__Tags">
         <TagList tags={tags} />
-        <i className="mdi mdi-tag" />
+        <i className="fa fa-tag" />
       </div>
     </Link>
   );
@@ -38,10 +38,10 @@ const PaperListView = ({ onSearch, papers, search }) => (
         placeholder="Search by title..."
         value={search}
       />
-      <i className="mdi mdi-magnify" />
+      <i className="fa fa-search" />
     </div>
     <Link className="PaperListView__AddButton" to="/papers/new">
-      <i className="mdi mdi-plus-circle" />Add paper
+      <i className="fa fa-plus-circle" />Add paper
     </Link>
     {papers.map((paper, i) => <PaperListViewRow paper={paper} key={i} />)}
   </div>

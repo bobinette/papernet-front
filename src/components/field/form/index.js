@@ -19,7 +19,7 @@ class FormField extends Component {
     switch (form.type) {
       case 'list':
         return (
-          <div>
+          <div className={form.extra.className ? form.extra.className : ''}>
             {form.children.map((child, key) => (
               <FormField
                 key={key}

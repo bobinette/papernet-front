@@ -11,6 +11,7 @@ class MarkdownForm extends Component {
     value: ImmutablePropTypes.map.isRequired,
     valueKey: ValueKeyPropType.isRequired,
     extra: PropTypes.shape({
+      autoresize: PropTypes.bool,
       className: PropTypes.string,
       placeholder: PropTypes.string,
     }),
@@ -18,6 +19,7 @@ class MarkdownForm extends Component {
 
   static defaultProps = {
     extra: {
+      autoresize: false,
       className: '',
       placeholder: '',
     },
@@ -38,6 +40,7 @@ class MarkdownForm extends Component {
 
     return (
       <TextArea
+        autoresize={extra.autoresize}
         className={extra.className}
         onChange={this.onChange}
         placeholder={extra.placeholder}

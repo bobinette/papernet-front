@@ -1,67 +1,37 @@
 @import '../../style/base.scss';
 
-.PaperView {
-	display: flex;
+.PaperView__Title {
+	font-size: 3rem;
 }
 
-.PaperView__LeftPanel {
-	width: 20%;
-	min-height: 100vh;
-
-	background: $blue;
-	color: $background;
-	padding: 20px 10px;
-
-	a {
-		color: $background;
-
-		&:visited {
-			color: $background;
-			text-decoration: none;
-		}
-
-		&:hover {
-			color: $background;
-			text-decoration: underline;
-		}
-	}
-
-	.PaperView__LeftPanel__Links {
-		display: flex;
-		justify-content: space-between;
-
-		a:last-of-type {
-			margin-right: 5px;
-		}
-	}
-
+.PaperView__Content {
 	.TagList {
+		font-size: 0.8rem;
+		margin-top: 10px;
+		margin-bottom: 10px;
+
 		.TagList__Tags {
 			display: flex;
 			flex-wrap: wrap;
 			padding: 5px;
 
 			.TagList__Tag {
-				border: 1px solid $background;
+				border: 1px solid $gray-dark;
 				border-radius: 2px;
 
+				background: $gray-lighter;
+				color: $gray-darkest;
+
 				margin: 2.5px;
-				padding: 2.5px 10px;
+				padding: 5px 10px;
 
 				display: flex;
 				align-items: center;
+
+				.fa {
+					margin-right: 3px;
+				}
 			}
 		}
 	}
-}
-
-.PaperView__LeftPanel__Tags {
-	margin-top: 30px;
-}
-
-.PaperView__Content {
-	width: 80%;
-	padding: 0 40px;
-
-	box-shadow: 0 0 10px 3px $blue-darker;
 }

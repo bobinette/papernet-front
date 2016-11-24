@@ -48,7 +48,7 @@ const renderCode = (code, lang, key) => {
       eq = (
         <div>
           <div className="Markdown__ErrorMessage">
-            <i className="mdi mdi-alert" />
+            <i className="fa fa-exclamation-triangle" />
             Could not render equation: ${e.message}
           </div>
           {eq}
@@ -63,7 +63,7 @@ const renderCode = (code, lang, key) => {
   if (lang === 'warning') {
     const warning = (
       <div className="Markdown__Warning" key={key} >
-        <i className="mdi mdi-alert" />
+        <i className="fa fa-exclamation-triangle" />
         {code}
       </div>
     );
@@ -83,6 +83,7 @@ const renderCode = (code, lang, key) => {
   }
   return (
     <code
+      key={key}
       className={classNames(codeClass)}
       dangerouslySetInnerHTML={{  // eslint-disable-line react/no-danger
         __html: escapedCode,

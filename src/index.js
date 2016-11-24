@@ -19,10 +19,10 @@ import PaperEditContainer from 'paper/edit/container';
 import paperReducer from 'paper/reducer';
 
 // Styles
-import 'bootstrap/dist/css/bootstrap.css';
-import 'mdi/scss/materialdesignicons.scss';
-import 'katex/dist/katex.min.css';
 import 'style/base.scss';
+import 'bootstrap/scss/bootstrap.scss';
+import 'font-awesome/scss/font-awesome.scss';
+import 'katex/dist/katex.min.css';
 
 // Create store
 const reducers = {
