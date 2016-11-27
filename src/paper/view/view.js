@@ -15,7 +15,7 @@ const PaperView = ({ paper }) => {
 
   return (
     <div className="PaperView">
-      <nav className="navbar navbar-light bg-faded">
+      <nav className="navbar navbar-fixed-top navbar-light bg-faded">
         <Link className="navbar-brand" to={'/papers'}>Papernet</Link>
         <ul className="nav navbar-nav pull-xs-right">
           <li className="nav-item">
@@ -26,7 +26,7 @@ const PaperView = ({ paper }) => {
       <div className="PaperView__Content row">
         <TagList className="col-md-10 offset-md-1" tags={tags} />
         <div className="col-md-10 offset-md-1">
-          <h1 className="PaperView__Title">{paper.get('title')}</h1>
+          <h1 className="display-3">{paper.get('title')}</h1>
           <Markdown text={paper.get('summary')} />
         </div>
       </div>

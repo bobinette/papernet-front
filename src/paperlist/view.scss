@@ -1,64 +1,11 @@
 @import '../style/base.scss';
 
-.PaperListViewRow {
-	background: $background-card;
+.PaperListView__Content {
+	margin-top: 60px;
 
-	margin: 5px 2.5px;
-	padding: 10px;
-	border: 1px solid $gray;
-	border-radius: 3px;
-
-	color: $foreground;
-	box-shadow: 0 0 5px $gray;
-
-	&:visited {
-		text-decoration: none;
+	ul {
+		list-style-type: none;
 	}
-
-	&:hover {
-		box-shadow: 0 0 5px $blue-light;
-		border-color: $blue-light;
-		text-decoration: none;
-		cursor: pointer;
-	}
-
-	.PaperListViewRow__Tags {
-		display: flex;
-		align-items: center;
-		justify-content: flex-end;
-
-		color: $blue-light;
-		// font-size: 9pt;
-	}
-
-	.fa-tag {
-		margin-left: 3px;
-	}
-
-	.TagList {
-		.TagList__Tags {
-			display: flex;
-			flex-wrap: wrap;
-
-			.TagList__Tag {
-				border: 1px solid $blue-light;
-				border-radius: 2px;
-
-				margin: 1px;
-				padding: 1px 5px;
-
-				display: flex;
-				align-items: center;
-			}
-		}
-	}
-}
-
-.PaperListView {
-	display: flex;
-	flex-direction: column;
-
-	padding: 10px 20px;
 }
 
 .PaperListView__AddButton {
@@ -95,7 +42,6 @@
 	margin-bottom: 15px;
 
 	.fa {
-		// font-size: 14pt;
 		margin: 0 2px;
 	}
 }
@@ -109,5 +55,32 @@
 		outline: none;
 		border: none;
 		background: transparent;
+	}
+}
+
+.PaperListViewRow {
+
+	a {
+		color: $foreground;
+
+		&:visited {
+			text-decoration: none;
+			color: $foreground;
+		}
+
+		&:hover {
+			text-decoration: none;
+			color: $foreground;
+			cursor: pointer;
+		}
+	}
+
+	.PaperListViewRow__Tags {
+		display: flex;
+		align-items: center;
+
+		.fa-tag {
+			margin-left: 3px;
+		}
 	}
 }

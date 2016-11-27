@@ -77,7 +77,11 @@ const renderCode = (code, lang, key) => {
   }
   let escapedCode = code;
   if (lang) {
-    escapedCode = hljs.highlight(lang, code).value;
+    try {
+      escapedCode = hljs.highlight(lang, code).value;
+    } catch (e) {
+      console.log(e); // eslint-disable-line no-console
+    }
   } else {
     escapedCode = escape(code, true);
   }

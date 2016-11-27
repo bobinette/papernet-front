@@ -41,6 +41,8 @@ const autoresize = (elt) => {
   elt.scrollTop = elt.scrollHeight; // eslint-disable-line no-param-reassign
 };
 const autoresizeListener = () => {
+  if (!this) return;
+
   autoresize(this);
   window.scrollTo(window.scrollLeft, (this.scrollTop + this.scrollHeight));
 };
@@ -79,8 +81,8 @@ class PaperEdit extends Component {
     const tags = paper.get('tags') || List();
 
     return (
-      <div className="PaperEdit">
-        <nav className="navbar navbar-light bg-faded">
+      <div className="PaperEdit container">
+        <nav className="navbar navbar-fixed-top navbar-light bg-faded">
           <span className="navbar-brand">Papernet</span>
           <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item">

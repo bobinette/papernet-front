@@ -1,37 +1,10 @@
 @import '../../style/base.scss';
 
-.PaperView__Title {
-	font-size: 3rem;
-}
-
 .PaperView__Content {
+	margin-top: 60px;
+
 	.TagList {
-		font-size: 0.8rem;
 		margin-top: 10px;
 		margin-bottom: 10px;
-
-		.TagList__Tags {
-			display: flex;
-			flex-wrap: wrap;
-			padding: 5px;
-
-			.TagList__Tag {
-				border: 1px solid $gray-dark;
-				border-radius: 2px;
-
-				background: $gray-lighter;
-				color: $gray-darkest;
-
-				margin: 2.5px;
-				padding: 5px 10px;
-
-				display: flex;
-				align-items: center;
-
-				.fa {
-					margin-right: 3px;
-				}
-			}
-		}
 	}
 }
