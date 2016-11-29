@@ -59,7 +59,7 @@ const PaperListView = ({ onSearch, papers, search }) => (
       <span className="navbar-brand">Papernet</span>
     </nav>
     <div className="PaperListView__Content">
-      <div className="PaperListView__Search">
+      <div className="PaperListView__Search col-xs-8 offset-xs-4">
         <Text
           className="PaperListView__Search__Input"
           onChange={onSearch}
