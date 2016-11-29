@@ -57,6 +57,11 @@ const PaperListView = ({ onSearch, papers, search }) => (
   <div className="PaperListView container">
     <nav className="navbar navbar-fixed-top navbar-light bg-faded">
       <span className="navbar-brand">Papernet</span>
+      <ul className="nav navbar-nav pull-xs-right">
+        <li className="nav-item">
+          <Link className="nav-link" to="/papers/new">New</Link>
+        </li>
+      </ul>
     </nav>
     <div className="PaperListView__Content">
       <div className="PaperListView__Search col-xs-8 offset-xs-4">
@@ -68,9 +73,6 @@ const PaperListView = ({ onSearch, papers, search }) => (
         />
         <i className="fa fa-search" />
       </div>
-      <Link className="PaperListView__AddButton col-xs-12" to="/papers/new">
-        <i className="fa fa-plus-circle" />Add paper
-      </Link>
       <ul className="col-xs-12 container">
         {papers.map((paper, i) => (
           <li className="col-md-10 offset-md-1" key={i} >
