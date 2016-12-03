@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-
-import history from 'routing';
 
 import { paperPropType } from 'utils/constants';
 
-import { deletePaper, getPaper, savePaper, updatePaper } from '../actions';
+import { getPaper, savePaper, updatePaper } from '../actions';
 import { RESET_PAPER } from '../constants';
 
 import PaperEditView from './view';
@@ -29,7 +28,6 @@ class PaperEditContainer extends Component {
     super(props);
 
     this.onChange = ::this.onChange;
-    this.onDelete = ::this.onDelete;
     this.onSave = ::this.onSave;
   }
 
@@ -59,15 +57,9 @@ class PaperEditContainer extends Component {
     this.props.dispatch(updatePaper(key, value));
   }
 
-  onDelete() {
-    this.props.dispatch(deletePaper()).then(
-      () => { history.push('/papers'); }
-    );
-  }
-
   onSave() {
     this.props.dispatch(savePaper()).then(
-      (paperId) => { history.push(`/papers/${paperId}`); }
+      (paperId) => { browserHistory.push(`/papers/${paperId}`); }
     );
   }
 

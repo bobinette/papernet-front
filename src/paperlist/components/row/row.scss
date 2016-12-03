@@ -1,0 +1,27 @@
+@import '../../../style/base.scss';
+
+.PaperListViewRow {
+	a {
+		color: $foreground;
+
+		&:visited {
+			text-decoration: none;
+			color: $foreground;
+		}
+
+		&:hover {
+			text-decoration: none;
+			color: $foreground;
+			cursor: pointer;
+		}
+	}
+
+	.PaperListViewRow__Tags {
+		display: flex;
+		align-items: center;
+
+		.fa-tag {
+			margin-left: 3px;
+		}
+	}
+}

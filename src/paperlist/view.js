@@ -1,66 +1,43 @@
 import React, { PropTypes } from 'react';
 
-import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import { Link } from 'react-router';
 
-import TagList from 'components/taglist';
 import Text from 'components/input/text';
 
 import { paperPropType } from 'utils/constants';
 
+import Dropdown from './components/dropdown';
+import PaperListViewRow from './components/row';
+
 import './view.scss';
 
-const extractAbstract = (text) => {
-  let end = text.indexOf('#');
-  if (end === -1) {
-    end = text.length;
-  }
-
-  return text.substring(0, end);
-};
-
-const PaperListViewRow = ({ paper }) => {
-  const tags = paper.get('tags') || List();
-  let abstract = extractAbstract(paper.get('summary'));
-  let tooLong = false;
-
-  if (abstract && abstract.length > 200) {
-    abstract = abstract.substring(0, 197);
-    tooLong = true;
-  }
-  return (
-    <div className="PaperListViewRow card">
-      <div className="card-block" to={`/papers/${paper.get('id')}`}>
-        <Link to={`/papers/${paper.get('id')}`}>
-          <h5 className="card-title">{paper.get('title')}</h5>
-          {abstract !== null ?
-            <div className="card-text">{abstract}{tooLong ? '...' : null}</div>
-            : null
-          }
-        </Link>
-      </div>
-      <div className="PaperListViewRow__Tags card-footer">
-        <i className="fa fa-tag" />
-        <TagList tags={tags} max={5} />
-      </div>
-    </div>
-  );
-};
-
-PaperListViewRow.propTypes = {
-  paper: paperPropType,
-};
-
-const PaperListView = ({ onSearch, papers, search }) => (
+const PaperListView = ({ onLogin, onLogout, onSearch, papers, search, user }) => (
   <div className="PaperListView container">
     <nav className="navbar navbar-fixed-top navbar-light bg-faded">
       <span className="navbar-brand">Papernet</span>
-      <ul className="nav navbar-nav pull-xs-right">
+      <ul className="nav navbar-nav">
         <li className="nav-item">
-          <Link className="nav-link" to="/papers/new">New</Link>
+          <Link className="nav-link" to={'/papers/new'}>New</Link>
         </li>
+      </ul>
+      <ul className="nav navbar-nav pull-xs-right">
+        {
+          user.get('token') ?
+            <Dropdown
+              title={user.getIn(['user', 'name'])}
+              onLogout={onLogout}
+            /> :
+              <li className="nav-item active">
+                <button
+                  className="nav-link btn btn-link PaperListView__LoginButton"
+                  onClick={onLogin}
+                >
+                  Login
+                </button>
+              </li>
+        }
       </ul>
     </nav>
     <div className="PaperListView__Content">
@@ -68,7 +45,7 @@ const PaperListView = ({ onSearch, papers, search }) => (
         <Text
           className="PaperListView__Search__Input"
           onChange={onSearch}
-          placeholder="Search by title..."
+          placeholder="Search by title or tags..."
           value={search}
         />
         <i className="fa fa-search" />
@@ -85,9 +62,12 @@ const PaperListView = ({ onSearch, papers, search }) => (
 );
 
 PaperListView.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+  onLogout: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
   papers: ImmutablePropTypes.listOf(paperPropType).isRequired,
   search: PropTypes.string.isRequired,
+  user: ImmutablePropTypes.map.isRequired,
 };
 
 export default PaperListView;
