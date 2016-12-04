@@ -8,6 +8,12 @@ export const paperPropType = ImmutablePropTypes.contains({
   summary: ImmutablePropTypes.string,
 });
 
+export const userPropType = ImmutablePropTypes.contains({
+  id: PropTypes.string,
+  name: PropTypes.string,
+  bookmarks: ImmutablePropTypes.listOf(PropTypes.number),
+});
+
 // URLs
-export const papernetURL = 'http://localhost:1705/papernet';
+export const papernetURL = 'http://localhost:1705/api';
 

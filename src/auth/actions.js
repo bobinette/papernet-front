@@ -51,7 +51,7 @@ export const me = () => (dispatch, getState) => {
     Authorization: `Bearer ${token}`,
   });
 
-  const url = `${papernetURL}/auth/me`;
+  const url = `${papernetURL}/me`;
   return fetch(url, { headers }).then(handleJSON).then(
     response => dispatch({ type: RECEIVE_USER, user: response.data }),
     (err) => {

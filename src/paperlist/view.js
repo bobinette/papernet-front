@@ -6,14 +6,14 @@ import { Link } from 'react-router';
 
 import Text from 'components/input/text';
 
-import { paperPropType } from 'utils/constants';
+import { paperPropType, userPropType } from 'utils/constants';
 
 import Dropdown from './components/dropdown';
 import PaperListViewRow from './components/row';
 
 import './view.scss';
 
-const PaperListView = ({ onLogin, onLogout, onSearch, papers, search, user }) => (
+const PaperListView = ({ onBookmark, onLogin, onLogout, onSearch, papers, search, user }) => (
   <div className="PaperListView container">
     <nav className="navbar navbar-fixed-top navbar-light bg-faded">
       <span className="navbar-brand">Papernet</span>
@@ -53,7 +53,7 @@ const PaperListView = ({ onLogin, onLogout, onSearch, papers, search, user }) =>
       <ul className="col-xs-12 container">
         {papers.map((paper, i) => (
           <li className="col-md-10 offset-md-1" key={i} >
-            <PaperListViewRow paper={paper} />
+            <PaperListViewRow paper={paper} user={user.get('user')} onBookmark={onBookmark} />
           </li>
         ))}
       </ul>
@@ -62,12 +62,16 @@ const PaperListView = ({ onLogin, onLogout, onSearch, papers, search, user }) =>
 );
 
 PaperListView.propTypes = {
+  onBookmark: PropTypes.func.isRequired,
   onLogin: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
   papers: ImmutablePropTypes.listOf(paperPropType).isRequired,
   search: PropTypes.string.isRequired,
-  user: ImmutablePropTypes.map.isRequired,
+  user: ImmutablePropTypes.contains({
+    token: PropTypes.string,
+    user: userPropType,
+  }).isRequired,
 };
 
 export default PaperListView;

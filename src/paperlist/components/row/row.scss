@@ -19,9 +19,33 @@
 	.PaperListViewRow__Tags {
 		display: flex;
 		align-items: center;
+		flex: 1;
 
 		.fa-tag {
 			margin-left: 3px;
+		}
+	}
+
+	.card-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.PaperListViewRow__Bookmark {
+		font-size: 1.2em;
+		margin: 0 5px;
+
+		button {
+			border: none;
+			outline: none;
+			background: transparent;
+
+			color: $foreground;
+
+			&:hover {
+				color: black;
+			}
 		}
 	}
 }

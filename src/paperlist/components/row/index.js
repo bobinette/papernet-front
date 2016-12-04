@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 import { List } from 'immutable';
 
+import classNames from 'classnames';
+
 import TagList from 'components/taglist';
 
-import { paperPropType } from 'utils/constants';
+import { paperPropType, userPropType } from 'utils/constants';
 
 import './row.scss';
 
@@ -18,7 +20,7 @@ const extractAbstract = (text) => {
   return text.substring(0, end);
 };
 
-const PaperListViewRow = ({ paper }) => {
+const PaperListViewRow = ({ onBookmark, paper, user }) => {
   const tags = paper.get('tags') || List();
   let abstract = extractAbstract(paper.get('summary'));
   let tooLong = false;
@@ -27,6 +29,14 @@ const PaperListViewRow = ({ paper }) => {
     abstract = abstract.substring(0, 197);
     tooLong = true;
   }
+
+  const bookmarked = user.get('bookmarks').includes(paper.get('id'));
+  const bookmarkClasses = {
+    fa: true,
+    'fa-bookmark-o': !bookmarked,
+    'fa-bookmark': bookmarked,
+  };
+
   return (
     <div className="PaperListViewRow card">
       <div className="card-block" to={`/papers/${paper.get('id')}`}>
@@ -38,16 +48,25 @@ const PaperListViewRow = ({ paper }) => {
           }
         </Link>
       </div>
-      <div className="PaperListViewRow__Tags card-footer">
-        <i className="fa fa-tag" />
-        <TagList tags={tags} max={5} />
+      <div className="card-footer">
+        <div className="PaperListViewRow__Tags">
+          <i className="fa fa-tag" />
+          <TagList tags={tags} max={5} />
+        </div>
+        <div className="PaperListViewRow__Bookmark">
+          <button onClick={() => onBookmark(paper.get('id'))}>
+            <i className={classNames(bookmarkClasses)} />
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
 PaperListViewRow.propTypes = {
+  onBookmark: PropTypes.func.isRequired,
   paper: paperPropType,
+  user: userPropType,
 };
 
 export default PaperListViewRow;

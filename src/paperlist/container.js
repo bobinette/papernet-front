@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { login, logout, loadCookie, me } from 'auth/actions';
 
-import { getPaperList } from './actions';
+import { bookmark, getPaperList, unbookmark } from './actions';
 import { SEARCH_PAPER_LIST } from './constants';
 import PaperListView from './view';
 
@@ -25,9 +25,10 @@ class PaperListContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.onSearch = ::this.onSearch;
+    this.onBookmark = ::this.onBookmark;
     this.onLogin = ::this.onLogin;
     this.onLogout = ::this.onLogout;
+    this.onSearch = ::this.onSearch;
 
     this.props.dispatch(loadCookie());
     this.props.dispatch(me());
@@ -62,6 +63,15 @@ class PaperListContainer extends Component {
     this.props.dispatch({ type: SEARCH_PAPER_LIST, search });
   }
 
+  onBookmark(id) {
+    const { dispatch, user } = this.props;
+    if (user.getIn(['user', 'bookmarks']).includes(id)) {
+      dispatch(unbookmark(id));
+    } else {
+      dispatch(bookmark(id));
+    }
+  }
+
   render() {
     const { papers, search, user } = this.props;
 
@@ -69,6 +79,7 @@ class PaperListContainer extends Component {
       <div className="PaperContainer">
         <PaperListView
           papers={papers}
+          onBookmark={this.onBookmark}
           onLogin={this.onLogin}
           onLogout={this.onLogout}
           onSearch={this.onSearch}
