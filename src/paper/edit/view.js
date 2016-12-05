@@ -6,6 +6,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router';
 
 import FormField from 'components/field/form';
+import NavBar from 'components/navbar';
 import TagList from 'components/input/taglist';
 
 import './view.scss';
@@ -90,17 +91,12 @@ class PaperEdit extends Component {
 
     return (
       <div className="PaperEdit container">
-        <nav className="navbar navbar-fixed-top navbar-light bg-faded">
-          <span className="navbar-brand">Papernet</span>
-          <ul className="nav navbar-nav pull-xs-right">
-            <li className="nav-item">
-              <Link className="nav-link" to={paper.get('id') ? `/papers/${paper.get('id')}` : 'papers'}>Cancel</Link>
-            </li>
-            <li className="nav-item">
-              <button className="btn btn-outline-success" onClick={onSave}>Save</button>
-            </li>
-          </ul>
-        </nav>
+        <NavBar
+          items={[
+            <Link className="nav-link" to={paper.get('id') ? `/papers/${paper.get('id')}` : 'papers'}>Cancel</Link>,
+            <button className="btn btn-outline-success" onClick={onSave}>Save</button>
+          ]}
+        />
         <div className="PaperEdit__Content row">
           <TagList
             className="col-md-10 offset-md-1"

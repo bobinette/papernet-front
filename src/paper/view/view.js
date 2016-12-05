@@ -9,6 +9,7 @@ import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
 
 import Markdown from 'components/markdown';
+import NavBar from 'components/navbar';
 import TagList from 'components/taglist';
 
 import './view.scss';
@@ -21,14 +22,9 @@ const PaperView = ({ paper }) => {
 
   return (
     <div className="PaperView">
-      <nav className="navbar navbar-fixed-top navbar-light bg-faded">
-        <Link className="navbar-brand" to={'/papers'}>Papernet</Link>
-        <ul className="nav navbar-nav pull-xs-right">
-          <li className="nav-item">
-            <Link className="nav-link" to={`/papers/${paper.get('id')}/edit`}>Edit</Link>
-          </li>
-        </ul>
-      </nav>
+      <NavBar
+        items={[<Link className="nav-link" to={`/papers/${paper.get('id')}/edit`}>Edit</Link>]}
+      />
       <div className="PaperView__Content row">
         <TagList className="col-md-10 offset-md-1" tags={tags} />
         <div className="col-md-10 offset-md-1" >

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
+import { List } from 'immutable';
 
 import { login, logout, loadCookie, me } from 'auth/actions';
 
@@ -65,7 +66,8 @@ class PaperListContainer extends Component {
 
   onBookmark(id) {
     const { dispatch, user } = this.props;
-    if (user.getIn(['user', 'bookmarks']).includes(id)) {
+    const bookmarks = user.getIn(['user', 'bookmarks']) || List();
+    if (bookmarks.includes(id)) {
       dispatch(unbookmark(id));
     } else {
       dispatch(bookmark(id));

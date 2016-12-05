@@ -15,17 +15,17 @@
 			padding: 5px;
 
 			.TagList__Tag {
-				border: 1px solid $gray-dark;
+				border: 1px solid $gray-light;
 				border-radius: $border-radius;
 
-				background: $gray-lighter;
-				color: $gray-dark;
+				background: $body-bg;
+				color: $body-color;
 
 				margin: 2.5px;
 				padding: 5px 10px;
 
 				display: flex;
-				align-items: center;
+				align-items: baseline;
 
 				.fa {
 					padding-top: 2px;

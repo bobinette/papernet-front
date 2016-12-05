@@ -33,7 +33,8 @@ const PaperListViewRow = ({ onBookmark, paper, user }) => {
     tooLong = true;
   }
 
-  const bookmarked = user.get('bookmarks').includes(paper.get('id'));
+  const bookmarks = user.get('bookmarks') || List();
+  const bookmarked = bookmarks.includes(paper.get('id'));
   const bookmarkClasses = {
     fa: true,
     'fa-bookmark-o': !bookmarked,

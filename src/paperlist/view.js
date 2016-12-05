@@ -6,40 +6,17 @@ import Text from 'components/input/text';
 
 import { paperPropType, userPropType } from 'utils/constants';
 
-import Dropdown from './components/dropdown';
+import NavBar from 'components/navbar';
+
 import PaperListViewRow from './components/row';
 
 import './view.scss';
 
-const PaperListView = ({ onBookmark, onLogin, onLogout, onSearch, papers, search, user }) => (
+const PaperListView = ({ onBookmark, onSearch, papers, search, user }) => (
   <div className="PaperListView container">
-    <nav className="navbar navbar-fixed-top navbar-light">
-      <div className="container">
-        <span className="navbar-brand">Papernet</span>
-        <ul className="nav navbar-nav">
-          <li className="nav-item">
-            <Link className="nav-link" to={'/papers/new'}>New</Link>
-          </li>
-        </ul>
-        <ul className="nav navbar-nav pull-xs-right">
-          {
-            user.get('token') ?
-              <Dropdown
-                title={user.getIn(['user', 'name'])}
-                onLogout={onLogout}
-              /> :
-                <li className="nav-item active">
-                  <button
-                    className="nav-link btn btn-link PaperListView__LoginButton"
-                    onClick={onLogin}
-                  >
-                    Login
-                  </button>
-                </li>
-          }
-        </ul>
-      </div>
-    </nav>
+    <NavBar
+      items={[<Link className="nav-link" to={'/papers/new'}>New</Link>]}
+    />
     <div className="PaperListView__Content">
       <div className="PaperListView__Search col-xs-8 offset-xs-4">
         <Text
@@ -63,8 +40,6 @@ const PaperListView = ({ onBookmark, onLogin, onLogout, onSearch, papers, search
 
 PaperListView.propTypes = {
   onBookmark: PropTypes.func.isRequired,
-  onLogin: PropTypes.func.isRequired,
-  onLogout: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
   papers: ImmutablePropTypes.listOf(paperPropType).isRequired,
   search: PropTypes.string.isRequired,
