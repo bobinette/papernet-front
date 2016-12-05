@@ -1,4 +1,5 @@
-@import '../../style/base.scss';
+@import '../../style/_colors.scss';
+@import "~bootstrap/scss/_variables.scss";
 
 .TagList {
 	font-size: 0.8rem;
@@ -9,11 +10,11 @@
 		flex-wrap: wrap;
 
 		.TagList__Tag {
-			border: 1px solid $gray-dark;
-			border-radius: 2px;
+			border: 1px solid $gray-light;
+			border-radius: $border-radius;
 
-			background: $gray-lighter;
-			color: $gray-darkest;
+			background: $body-bg;
+			color: $body-color;
 
 			margin: 2.5px;
 			padding: 5px 10px;

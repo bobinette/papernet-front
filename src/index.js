@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { IndexRedirect, Router, Route, browserHistory } from 'react-router';
 
-// import history from 'routing';
-
 // Redux
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
+
+// Init style before importing components
+import 'style/base.scss';
+import 'font-awesome/scss/font-awesome.scss';
+import 'katex/dist/katex.min.css';
 
 // Paper list page
 import PaperListContainer from 'paperlist/container';
@@ -21,12 +24,6 @@ import paperReducer from 'paper/reducer';
 // Auth page
 import GoogleLoggedIn from 'auth/google';
 import userReducer from 'auth/reducer';
-
-// Styles
-import 'style/base.scss';
-import 'bootstrap/scss/bootstrap.scss';
-import 'font-awesome/scss/font-awesome.scss';
-import 'katex/dist/katex.min.css';
 
 // Create store
 const reducers = {

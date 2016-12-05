@@ -2,38 +2,6 @@
 // Base colors
 // ============================================================================
 
-$gray: #DDD;
-$gray-dark: darken($gray, 10);
-$gray-darker: darken($gray, 30);
-$gray-darkest: darken($gray, 60);
-$gray-light: #F0F0F0;
-$gray-lighter: #FAFAFA;
-$gray-lightest: #FDFDFD;
-
-$blue: #6fa4d5;
-$blue-dark: darken($blue, 10);
-$blue-darker: darken($blue, 20);
-$blue-light: lighten($blue, 10);
-$blue-lighter: lighten($blue, 20);
-$blue-lightest: lighten($blue, 35);
-
-$red: #d52c36;
-$red-dark: darken($red, 10);
-$red-light: lighten($red, 10);
-$red-lighter: lighten($red, 20);
-$red-lightest: lighten($red, 35);
-
-$green: #5ab458;
-$green-light: lighten($green, 10);
-$green-lighter: lighten($green, 20);
-$green-lightest: lighten($green, 35);
-
 // ============================================================================
 // Roles
 // ============================================================================
-
-$background: white;
-$background-card: white;
-
-$foreground: $gray-darkest;
-$foreground-light: $gray-darker;

@@ -1,17 +1,18 @@
-@import '../../../style/base.scss';
+@import '../../../style/_colors.scss';
+@import "~bootstrap/scss/_variables.scss";
 
 .PaperListViewRow {
 	a {
-		color: $foreground;
+		color: $body-color;
 
 		&:visited {
 			text-decoration: none;
-			color: $foreground;
+			color: $body-color;
 		}
 
 		&:hover {
 			text-decoration: none;
-			color: $foreground;
+			color: $body-color;
 			cursor: pointer;
 		}
 	}
@@ -41,7 +42,7 @@
 			outline: none;
 			background: transparent;
 
-			color: $foreground;
+			color: $body-color;
 
 			&:hover {
 				color: black;

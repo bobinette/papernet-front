@@ -49,22 +49,22 @@ const PaperListViewRow = ({ onBookmark, paper, user }) => {
             <p className="card-text">{abstract}{tooLong ? '...' : null}</p>
             : null
           }
-        </Link>
-        <p className="card-text">
-          <small
-            className="text-muted"
-            data-for={paper.get('id').toString()}
-            data-tip
-          >
-            <Tooltip
-              placement="bottom"
-              mouseEnterDelay={0.3}
-              overlay={<small>{moment(paper.get('updatedAt')).format('LLL')}</small>}
+          <p className="card-text">
+            <small
+              className="text-muted"
+              data-for={paper.get('id').toString()}
+              data-tip
             >
-              <span>Modified {moment(paper.get('updatedAt')).fromNow()}</span>
-            </Tooltip>
-          </small>
-        </p>
+              <Tooltip
+                placement="bottom"
+                mouseEnterDelay={0.3}
+                overlay={<small>{moment(paper.get('updatedAt')).format('LLL')}</small>}
+              >
+                <span>Modified {moment(paper.get('updatedAt')).fromNow()}</span>
+              </Tooltip>
+            </small>
+          </p>
+        </Link>
       </div>
       <div className="card-footer">
         <div className="PaperListViewRow__Tags">

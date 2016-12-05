@@ -1,20 +1,23 @@
 @import 'colors.scss';
 @import 'variables.scss';
 
-@import "../../node_modules/bootstrap/scss/variables";
-@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/bootstrap";
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 body {
 	min-height: 100vh;
-	background: $background;
 
-	font-family: 'Open Sans', Arial, sans-serif;
-	color: $foreground;
+	font-family: 'Source Sans Pro', 'Roboto', Arial, sans-serif;
 }
 
-h1 {
-	font-family: 'Roboto', Arial, sans-serif;
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Lato', Arial, sans-serif;
+}
+
+a:focus {
+	text-decoration: none;
+	outline: none;
 }
