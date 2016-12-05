@@ -5,6 +5,7 @@ import { FormPropType } from 'components/field/propTypes';
 
 import MarkdownForm from 'components/field/markdown';
 import TextForm from 'components/field/text';
+import TextListForm from 'components/field/textlist';
 
 class FormField extends Component {
   static propTypes = {
@@ -42,6 +43,15 @@ class FormField extends Component {
       case 'text':
         return (
           <TextForm
+            extra={form.extra}
+            onChange={onChange}
+            value={value}
+            valueKey={form.valueKey}
+          />
+        );
+      case 'textlist':
+        return (
+          <TextListForm
             extra={form.extra}
             onChange={onChange}
             value={value}

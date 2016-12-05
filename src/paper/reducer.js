@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
       newState = newState.set('loading', false);
       break;
     case UPDATE_PAPER:
-      newState = newState.setIn(['paper'].concat(action.key), action.value);
+      newState = newState.setIn(['paper'], action.value);
       break;
     case RESET_PAPER:
       newState = newState.set('paper', initialState.get('paper'));

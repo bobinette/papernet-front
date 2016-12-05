@@ -18,8 +18,8 @@ export const getPaper = id => (dispatch) => {
   );
 };
 
-export const updatePaper = (key, value) => dispatch => (
-  dispatch({ type: UPDATE_PAPER, key, value })
+export const updatePaper = (value) => dispatch => (
+  dispatch({ type: UPDATE_PAPER, value })
 );
 
 export const savePaper = () => (dispatch, getState) => {

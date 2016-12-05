@@ -1,9 +1,12 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-
 import { List } from 'immutable';
 
 import classNames from 'classnames';
+import moment from 'moment';
+
+import Tooltip from 'rc-tooltip';
+import 'rc-tooltip/assets/bootstrap.css';
 
 import TagList from 'components/taglist';
 
@@ -43,10 +46,25 @@ const PaperListViewRow = ({ onBookmark, paper, user }) => {
         <Link to={`/papers/${paper.get('id')}`}>
           <h5 className="card-title">{paper.get('title')}</h5>
           {abstract !== null ?
-            <div className="card-text">{abstract}{tooLong ? '...' : null}</div>
+            <p className="card-text">{abstract}{tooLong ? '...' : null}</p>
             : null
           }
         </Link>
+        <p className="card-text">
+          <small
+            className="text-muted"
+            data-for={paper.get('id').toString()}
+            data-tip
+          >
+            <Tooltip
+              placement="bottom"
+              mouseEnterDelay={0.3}
+              overlay={<small>{moment(paper.get('updatedAt')).format('LLL')}</small>}
+            >
+              <span>Modified {moment(paper.get('updatedAt')).fromNow()}</span>
+            </Tooltip>
+          </small>
+        </p>
       </div>
       <div className="card-footer">
         <div className="PaperListViewRow__Tags">

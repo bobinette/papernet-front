@@ -53,8 +53,8 @@ class PaperEditContainer extends Component {
     }
   }
 
-  onChange(key, value) {
-    this.props.dispatch(updatePaper(key, value));
+  onChange(value) {
+    this.props.dispatch(updatePaper(value));
   }
 
   onSave() {

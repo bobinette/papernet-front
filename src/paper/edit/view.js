@@ -24,6 +24,14 @@ const form = {
       },
     },
     {
+      type: 'textlist',
+      valueKey: ['references'],
+      extra: {
+        className: 'PaperEdit__References',
+        placeholder: 'References...',
+      },
+    },
+    {
       type: 'markdown',
       valueKey: ['summary'],
       extra: {
@@ -72,8 +80,8 @@ class PaperEdit extends Component {
   }
 
   onTagsChange(tags) {
-    const { onChange } = this.props;
-    onChange('tags', tags);
+    const { onChange, paper } = this.props;
+    onChange(paper.set('tags', tags));
   }
 
   render() {

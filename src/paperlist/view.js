@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
-
-import ImmutablePropTypes from 'react-immutable-proptypes';
-
 import { Link } from 'react-router';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import Text from 'components/input/text';
 

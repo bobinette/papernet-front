@@ -30,7 +30,8 @@ class TextField extends Component {
   }
 
   onChange(newValue) {
-    this.props.onChange(this.props.valueKey, newValue);
+    const { value, valueKey } = this.props;
+    this.props.onChange(value.setIn(valueKey, newValue));
   }
 
   render() {
