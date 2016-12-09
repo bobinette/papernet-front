@@ -92,9 +92,20 @@ class PaperEdit extends Component {
     return (
       <div className="PaperEdit container">
         <NavBar
-          items={[
-            <Link className="nav-link" to={paper.get('id') ? `/papers/${paper.get('id')}` : 'papers'}>Cancel</Link>,
-            <button className="btn btn-outline-success" onClick={onSave}>Save</button>
+          rightItems={[
+            {
+              element: (
+                <Link
+                  className="nav-link"
+                  to={paper.get('id') ? `/papers/${paper.get('id')}` : 'papers'}
+                >
+                  Cancel
+                </Link>
+              ),
+            },
+            {
+              element: <button className="btn btn-outline-success" onClick={onSave}>Save</button>,
+            },
           ]}
         />
         <div className="PaperEdit__Content row">

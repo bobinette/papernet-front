@@ -51,12 +51,12 @@
 
 			outline: none;
 			border: none;
-			border-bottom: 1px solid $gray;
+			border-bottom: 1px solid $gray-lighter;
 
 			padding-left: 10px;
 
 			&:hover, &:focus {
-				border-color: $gray-dark;
+				border-color: $gray-light;
 			}
 
 			width: 100%;
@@ -81,7 +81,7 @@
 			position: absolute;
 			top: 96%;
 			width: 100%;
-			border: 1px solid $gray;
+			border: 1px solid $gray-lighter;
 			background-color: $body-bg;
 			color: $body-color;
 			border-bottom-left-radius: 4px;
@@ -95,7 +95,7 @@
 		}
 
 		.react-autosuggest__suggestion--focused {
-			background-color: $gray;
+			background-color: $gray-lighter;
 		}
 
 		.react-autosuggest__section-container:first-child .react-autosuggest__section-title {
@@ -110,10 +110,10 @@
 
 		outline: none;
 		border: none;
-		border-bottom: 1px solid $gray;
+		border-bottom: 1px solid $gray-lighter;
 
 		&:hover, &:focus {
-			border-color: $gray-dark;
+			border-color: $gray-light;
 		}
 
 		width: 100%;

@@ -23,7 +23,11 @@ const PaperView = ({ paper }) => {
   return (
     <div className="PaperView">
       <NavBar
-        items={[<Link className="nav-link" to={`/papers/${paper.get('id')}/edit`}>Edit</Link>]}
+        rightItems={[
+          {
+            element: <Link className="nav-link" to={`/papers/${paper.get('id')}/edit`}>Edit</Link>,
+          },
+        ]}
       />
       <div className="PaperView__Content row">
         <TagList className="col-md-10 offset-md-1" tags={tags} />
@@ -43,7 +47,7 @@ const PaperView = ({ paper }) => {
           </small>
         </div>
         <div className="col-md-10 offset-md-1">
-          <h1 className="display-3">{paper.get('title')}</h1>
+          <h1 className="display-4">{paper.get('title')}</h1>
           <Markdown text={paper.get('summary')} />
           <ul>
             {

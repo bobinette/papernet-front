@@ -15,7 +15,19 @@ import './view.scss';
 const PaperListView = ({ onBookmark, onSearch, papers, search, user }) => (
   <div className="PaperListView container">
     <NavBar
-      items={[<Link className="nav-link" to={'/papers/new'}>New</Link>]}
+      items={[
+        {
+          element: <Link className="nav-link" to={'/papers'}>Home</Link>,
+          active: true,
+        },
+      ]}
+      rightItems={[
+        {
+          element: (
+            <Link className="btn btn-outline-primary" to={'/papers/new'}>New</Link>
+          ),
+        },
+      ]}
     />
     <div className="PaperListView__Content">
       <div className="PaperListView__Search col-xs-8 offset-xs-4">

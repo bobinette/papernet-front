@@ -5,9 +5,16 @@ import { papernetURL } from 'utils/constants';
 
 import { FECTH_PAPER, RECEIVE_PAPER, UPDATE_PAPER } from './constants';
 
-export const getPaper = id => (dispatch) => {
+export const getPaper = id => (dispatch, getState) => {
+  const token = getState().user.get('token');
+  if (!token) return null;
+
+  const headers = new Headers({
+    Authorization: `Bearer ${token}`,
+  });
+
   dispatch({ type: FECTH_PAPER });
-  return fetch(`${papernetURL}/papers/${id}`, {}).then(handleJSON).then(
+  return fetch(`${papernetURL}/papers/${id}`, { headers }).then(handleJSON).then(
     (response) => {
       const paper = response.data;
       return dispatch({ type: RECEIVE_PAPER, paper });
@@ -18,7 +25,7 @@ export const getPaper = id => (dispatch) => {
   );
 };
 
-export const updatePaper = (value) => dispatch => (
+export const updatePaper = value => dispatch => (
   dispatch({ type: UPDATE_PAPER, value })
 );
 
@@ -32,8 +39,16 @@ export const savePaper = () => (dispatch, getState) => {
     method = 'PUT';
   }
 
+  const token = getState().user.get('token');
+  if (!token) return null;
+
+  const headers = new Headers({
+    Authorization: `Bearer ${token}`,
+  });
+
   return fetch(saveURL, {
     method,
+    headers,
     body: JSON.stringify(paper.toJS()),
   }).then(handleJSON).then(
     (response) => {
@@ -52,8 +67,15 @@ export const deletePaper = () => (dispatch, getState) => {
 
   if (!paper.get('id')) return new Promise();
 
+  const token = getState().user.get('token');
+  if (!token) return null;
+
+  const headers = new Headers({
+    Authorization: `Bearer ${token}`,
+  });
+
   const deleteURL = `${papernetURL}/papers/${paper.get('id')}`;
-  return fetch(deleteURL, { method: 'DELETE' }).then(handleJSON).then(
+  return fetch(deleteURL, { method: 'DELETE', headers }).then(handleJSON).then(
     () => {
       dispatch({ type: RECEIVE_PAPER, paper: {} });
     },

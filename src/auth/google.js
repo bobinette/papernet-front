@@ -40,12 +40,12 @@ class GoogleLogIn extends Component {
           <h1 className="display-3">Congratulations!</h1>
           <p className="lead">
             You are now connected to Papernet with Google! Do not worry, Google was used just
-            to avoid implementing an authentication system. Ain&quot;t nobody got time for that.
+            to avoid implementing an authentication system. Ain&#39;t nobody got time for that.
             I will not be doing anything with your data.
           </p>
           <p className="lead">
             <Link className="btn btn-primary btn-lg" to={'/papers'} role="button">
-              Let&quot;s head back home
+              Let&#39;s head back home
             </Link>
           </p>
         </div>
