@@ -33,18 +33,22 @@ const PaperListViewRow = ({ onBookmark, paper, user }) => {
     tooLong = true;
   }
 
-  const bookmarks = user.get('bookmarks') || List();
-  const bookmarked = bookmarks.includes(paper.get('id'));
-  const bookmarkClasses = {
-    fa: true,
-    'fa-bookmark-o': !bookmarked,
-    'fa-bookmark': bookmarked,
-  };
+  let bookmarkClasses = {};
+  if (user && onBookmark) {
+    const bookmarks = user.get('bookmarks') || List();
+    const bookmarked = bookmarks.includes(paper.get('id'));
+
+    bookmarkClasses = {
+      fa: true,
+      'fa-bookmark-o': !bookmarked,
+      'fa-bookmark': bookmarked,
+    };
+  }
 
   return (
     <div className="PaperListViewRow card">
-      <div className="card-block" to={`/papers/${paper.get('id')}`}>
-        <Link to={`/papers/${paper.get('id')}`}>
+      <div className="card-block">
+        <Link>
           <h5 className="card-title">{paper.get('title')}</h5>
           {abstract !== null ?
             <p className="card-text">{abstract}{tooLong ? '...' : null}</p>
@@ -72,19 +76,21 @@ const PaperListViewRow = ({ onBookmark, paper, user }) => {
           <i className="fa fa-tag" />
           <TagList tags={tags} max={5} />
         </div>
-        <div className="PaperListViewRow__Bookmark">
-          <button onClick={() => onBookmark(paper.get('id'))}>
-            <i className={classNames(bookmarkClasses)} />
-          </button>
-        </div>
+        {user && onBookmark &&
+          <div className="PaperListViewRow__Bookmark">
+            <button onClick={() => onBookmark(paper.get('id'))}>
+              <i className={classNames(bookmarkClasses)} />
+            </button>
+          </div>
+        }
       </div>
     </div>
   );
 };
 
 PaperListViewRow.propTypes = {
-  onBookmark: PropTypes.func.isRequired,
-  paper: paperPropType,
+  onBookmark: PropTypes.func,
+  paper: paperPropType.isRequired,
   user: userPropType,
 };
 

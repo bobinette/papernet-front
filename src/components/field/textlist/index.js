@@ -6,6 +6,8 @@ import Text from 'components/input/text';
 
 import { ValueKeyPropType } from 'components/field/propTypes';
 
+import './textlist.scss';
+
 class TextList extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,

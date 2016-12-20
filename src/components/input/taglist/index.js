@@ -8,6 +8,8 @@ import qs from 'qs';
 import handleJSON from 'utils/actions/handleResponse';
 import { papernetURL } from 'utils/constants';
 
+import './taglist.scss';
+
 const renderSuggestion = suggestion => suggestion;
 const getSuggestionValue = suggestion => suggestion;
 

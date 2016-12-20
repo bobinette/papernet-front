@@ -1,0 +1,19 @@
+@import "~bootstrap/scss/_variables.scss";
+
+.TagList {
+	input {
+		background: transparent;
+
+		outline: none;
+		border: none;
+		border-bottom: 1px solid $gray-lighter;
+
+		padding-left: 10px;
+
+		&:hover, &:focus {
+			border-color: $gray-light;
+		}
+
+		width: 100%;
+	}
+}

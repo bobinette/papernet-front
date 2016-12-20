@@ -20,6 +20,10 @@ const PaperListView = ({ onBookmark, onSearch, papers, search, user }) => (
           element: <Link className="nav-link" to={'/papers'}>Home</Link>,
           active: true,
         },
+        {
+          element: <Link className="nav-link" to={'/imports'}>Imports</Link>,
+          active: false,
+        },
       ]}
       rightItems={[
         {

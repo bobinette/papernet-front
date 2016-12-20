@@ -3,7 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { List } from 'immutable';
 
-import { login, logout, loadCookie, me } from 'auth/actions';
+import { loadCookie, me } from 'auth/actions';
 
 import { bookmark, getPaperList, unbookmark } from './actions';
 import { SEARCH_PAPER_LIST } from './constants';
@@ -27,8 +27,6 @@ class PaperListContainer extends Component {
     super(props);
 
     this.onBookmark = ::this.onBookmark;
-    this.onLogin = ::this.onLogin;
-    this.onLogout = ::this.onLogout;
     this.onSearch = ::this.onSearch;
 
     this.props.dispatch(loadCookie());
@@ -50,14 +48,6 @@ class PaperListContainer extends Component {
     if (nextProps.user.get('token') !== this.props.user.get('token')) {
       dispatch(me());
     }
-  }
-
-  onLogin() {
-    this.props.dispatch(login());
-  }
-
-  onLogout() {
-    this.props.dispatch(logout());
   }
 
   onSearch(search) {
@@ -82,8 +72,6 @@ class PaperListContainer extends Component {
         <PaperListView
           papers={papers}
           onBookmark={this.onBookmark}
-          onLogin={this.onLogin}
-          onLogout={this.onLogout}
           onSearch={this.onSearch}
           search={search}
           user={user}

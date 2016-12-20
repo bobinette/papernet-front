@@ -61,7 +61,7 @@ export const me = () => (dispatch, getState) => {
 };
 
 export const logout = () => (dispatch) => {
-  cookie.remove('access_token');
-  dispatch({ type: RECEIVE_USER, user: {} });
+  cookie.remove('access_token', { path: '/' });
   dispatch({ type: RECEIVE_TOKEN, token: '' });
+  dispatch({ type: RECEIVE_USER, user: {} });
 };

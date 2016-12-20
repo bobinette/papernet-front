@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
@@ -14,56 +14,84 @@ import TagList from 'components/taglist';
 
 import './view.scss';
 
-const PaperView = ({ paper }) => {
-  if (!paper.get('id')) return null;
+const urlRegex = new RegExp(
+  /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/
+);
 
-  const tags = paper.get('tags') || List();
-  const resources = paper.get('resources') || List();
+class PaperView extends Component {
 
-  return (
-    <div className="PaperView">
-      <NavBar
-        rightItems={[
+  static propTypes = {
+    paper: ImmutablePropTypes.shape({
+      title: ImmutablePropTypes.string,
+    }).isRequired,
+  };
+
+  renderReferences() {
+    const { paper } = this.props;
+    const references = paper.get('references') || List();
+
+    if (references.size === 0) return null;
+
+    return (
+      <div>
+        <h2>References</h2>
+        <ul>
           {
-            element: <Link className="nav-link" to={`/papers/${paper.get('id')}/edit`}>Edit</Link>,
-          },
-        ]}
-      />
-      <div className="PaperView__Content row">
-        <TagList className="col-md-10 offset-md-1" tags={tags} />
-        <div className="col-md-10 offset-md-1" >
-          <small
-            className="text-muted"
-            data-for={paper.get('id').toString()}
-            data-tip
-          >
-            <Tooltip
-              placement="bottom"
-              mouseEnterDelay={0.3}
-              overlay={<small>{moment(paper.get('updatedAt')).format('LLL')}</small>}
-            >
-              <span>Modified {moment(paper.get('updatedAt')).fromNow()}</span>
-            </Tooltip>
-          </small>
-        </div>
-        <div className="col-md-10 offset-md-1">
-          <h1 className="display-4">{paper.get('title')}</h1>
-          <Markdown text={paper.get('summary')} />
-          <ul>
+            references.map((ref, i) => {
+              let elt = ref;
+              if (elt.match(urlRegex)) {
+                elt = <a href={ref}>{ref}</a>;
+              }
+              return <li key={i}>{elt}</li>;
+            })
+          }
+        </ul>
+      </div>
+    );
+  }
+
+  render() {
+    const { paper } = this.props;
+
+    if (!paper.get('id')) return null;
+
+    const tags = paper.get('tags') || List();
+
+    return (
+      <div className="PaperView">
+        <NavBar
+          rightItems={[
             {
-              resources.map((res, i) => <li key={i}>res</li>)
-            }
-          </ul>
+              element: <Link className="nav-link" to={`/papers/${paper.get('id')}/edit`}>Edit</Link>,
+            },
+          ]}
+        />
+        <div className="PaperView__Content row">
+          <TagList className="col-md-10 offset-md-1" tags={tags} />
+          <div className="col-md-10 offset-md-1" >
+            <small
+              className="text-muted"
+              data-for={paper.get('id').toString()}
+              data-tip
+            >
+              <Tooltip
+                placement="bottom"
+                mouseEnterDelay={0.3}
+                overlay={<small>{moment(paper.get('updatedAt')).format('LLL')}</small>}
+              >
+                <span>Modified {moment(paper.get('updatedAt')).fromNow()}</span>
+              </Tooltip>
+            </small>
+          </div>
+          <div className="col-md-10 offset-md-1">
+            <h1 className="display-4">{paper.get('title')}</h1>
+            <Markdown text={paper.get('summary')} />
+            {this.renderReferences()}
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
-
-PaperView.propTypes = {
-  paper: ImmutablePropTypes.shape({
-    title: ImmutablePropTypes.string,
-  }).isRequired,
-};
+    );
+  }
+}
 
 export default PaperView;

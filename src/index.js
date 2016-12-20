@@ -25,8 +25,13 @@ import paperReducer from 'paper/reducer';
 import GoogleLoggedIn from 'auth/google';
 import userReducer from 'auth/reducer';
 
+// Imports
+import ImportContainer from 'imports/container';
+import importsReducer from 'imports/reducer';
+
 // Create store
 const reducers = {
+  imports: importsReducer,
   paper: paperReducer,
   paperList: paperListReducer,
   user: userReducer,
@@ -52,6 +57,7 @@ ReactDOM.render(
             <IndexRedirect to="/auth/google" />
             <Route path="google" component={GoogleLoggedIn} />
           </Route>
+          <Route path="imports" component={ImportContainer} />
         </Route>
       </Router>
     </div>

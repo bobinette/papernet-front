@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { paperPropType } from 'utils/constants';
+import { loadCookie, me } from 'auth/actions';
 
 import { getPaper } from '../actions';
 import PaperView from './view';
@@ -20,6 +21,13 @@ class PaperViewContainer extends Component {
       id: PropTypes.string,
     }).isRequired,
   };
+
+  constructor(props) {
+    super(props);
+
+    this.props.dispatch(loadCookie());
+    this.props.dispatch(me());
+  }
 
   componentWillMount() {
     const { dispatch, params } = this.props;

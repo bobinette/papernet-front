@@ -73,7 +73,7 @@ NavBar.propTypes = {
   })),
   onLogin: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
-  user: userPropType,
+  user: userPropType.isRequired,
 };
 
 NavBar.defaultProps = {

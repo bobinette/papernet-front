@@ -25,20 +25,20 @@ const form = {
       },
     },
     {
-      type: 'textlist',
-      valueKey: ['references'],
-      extra: {
-        className: 'PaperEdit__References',
-        placeholder: 'References...',
-      },
-    },
-    {
       type: 'markdown',
       valueKey: ['summary'],
       extra: {
         autoresize: true,
         className: 'PaperEdit__Summary',
         placeholder: 'Summary, in markdown format',
+      },
+    },
+    {
+      type: 'textlist',
+      valueKey: ['references'],
+      extra: {
+        className: 'PaperEdit__References',
+        placeholder: 'References...',
       },
     },
   ],

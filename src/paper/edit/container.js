@@ -6,6 +6,7 @@ import { paperPropType } from 'utils/constants';
 
 import { getPaper, savePaper, updatePaper } from '../actions';
 import { RESET_PAPER } from '../constants';
+import { loadCookie, me } from 'auth/actions';
 
 import PaperEditView from './view';
 
@@ -29,6 +30,9 @@ class PaperEditContainer extends Component {
 
     this.onChange = ::this.onChange;
     this.onSave = ::this.onSave;
+
+    this.props.dispatch(loadCookie());
+    this.props.dispatch(me());
   }
 
   componentWillMount() {

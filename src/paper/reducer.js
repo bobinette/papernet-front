@@ -7,6 +7,7 @@ const initialState = fromJS({
     title: '',
     summary: '',
     tags: [],
+    references: [],
   },
   loading: false,
 });
