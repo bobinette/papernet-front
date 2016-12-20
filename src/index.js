@@ -13,8 +13,8 @@ import 'font-awesome/scss/font-awesome.scss';
 import 'katex/dist/katex.min.css';
 
 // Paper list page
-import PaperListContainer from 'paperlist/container';
-import paperListReducer from 'paperlist/reducer';
+import HomeContainer from 'home/container';
+import homeReducer from 'home/reducer';
 
 // Paper page
 import PaperViewContainer from 'paper/view/container';
@@ -31,9 +31,9 @@ import importsReducer from 'imports/reducer';
 
 // Create store
 const reducers = {
+  home: homeReducer,
   imports: importsReducer,
   paper: paperReducer,
-  paperList: paperListReducer,
   user: userReducer,
 };
 const reducer = combineReducers(reducers);
@@ -49,7 +49,7 @@ ReactDOM.render(
       <Router history={browserHistory}>
         <Route path="/">
           <IndexRedirect to="/papers" />
-          <Route path="papers" component={PaperListContainer} />
+          <Route path="papers" component={HomeContainer} />
           <Route path="papers/new" component={PaperEditContainer} />
           <Route path="papers/:id" component={PaperViewContainer} />
           <Route path="papers/:id/edit" component={PaperEditContainer} />

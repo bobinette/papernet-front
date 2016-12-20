@@ -1,7 +1,7 @@
 @import '../style/_colors.scss';
 @import "~bootstrap/scss/_variables.scss";
 
-.PaperListView__Content {
+.HomeView__Content {
 	margin-top: 70px;
 
 	ul {
@@ -9,7 +9,7 @@
 	}
 }
 
-.PaperListView__Search {
+.HomeView__Search {
 	display: flex;
 	align-items: center;
 	padding: 2.5px;
@@ -26,7 +26,7 @@
 	}
 }
 
-.PaperListView__Search__Input {
+.HomeView__Search__Input {
 	flex: 1;
 
 	input {
@@ -38,7 +38,7 @@
 	}
 }
 
-.btn.btn-link.PaperListView__LoginButton {
+.btn.btn-link.HomeView__LoginButton {
 	&:focus:active, &:focus {
 		outline: none;
 	}

@@ -12,8 +12,8 @@ import PaperListViewRow from './components/row';
 
 import './view.scss';
 
-const PaperListView = ({ onBookmark, onSearch, papers, search, user }) => (
-  <div className="PaperListView container">
+const HomeView = ({ onBookmark, onSearch, papers, search, user }) => (
+  <div className="HomeView container">
     <NavBar
       items={[
         {
@@ -33,10 +33,10 @@ const PaperListView = ({ onBookmark, onSearch, papers, search, user }) => (
         },
       ]}
     />
-    <div className="PaperListView__Content">
-      <div className="PaperListView__Search col-xs-8 offset-xs-4">
+    <div className="HomeView__Content">
+      <div className="HomeView__Search col-xs-8 offset-xs-4">
         <Text
-          className="PaperListView__Search__Input"
+          className="HomeView__Search__Input"
           onChange={onSearch}
           placeholder="Search by title or tags..."
           value={search}
@@ -54,7 +54,7 @@ const PaperListView = ({ onBookmark, onSearch, papers, search, user }) => (
   </div>
 );
 
-PaperListView.propTypes = {
+HomeView.propTypes = {
   onBookmark: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
   papers: ImmutablePropTypes.listOf(paperPropType).isRequired,
@@ -65,4 +65,4 @@ PaperListView.propTypes = {
   }).isRequired,
 };
 
-export default PaperListView;
+export default HomeView;

@@ -50,7 +50,7 @@ const NavBar = ({ items, rightItems, onLogin, onLogout, user }) => (
             /> :
               <li className="nav-item active">
                 <button
-                  className="nav-link btn btn-link PaperListView__LoginButton"
+                  className="nav-link btn btn-link"
                   onClick={onLogin}
                 >
                   Login

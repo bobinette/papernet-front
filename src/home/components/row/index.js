@@ -48,7 +48,7 @@ const PaperListViewRow = ({ onBookmark, paper, user }) => {
   return (
     <div className="PaperListViewRow card">
       <div className="card-block">
-        <Link>
+        <Link to={`/papers/${paper.get('id')}`}>
           <h5 className="card-title">{paper.get('title')}</h5>
           {abstract !== null ?
             <p className="card-text">{abstract}{tooLong ? '...' : null}</p>

@@ -7,7 +7,7 @@ import { paperPropType } from 'utils/constants';
 import FormField from 'components/field/form';
 import NavBar from 'components/navbar';
 
-import PaperListViewRow from 'paperlist/components/row';
+import PaperListViewRow from 'home/components/row';
 
 import './view.scss';
 

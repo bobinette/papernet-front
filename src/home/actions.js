@@ -9,7 +9,7 @@ import { RECEIVE_USER } from 'auth/constants';
 import { RECEIVE_PAPER_LIST } from './constants';
 
 export const getPaperList = () => (dispatch, getState) => {
-  const search = getState().paperList.get('search');
+  const search = getState().home.get('search');
   const params = {
     q: search.length > 0 ? search : null,
   };

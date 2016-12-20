@@ -7,15 +7,15 @@ import { loadCookie, me } from 'auth/actions';
 
 import { bookmark, getPaperList, unbookmark } from './actions';
 import { SEARCH_PAPER_LIST } from './constants';
-import PaperListView from './view';
+import HomeView from './view';
 
 const mapStateToProps = state => ({
-  papers: state.paperList.get('papers'),
-  search: state.paperList.get('search'),
+  papers: state.home.get('papers'),
+  search: state.home.get('search'),
   user: state.user,
 });
 
-class PaperListContainer extends Component {
+class HomeContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     papers: ImmutablePropTypes.list.isRequired,
@@ -68,8 +68,8 @@ class PaperListContainer extends Component {
     const { papers, search, user } = this.props;
 
     return (
-      <div className="PaperContainer">
-        <PaperListView
+      <div className="HomeContainer">
+        <HomeView
           papers={papers}
           onBookmark={this.onBookmark}
           onSearch={this.onSearch}
@@ -81,4 +81,4 @@ class PaperListContainer extends Component {
   }
 }
 
-export default connect(mapStateToProps)(PaperListContainer);
+export default connect(mapStateToProps)(HomeContainer);
