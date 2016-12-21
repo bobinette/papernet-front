@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
+import { loadCookie, me } from 'auth/actions';
 import { paperPropType } from 'utils/constants';
 
 import { getPaper, savePaper, updatePaper } from '../actions';
 import { RESET_PAPER } from '../constants';
-import { loadCookie, me } from 'auth/actions';
 
 import PaperEditView from './view';
 
