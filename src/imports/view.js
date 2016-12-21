@@ -7,7 +7,7 @@ import { paperPropType } from 'utils/constants';
 import FormField from 'components/field/form';
 import NavBar from 'components/navbar';
 
-import PaperListViewRow from 'home/components/row';
+import ImportCard from './row';
 
 import './view.scss';
 
@@ -89,7 +89,7 @@ class ImportView extends Component {
           <ul className="col-xs-12 container">
             {imports.get('list').map((paper, i) => (
               <li className="col-md-10 offset-md-1" key={i} >
-                <PaperListViewRow paper={paper} />
+                <ImportCard paper={paper} />
               </li>
             ))}
           </ul>

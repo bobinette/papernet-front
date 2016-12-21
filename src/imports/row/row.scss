@@ -1,0 +1,39 @@
+@import "~bootstrap/scss/_variables.scss";
+
+.ImportRow {
+	a {
+		&:visited {
+			text-decoration: none;
+		}
+
+		&:hover {
+			text-decoration: none;
+			cursor: pointer;
+		}
+	}
+
+	.ImportRow__Tags {
+		display: flex;
+		align-items: center;
+		flex: 1;
+
+		.fa-tag {
+			margin-left: 3px;
+		}
+	}
+
+	.card-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.ImportRow__Links {
+		margin-top: 5px;
+		margin-bottom: 5px;
+
+		a:not(:last-child) {
+			margin-right: 10px;
+		}
+	}
+}

@@ -19,3 +19,7 @@ a:focus {
 	text-decoration: none;
 	outline: none;
 }
+
+.btn:focus, .btn:focus:active {
+	outline: none;
+}
