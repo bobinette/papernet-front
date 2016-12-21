@@ -48,14 +48,14 @@ const NavBar = ({ items, rightItems, onLogin, onLogout, user }) => (
               title={user.getIn(['user', 'name']) || 'John Doe'}
               onLogout={onLogout}
             /> :
-              <li className="nav-item active">
-                <button
-                  className="nav-link btn btn-link"
-                  onClick={onLogin}
-                >
-                  Login
-                </button>
-              </li>
+            <li className="nav-item active">
+              <button
+                className="nav-link btn btn-link"
+                onClick={onLogin}
+              >
+                Login
+              </button>
+            </li>
         }
       </ul>
     </div>
