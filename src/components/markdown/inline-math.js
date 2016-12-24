@@ -8,14 +8,17 @@
  * @license MIT
  */
 
-const locator = (value, fromIndex) => value.indexOf('`', fromIndex);
+const startingBlock = '$';
+const endingChar = '$';
+
+const locator = (value, fromIndex) => value.indexOf(startingBlock, fromIndex);
 
 const tokenizer = (eat, value, silent) => {
-  if (!value.startsWith('`!')) {
+  if (!value.startsWith(startingBlock)) {
     return undefined;
   }
 
-  if (value.length < 3 || value.charAt(2) === '`') {
+  if (value.length === startingBlock.length + endingChar.length) {
     return undefined;
   }
 
@@ -23,14 +26,14 @@ const tokenizer = (eat, value, silent) => {
     return true;
   }
 
-  let index = 2;
+  let index = startingBlock.length;
   const length = value.length;
-  while (index < length && value.charAt(index) !== '`') {
+  while (index < length && value.charAt(index) !== endingChar) {
     index += 1;
   }
 
   const full = value.substring(0, index + 1);
-  const eq = value.substring(2, index);
+  const eq = value.substring(startingBlock.length, index);
 
   return eat(full)({
     type: 'inlineCode',
