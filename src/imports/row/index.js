@@ -13,10 +13,14 @@ import { paperPropType } from 'utils/constants';
 import './row.scss';
 
 const extractAbstract = (text) => {
-  let end = text.indexOf('#');
-  if (end === -1) {
-    end = text.length;
-  }
+  const stops = ['#', '\n'];
+  let end = text.length;
+  stops.forEach((stop) => {
+    const i = text.indexOf(stop);
+    if (i > 0 && i < end) {
+      end = i;
+    }
+  });
 
   return text.substring(0, end);
 };

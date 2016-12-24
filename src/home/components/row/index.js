@@ -9,29 +9,28 @@ import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
 
 import TagList from 'components/taglist';
+import ReadMoreMarkdown from 'components/markdown/read-more';
 
 import { paperPropType, userPropType } from 'utils/constants';
 
 import './row.scss';
 
 const extractAbstract = (text) => {
-  let end = text.indexOf('#');
-  if (end === -1) {
-    end = text.length;
-  }
+  const stops = ['#', '\n'];
+  let end = text.length;
+  stops.forEach((stop) => {
+    const i = text.indexOf(stop);
+    if (i >= 0 && i < end) {
+      end = i;
+    }
+  });
 
   return text.substring(0, end);
 };
 
 const PaperListViewRow = ({ onBookmark, paper, user }) => {
   const tags = paper.get('tags') || List();
-  let abstract = extractAbstract(paper.get('summary'));
-  let tooLong = false;
-
-  if (abstract && abstract.length > 200) {
-    abstract = abstract.substring(0, 197);
-    tooLong = true;
-  }
+  const abstract = extractAbstract(paper.get('summary'));
 
   let bookmarkClasses = {};
   if (user && onBookmark) {
@@ -50,10 +49,7 @@ const PaperListViewRow = ({ onBookmark, paper, user }) => {
       <div className="card-block">
         <Link to={`/papers/${paper.get('id')}`}>
           <h5 className="card-title">{paper.get('title')}</h5>
-          {abstract !== null ?
-            <p className="card-text">{abstract}{tooLong ? '...' : null}</p>
-            : null
-          }
+          <ReadMoreMarkdown text={abstract} />
           <p className="card-text">
             <small
               className="text-muted"
