@@ -49,11 +49,13 @@ const autoresize = (elt) => {
   elt.style.height = `${elt.scrollHeight}px`; // eslint-disable-line no-param-reassign
   elt.scrollTop = elt.scrollHeight; // eslint-disable-line no-param-reassign
 };
-const autoresizeListener = () => {
-  if (!this) return;
 
-  autoresize(this);
-  window.scrollTo(window.scrollLeft, (this.scrollTop + this.scrollHeight));
+const autoresizeListener = (event) => {
+  const target = event.target;
+  if (!target) return;
+
+  autoresize(target);
+  window.scrollTo(window.scrollLeft, (target.scrollTop + target.scrollHeight));
 };
 
 class PaperEdit extends Component {
