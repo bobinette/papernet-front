@@ -64,11 +64,10 @@ const ImportRow = ({ paper }) => {
       </div>
     </div>
   );
-}
+};
 
 ImportRow.propTypes = {
   paper: paperPropType.isRequired,
 };
-
 
 export default ImportRow;

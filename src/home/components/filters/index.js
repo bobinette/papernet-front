@@ -44,6 +44,6 @@ Filters.propTypes = {
 
 Filters.defaultProps = {
   className: '',
-}
+};
 
 export default Filters;

@@ -6,7 +6,7 @@ import { List } from 'immutable';
 import { loadCookie, me } from 'auth/actions';
 
 import { bookmark, getPaperList, unbookmark } from './actions';
-import { SEARCH_PAPER_LIST, UPDATE_FILTERS } from './constants';
+import { UPDATE_FILTERS } from './constants';
 import HomeView from './view';
 
 const mapStateToProps = state => ({
@@ -32,7 +32,6 @@ class HomeContainer extends Component {
 
     this.onBookmark = ::this.onBookmark;
     this.onFilterChange = ::this.onFilterChange;
-    this.onSearch = ::this.onSearch;
 
     this.props.dispatch(loadCookie());
     this.props.dispatch(me());
@@ -69,12 +68,8 @@ class HomeContainer extends Component {
     this.props.dispatch({ type: UPDATE_FILTERS, key, value });
   }
 
-  onSearch(search) {
-    this.props.dispatch({ type: SEARCH_PAPER_LIST, search });
-  }
-
   render() {
-    const { filters, papers, search, user } = this.props;
+    const { filters, papers, user } = this.props;
 
     return (
       <div className="HomeContainer">
