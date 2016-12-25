@@ -8,9 +8,9 @@ import { papernetURL } from 'utils/constants';
 import { RECEIVE_IMPORTS } from './constants';
 
 export const search = () => (dispatch, getState) => { // eslint-disable-line import/prefer-default-export
-  const filters = getState().imports.get('filters');
+  const q = getState().imports.get('q');
   const params = {
-    title: filters.get('title') && filters.get('title').length > 0 ? filters.get('title') : null,
+    q: q && q.length > 0 ? q : null,
   };
   const url = `${papernetURL}/arxiv?${qs.stringify(params, { skipNulls: true })}`;
 

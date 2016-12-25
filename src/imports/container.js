@@ -19,6 +19,7 @@ class ImportContainer extends Component {
     imports: ImmutablePropTypes.contains({
       filters: ImmutablePropTypes.contains({
         title: PropTypes.string,
+        q: PropTypes.string,
       }),
     }).isRequired,
     user: ImmutablePropTypes.map.isRequired,
