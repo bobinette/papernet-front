@@ -3,6 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 
 import { loadCookie, me } from 'auth/actions';
+import { savePaper } from 'paper/actions';
 
 import { search } from './actions';
 import { SEARCH_IMPORTS } from './constants';
@@ -29,13 +30,11 @@ class ImportContainer extends Component {
     super(props);
 
     this.onChange = ::this.onChange;
+    this.onImport = ::this.onImport;
     this.onSearch = ::this.onSearch;
 
     this.props.dispatch(loadCookie());
     this.props.dispatch(me());
-  }
-
-  componentDidMount() {
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,6 +49,10 @@ class ImportContainer extends Component {
     this.props.dispatch({ type: SEARCH_IMPORTS, value });
   }
 
+  onImport(paper) {
+    this.props.dispatch(savePaper(paper));
+  }
+
   onSearch() {
     this.props.dispatch(search());
   }
@@ -61,6 +64,7 @@ class ImportContainer extends Component {
       <div className="ImportContainer">
         <ImportView
           onChange={this.onChange}
+          onImport={this.onImport}
           onSearch={this.onSearch}
           imports={imports}
         />

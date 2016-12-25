@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { List } from 'immutable';
 
 import moment from 'moment';
@@ -26,7 +26,7 @@ const extractAbstract = (text) => {
   return text.substring(0, end);
 };
 
-const ImportRow = ({ paper }) => {
+const ImportRow = ({ onImport, paper }) => {
   const abstract = extractAbstract(paper.get('summary'));
 
   const tags = paper.get('tags') || List();
@@ -37,6 +37,9 @@ const ImportRow = ({ paper }) => {
         <h5 className="card-title">{paper.get('title')}</h5>
         <ReadMoreMarkdown text={abstract} />
         <div className="card-text ImportRow__Links">
+          <button className="btn btn-sm btn-primary" onClick={onImport}>
+            Import in Papernet
+          </button>
           <a href={paper.getIn(['references', 0])} className="btn btn-sm btn-outline-primary">See on arXiv</a>
           <a href={paper.getIn(['references', 1])} className="btn btn-sm btn-outline-primary">PDF</a>
         </div>
@@ -67,6 +70,7 @@ const ImportRow = ({ paper }) => {
 };
 
 ImportRow.propTypes = {
+  onImport: PropTypes.func.isRequired,
   paper: paperPropType.isRequired,
 };
 

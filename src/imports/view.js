@@ -11,7 +11,7 @@ import ImportCard from './row';
 
 import './view.scss';
 
-const ImportView = ({ imports, onChange, onSearch }) => (
+const ImportView = ({ imports, onChange, onImport, onSearch }) => (
   <div className="container">
     <NavBar
       items={[
@@ -42,7 +42,10 @@ const ImportView = ({ imports, onChange, onSearch }) => (
       <ul className="col-xs-12 container">
         {imports.get('list').map((paper, i) => (
           <li className="col-md-10 offset-md-1" key={i} >
-            <ImportCard paper={paper} />
+            <ImportCard
+              onImport={() => onImport(paper)}
+              paper={paper}
+            />
           </li>
         ))}
       </ul>
@@ -57,8 +60,9 @@ ImportView.propTypes = {
     }),
     list: ImmutablePropTypes.listOf(paperPropType).isRequired,
   }).isRequired,
-  onSearch: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
+  onImport: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default ImportView;
