@@ -62,7 +62,7 @@ describe('Enriched Markdown', () => {
   });
 
   it('should render inline math', () => {
-    const md = 'some inline `!\delta`';
+    const md = 'some inline $\delta$'; // eslint-disable-line no-useless-escape
 
     const comp = mount(<Markdown text={md} />);
     expect(comp.find('div > p')).to.be.present();
