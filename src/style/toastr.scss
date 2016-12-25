@@ -1,0 +1,35 @@
+@import "./_colors.scss";
+
+.redux-toastr .toastr {
+	min-height: 0;
+	opacity: 1;
+
+	// Display
+	.toastr-left-container, .toastr-right-container {
+		display: none;
+	}
+
+	.toastr-middle-container {
+		width: 100%;
+		margin-left: 0;
+		padding: 10px;
+	}
+
+	// Colors
+	&.error {
+		background-color: $brand-danger;
+	}
+	&.success {
+		background-color: $brand-success;
+	}
+}
+
+// Position
+.redux-toastr.top-left, .redux-toastr.top-right, .redux-toastr.top-center {
+	top: 65px;
+}
+
+// Animation
+.toastr.animated {
+	animation-duration: 500ms;
+}

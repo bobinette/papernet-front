@@ -87,6 +87,7 @@
     "react-immutable-proptypes": "^2.1.0",
     "react-onclickoutside": "^5.7.1",
     "react-redux": "^4.4.6",
+    "react-redux-toastr": "^4.4.2",
     "react-router": "^2.5.2",
     "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",

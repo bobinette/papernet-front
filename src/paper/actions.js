@@ -1,3 +1,5 @@
+import { toastr } from 'react-redux-toastr';
+
 import 'whatwg-fetch';
 
 import handleJSON from 'utils/actions/handleResponse';
@@ -20,7 +22,7 @@ export const getPaper = id => (dispatch, getState) => {
       return dispatch({ type: RECEIVE_PAPER, paper });
     },
     (err) => {
-      console.log('Could not get paper', err.message ? err.message : null); // eslint-disable-line no-console
+      toastr.error('', `Could not get paper: ${err.message ? err.message : null}`);
     }
   );
 };
@@ -55,7 +57,7 @@ export const savePaper = paper => (dispatch, getState) => {
       return respPaper.id;
     },
     (err) => {
-      console.error('Could not save paper', err.message ? err.message : null); // eslint-disable-line no-console
+      toastr.error('', `Could not save paper: ${err.message ? err.message : null}`);
     }
   );
 };
@@ -78,7 +80,7 @@ export const deletePaper = () => (dispatch, getState) => {
       dispatch({ type: RECEIVE_PAPER, paper: {} });
     },
     (err) => {
-      console.error('Could not save paper', err.message ? err.message : null); // eslint-disable-line no-console
+      toastr.error('', `Could not delete paper: ${err.message ? err.message : null}`);
     }
   );
 };

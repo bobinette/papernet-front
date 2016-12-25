@@ -7,10 +7,15 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
 
+// Toastr
+import ReduxToastr, { reducer as toastrReducer } from 'react-redux-toastr';
+
 // Init style before importing components
 import 'style/base.scss';
 import 'font-awesome/scss/font-awesome.scss';
 import 'katex/dist/katex.min.css';
+import 'react-redux-toastr/src/styles/index.scss';
+import 'style/toastr.scss';
 
 // Paper list page
 import HomeContainer from 'home/container';
@@ -34,6 +39,7 @@ const reducers = {
   home: homeReducer,
   imports: importsReducer,
   paper: paperReducer,
+  toastr: toastrReducer,
   user: userReducer,
 };
 const reducer = combineReducers(reducers);
@@ -60,6 +66,13 @@ ReactDOM.render(
           <Route path="imports" component={ImportContainer} />
         </Route>
       </Router>
+      <ReduxToastr
+        newestOnTop
+        preventDuplicates
+        timeOut={0}
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+      />
     </div>
   </Provider>,
   document.getElementById('app')

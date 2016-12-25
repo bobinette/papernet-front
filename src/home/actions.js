@@ -1,3 +1,5 @@
+import { toastr } from 'react-redux-toastr';
+
 import 'whatwg-fetch';
 
 import qs from 'qs';
@@ -30,7 +32,7 @@ export const getPaperList = () => (dispatch, getState) => {
       return dispatch({ type: RECEIVE_PAPER_LIST, papers });
     },
     (err) => {
-      console.log('Could not get paper list', err.message ? err.message : null); // eslint-disable-line no-console
+      toastr.error('', `Could not load your papers: ${err.message ? err.message : null}`);
     }
   );
 };
@@ -51,7 +53,7 @@ export const bookmark = id => (dispatch, getState) => {
       return dispatch({ type: RECEIVE_USER, user });
     },
     (err) => {
-      console.error('Could not bookmar', err.message ? err.message : null); // eslint-disable-line no-console
+      toastr.error('', `Could not bookmark: ${err.message ? err.message : null}`);
     }
   );
 };
@@ -72,7 +74,7 @@ export const unbookmark = id => (dispatch, getState) => {
       return dispatch({ type: RECEIVE_USER, user });
     },
     (err) => {
-      console.error('Could not unbookmark', err.message ? err.message : null); // eslint-disable-line no-console
+      toastr.error('', `Could not unbookmark: ${err.message ? err.message : null}`);
     }
   );
 };

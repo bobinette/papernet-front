@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
+import { toastr } from 'react-redux-toastr';
+
 import Autosuggest from 'react-autosuggest';
 
 import 'whatwg-fetch';
@@ -62,8 +64,6 @@ class TagList extends Component {
     }
   }
 
-  // Autosuggest will call this function every time you need to update suggestions.
-  // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested({ value }) {
     const url = `${papernetURL}/tags?${qs.stringify({ q: value }, { skipNulls: true })}`;
     return fetch(url, {}).then(handleJSON).then(
@@ -72,12 +72,11 @@ class TagList extends Component {
         this.setState({ suggestions: tags });
       },
       (err) => {
-        console.log('Could not get paper list', err.message ? err.message : null); // eslint-disable-line no-console
+        toastr.error('', `Could not retrieve tags: ${err.message ? err.message : null}`);
       }
     );
   }
 
-  // Autosuggest will call this function every time you need to clear suggestions.
   onSuggestionsClearRequested() {
     this.setState({ suggestions: [] });
   }

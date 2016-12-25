@@ -1,3 +1,5 @@
+import { toastr } from 'react-redux-toastr';
+
 import 'whatwg-fetch';
 
 import qs from 'qs';
@@ -27,7 +29,7 @@ export const search = () => (dispatch, getState) => { // eslint-disable-line imp
       return dispatch({ type: RECEIVE_IMPORTS, list: papers });
     },
     (err) => {
-      console.log('Could not get paper list', err.message ? err.message : null); // eslint-disable-line no-console
+      toastr.error('', `Could not search: ${err.message ? err.message : null}`);
     }
   );
 };

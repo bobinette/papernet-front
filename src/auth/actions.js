@@ -1,3 +1,4 @@
+import { toastr } from 'react-redux-toastr';
 import cookie from 'react-cookie';
 
 import 'whatwg-fetch';
@@ -16,7 +17,7 @@ export const login = () => () => {
       window.location.href = response.url;
     },
     (err) => {
-      console.log('Could not get auth url', err.message ? err.message : null); // eslint-disable-line no-console
+      toastr.error('', `Could not get auth urls: ${err.message ? err.message : null}`);
     }
   );
 };
@@ -31,7 +32,7 @@ export const exchangeToken = (provider, code, state) => (dispatch) => {
       return dispatch({ type: RECEIVE_USER, token: response.user });
     },
     (err) => {
-      console.log('Could not exchange token', err.message ? err.message : null); // eslint-disable-line no-console
+      toastr.error('', `Could not exchange token: ${err.message ? err.message : null}`);
     }
   );
 };
@@ -55,7 +56,7 @@ export const me = () => (dispatch, getState) => {
   return fetch(url, { headers }).then(handleJSON).then(
     response => dispatch({ type: RECEIVE_USER, user: response.data }),
     (err) => {
-      console.log('Could not exchange token', err.message ? err.message : null); // eslint-disable-line no-console
+      toastr.error('', `Could not load your profile: ${err.message ? err.message : null}`);
     }
   );
 };
