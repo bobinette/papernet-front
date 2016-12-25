@@ -9,43 +9,9 @@
 	}
 }
 
-.HomeView__Search {
-	display: flex;
-	align-items: center;
-	padding: 2.5px;
-
-	background: $body-bg;
-	border: 1px solid lighten($gray-light, 20);
-	border-radius: $border-radius;
-
-	padding: 5px;
-
-	.fa {
-		margin: 0 2px;
-	}
-}
-
-.HomeView__Search__Input {
-	flex: 1;
-
-	input {
-		width: 100%;
-
-		outline: none;
-		border: none;
-		background: transparent;
-	}
-}
-
 .btn.btn-link.HomeView__LoginButton {
 	&:focus:active, &:focus {
 		outline: none;
-	}
-}
-
-.HomeView__Filters {
-	input {
-		margin-right: 5px;
 	}
 }
 

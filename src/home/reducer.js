@@ -5,6 +5,7 @@ import { RECEIVE_PAPER_LIST, SEARCH_PAPER_LIST, UPDATE_FILTERS } from './constan
 const initialState = fromJS({
   filters: {
     bookmarked: false,
+    q: '',
   },
   papers: [],
   search: '',

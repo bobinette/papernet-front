@@ -83,8 +83,6 @@ class HomeContainer extends Component {
           papers={papers}
           onBookmark={this.onBookmark}
           onFilterChange={this.onFilterChange}
-          onSearch={this.onSearch}
-          search={search}
           user={user}
         />
       </div>
