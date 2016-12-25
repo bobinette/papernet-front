@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { List } from 'immutable';
 
 import moment from 'moment';
@@ -6,6 +6,7 @@ import moment from 'moment';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
 
+import ReadMoreMarkdown from 'components/markdown/read-more';
 import TagList from 'components/taglist';
 
 import { paperPropType } from 'utils/constants';
@@ -25,89 +26,49 @@ const extractAbstract = (text) => {
   return text.substring(0, end);
 };
 
-const abstractLength = 200;
+const ImportRow = ({ paper }) => {
+  const abstract = extractAbstract(paper.get('summary'));
 
-class ImportRow extends PureComponent {
-  static propTypes = {
-    paper: paperPropType.isRequired,
-  };
+  const tags = paper.get('tags') || List();
 
-  constructor(props) {
-    super(props);
-
-    this.onShow = ::this.onShow;
-
-    this.state = {
-      fullAbstract: false,
-    };
-  }
-
-  onShow() {
-    const { fullAbstract } = this.state;
-    this.setState({ fullAbstract: !fullAbstract });
-  }
-
-  renderAbstract() {
-    const { paper } = this.props;
-    const { fullAbstract } = this.state;
-
-    let abstract = extractAbstract(paper.get('summary'));
-    if (!abstract) return null;
-
-    if (!fullAbstract && abstract && abstract.length > abstractLength) {
-      abstract = `${abstract.substring(0, abstractLength - 3)}...`;
-    }
-
-    return (
-      <div className="card-text">
-        {abstract}<br />
-        <button className="btn btn-sm btn-link" onClick={this.onShow}>
-          Show {fullAbstract ? 'less' : 'more'}
-        </button>
-      </div>
-    );
-  }
-
-  render() {
-    const { paper } = this.props;
-
-    const tags = paper.get('tags') || List();
-
-    return (
-      <div className="ImportRow card">
-        <div className="card-block">
-          <h5 className="card-title">{paper.get('title')}</h5>
-          {this.renderAbstract()}
-          <div className="card-text ImportRow__Links">
-            <a href={paper.getIn(['references', 0])} className="btn btn-sm btn-outline-primary">See on arXiv</a>
-            <a href={paper.getIn(['references', 1])} className="btn btn-sm btn-outline-primary">PDF</a>
-          </div>
-          <p className="card-text">
-            <small
-              className="text-muted"
-              data-for={paper.get('id').toString()}
-              data-tip
+  return (
+    <div className="ImportRow card">
+      <div className="card-block">
+        <h5 className="card-title">{paper.get('title')}</h5>
+        <ReadMoreMarkdown text={abstract} />
+        <div className="card-text ImportRow__Links">
+          <a href={paper.getIn(['references', 0])} className="btn btn-sm btn-outline-primary">See on arXiv</a>
+          <a href={paper.getIn(['references', 1])} className="btn btn-sm btn-outline-primary">PDF</a>
+        </div>
+        <p className="card-text">
+          <small
+            className="text-muted"
+            data-for={paper.get('id').toString()}
+            data-tip
+          >
+            <Tooltip
+              placement="bottom"
+              mouseEnterDelay={0.3}
+              overlay={<small>{moment(paper.get('updatedAt')).format('LLL')}</small>}
             >
-              <Tooltip
-                placement="bottom"
-                mouseEnterDelay={0.3}
-                overlay={<small>{moment(paper.get('updatedAt')).format('LLL')}</small>}
-              >
-                <span>Modified {moment(paper.get('updatedAt')).fromNow()}</span>
-              </Tooltip>
-            </small>
-          </p>
-        </div>
-        <div className="card-footer">
-          <div className="ImportRow__Tags">
-            <i className="fa fa-tag" />
-            <TagList tags={tags} max={5} />
-          </div>
+              <span>Modified {moment(paper.get('updatedAt')).fromNow()}</span>
+            </Tooltip>
+          </small>
+        </p>
+      </div>
+      <div className="card-footer">
+        <div className="ImportRow__Tags">
+          <i className="fa fa-tag" />
+          <TagList tags={tags} max={5} />
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+ImportRow.propTypes = {
+  paper: paperPropType.isRequired,
+};
 
 
 export default ImportRow;

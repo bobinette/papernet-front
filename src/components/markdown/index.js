@@ -7,12 +7,11 @@ import githubSanitize from 'hast-util-sanitize/lib/github.json';
 
 import merge from 'deepmerge';
 
-import katex from 'katex';
-
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 
 import inlineMath from './inline-math';
+import { Equation, InlineEquation } from './equation';
 
 import './markdown.scss';
 
@@ -31,32 +30,12 @@ const escape = (html, encode) => (
 //  - warning: render a warning block
 const renderCode = (code, lang, key) => {
   // Equation
-  if (lang === 'equation' || lang === 'inlineEquation') {
-    let eq = code;
-    const classes = {
-      Markdown__Equation: true,
-    };
-    try {
-      eq = (
-        <span
-          dangerouslySetInnerHTML={{  // eslint-disable-line react/no-danger
-            __html: katex.renderToString(code, { displayMode: lang === 'equation' }),
-          }}
-        />
-      );
-    } catch (e) {
-      eq = (
-        <div>
-          <div className="Markdown__ErrorMessage">
-            <i className="fa fa-exclamation-triangle" />
-            Could not render equation: ${e.message}
-          </div>
-          {eq}
-        </div>
-      );
-      classes.Markdown__Error = true;
-    }
-    return <span key={key} className={classNames(classes)}>{eq}</span>;
+  if (lang === 'equation') {
+    return <Equation equation={code} key={key} />;
+  }
+
+  if (lang === 'inlineEquation') {
+    return <InlineEquation equation={code} key={key} />;
   }
 
   // Warning
