@@ -29,9 +29,7 @@ export const updatePaper = value => dispatch => (
   dispatch({ type: UPDATE_PAPER, value })
 );
 
-export const savePaper = () => (dispatch, getState) => {
-  const paper = getState().paper.get('paper');
-
+export const savePaper = paper => (dispatch, getState) => {
   let saveURL = `${papernetURL}/papers`;
   let method = 'POST';
   if (paper.get('id')) {
