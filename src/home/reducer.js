@@ -1,8 +1,11 @@
 import { fromJS } from 'immutable';
 
-import { RECEIVE_PAPER_LIST, SEARCH_PAPER_LIST } from './constants';
+import { RECEIVE_PAPER_LIST, SEARCH_PAPER_LIST, UPDATE_FILTERS } from './constants';
 
 const initialState = fromJS({
+  filters: {
+    bookmarked: false,
+  },
   papers: [],
   search: '',
 });
@@ -15,6 +18,9 @@ export default (state = initialState, action) => {
       break;
     case SEARCH_PAPER_LIST:
       newState = newState.set('search', action.search);
+      break;
+    case UPDATE_FILTERS:
+      newState = newState.setIn(['filters', action.key], action.value);
       break;
     default:
   }

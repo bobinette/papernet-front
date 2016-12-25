@@ -10,8 +10,10 @@ import { RECEIVE_PAPER_LIST } from './constants';
 
 export const getPaperList = () => (dispatch, getState) => {
   const search = getState().home.get('search');
+  const filters = getState().home.get('filters');
   const params = {
     q: search.length > 0 ? search : null,
+    bookmarked: filters.get('bookmarked') ? true : null,
   };
   const url = `${papernetURL}/papers?${qs.stringify(params, { skipNulls: true })}`;
 

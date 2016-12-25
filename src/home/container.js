@@ -6,10 +6,11 @@ import { List } from 'immutable';
 import { loadCookie, me } from 'auth/actions';
 
 import { bookmark, getPaperList, unbookmark } from './actions';
-import { SEARCH_PAPER_LIST } from './constants';
+import { SEARCH_PAPER_LIST, UPDATE_FILTERS } from './constants';
 import HomeView from './view';
 
 const mapStateToProps = state => ({
+  filters: state.home.get('filters'),
   papers: state.home.get('papers'),
   search: state.home.get('search'),
   user: state.user,
@@ -18,6 +19,9 @@ const mapStateToProps = state => ({
 class HomeContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    filters: ImmutablePropTypes.contains({
+      bookmarked: PropTypes.bool,
+    }).isRequired,
     papers: ImmutablePropTypes.list.isRequired,
     search: PropTypes.string.isRequired,
     user: ImmutablePropTypes.map.isRequired,
@@ -27,6 +31,7 @@ class HomeContainer extends Component {
     super(props);
 
     this.onBookmark = ::this.onBookmark;
+    this.onFilterChange = ::this.onFilterChange;
     this.onSearch = ::this.onSearch;
 
     this.props.dispatch(loadCookie());
@@ -41,17 +46,13 @@ class HomeContainer extends Component {
   componentWillReceiveProps(nextProps) {
     const { dispatch } = this.props;
 
-    if (nextProps.search !== this.props.search) {
+    if (nextProps.search !== this.props.search || nextProps.filters !== this.props.filters) {
       dispatch(getPaperList());
     }
 
     if (nextProps.user.get('token') !== this.props.user.get('token')) {
       dispatch(me());
     }
-  }
-
-  onSearch(search) {
-    this.props.dispatch({ type: SEARCH_PAPER_LIST, search });
   }
 
   onBookmark(id) {
@@ -64,14 +65,24 @@ class HomeContainer extends Component {
     }
   }
 
+  onFilterChange(key, value) {
+    this.props.dispatch({ type: UPDATE_FILTERS, key, value });
+  }
+
+  onSearch(search) {
+    this.props.dispatch({ type: SEARCH_PAPER_LIST, search });
+  }
+
   render() {
-    const { papers, search, user } = this.props;
+    const { filters, papers, search, user } = this.props;
 
     return (
       <div className="HomeContainer">
         <HomeView
+          filters={filters}
           papers={papers}
           onBookmark={this.onBookmark}
+          onFilterChange={this.onFilterChange}
           onSearch={this.onSearch}
           search={search}
           user={user}
