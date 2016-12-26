@@ -9,7 +9,7 @@ import { papernetURL } from 'utils/constants';
 
 import { savePaper } from 'paper/actions';
 
-import { RECEIVE_IMPORTS } from './constants';
+import { RECEIVE_IMPORTS, START_LOADING, STOP_LOADING } from './constants';
 
 export const search = () => (dispatch, getState) => { // eslint-disable-line import/prefer-default-export
   const q = getState().imports.get('q');
@@ -25,12 +25,15 @@ export const search = () => (dispatch, getState) => { // eslint-disable-line imp
     Authorization: `Bearer ${token}`,
   });
 
+  dispatch({ type: START_LOADING });
   return fetch(url, { headers }).then(handleJSON).then(
     (response) => {
       const papers = response.data;
+      dispatch({ type: STOP_LOADING });
       return dispatch({ type: RECEIVE_IMPORTS, list: papers });
     },
     (err) => {
+      dispatch({ type: STOP_LOADING });
       toastr.error('', `Could not search: ${err.message ? err.message : null}`);
     }
   );

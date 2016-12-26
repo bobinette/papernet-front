@@ -18,21 +18,17 @@ import 'react-redux-toastr/src/styles/index.scss';
 import 'style/toastr.scss';
 
 // Paper list page
-import HomeContainer from 'home/container';
-import homeReducer from 'home/reducer';
+import HomeContainer, { homeReducer } from 'home';
 
 // Paper page
-import PaperViewContainer from 'paper/view/container';
-import PaperEditContainer from 'paper/edit/container';
-import paperReducer from 'paper/reducer';
+import { PaperViewContainer, PaperEditContainer, paperReducer } from 'paper';
 
 // Auth page
 import GoogleLoggedIn from 'auth/google';
 import userReducer from 'auth/reducer';
 
 // Imports
-import ImportContainer from 'imports/container';
-import importsReducer from 'imports/reducer';
+import ImportsContainer, { importsReducer } from 'imports';
 
 // Create store
 const reducers = {
@@ -63,7 +59,7 @@ ReactDOM.render(
             <IndexRedirect to="/auth/google" />
             <Route path="google" component={GoogleLoggedIn} />
           </Route>
-          <Route path="imports" component={ImportContainer} />
+          <Route path="imports" component={ImportsContainer} />
         </Route>
       </Router>
       <ReduxToastr

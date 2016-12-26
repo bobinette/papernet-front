@@ -63,8 +63,8 @@ const ImportRow = ({ onImport, paper }) => {
         <ReadMoreMarkdown text={abstract} />
         <div className="card-text ImportRow__Links">
           <ImportButtonOrLink paperID={paper.get('id')} onImport={onImport} />
-          <a href={paper.getIn(['references', 0])} className="btn btn-sm btn-outline-secondary">See on arXiv</a>
-          <a href={paper.getIn(['references', 1])} className="btn btn-sm btn-outline-secondary">PDF</a>
+          <a href={paper.getIn(['references', 0])} className="btn btn-sm btn-outline-primary">See on arXiv</a>
+          <a href={paper.getIn(['references', 1])} className="btn btn-sm btn-outline-primary">PDF</a>
         </div>
         <p className="card-text">
           <small

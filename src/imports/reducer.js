@@ -1,10 +1,11 @@
 import { fromJS } from 'immutable';
 
-import { RECEIVE_IMPORTS, SEARCH_IMPORTS } from './constants';
+import { RECEIVE_IMPORTS, START_LOADING, STOP_LOADING, SEARCH_IMPORTS } from './constants';
 
 const initialState = fromJS({
-  q: '',
   list: [],
+  loading: false,
+  q: '',
 });
 
 export default (state = initialState, action) => {
@@ -12,6 +13,12 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_IMPORTS:
       newState = newState.set('q', action.value);
+      break;
+    case START_LOADING:
+      newState = newState.set('loading', true);
+      break;
+    case STOP_LOADING:
+      newState = newState.set('loading', false);
       break;
     case RECEIVE_IMPORTS:
       newState = newState.set('list', fromJS(action.list));
