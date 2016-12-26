@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { List } from 'immutable';
+import { Link } from 'react-router';
 
 import moment from 'moment';
 
@@ -26,6 +27,30 @@ const extractAbstract = (text) => {
   return text.substring(0, end);
 };
 
+const ImportButtonOrLink = ({ paperID, onImport }) => {
+  if (paperID !== 0) {
+    return (
+      <Link
+        className="btn btn-sm btn-outline-primary"
+        to={`papers/${paperID}`}
+      >
+        See on Papernet
+      </Link>
+    );
+  }
+
+  return (
+    <button className="btn btn-sm btn-primary" onClick={onImport}>
+      Import in Papernet
+    </button>
+  );
+};
+
+ImportButtonOrLink.propTypes = {
+  paperID: PropTypes.number.isRequired,
+  onImport: PropTypes.func.isRequired,
+};
+
 const ImportRow = ({ onImport, paper }) => {
   const abstract = extractAbstract(paper.get('summary'));
 
@@ -37,11 +62,9 @@ const ImportRow = ({ onImport, paper }) => {
         <h5 className="card-title">{paper.get('title')}</h5>
         <ReadMoreMarkdown text={abstract} />
         <div className="card-text ImportRow__Links">
-          <button className="btn btn-sm btn-primary" onClick={onImport}>
-            Import in Papernet
-          </button>
-          <a href={paper.getIn(['references', 0])} className="btn btn-sm btn-outline-primary">See on arXiv</a>
-          <a href={paper.getIn(['references', 1])} className="btn btn-sm btn-outline-primary">PDF</a>
+          <ImportButtonOrLink paperID={paper.get('id')} onImport={onImport} />
+          <a href={paper.getIn(['references', 0])} className="btn btn-sm btn-outline-secondary">See on arXiv</a>
+          <a href={paper.getIn(['references', 1])} className="btn btn-sm btn-outline-secondary">PDF</a>
         </div>
         <p className="card-text">
           <small

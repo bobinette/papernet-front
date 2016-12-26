@@ -43,7 +43,7 @@ const ImportView = ({ imports, onChange, onImport, onSearch }) => (
         {imports.get('list').map((paper, i) => (
           <li className="col-md-10 offset-md-1" key={i} >
             <ImportCard
-              onImport={() => onImport(paper)}
+              onImport={() => onImport(i)}
               paper={paper}
             />
           </li>

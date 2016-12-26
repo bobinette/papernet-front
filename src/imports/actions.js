@@ -7,6 +7,8 @@ import qs from 'qs';
 import handleJSON from 'utils/actions/handleResponse';
 import { papernetURL } from 'utils/constants';
 
+import { savePaper } from 'paper/actions';
+
 import { RECEIVE_IMPORTS } from './constants';
 
 export const search = () => (dispatch, getState) => { // eslint-disable-line import/prefer-default-export
@@ -30,6 +32,18 @@ export const search = () => (dispatch, getState) => { // eslint-disable-line imp
     },
     (err) => {
       toastr.error('', `Could not search: ${err.message ? err.message : null}`);
+    }
+  );
+};
+
+export const importPaper = index => (dispatch, getState) => {
+  const paper = getState().imports.getIn(['list', index]);
+  if (!paper) return null;
+
+  return dispatch(savePaper(paper)).then(
+    (id) => {
+      const list = getState().imports.get('list').setIn([index, 'id'], id);
+      return dispatch({ type: RECEIVE_IMPORTS, list });
     }
   );
 };

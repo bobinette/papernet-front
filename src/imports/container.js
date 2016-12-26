@@ -3,9 +3,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 
 import { loadCookie, me } from 'auth/actions';
-import { savePaper } from 'paper/actions';
 
-import { search } from './actions';
+import { importPaper, search } from './actions';
 import { SEARCH_IMPORTS } from './constants';
 import ImportView from './view';
 
@@ -50,7 +49,7 @@ class ImportContainer extends Component {
   }
 
   onImport(paper) {
-    this.props.dispatch(savePaper(paper));
+    this.props.dispatch(importPaper(paper));
   }
 
   onSearch() {
