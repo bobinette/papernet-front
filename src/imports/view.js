@@ -8,29 +8,48 @@ import SearchBar from 'components/input/text/search-bar';
 import NavBar from 'components/navbar';
 import Spinner from 'components/spinner';
 
+import Pagination from './pagination';
 import ImportCard from './row';
 
 import './view.scss';
 
-const ImportsList = ({ list, onImport }) => (
-  <ul className="container">
-    {list.map((paper, i) => (
-      <li className="col-md-10 offset-md-1" key={i} >
-        <ImportCard
-          onImport={() => onImport(i)}
-          paper={paper}
-        />
-      </li>
-    ))}
-  </ul>
+const ImportsList = ({ imports, onImport, onOffsetChange }) => (
+  <div>
+    <Pagination
+      pagination={imports.get('pagination')}
+      onChange={onOffsetChange}
+    />
+    <ul className="container">
+      {imports.get('list').map((paper, i) => (
+        <li className="col-md-12" key={i} >
+          <ImportCard
+            onImport={() => onImport(i)}
+            paper={paper}
+          />
+        </li>
+      ))}
+    </ul>
+    <Pagination
+      pagination={imports.get('pagination')}
+      onChange={onOffsetChange}
+    />
+  </div>
 );
 
 ImportsList.propTypes = {
-  list: ImmutablePropTypes.listOf(paperPropType).isRequired,
+  imports: ImmutablePropTypes.contains({
+    list: ImmutablePropTypes.listOf(paperPropType).isRequired,
+    pagination: ImmutablePropTypes.contains({
+      limit: PropTypes.number,
+      offset: PropTypes.number,
+      total: PropTypes.number,
+    }).isRequired,
+  }).isRequired,
   onImport: PropTypes.func.isRequired,
+  onOffsetChange: PropTypes.func.isRequired,
 };
 
-const ImportView = ({ imports, onChange, onImport, onSearch }) => (
+const ImportView = ({ imports, onChange, onImport, onOffsetChange, onSearch }) => (
   <div className="container">
     <NavBar
       items={[
@@ -52,20 +71,20 @@ const ImportView = ({ imports, onChange, onImport, onSearch }) => (
           value={imports.get('q')}
         />
         <button
-          className="btn btn-primary col-md-2 offset-md-5"
+          className="btn btn-primary ImportView__Search"
           onClick={onSearch}
         >
           Search
         </button>
       </div>
-      <div className="col-md-12">
+      <div className="col-md-10 offset-md-1">
         {
           imports.get('loading') ?
             <div className="ImportView__Spinner">
               <Spinner text="Fetching arXiv..." />
             </div>
             :
-            <ImportsList list={imports.get('list')} onImport={onImport} />
+            <ImportsList imports={imports} onImport={onImport} onOffsetChange={onOffsetChange} />
         }
       </div>
     </div>
@@ -81,6 +100,7 @@ ImportView.propTypes = {
   }).isRequired,
   onChange: PropTypes.func.isRequired,
   onImport: PropTypes.func.isRequired,
+  onOffsetChange: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
 };
 

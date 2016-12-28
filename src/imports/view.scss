@@ -2,12 +2,19 @@
 	margin-top: 70px;
 
 	ul {
-		margin-top: 20px;
 		list-style-type: none;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	.Pagination ul {
+		margin: 0;
 	}
 }
 
 .ImportView__Search {
+	text-align: center;
+
 	button {
 		margin-top: 5px;
 	}

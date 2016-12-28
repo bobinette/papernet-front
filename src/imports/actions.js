@@ -11,9 +11,14 @@ import { savePaper } from 'paper/actions';
 
 import { RECEIVE_IMPORTS, START_LOADING, STOP_LOADING } from './constants';
 
-export const search = () => (dispatch, getState) => { // eslint-disable-line import/prefer-default-export
-  const q = getState().imports.get('q');
+export const search = () => (dispatch, getState) => {
+  const imports = getState().imports;
+  const q = imports.get('q');
+  const limit = imports.getIn(['pagination', 'limit']);
+  const offset = imports.getIn(['pagination', 'offset']);
   const params = {
+    limit,
+    offset,
     q: q && q.length > 0 ? q : null,
   };
   const url = `${papernetURL}/arxiv?${qs.stringify(params, { skipNulls: true })}`;
@@ -30,7 +35,7 @@ export const search = () => (dispatch, getState) => { // eslint-disable-line imp
     (response) => {
       const papers = response.data;
       dispatch({ type: STOP_LOADING });
-      return dispatch({ type: RECEIVE_IMPORTS, list: papers });
+      return dispatch({ type: RECEIVE_IMPORTS, list: papers, total: response.pagination.total });
     },
     (err) => {
       dispatch({ type: STOP_LOADING });
