@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { loadCookie, me } from 'auth/actions';
 
 import { importPaper, search } from './actions';
-import { SEARCH_IMPORTS, UPDATE_OFFSET } from './constants';
+import { SEARCH_IMPORTS, UPDATE_IMPORTS_OFFSET } from './constants';
 import ImportView from './view';
 
 const mapStateToProps = state => ({
@@ -58,7 +58,7 @@ class ImportContainer extends Component {
   }
 
   onOffsetChange(offset) {
-    this.props.dispatch({ type: UPDATE_OFFSET, offset });
+    this.props.dispatch({ type: UPDATE_IMPORTS_OFFSET, offset });
   }
 
   onSearch() {

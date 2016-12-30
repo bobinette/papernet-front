@@ -5,7 +5,7 @@ import {
   START_LOADING,
   STOP_LOADING,
   SEARCH_IMPORTS,
-  UPDATE_OFFSET,
+  UPDATE_IMPORTS_OFFSET,
  } from './constants';
 
 const initialState = fromJS({
@@ -13,7 +13,7 @@ const initialState = fromJS({
   loading: false,
   q: '',
   pagination: {
-    limit: 10,
+    limit: 20,
     offset: 0,
     total: 0,
   },
@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
       newState = newState.set('list', fromJS(action.list));
       newState = newState.setIn(['pagination', 'total'], action.total);
       break;
-    case UPDATE_OFFSET:
+    case UPDATE_IMPORTS_OFFSET:
       newState = newState.setIn(['pagination', 'offset'], action.offset);
       break;
     default:
