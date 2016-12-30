@@ -6,9 +6,9 @@ import { paperPropType } from 'utils/constants';
 
 import SearchBar from 'components/input/text/search-bar';
 import NavBar from 'components/navbar';
+import Pagination from 'components/pagination';
 import Spinner from 'components/spinner';
 
-import Pagination from './pagination';
 import ImportCard from './row';
 
 import './view.scss';
