@@ -37,7 +37,14 @@ const Equation = ({ equation }) => {
       {elt}
       <div>
         <ClipboardButton className="btn btn-outline-primary btn-sm" data-clipboard-text={equation}>
-          <i className="fa fa-clipboard" />
+          <Tooltip
+            placement="top"
+            trigger={['click']}
+            mouseEnterDelay={0.1}
+            overlay="Copied!"
+          >
+            <i className="fa fa-clipboard" />
+          </Tooltip>
         </ClipboardButton>
       </div>
     </div>
