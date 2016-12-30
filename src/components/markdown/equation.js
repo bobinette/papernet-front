@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 
+import ClipboardButton from 'react-clipboard.js';
+
 import classNames from 'classnames';
 import katex from 'katex';
 
@@ -8,10 +10,11 @@ import 'rc-tooltip/assets/bootstrap.css';
 
 const Equation = ({ equation }) => {
   let elt;
-  const classes = {};
+  const classes = { Equation: true };
   try {
     elt = (
       <span
+        className="Equation__Equation"
         dangerouslySetInnerHTML={{  // eslint-disable-line react/no-danger
           __html: katex.renderToString(equation, { displayMode: true }),
         }}
@@ -19,7 +22,7 @@ const Equation = ({ equation }) => {
     );
   } catch (e) {
     elt = (
-      <div>
+      <div className="col-md-11">
         <div className="Markdown__ErrorMessage">
           <i className="fa fa-exclamation-triangle" />
           Could not render equation: ${e.message}
@@ -29,7 +32,16 @@ const Equation = ({ equation }) => {
     );
     classes.Markdown__Error = true;
   }
-  return <span className={classNames(classes)}>{elt}</span>;
+  return (
+    <div className={classNames(classes)}>
+      {elt}
+      <div>
+        <ClipboardButton className="btn btn-outline-primary btn-sm" data-clipboard-text={equation}>
+          <i className="fa fa-clipboard" />
+        </ClipboardButton>
+      </div>
+    </div>
+  );
 };
 
 Equation.propTypes = {

@@ -21,3 +21,12 @@
 		color: $brand-danger;
 	}
 }
+
+.Equation {
+	display: flex;
+	align-items: center;
+}
+
+.Equation__Equation {
+	flex: 1;
+}
