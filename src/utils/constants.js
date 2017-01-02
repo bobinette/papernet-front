@@ -14,6 +14,12 @@ export const userPropType = ImmutablePropTypes.contains({
   bookmarks: ImmutablePropTypes.listOf(PropTypes.number),
 });
 
+export const paginationPropType = ImmutablePropTypes.contains({
+  limit: PropTypes.number,
+  offset: PropTypes.number,
+  total: PropTypes.number,
+});
+
 // URLs
 export const papernetURL = 'http://localhost:1705/api';
 

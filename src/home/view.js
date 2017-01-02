@@ -2,16 +2,45 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import { paperPropType, userPropType } from 'utils/constants';
+import { paginationPropType, paperPropType, userPropType } from 'utils/constants';
 
 import NavBar from 'components/navbar';
+import Pagination from 'components/pagination';
 
 import Filters from './components/filters';
 import PaperListViewRow from './components/row';
 
 import './view.scss';
 
-const HomeView = ({ filters, onBookmark, onFilterChange, papers, user }) => (
+const HomeList = ({ onBookmark, onOffsetChange, pagination, papers, user }) => (
+  <div>
+    <Pagination
+      pagination={pagination}
+      onChange={onOffsetChange}
+    />
+    <ul className="container HomeView__List">
+      {papers.map((paper, i) => (
+        <li className="col-md-12" key={i} >
+          <PaperListViewRow paper={paper} user={user.get('user')} onBookmark={onBookmark} />
+        </li>
+      ))}
+    </ul>
+    <Pagination
+      pagination={pagination}
+      onChange={onOffsetChange}
+    />
+  </div>
+);
+
+HomeList.propTypes = {
+  onBookmark: PropTypes.func.isRequired,
+  onOffsetChange: PropTypes.func.isRequired,
+  papers: paperPropType.isRequired,
+  pagination: paginationPropType.isRequired,
+  user: userPropType.isRequired,
+};
+
+const HomeView = ({ filters, onBookmark, onFilterChange, onOffsetChange, pagination, papers, user }) => (
   <div className="HomeView container">
     <NavBar
       items={[
@@ -38,13 +67,15 @@ const HomeView = ({ filters, onBookmark, onFilterChange, papers, user }) => (
         filters={filters}
         onFilterChange={onFilterChange}
       />
-      <ul className="col-xs-12 container HomeView__List">
-        {papers.map((paper, i) => (
-          <li className="col-md-10 offset-md-1" key={i} >
-            <PaperListViewRow paper={paper} user={user.get('user')} onBookmark={onBookmark} />
-          </li>
-        ))}
-      </ul>
+      <div className="col-md-10 offset-md-1">
+        <HomeList
+          pagination={pagination}
+          papers={papers}
+          onBookmark={onBookmark}
+          onOffsetChange={onOffsetChange}
+          user={user}
+        />
+      </div>
     </div>
   </div>
 );
@@ -55,6 +86,8 @@ HomeView.propTypes = {
   }).isRequired,
   onBookmark: PropTypes.func.isRequired,
   onFilterChange: PropTypes.func.isRequired,
+  onOffsetChange: PropTypes.func.isRequired,
+  pagination: paginationPropType.isRequired,
   papers: ImmutablePropTypes.listOf(paperPropType).isRequired,
   user: ImmutablePropTypes.contains({
     token: PropTypes.string,

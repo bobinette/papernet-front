@@ -5,12 +5,15 @@ import { List } from 'immutable';
 
 import { loadCookie, me } from 'auth/actions';
 
+import { paginationPropType } from 'utils/constants';
+
 import { bookmark, getPaperList, unbookmark } from './actions';
-import { UPDATE_FILTERS } from './constants';
+import { UPDATE_FILTERS, UPDATE_HOME_OFFSET } from './constants';
 import HomeView from './view';
 
 const mapStateToProps = state => ({
   filters: state.home.get('filters'),
+  pagination: state.home.get('pagination'),
   papers: state.home.get('papers'),
   search: state.home.get('search'),
   user: state.user,
@@ -22,6 +25,7 @@ class HomeContainer extends Component {
     filters: ImmutablePropTypes.contains({
       bookmarked: PropTypes.bool,
     }).isRequired,
+    pagination: paginationPropType.isRequired,
     papers: ImmutablePropTypes.list.isRequired,
     search: PropTypes.string.isRequired,
     user: ImmutablePropTypes.map.isRequired,
@@ -32,6 +36,7 @@ class HomeContainer extends Component {
 
     this.onBookmark = ::this.onBookmark;
     this.onFilterChange = ::this.onFilterChange;
+    this.onOffsetChange = ::this.onOffsetChange;
 
     this.props.dispatch(loadCookie());
     this.props.dispatch(me());
@@ -68,16 +73,22 @@ class HomeContainer extends Component {
     this.props.dispatch({ type: UPDATE_FILTERS, key, value });
   }
 
+  onOffsetChange(offset) {
+    this.props.dispatch({ type: UPDATE_HOME_OFFSET, offset });
+  }
+
   render() {
-    const { filters, papers, user } = this.props;
+    const { filters, pagination, papers, user } = this.props;
 
     return (
       <div className="HomeContainer">
         <HomeView
           filters={filters}
+          pagination={pagination}
           papers={papers}
           onBookmark={this.onBookmark}
           onFilterChange={this.onFilterChange}
+          onOffsetChange={this.onOffsetChange}
           user={user}
         />
       </div>

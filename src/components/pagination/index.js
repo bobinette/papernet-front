@@ -37,22 +37,23 @@ const Pagination = ({ pagination, onChange }) => {
 
   const lastPage = Math.ceil(pagination.get('total') / limit);
   let firstPage = currentPage;
+
+  // Handle left part
   if (firstPage <= 3) {
     firstPage = 1;
   } else if (firstPage > 3) {
     firstPage -= 2;
   }
-  if (firstPage > lastPage - 4) {
+
+  // Handle right part
+  if (lastPage > 4 && firstPage > lastPage - 4) {
     firstPage = lastPage - 4;
   }
 
+  // Create pages
   const pages = [];
   for (let i = firstPage; i < firstPage + 5 && i <= lastPage; i += 1) {
     pages.push({ page: i, offset: (i - 1) * limit });
-  }
-
-  if (pages.length < 2) {
-    return null;
   }
 
   return (

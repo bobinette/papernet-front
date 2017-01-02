@@ -29,7 +29,8 @@ export const getPaperList = () => (dispatch, getState) => {
   return fetch(url, { headers }).then(handleJSON).then(
     (response) => {
       const papers = response.data;
-      return dispatch({ type: RECEIVE_PAPER_LIST, papers });
+      const total = response.pagination.total;
+      return dispatch({ type: RECEIVE_PAPER_LIST, papers, total });
     },
     (err) => {
       toastr.error('', `Could not load your papers: ${err.message ? err.message : null}`);
