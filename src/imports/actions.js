@@ -51,7 +51,7 @@ export const importPaper = index => (dispatch, getState) => {
   return dispatch(savePaper(paper)).then(
     (id) => {
       const list = getState().imports.get('list').setIn([index, 'id'], id);
-      return dispatch({ type: RECEIVE_IMPORTS, list });
+      return dispatch({ type: RECEIVE_IMPORTS, list, total: getState().imports.getIn(['pagination', 'total']) });
     }
   );
 };
