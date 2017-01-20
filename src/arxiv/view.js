@@ -13,22 +13,36 @@ import ImportCard from './row';
 
 import './view.scss';
 
+const arxivLimit = 50000;
+
 const ArxivList = ({ arxiv, onImport, onOffsetChange }) => (
   <div>
     <Pagination
       pagination={arxiv.get('pagination')}
       onChange={onOffsetChange}
     />
-    <ul className="container">
-      {arxiv.get('list').map((paper, i) => (
-        <li className="col-md-12" key={i} >
-          <ImportCard
-            onImport={() => onImport(i)}
-            paper={paper}
-          />
-        </li>
-      ))}
-    </ul>
+    {
+      arxiv.getIn(['pagination', 'offset']) >= arxivLimit ?
+        <large>
+          Unfortunately, the arXiv API cannot go further than 50.000 results by simply offsetting. You have to refine
+          your search. However, refining your search is currently not possible in Papernet, but I&#39;ll be working on
+          that soon!
+
+          <br />
+          More information <a href="https://groups.google.com/forum/#!msg/arxiv-api/DCfTl4jj7j0/WN6l6MG-tz4J">here</a>
+        </large>
+        :
+        <ul className="container">
+          {arxiv.get('list').map((paper, i) => (
+            <li className="col-md-12" key={i} >
+              <ImportCard
+                onImport={() => onImport(i)}
+                paper={paper}
+              />
+            </li>
+          ))}
+        </ul>
+    }
     <Pagination
       pagination={arxiv.get('pagination')}
       onChange={onOffsetChange}
