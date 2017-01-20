@@ -9,13 +9,13 @@ import { papernetURL } from 'utils/constants';
 
 import { savePaper } from 'paper/actions';
 
-import { RECEIVE_IMPORTS, START_LOADING, STOP_LOADING } from './constants';
+import { RECEIVE_ARXIV, START_LOADING, STOP_LOADING } from './constants';
 
 export const search = () => (dispatch, getState) => {
-  const imports = getState().imports;
-  const q = imports.get('q');
-  const limit = imports.getIn(['pagination', 'limit']);
-  const offset = imports.getIn(['pagination', 'offset']);
+  const arxiv = getState().arxiv;
+  const q = arxiv.get('q');
+  const limit = arxiv.getIn(['pagination', 'limit']);
+  const offset = arxiv.getIn(['pagination', 'offset']);
   const params = {
     limit,
     offset,
@@ -35,7 +35,7 @@ export const search = () => (dispatch, getState) => {
     (response) => {
       const papers = response.data;
       dispatch({ type: STOP_LOADING });
-      return dispatch({ type: RECEIVE_IMPORTS, list: papers, total: response.pagination.total });
+      return dispatch({ type: RECEIVE_ARXIV, list: papers, total: response.pagination.total });
     },
     (err) => {
       dispatch({ type: STOP_LOADING });
@@ -45,13 +45,13 @@ export const search = () => (dispatch, getState) => {
 };
 
 export const importPaper = index => (dispatch, getState) => {
-  const paper = getState().imports.getIn(['list', index]);
+  const paper = getState().arxiv.getIn(['list', index]);
   if (!paper) return null;
 
   return dispatch(savePaper(paper)).then(
     (id) => {
-      const list = getState().imports.get('list').setIn([index, 'id'], id);
-      return dispatch({ type: RECEIVE_IMPORTS, list, total: getState().imports.getIn(['pagination', 'total']) });
+      const list = getState().arxiv.get('list').setIn([index, 'id'], id);
+      return dispatch({ type: RECEIVE_ARXIV, list, total: getState().arxiv.getIn(['pagination', 'total']) });
     }
   );
 };

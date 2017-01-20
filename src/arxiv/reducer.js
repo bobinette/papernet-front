@@ -1,11 +1,11 @@
 import { fromJS } from 'immutable';
 
 import {
-  RECEIVE_IMPORTS,
+  RECEIVE_ARXIV,
   START_LOADING,
   STOP_LOADING,
-  SEARCH_IMPORTS,
-  UPDATE_IMPORTS_OFFSET,
+  SEARCH_ARXIV,
+  UPDATE_ARXIV_OFFSET,
  } from './constants';
 
 const initialState = fromJS({
@@ -22,7 +22,7 @@ const initialState = fromJS({
 export default (state = initialState, action) => {
   let newState = state;
   switch (action.type) {
-    case SEARCH_IMPORTS:
+    case SEARCH_ARXIV:
       newState = newState.set('q', action.value);
       break;
     case START_LOADING:
@@ -31,11 +31,11 @@ export default (state = initialState, action) => {
     case STOP_LOADING:
       newState = newState.set('loading', false);
       break;
-    case RECEIVE_IMPORTS:
+    case RECEIVE_ARXIV:
       newState = newState.set('list', fromJS(action.list));
       newState = newState.setIn(['pagination', 'total'], action.total);
       break;
-    case UPDATE_IMPORTS_OFFSET:
+    case UPDATE_ARXIV_OFFSET:
       newState = newState.setIn(['pagination', 'offset'], action.offset);
       break;
     default:

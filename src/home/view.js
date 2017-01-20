@@ -49,7 +49,7 @@ const HomeView = ({ filters, onBookmark, onFilterChange, onOffsetChange, paginat
           active: true,
         },
         {
-          element: <Link className="nav-link" to={'/imports'}>Imports</Link>,
+          element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>,
           active: false,
         },
       ]}

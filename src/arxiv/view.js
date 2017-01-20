@@ -13,14 +13,14 @@ import ImportCard from './row';
 
 import './view.scss';
 
-const ImportsList = ({ imports, onImport, onOffsetChange }) => (
+const ArxivList = ({ arxiv, onImport, onOffsetChange }) => (
   <div>
     <Pagination
-      pagination={imports.get('pagination')}
+      pagination={arxiv.get('pagination')}
       onChange={onOffsetChange}
     />
     <ul className="container">
-      {imports.get('list').map((paper, i) => (
+      {arxiv.get('list').map((paper, i) => (
         <li className="col-md-12" key={i} >
           <ImportCard
             onImport={() => onImport(i)}
@@ -30,14 +30,14 @@ const ImportsList = ({ imports, onImport, onOffsetChange }) => (
       ))}
     </ul>
     <Pagination
-      pagination={imports.get('pagination')}
+      pagination={arxiv.get('pagination')}
       onChange={onOffsetChange}
     />
   </div>
 );
 
-ImportsList.propTypes = {
-  imports: ImmutablePropTypes.contains({
+ArxivList.propTypes = {
+  arxiv: ImmutablePropTypes.contains({
     list: ImmutablePropTypes.listOf(paperPropType).isRequired,
     pagination: ImmutablePropTypes.contains({
       limit: PropTypes.number,
@@ -49,7 +49,7 @@ ImportsList.propTypes = {
   onOffsetChange: PropTypes.func.isRequired,
 };
 
-const ImportView = ({ imports, onChange, onImport, onOffsetChange, onSearch }) => (
+const ImportView = ({ arxiv, onChange, onImport, onOffsetChange, onSearch }) => (
   <div className="container">
     <NavBar
       items={[
@@ -58,7 +58,7 @@ const ImportView = ({ imports, onChange, onImport, onOffsetChange, onSearch }) =
           active: false,
         },
         {
-          element: <Link className="nav-link" to={'/imports'}>Imports</Link>,
+          element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>,
           active: true,
         },
       ]}
@@ -68,7 +68,7 @@ const ImportView = ({ imports, onChange, onImport, onOffsetChange, onSearch }) =
         <SearchBar
           onChange={onChange}
           placeholder="Search by title, author, category..."
-          value={imports.get('q')}
+          value={arxiv.get('q')}
         />
         <button
           className="btn btn-primary ImportView__Search"
@@ -79,12 +79,12 @@ const ImportView = ({ imports, onChange, onImport, onOffsetChange, onSearch }) =
       </div>
       <div className="col-md-10 offset-md-1">
         {
-          imports.get('loading') ?
+          arxiv.get('loading') ?
             <div className="ImportView__Spinner">
               <Spinner text="Fetching arXiv..." />
             </div>
             :
-            <ImportsList imports={imports} onImport={onImport} onOffsetChange={onOffsetChange} />
+            <ArxivList arxiv={arxiv} onImport={onImport} onOffsetChange={onOffsetChange} />
         }
       </div>
     </div>
@@ -92,7 +92,7 @@ const ImportView = ({ imports, onChange, onImport, onOffsetChange, onSearch }) =
 );
 
 ImportView.propTypes = {
-  imports: ImmutablePropTypes.contains({
+  arxiv: ImmutablePropTypes.contains({
     filters: ImmutablePropTypes.contains({
       q: PropTypes.string,
     }),

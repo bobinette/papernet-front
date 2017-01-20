@@ -5,18 +5,18 @@ import { connect } from 'react-redux';
 import { loadCookie, me } from 'auth/actions';
 
 import { importPaper, search } from './actions';
-import { SEARCH_IMPORTS, UPDATE_IMPORTS_OFFSET } from './constants';
+import { SEARCH_ARXIV, UPDATE_ARXIV_OFFSET } from './constants';
 import ImportView from './view';
 
 const mapStateToProps = state => ({
-  imports: state.imports,
+  arxiv: state.arxiv,
   user: state.user,
 });
 
 class ImportContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    imports: ImmutablePropTypes.contains({
+    arxiv: ImmutablePropTypes.contains({
       filters: ImmutablePropTypes.contains({
         title: PropTypes.string,
         q: PropTypes.string,
@@ -44,13 +44,13 @@ class ImportContainer extends Component {
       dispatch(me());
     }
 
-    if (nextProps.imports.getIn(['pagination', 'offset']) !== this.props.imports.getIn(['pagination', 'offset'])) {
+    if (nextProps.arxiv.getIn(['pagination', 'offset']) !== this.props.arxiv.getIn(['pagination', 'offset'])) {
       this.onSearch();
     }
   }
 
   onChange(value) {
-    this.props.dispatch({ type: SEARCH_IMPORTS, value });
+    this.props.dispatch({ type: SEARCH_ARXIV, value });
   }
 
   onImport(paper) {
@@ -58,7 +58,7 @@ class ImportContainer extends Component {
   }
 
   onOffsetChange(offset) {
-    this.props.dispatch({ type: UPDATE_IMPORTS_OFFSET, offset });
+    this.props.dispatch({ type: UPDATE_ARXIV_OFFSET, offset });
   }
 
   onSearch() {
@@ -66,7 +66,7 @@ class ImportContainer extends Component {
   }
 
   render() {
-    const { imports } = this.props;
+    const { arxiv } = this.props;
 
     return (
       <div className="ImportContainer">
@@ -75,7 +75,7 @@ class ImportContainer extends Component {
           onImport={this.onImport}
           onOffsetChange={this.onOffsetChange}
           onSearch={this.onSearch}
-          imports={imports}
+          arxiv={arxiv}
         />
       </div>
     );
