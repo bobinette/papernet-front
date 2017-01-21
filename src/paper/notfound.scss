@@ -1,0 +1,12 @@
+.NotFoundView {
+    & > div {
+        margin-top: 80px;
+        text-align: center;
+    }
+
+    & > div > h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

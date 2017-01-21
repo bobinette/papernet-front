@@ -3,7 +3,7 @@ import { toastr } from 'react-redux-toastr';
 import fetch from 'utils/fetch';
 import { papernetURL } from 'utils/constants';
 
-import { FECTH_PAPER, RECEIVE_PAPER, UPDATE_PAPER } from './constants';
+import { FECTH_PAPER, NOT_FOUND_PAPER, RECEIVE_PAPER, UPDATE_PAPER } from './constants';
 
 export const getPaper = id => (dispatch, getState) => {
   const token = getState().user.get('token');
@@ -19,8 +19,12 @@ export const getPaper = id => (dispatch, getState) => {
       const paper = response.data;
       return dispatch({ type: RECEIVE_PAPER, paper });
     },
-    ({ json }) => {
+    ({ json, status }) => {
+      if (status === 404) {
+        return dispatch({ type: NOT_FOUND_PAPER });
+      }
       toastr.error('', `Could not get paper: ${json.message ? json.message : null}`);
+      return null;
     }
   );
 };

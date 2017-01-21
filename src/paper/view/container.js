@@ -5,16 +5,19 @@ import { paperPropType } from 'utils/constants';
 import { loadCookie, me } from 'auth/actions';
 
 import { getPaper } from '../actions';
+import NotFoundView from '../notfound';
 import PaperView from './view';
 
 const mapStateToProps = state => ({
-  paper: state.paper.get('paper'),
+  found: state.paper.get('found'),
   loading: state.paper.get('loading'),
+  paper: state.paper.get('paper'),
 });
 
 class PaperViewContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    found: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired,
     paper: paperPropType.isRequired,
     params: PropTypes.shape({
@@ -43,10 +46,12 @@ class PaperViewContainer extends Component {
   }
 
   render() {
-    const { loading, paper } = this.props;
+    const { found, loading, paper } = this.props;
 
     // Dangerous. Replace with a loading page.
     if (loading) return null;
+
+    if (!found) return <NotFoundView />;
 
     return (
       <div className="PaperContainer container">

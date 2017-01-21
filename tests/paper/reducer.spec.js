@@ -24,6 +24,7 @@ describe('reducer', () => {
         title: 'Yolo tonight',
       },
       loading: false,
+      found: true,
     }));
   });
 
@@ -42,6 +43,7 @@ describe('reducer', () => {
         title: 'Yolo tonight',
       },
       loading: false,
+      found: true,
     }));
   });
 
@@ -59,6 +61,7 @@ describe('reducer', () => {
         title: 'Yolo tonight',
       },
       loading: false,
+      found: true,
     }));
   });
 });
