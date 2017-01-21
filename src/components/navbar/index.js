@@ -26,7 +26,7 @@ const NavBar = ({ items, rightItems, onLogin, onLogout, user }) => (
   <nav className="navbar navbar-fixed-top navbar-light">
     <div className="container">
       <Link className="navbar-brand" to={'/papers'}>
-        {<img className="d-inline-block align-top" src={icon} width="30" height="30" alt="" />}
+        <img className="d-inline-block align-top" src={icon} width="30" height="30" alt="" />
         Papernet
       </Link>
       <ul className="nav navbar-nav">

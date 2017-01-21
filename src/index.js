@@ -21,7 +21,7 @@ import 'style/toastr.scss';
 import HomeContainer, { homeReducer } from 'home';
 
 // Paper page
-import { PaperViewContainer, PaperEditContainer, paperReducer } from 'paper';
+import { PaperEditContainer, PaperViewContainer, paperReducer } from 'paper';
 
 // Auth page
 import GoogleLoggedIn from 'auth/google';

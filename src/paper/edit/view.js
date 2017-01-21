@@ -94,6 +94,16 @@ class PaperEdit extends Component {
     return (
       <div className="PaperEdit container">
         <NavBar
+          items={[
+            {
+              element: <Link className="nav-link" to={'/papers'}>Home</Link>,
+              active: true,
+            },
+            {
+              element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>,
+              active: false,
+            },
+          ]}
           rightItems={[
             {
               element: (

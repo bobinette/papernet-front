@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { List } from 'immutable';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import moment from 'moment';
 
@@ -12,6 +11,8 @@ import Markdown from 'components/markdown';
 import NavBar from 'components/navbar';
 import TagList from 'components/taglist';
 
+import { paperPropType } from 'utils/constants';
+
 import './view.scss';
 
 const urlRegex = new RegExp(
@@ -21,9 +22,7 @@ const urlRegex = new RegExp(
 class PaperView extends Component {
 
   static propTypes = {
-    paper: ImmutablePropTypes.shape({
-      title: ImmutablePropTypes.string,
-    }).isRequired,
+    paper: paperPropType.isRequired,
   };
 
   renderReferences() {
@@ -60,6 +59,16 @@ class PaperView extends Component {
     return (
       <div className="PaperView">
         <NavBar
+          items={[
+            {
+              element: <Link className="nav-link" to={'/papers'}>Home</Link>,
+              active: true,
+            },
+            {
+              element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>,
+              active: false,
+            },
+          ]}
           rightItems={[
             {
               element: <Link className="nav-link" to={`/papers/${paper.get('id')}/edit`}>Edit</Link>,
