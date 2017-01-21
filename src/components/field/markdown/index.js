@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import TextArea from 'components/input/textarea';
+import Markdown from 'components/input/markdown';
 
 import { ValueKeyPropType } from 'components/field/propTypes';
 
@@ -40,7 +40,7 @@ class MarkdownForm extends Component {
     const { extra, value, valueKey } = this.props;
 
     return (
-      <TextArea
+      <Markdown
         autoresize={extra.autoresize}
         className={extra.className}
         onChange={this.onChange}

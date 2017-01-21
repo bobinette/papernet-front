@@ -23,3 +23,9 @@ a:focus {
 .btn:focus, .btn:focus:active {
 	outline: none;
 }
+
+.btn.btn-link {
+    &:focus:active, &:focus {
+        outline: none;
+    }
+}
