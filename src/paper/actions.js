@@ -1,8 +1,6 @@
 import { toastr } from 'react-redux-toastr';
 
-import 'whatwg-fetch';
-
-import handleJSON from 'utils/actions/handleResponse';
+import fetch from 'utils/fetch';
 import { papernetURL } from 'utils/constants';
 
 import { FECTH_PAPER, RECEIVE_PAPER, UPDATE_PAPER } from './constants';
@@ -16,13 +14,13 @@ export const getPaper = id => (dispatch, getState) => {
   });
 
   dispatch({ type: FECTH_PAPER });
-  return fetch(`${papernetURL}/papers/${id}`, { headers }).then(handleJSON).then(
+  return fetch(`${papernetURL}/papers/${id}`, { headers }).then(
     (response) => {
       const paper = response.data;
       return dispatch({ type: RECEIVE_PAPER, paper });
     },
-    (err) => {
-      toastr.error('', `Could not get paper: ${err.message ? err.message : null}`);
+    ({ json }) => {
+      toastr.error('', `Could not get paper: ${json.message ? json.message : null}`);
     }
   );
 };
@@ -50,14 +48,14 @@ export const savePaper = paper => (dispatch, getState) => {
     method,
     headers,
     body: JSON.stringify(paper.toJS()),
-  }).then(handleJSON).then(
+  }).then(
     (response) => {
       const respPaper = response.data;
       dispatch({ type: RECEIVE_PAPER, paper: respPaper });
       return respPaper.id;
     },
-    (err) => {
-      toastr.error('', `Could not save paper: ${err.message ? err.message : null}`);
+    ({ json }) => {
+      toastr.error('', `Could not save paper: ${json.message ? json.message : null}`);
     }
   );
 };
@@ -75,12 +73,12 @@ export const deletePaper = () => (dispatch, getState) => {
   });
 
   const deleteURL = `${papernetURL}/papers/${paper.get('id')}`;
-  return fetch(deleteURL, { method: 'DELETE', headers }).then(handleJSON).then(
+  return fetch(deleteURL, { method: 'DELETE', headers }).then(
     () => {
       dispatch({ type: RECEIVE_PAPER, paper: {} });
     },
-    (err) => {
-      toastr.error('', `Could not delete paper: ${err.message ? err.message : null}`);
+    ({ json }) => {
+      toastr.error('', `Could not delete paper: ${json.message ? json.message : null}`);
     }
   );
 };
