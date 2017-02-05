@@ -13,7 +13,7 @@ module.exports = {
     loaders: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loaders: ['react-hot', 'babel']
+      loader: 'babel'
     }, {
       test: /\.css$/,
       loader: 'style!css'
@@ -25,15 +25,11 @@ module.exports = {
       loader: 'style!css!less'
     }, {
       test: /\.json$/,
-      loader: 'json'
+      loader: 'json-loader'
     },
     {
-      test: /\.png$/,
-      loader: 'url-loader?limit=100000'
-    },
-    {
-      test: /\.jpg$/,
-      loader: 'file-loader'
+      test: /\.(png|jpg)$/,
+      loader: 'file-loader?name=assets/[name].[ext]',
     },
     {
       test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
@@ -45,22 +41,23 @@ module.exports = {
     },
     {
       test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'file'
+      loader: 'file',
     },
     {
       test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
       loader: 'url?limit=10000&mimetype=image/svg+xml'
-    }]
+    }],
   },
   resolve: {
-    root: path.resolve('./src'),
-    extensions: ['', '.js', '.jsx']
+    modulesDirectories: ['./node_modules', './src', './assets'],
+    extensions: ['', '.js', '.jsx', '.json', '.scss', '.png']
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    })
+        NODE_ENV: JSON.stringify('production'),
+      },
+      'process.env.PAPERNET_HOST': JSON.stringify('https://bobi.space'),
+    }),
   ],
 };

@@ -47,12 +47,12 @@ module.exports = {
     }],
   },
   resolve: {
-    modulesDirectories: ['./node_modules', './src', './images'],
+    modulesDirectories: ['./node_modules', './src', './assets'],
     extensions: ['', '.js', '.jsx', '.json', '.scss', '.png']
   },
   output: {
-    path: path.join(__dirname, '/dist'),
-    publicPath: '/',
+    path: path.join(__dirname, '/app'),
+    publicPath: '/app',
     sourceMapFilename: '[file].map',
     filename: 'bundle.js'
   },
@@ -62,7 +62,10 @@ module.exports = {
     historyApiFallback: true
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.DefinePlugin({
+      'process.env.PAPERNET_HOST': JSON.stringify('http://127.0.0.1:1705'),
+    }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   sassLoader: {
     includePaths: [path.resolve(__dirname)]

@@ -21,5 +21,5 @@ export const paginationPropType = ImmutablePropTypes.contains({
 });
 
 // URLs
-export const papernetURL = 'http://localhost:1705/api';
+export const papernetURL = `${process.env.PAPERNET_HOST}/api`;
 
