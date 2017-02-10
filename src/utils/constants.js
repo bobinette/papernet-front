@@ -21,5 +21,13 @@ export const paginationPropType = ImmutablePropTypes.contains({
 });
 
 // URLs
-export const papernetURL = `${process.env.PAPERNET_HOST}/api`;
+let baseHost = 'https://bobi.space';
+if (
+  window.location.hostname.indexOf('localhost') === 0 ||
+  window.location.hostname.indexOf('127.0.0.1') === 0) {
+  baseHost = 'http://127.0.0.1:1705';
+} else if (window.location.hostname.indexOf('local-bobi') === 0) {
+  baseHost = 'http://local-bobi.space';
+}
+export const papernetURL = `${baseHost}/api`;
 
