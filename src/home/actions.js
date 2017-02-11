@@ -16,8 +16,9 @@ export const getPaperList = () => (dispatch, getState) => {
   const params = {
     q: search.length > 0 ? search : null,
     bookmarked: filters.get('bookmarked') ? true : null,
+    tags: filters.get('tags') || null,
   };
-  const url = `${papernetURL}/papers?${qs.stringify(params, { skipNulls: true })}`;
+  const url = `${papernetURL}/papers?${qs.stringify(params, { skipNulls: true, indices: false })}`;
 
   const token = getState().user.get('token');
   if (!token) return null;

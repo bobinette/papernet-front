@@ -1,23 +1,18 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import { paginationPropType, paperPropType, userPropType } from 'utils/constants';
 
-import NavBar from 'components/navbar';
 import Pagination from 'components/pagination';
 
-import Filters from './components/filters';
+import SearchBar from 'components/input/text/search-bar';
+
 import PaperListViewRow from './components/row';
 
 import './view.scss';
 
 const HomeList = ({ onBookmark, onOffsetChange, pagination, papers, user }) => (
   <div>
-    <Pagination
-      pagination={pagination}
-      onChange={onOffsetChange}
-    />
     <ul className="container HomeView__List">
       {papers.map((paper, i) => (
         <li className="col-md-12" key={i} >
@@ -42,31 +37,15 @@ HomeList.propTypes = {
 
 const HomeView = ({ filters, onBookmark, onFilterChange, onOffsetChange, pagination, papers, user }) => (
   <div className="HomeView container">
-    <NavBar
-      items={[
-        {
-          element: <Link className="nav-link" to={'/papers'}>Home</Link>,
-          active: true,
-        },
-        {
-          element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>,
-          active: false,
-        },
-      ]}
-      rightItems={[
-        {
-          element: (
-            <Link className="btn btn-outline-primary" to={'/papers/new'}>New</Link>
-          ),
-        },
-      ]}
-    />
-    <div className="HomeView__Content">
-      <Filters
+    <div className="HomeView__Content row">
+      <SearchBar
         className="col-xs-8 offset-xs-2"
-        filters={filters}
-        onFilterChange={onFilterChange}
+        onChange={v => onFilterChange('q', v)}
+        placeholder="Search by title or tags..."
+        value={filters.get('q')}
       />
+    </div>
+    <div className="HomeView__List row">
       <div className="col-md-10 offset-md-1">
         <HomeList
           pagination={pagination}

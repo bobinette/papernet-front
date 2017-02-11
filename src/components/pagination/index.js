@@ -59,7 +59,7 @@ const Pagination = ({ pagination, onChange }) => {
   return (
     <div className="Pagination">
       <nav>
-        <ul className="pagination">
+        <ul className="Pagination__Pages pagination">
           {
             pages[0].page !== 1 ? <PaginationItem page={1} offset={0} onChange={onChange} /> : null
           }

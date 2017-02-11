@@ -1,11 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { List } from 'immutable';
 
 import { loadCookie, me } from 'auth/actions';
 
 import { paginationPropType } from 'utils/constants';
+
+import NavBar from 'components/navbar';
 
 import { bookmark, getPaperList, unbookmark } from './actions';
 import { UPDATE_FILTERS, UPDATE_HOME_OFFSET } from './constants';
@@ -82,6 +85,15 @@ class HomeContainer extends Component {
 
     return (
       <div className="HomeContainer">
+        <NavBar
+          items={[
+            { element: <Link className="nav-link" to={'/papers'}>Home</Link>, active: true },
+            { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: false },
+          ]}
+          rightItems={[
+            { element: <Link className="btn btn-outline-primary" to={'/papers/new'}>New</Link> },
+          ]}
+        />
         <HomeView
           filters={filters}
           pagination={pagination}
