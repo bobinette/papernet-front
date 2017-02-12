@@ -6,11 +6,12 @@ import Text from 'components/input/text';
 
 import './search-bar.scss';
 
-const SearchBar = ({ className, onChange, placeholder, value }) => (
+const SearchBar = ({ className, onChange, onKeyPress, placeholder, value }) => (
   <div className={classNames(className, 'SearchBar')}>
     <Text
       className="SearchBar__Input"
       onChange={onChange}
+      onKeyPress={onKeyPress}
       placeholder={placeholder}
       value={value}
     />
@@ -21,6 +22,7 @@ const SearchBar = ({ className, onChange, placeholder, value }) => (
 SearchBar.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  onKeyPress: PropTypes.func,
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
 };

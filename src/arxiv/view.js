@@ -81,6 +81,9 @@ const ImportView = ({ arxiv, onChange, onImport, onOffsetChange, onSearch }) => 
       <div className="ImportView__Search col-md-8 offset-md-2">
         <SearchBar
           onChange={onChange}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') onSearch();
+          }}
           placeholder="Search by title, author, category..."
           value={arxiv.get('q')}
         />
