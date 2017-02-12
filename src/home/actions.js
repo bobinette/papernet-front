@@ -16,7 +16,7 @@ export const getPaperList = () => (dispatch, getState) => {
   const params = {
     q: search.length > 0 ? search : null,
     bookmarked: filters.get('bookmarked') ? true : null,
-    tags: filters.get('tags') || null,
+    tags: filters.get('tags').toJS() || null,
   };
   const url = `${papernetURL}/papers?${qs.stringify(params, { skipNulls: true, indices: false })}`;
 
@@ -30,8 +30,9 @@ export const getPaperList = () => (dispatch, getState) => {
   return fetch(url, { headers }).then(handleJSON).then(
     (response) => {
       const papers = response.data;
+      const facets = response.facets;
       const total = response.pagination.total;
-      return dispatch({ type: RECEIVE_PAPER_LIST, papers, total });
+      return dispatch({ type: RECEIVE_PAPER_LIST, papers, total, facets });
     },
     (err) => {
       toastr.error('', `Could not load your papers: ${err.message ? err.message : null}`);

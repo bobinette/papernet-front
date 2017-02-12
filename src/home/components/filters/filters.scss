@@ -1,0 +1,76 @@
+@import '../../../style/_colors.scss';
+@import "~bootstrap/scss/_variables.scss";
+
+.HomeFilters__Filters {
+
+    input {
+        margin-right: 5px;
+    }
+
+    ul {
+        padding: 0;
+        margin-bottom: 0;
+    }
+
+    li {
+        border-radius: 3px;
+        padding: 5px;
+
+        &:hover {
+            background: $gray-lightest;
+            cursor: pointer;
+
+            color: $body-color;
+            text-decoration: none;
+        }
+    }
+
+    li.HomeFilters__Tags__Selected {
+        background: $brand-primary;
+    }
+}
+
+.HomeFilters__Section {
+    padding: 15px;
+
+    border: $card-border-width solid $card-border-color;
+    border-radius: $card-border-radius;
+}
+
+.HomeFilters__Section:not(:first-child) {
+    margin-top: 15px;
+}
+
+.HomeFilters__Tags__Tag {
+    padding: 0;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.HomeFilters__Tags__Tag.btn.btn-link {
+    color: $body-color;
+    text-decoration: none;
+
+    &:hover {
+        color: $body-color;
+        text-decoration: none;
+    }
+}
+
+.HomeFilters__Tags__Tag.HomeFilters__Tags__Tag__Selected.btn.btn-link {
+    color: $body-bg;
+    text-decoration: none;
+
+    &:hover {
+        color: $body-bg;
+        text-decoration: none;
+    }
+}
+
+.HomeFilters__Tags__TagText {
+    text-align: left;
+    white-space: normal;
+}

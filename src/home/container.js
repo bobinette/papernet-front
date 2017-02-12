@@ -15,6 +15,7 @@ import { UPDATE_FILTERS, UPDATE_HOME_OFFSET } from './constants';
 import HomeView from './view';
 
 const mapStateToProps = state => ({
+  facets: state.home.get('facets'),
   filters: state.home.get('filters'),
   pagination: state.home.get('pagination'),
   papers: state.home.get('papers'),
@@ -25,6 +26,7 @@ const mapStateToProps = state => ({
 class HomeContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    facets: ImmutablePropTypes.map,
     filters: ImmutablePropTypes.contains({
       bookmarked: PropTypes.bool,
     }).isRequired,
@@ -81,7 +83,7 @@ class HomeContainer extends Component {
   }
 
   render() {
-    const { filters, pagination, papers, user } = this.props;
+    const { facets, filters, pagination, papers, user } = this.props;
 
     return (
       <div className="HomeContainer">
@@ -95,6 +97,7 @@ class HomeContainer extends Component {
           ]}
         />
         <HomeView
+          facets={facets}
           filters={filters}
           pagination={pagination}
           papers={papers}

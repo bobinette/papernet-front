@@ -1,14 +1,21 @@
 @import '../style/_colors.scss';
 @import "~bootstrap/scss/_variables.scss";
 
-.HomeView__Content {
+.HomeView__Search {
 	margin-top: 70px;
 }
 
-.HomeView__List {
+.HomeView__Content {
+    margin-top: 20px;
+
 	ul {
 		list-style-type: none;
 	}
+}
+
+.HomeView__List {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .btn.btn-link.HomeView__LoginButton {
@@ -17,6 +24,12 @@
 	}
 }
 
-.HomeView__List {
-	margin-top: 10px;
+.HomeView__Filters {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.HomeList {
+    padding-left: 0;
+    padding-right: 0;
 }
