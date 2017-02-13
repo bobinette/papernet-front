@@ -116,6 +116,6 @@ ImportView.propTypes = {
 
 ImportView.defaultProps = {
   search: '',
-}
+};
 
 export default ImportView;
