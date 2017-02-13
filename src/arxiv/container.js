@@ -1,6 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
+
+import { browserHistory } from 'react-router';
 
 import { loadCookie, me } from 'auth/actions';
 
@@ -13,7 +15,7 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-class ImportContainer extends Component {
+class ImportContainer extends PureComponent {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     arxiv: ImmutablePropTypes.contains({
@@ -22,7 +24,22 @@ class ImportContainer extends Component {
         q: PropTypes.string,
       }),
     }).isRequired,
+    location: PropTypes.shape({
+      query: PropTypes.shape({
+        q: PropTypes.string,
+        offset: PropTypes.string,
+      }),
+    }),
     user: ImmutablePropTypes.map.isRequired,
+  };
+
+  static defaultProps = {
+    location: {
+      query: {
+        q: '',
+        offset: '0',
+      },
+    },
   };
 
   constructor(props) {
@@ -35,6 +52,17 @@ class ImportContainer extends Component {
 
     this.props.dispatch(loadCookie());
     this.props.dispatch(me());
+
+    this.state = { search: this.props.location.query.q || '' };
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch({ type: SEARCH_ARXIV, value: this.state.search });
+
+    const offset = parseInt(this.props.location.query.offset, 10);
+    dispatch({ type: UPDATE_ARXIV_OFFSET, offset: isNaN(offset) ? 0 : offset });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,13 +72,22 @@ class ImportContainer extends Component {
       dispatch(me());
     }
 
-    if (nextProps.arxiv.getIn(['pagination', 'offset']) !== this.props.arxiv.getIn(['pagination', 'offset'])) {
-      this.onSearch();
+    if (nextProps.location !== this.props.location) {
+      const offset = parseInt(nextProps.location.query.offset, 10);
+      dispatch({ type: SEARCH_ARXIV, value: nextProps.location.query.q });
+      dispatch({ type: UPDATE_ARXIV_OFFSET, offset: isNaN(offset) ? 0 : offset });
+    }
+
+    if (
+      nextProps.arxiv.get('filters') !== this.props.arxiv.get('filters') ||
+      nextProps.arxiv.getIn(['pagination', 'offset']) !== this.props.arxiv.getIn(['pagination', 'offset'])
+    ) {
+      dispatch(search());
     }
   }
 
   onChange(value) {
-    this.props.dispatch({ type: SEARCH_ARXIV, value });
+    this.setState({ search: value });
   }
 
   onImport(paper) {
@@ -58,11 +95,27 @@ class ImportContainer extends Component {
   }
 
   onOffsetChange(offset) {
-    this.props.dispatch({ type: UPDATE_ARXIV_OFFSET, offset });
+    const location = Object.assign({}, this.props.location);
+
+    if (offset) {
+      Object.assign(location.query, { offset });
+    } else {
+      delete location.query.offset;
+    }
+
+    browserHistory.push(location);
   }
 
   onSearch() {
-    this.props.dispatch(search());
+    const location = Object.assign({}, this.props.location);
+
+    if (this.state.search) {
+      Object.assign(location.query, { q: this.state.search });
+    } else {
+      delete location.query.q;
+    }
+
+    browserHistory.push(location);
   }
 
   render() {
@@ -71,11 +124,12 @@ class ImportContainer extends Component {
     return (
       <div className="ImportContainer">
         <ImportView
+          arxiv={arxiv}
           onChange={this.onChange}
           onImport={this.onImport}
           onOffsetChange={this.onOffsetChange}
           onSearch={this.onSearch}
-          arxiv={arxiv}
+          search={this.state.search}
         />
       </div>
     );

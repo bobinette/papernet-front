@@ -63,18 +63,12 @@ ArxivList.propTypes = {
   onOffsetChange: PropTypes.func.isRequired,
 };
 
-const ImportView = ({ arxiv, onChange, onImport, onOffsetChange, onSearch }) => (
+const ImportView = ({ arxiv, onChange, onImport, onOffsetChange, onSearch, search }) => (
   <div className="container">
     <NavBar
       items={[
-        {
-          element: <Link className="nav-link" to={'/papers'}>Home</Link>,
-          active: false,
-        },
-        {
-          element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>,
-          active: true,
-        },
+        { element: <Link className="nav-link" to={'/papers'}>Home</Link>, active: false },
+        { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: true },
       ]}
     />
     <div className="ImportView__Content">
@@ -85,7 +79,7 @@ const ImportView = ({ arxiv, onChange, onImport, onOffsetChange, onSearch }) => 
             if (e.key === 'Enter') onSearch();
           }}
           placeholder="Search by title, author, category..."
-          value={arxiv.get('q')}
+          value={search}
         />
         <button
           className="btn btn-primary ImportView__Search"
@@ -95,14 +89,12 @@ const ImportView = ({ arxiv, onChange, onImport, onOffsetChange, onSearch }) => 
         </button>
       </div>
       <div className="col-md-10 offset-md-1">
-        {
-          arxiv.get('loading') ?
-            <div className="ImportView__Spinner">
-              <Spinner text="Fetching arXiv..." />
-            </div>
-            :
-            <ArxivList arxiv={arxiv} onImport={onImport} onOffsetChange={onOffsetChange} />
+        {arxiv.get('loading') &&
+          <div className="ImportView__Spinner">
+            <Spinner text="Fetching arXiv..." />
+          </div>
         }
+        {!arxiv.get('loading') && <ArxivList arxiv={arxiv} onImport={onImport} onOffsetChange={onOffsetChange} />}
       </div>
     </div>
   </div>
@@ -119,6 +111,11 @@ ImportView.propTypes = {
   onImport: PropTypes.func.isRequired,
   onOffsetChange: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
+  search: PropTypes.string,
 };
+
+ImportView.defaultProps = {
+  search: '',
+}
 
 export default ImportView;

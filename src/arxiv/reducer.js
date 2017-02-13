@@ -11,7 +11,9 @@ import {
 const initialState = fromJS({
   list: [],
   loading: false,
-  q: '',
+  filters: {
+    q: '',
+  },
   pagination: {
     limit: 20,
     offset: 0,
@@ -23,7 +25,7 @@ export default (state = initialState, action) => {
   let newState = state;
   switch (action.type) {
     case SEARCH_ARXIV:
-      newState = newState.set('q', action.value);
+      newState = newState.setIn(['filters', 'q'], action.value);
       break;
     case START_LOADING:
       newState = newState.set('loading', true);
