@@ -60,19 +60,11 @@ class PaperView extends Component {
       <div className="PaperView">
         <NavBar
           items={[
-            {
-              element: <Link className="nav-link" to={'/papers'}>Home</Link>,
-              active: true,
-            },
-            {
-              element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>,
-              active: false,
-            },
+            { element: <Link className="nav-link" to={'/papers'}>Home</Link>, active: true },
+            { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: false },
           ]}
           rightItems={[
-            {
-              element: <Link className="nav-link" to={`/papers/${paper.get('id')}/edit`}>Edit</Link>,
-            },
+            { element: <Link className="btn btn-outline-primary" to={`/papers/${paper.get('id')}/edit`}>Edit</Link> },
           ]}
         />
         <div className="PaperView__Content row">
