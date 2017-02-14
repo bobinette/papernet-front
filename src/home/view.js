@@ -10,6 +10,7 @@ import Pagination from 'components/pagination';
 import SearchBar from 'components/input/text/search-bar';
 
 import HomeFilters from './components/filters';
+import NoUserView from './components/nouser';
 import PaperListViewRow from './components/row';
 
 import './view.scss';
@@ -86,6 +87,13 @@ class HomeView extends PureComponent {
   render() {
     const { facets, filters, onBookmark, onFilterChange, onOffsetChange, pagination, papers, user } = this.props;
     const { search } = this.state;
+
+    if (!user.get('token')) {
+      return (
+        <div className="HomeView container">
+          <NoUserView className="col-md-8 offset-md-2" />
+        </div>);
+    }
 
     return (
       <div className="HomeView container">
