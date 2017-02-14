@@ -93,7 +93,7 @@ class HomeContainer extends Component {
             { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: false },
           ]}
           rightItems={[
-            { element: user.get("token") && <Link className="btn btn-outline-primary" to={'/papers/new'}>New</Link> },
+            { element: user.get('token') && <Link className="btn btn-outline-primary" to={'/papers/new'}>New</Link> },
           ]}
         />
         <HomeView
