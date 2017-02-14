@@ -14,6 +14,11 @@ import { RECEIVE_ARXIV, START_LOADING, STOP_LOADING } from './constants';
 export const search = () => (dispatch, getState) => {
   const arxiv = getState().arxiv;
   const q = arxiv.getIn(['filters', 'q']);
+  if (!q) {
+    dispatch({ type: RECEIVE_ARXIV, list: [], total: 0 });
+    return null;
+  }
+
   const limit = arxiv.getIn(['pagination', 'limit']);
   const offset = arxiv.getIn(['pagination', 'offset']);
   const params = {
