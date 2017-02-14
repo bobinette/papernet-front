@@ -36,7 +36,7 @@ HomeList.propTypes = {
   className: PropTypes.string,
   onBookmark: PropTypes.func.isRequired,
   onOffsetChange: PropTypes.func.isRequired,
-  papers: paperPropType.isRequired,
+  papers: ImmutablePropTypes.listOf(paperPropType).isRequired,
   pagination: paginationPropType.isRequired,
   user: userPropType.isRequired,
 };
@@ -44,6 +44,26 @@ HomeList.propTypes = {
 HomeList.defaultProps = {
   className: '',
 };
+
+const HomeEmptyState = () => (
+  <div className="HomeView container">
+    <div className="col-md-8 offset-md-2">
+      <h3>Time to create your first paper!</h3>
+      <p>It looks like your list is empty. To add papers to your list in Papernet, you have two options:
+      <ul>
+        <li>
+          you can directly create a new paper from the <strong>New</strong> button in the navigation bar, or
+        </li>
+        <li>
+          you can head to the <strong>Arxiv</strong> tab, still in the navigation bar,
+          and import papers from there.
+        </li>
+      </ul>
+      Happy papering!
+      </p>
+    </div>
+  </div>
+);
 
 class HomeView extends PureComponent {
   static propTypes = {
@@ -95,11 +115,13 @@ class HomeView extends PureComponent {
         </div>);
     }
 
+    if (papers.size === 0) { return <HomeEmptyState />; }
+
     return (
       <div className="HomeView container">
         <div className="HomeView__Search row">
           <SearchBar
-            className="col-xs-8 offset-xs-2"
+            className="col-md-8 offset-md-2"
             onChange={this.onSearchChange}
             onKeyPress={this.onSearch}
             placeholder="Search by title or tags..."
