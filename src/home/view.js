@@ -115,7 +115,14 @@ class HomeView extends PureComponent {
         </div>);
     }
 
-    if (papers.size === 0) { return <HomeEmptyState />; }
+    if (
+      papers.size === 0
+      && !filters.get('q')
+      && !filters.get('bookmarked')
+      && filters.get('tags').size === 0
+    ) {
+      return <HomeEmptyState />;
+    }
 
     return (
       <div className="HomeView container">
