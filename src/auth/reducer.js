@@ -1,14 +1,16 @@
 import { fromJS } from 'immutable';
 
-import { RECEIVE_TOKEN, RECEIVE_USER } from './constants';
+import { LOADED_TOKEN, RECEIVE_TOKEN, RECEIVE_USER } from './constants';
 
 const initialState = fromJS({
   user: {
     id: '',
     name: '',
     bookmarks: [],
+    canSee: [],
   },
   token: '',
+  tokenLoaded: false,
 });
 
 export default (state = initialState, action) => {
@@ -16,6 +18,9 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_TOKEN:
       newState = newState.set('token', action.token);
+      break;
+    case LOADED_TOKEN:
+      newState = newState.set('tokenLoaded', true);
       break;
     case RECEIVE_USER:
       newState = newState.set('user', fromJS(action.user));

@@ -1,2 +1,3 @@
+export const LOADED_TOKEN = 'LOADED_TOKEN';
 export const RECEIVE_USER = 'RECEIVE_USER';
 export const RECEIVE_TOKEN = 'RECEIVE_TOKEN';

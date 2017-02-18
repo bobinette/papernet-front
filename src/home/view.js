@@ -49,7 +49,7 @@ const HomeEmptyState = () => (
   <div className="HomeView container">
     <div className="col-md-8 offset-md-2">
       <h3>Time to create your first paper!</h3>
-      <p>It looks like your list is empty. To add papers to your list in Papernet, you have two options:
+      <p>It looks like your list is empty. To add papers to your list in Papernet, you have two options:</p>
       <ul>
         <li>
           you can directly create a new paper from the <strong>New</strong> button in the navigation bar, or
@@ -59,6 +59,7 @@ const HomeEmptyState = () => (
           and import papers from there.
         </li>
       </ul>
+      <p>
       Happy papering!
       </p>
     </div>
@@ -108,6 +109,11 @@ class HomeView extends PureComponent {
     const { facets, filters, onBookmark, onFilterChange, onOffsetChange, pagination, papers, user } = this.props;
     const { search } = this.state;
 
+    // If the token is not loaded, do not display anything to avoid glitches
+    // If the token is loaded and there actually was a token but there is no user id
+    // it means we are waiting for the 'me' API to respond, so same: do no display anything to avoid glitches
+    if (!user.get('tokenLoaded') || (user.get('token') && user.getIn(['user', 'id']) === '')) return null;
+
     if (!user.get('token')) {
       return (
         <div className="HomeView container">
@@ -116,10 +122,11 @@ class HomeView extends PureComponent {
     }
 
     if (
-      papers.size === 0
-      && !filters.get('q')
-      && !filters.get('bookmarked')
-      && filters.get('tags').size === 0
+      user.getIn(['user', 'id']) !== ''
+      && (
+        !user.getIn(['user', 'canSee'])
+        || user.getIn(['user', 'canSee']).size === 0
+      )
     ) {
       return <HomeEmptyState />;
     }

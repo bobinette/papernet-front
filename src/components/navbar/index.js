@@ -38,9 +38,11 @@ const NavBar = ({ items, rightItems, onLogin, onLogout, user }) => (
       </ul>
       <ul className="nav navbar-nav pull-xs-right">
         {rightItems.map((item, i) => (
-          <li key={i} className={classNames('nav-item', { active: item.active })}>
-            {item.element}
-          </li>
+          item.element ?
+            <li key={i} className={classNames('nav-item', { active: item.active })}>
+              {item.element}
+            </li>
+            : null
         ))}
         {
           user.get('token') ?
@@ -64,11 +66,11 @@ const NavBar = ({ items, rightItems, onLogin, onLogout, user }) => (
 
 NavBar.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
-    element: PropTypes.element.isRequired,
+    element: PropTypes.element,
     active: PropTypes.bool,
   })),
   rightItems: PropTypes.arrayOf(PropTypes.shape({
-    element: PropTypes.element.isRequired,
+    element: PropTypes.element,
     active: PropTypes.bool,
   })),
   onLogin: PropTypes.func.isRequired,

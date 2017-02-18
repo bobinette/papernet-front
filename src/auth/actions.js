@@ -8,7 +8,7 @@ import qs from 'qs';
 import handleJSON from 'utils/actions/handleResponse';
 import { papernetURL } from 'utils/constants';
 
-import { RECEIVE_TOKEN, RECEIVE_USER } from './constants';
+import { LOADED_TOKEN, RECEIVE_TOKEN, RECEIVE_USER } from './constants';
 
 export const login = () => () => {
   const url = `${papernetURL}/auth`;
@@ -37,10 +37,11 @@ export const exchangeToken = (provider, code, state) => (dispatch) => {
   );
 };
 
-export const loadCookie = () => (dispatch, getState) => {
+export const loadCookie = () => (dispatch) => {
   const token = cookie.load('access_token');
-  if (!token || token === getState().user.get('token')) return null;
+  if (!token) return dispatch({ type: LOADED_TOKEN });
 
+  dispatch({ type: LOADED_TOKEN });
   return dispatch({ type: RECEIVE_TOKEN, token });
 };
 
