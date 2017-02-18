@@ -41,6 +41,14 @@ const form = {
         placeholder: 'References...',
       },
     },
+    {
+      type: 'textlist',
+      valueKey: ['authors'],
+      extra: {
+        className: 'PaperEdit__Authors',
+        placeholder: 'Authors...',
+      },
+    },
   ],
 };
 

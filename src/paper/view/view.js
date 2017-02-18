@@ -49,6 +49,20 @@ class PaperView extends Component {
     );
   }
 
+  renderAuthors() {
+    const { paper } = this.props;
+    const authors = paper.get('authors') || List();
+
+    if (authors.size === 0) return null;
+
+    return (
+      <div>
+        <h2>Authors</h2>
+        <ul>{authors.map((author, i) => <li key={i}>{author}</li>)}</ul>
+      </div>
+    );
+  }
+
   render() {
     const { paper } = this.props;
 
@@ -88,6 +102,7 @@ class PaperView extends Component {
             <h1 className="display-4">{paper.get('title')}</h1>
             <Markdown text={paper.get('summary')} />
             {this.renderReferences()}
+            {this.renderAuthors()}
           </div>
         </div>
       </div>
