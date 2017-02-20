@@ -21,13 +21,13 @@ export const paginationPropType = ImmutablePropTypes.contains({
 });
 
 // URLs
-let apiURL = 'https://bobi.space/api';
+let apiURL = 'https://api.bobi.space';
 if (
   window.location.hostname.indexOf('localhost') !== -1 ||
   window.location.hostname.indexOf('127.0.0.1') !== -1) {
   apiURL = 'http://127.0.0.1:1705/api';
 } else if (window.location.hostname.indexOf('local-bobi') !== -1) {
-  apiURL = 'http://local-bobi.space/api';
+  apiURL = 'http://api.local-bobi.space';
 }
 export const papernetURL = `${apiURL}`;
 
