@@ -30,6 +30,9 @@ import userReducer from 'auth/reducer';
 // Arxiv
 import ArxivContainer, { arxivReducer } from 'arxiv';
 
+// Privacy policy
+import { Privacy, TermsOfUse } from 'legal';
+
 // Create store
 const reducers = {
   home: homeReducer,
@@ -60,6 +63,8 @@ ReactDOM.render(
             <Route path="google" component={GoogleLoggedIn} />
           </Route>
           <Route path="arxiv" component={ArxivContainer} />
+          <Route path="privacy" component={Privacy} />
+          <Route path="terms-of-use" component={TermsOfUse} />
         </Route>
       </Router>
       <ReduxToastr
