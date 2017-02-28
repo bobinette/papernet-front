@@ -25,7 +25,7 @@ let apiURL = 'https://api.bobi.space';
 if (
   window.location.hostname.indexOf('localhost') !== -1 ||
   window.location.hostname.indexOf('127.0.0.1') !== -1) {
-  apiURL = 'http://127.0.0.1:1705/api';
+  apiURL = 'http://127.0.0.1:1705';
 } else if (window.location.hostname.indexOf('local-bobi') !== -1) {
   apiURL = 'http://api.local-bobi.space';
 }
