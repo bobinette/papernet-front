@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 
 import listensToClickOutside from 'react-onclickoutside';
 
@@ -60,9 +59,6 @@ class Dropdown extends Component {
           aria-labelledby="profile-dropdown"
           onClick={this.onButtonsClicked}
         >
-          <Link className="dropdown-item" to="/privacy">Privacy policy</Link>
-          <Link className="dropdown-item" to="/terms-of-use">Terms of Use</Link>
-          <div className="dropdown-divider" />
           <button className="dropdown-item" onClick={onLogout}>Logout</button>
         </div>
       </li>

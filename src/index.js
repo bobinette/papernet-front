@@ -33,6 +33,9 @@ import ArxivContainer, { arxivReducer } from 'arxiv';
 // Privacy policy
 import { Privacy, TermsOfUse } from 'legal';
 
+// Components
+import Footer from 'components/footer';
+
 // Create store
 const reducers = {
   home: homeReducer,
@@ -67,6 +70,8 @@ ReactDOM.render(
           <Route path="terms-of-use" component={TermsOfUse} />
         </Route>
       </Router>
+      <Footer />
+
       <ReduxToastr
         newestOnTop
         preventDuplicates
