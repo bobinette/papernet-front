@@ -17,7 +17,7 @@ const Footer = () => (
         <a className="Footer__Column" href="/">Help</a>
       </div>
       <div className="col-md-2">
-        <a className="Footer__Column" href="/">Contact us</a>
+        <a className="Footer__Column" href="mailto:papernet@bobi.space">Contact us</a>
       </div>
     </div>
   </div>
