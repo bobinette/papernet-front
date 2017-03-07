@@ -7,11 +7,7 @@
   ],
   "settings": {
     "import/parser": "babel-eslint",
-    "import/resolver": {
-      "node": {
-        "moduleDirectory": ["node_modules", "."]
-      }
-    }
+    "import/resolver": "webpack"
   },
   "parser": "babel-eslint",
   "env": {

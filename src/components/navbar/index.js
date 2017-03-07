@@ -7,8 +7,6 @@ import classNames from 'classnames';
 import { login, logout } from 'auth/actions';
 import { userPropType } from 'utils/constants';
 
-import icon from 'H2O.png';
-
 import Dropdown from './dropdown';
 
 import './navbar.scss';
@@ -26,33 +24,36 @@ const NavBar = ({ items, rightItems, onLogin, onLogout, user }) => (
   <nav className="navbar navbar-fixed-top navbar-light">
     <div className="container">
       <Link className="navbar-brand" to={'/papers'}>
-        <img className="d-inline-block align-top" src={icon} width="30" height="30" alt="" />
+        <img
+          className="d-inline-block align-top"
+          src="https://papernet.bobi.space/app/assets/H2O.png"
+          width="30"
+          height="30"
+          alt=""
+        />
         Papernet
       </Link>
-      <ul className="nav navbar-nav">
+      <ul className="nav navbar-nav NavBar__LeftItems">
         {items.map((item, i) => (
           <li key={i} className={classNames('nav-item', { active: item.active })}>
             {item.element}
           </li>
         ))}
       </ul>
-      <ul className="nav navbar-nav pull-xs-right">
+      <ul className="nav navbar-nav pull-xs-right NavBar__RightItems">
         {rightItems.map((item, i) => (
-          item.element ?
-            <li key={i} className={classNames('nav-item', { active: item.active })}>
-              {item.element}
-            </li>
-            : null
+          <NavBar.Element active={item.active} element={item.element} key={i} />
         ))}
         {
           user.get('token') ?
             <Dropdown
+              className="NavBar__DropDown"
               title={user.getIn(['user', 'name']) || 'John Doe'}
               onLogout={onLogout}
             /> :
             <li className="nav-item active">
               <button
-                className="nav-link btn btn-link"
+                className="nav-link btn btn-link NavBar__LoginButton"
                 onClick={onLogin}
               >
                 Login
@@ -81,6 +82,22 @@ NavBar.propTypes = {
 NavBar.defaultProps = {
   items: [],
   rightItems: [],
+};
+
+NavBar.Element = ({ active, element, key }) => {
+  if (!element) return null;
+
+  return (
+    <li key={key} className={classNames('nav-item', { active })}>
+      {element}
+    </li>
+  );
+};
+
+NavBar.Element.propTypes = {
+  active: PropTypes.bool.isRequired,
+  element: PropTypes.element.isRequired,
+  key: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

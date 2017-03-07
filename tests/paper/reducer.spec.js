@@ -14,14 +14,14 @@ describe('reducer', () => {
     const action = {
       type: 'RECEIVE_PAPER',
       paper: Map({
-        title: 'Yolo tonight',
+        title: 'Pizza yolo',
       }),
     };
 
     const nextState = paper(initialState, action);
     expect(nextState).to.equal(fromJS({
       paper: {
-        title: 'Yolo tonight',
+        title: 'Pizza yolo',
       },
       loading: false,
       found: true,
@@ -33,14 +33,14 @@ describe('reducer', () => {
     const action = {
       type: 'RECEIVE_PAPER',
       paper: {
-        title: 'Yolo tonight',
+        title: 'Pizza yolo',
       },
     };
 
     const nextState = paper(initialState, action);
     expect(nextState).to.equal(fromJS({
       paper: {
-        title: 'Yolo tonight',
+        title: 'Pizza yolo',
       },
       loading: false,
       found: true,
@@ -51,14 +51,14 @@ describe('reducer', () => {
     const action = {
       type: 'RECEIVE_PAPER',
       paper: {
-        title: 'Yolo tonight',
+        title: 'Pizza yolo',
       },
     };
 
     const nextState = paper(undefined, action);
     expect(nextState).to.equal(fromJS({
       paper: {
-        title: 'Yolo tonight',
+        title: 'Pizza yolo',
       },
       loading: false,
       found: true,
