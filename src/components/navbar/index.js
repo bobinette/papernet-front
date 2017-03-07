@@ -35,9 +35,7 @@ const NavBar = ({ items, rightItems, onLogin, onLogout, user }) => (
       </Link>
       <ul className="nav navbar-nav NavBar__LeftItems">
         {items.map((item, i) => (
-          <li key={i} className={classNames('nav-item', { active: item.active })}>
-            {item.element}
-          </li>
+          <NavBar.Element active={item.active} element={item.element} key={i} />
         ))}
       </ul>
       <ul className="nav navbar-nav pull-xs-right NavBar__RightItems">
@@ -84,20 +82,19 @@ NavBar.defaultProps = {
   rightItems: [],
 };
 
-NavBar.Element = ({ active, element, key }) => {
+NavBar.Element = ({ active, element }) => {
   if (!element) return null;
 
   return (
-    <li key={key} className={classNames('nav-item', { active })}>
+    <li className={classNames('nav-item', { active })}>
       {element}
     </li>
   );
 };
 
 NavBar.Element.propTypes = {
-  active: PropTypes.bool.isRequired,
-  element: PropTypes.element.isRequired,
-  key: PropTypes.number.isRequired,
+  active: PropTypes.bool,
+  element: PropTypes.element,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
