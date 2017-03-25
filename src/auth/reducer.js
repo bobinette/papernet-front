@@ -6,6 +6,7 @@ const initialState = fromJS({
   user: {
     id: '',
     name: '',
+    email: '',
     bookmarks: [],
     canSee: [],
   },

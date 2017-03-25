@@ -26,6 +26,11 @@
 		align-items: center;
 		flex: 1;
 
+		.TagList__Tag {
+			border-color: $brand-primary;
+			color: $brand-primary;
+		}
+
 		.fa-tag {
 			margin-left: 3px;
 		}
@@ -35,6 +40,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+
+		.fa {
+			color: $brand-primary;
+		}
 	}
 
 	.PaperListViewRow__Bookmark {

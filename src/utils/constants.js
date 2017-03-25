@@ -11,6 +11,7 @@ export const paperPropType = ImmutablePropTypes.contains({
 export const userPropType = ImmutablePropTypes.contains({
   id: PropTypes.string,
   name: PropTypes.string,
+  email: PropTypes.string,
   bookmarks: ImmutablePropTypes.listOf(PropTypes.number),
 });
 

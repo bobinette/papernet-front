@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 
 import listensToClickOutside from 'react-onclickoutside';
 
@@ -42,6 +43,7 @@ class Dropdown extends Component {
     const { className, onLogout, title } = this.props;
 
     const classes = { open: this.state.open };
+    // @TODO: center Link text vertically
     return (
       <li className={classNames('nav-item dropdown active', className, classes)}>
         <button
@@ -59,7 +61,8 @@ class Dropdown extends Component {
           aria-labelledby="profile-dropdown"
           onClick={this.onButtonsClicked}
         >
-          <button className="dropdown-item" onClick={onLogout}>Logout</button>
+          <Link className="btn dropdown-item NavBar__DropdownItem" to="/profile">Profile</Link>
+          <button className="dropdown-item NavBar__DropdownItem" onClick={onLogout}>Logout</button>
         </div>
       </li>
     );

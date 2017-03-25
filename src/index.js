@@ -5,6 +5,7 @@ import { IndexRedirect, Router, Route, browserHistory } from 'react-router';
 // Redux
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 
 // Toastr
@@ -23,6 +24,9 @@ import HomeContainer, { homeReducer } from 'home';
 // Paper page
 import { PaperEditContainer, PaperViewContainer, paperReducer } from 'paper';
 
+// Profile page
+import { ProfileContainer, profileReducer } from 'profile';
+
 // Auth page
 import GoogleLoggedIn from 'auth/google';
 import userReducer from 'auth/reducer';
@@ -36,20 +40,27 @@ import { Privacy, TermsOfUse } from 'legal';
 // Components
 import Footer from 'components/footer';
 
+// Sagas
+import rootSaga from 'sagas';
+
 // Create store
 const reducers = {
   home: homeReducer,
   arxiv: arxivReducer,
   paper: paperReducer,
+  profile: profileReducer,
   toastr: toastrReducer,
   user: userReducer,
 };
 const reducer = combineReducers(reducers);
+const sagaMiddleware = createSagaMiddleware();
 const middlewares = compose(
   applyMiddleware(thunkMiddleware),
+  applyMiddleware(sagaMiddleware),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 const store = createStore(reducer, middlewares);
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -68,6 +79,7 @@ ReactDOM.render(
           <Route path="arxiv" component={ArxivContainer} />
           <Route path="privacy" component={Privacy} />
           <Route path="terms-of-use" component={TermsOfUse} />
+          <Route path="profile" component={ProfileContainer} />
         </Route>
       </Router>
       <Footer />
@@ -75,7 +87,7 @@ ReactDOM.render(
       <ReduxToastr
         newestOnTop
         preventDuplicates
-        timeOut={0}
+        timeOut={5000}
         transitionIn="fadeIn"
         transitionOut="fadeOut"
       />

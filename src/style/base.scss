@@ -29,3 +29,16 @@ a:focus {
         outline: none;
     }
 }
+
+pre > code {
+    background: $gray-lightest;
+    display: block;
+    padding: 0.85rem 1rem;
+}
+
+blockquote {
+    margin: 0;
+    padding: 0 1em;
+    color: $gray-light;
+    border-left: 0.25em solid $gray-lighter;
+}

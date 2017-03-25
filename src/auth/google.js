@@ -22,15 +22,50 @@ class GoogleLogIn extends Component {
     super(props);
 
     const { dispatch, location } = this.props;
-    dispatch(exchangeToken('google', location.query.code, location.query.state));
+    const { code, error, state } = location.query;
+    if (!error) {
+      dispatch(exchangeToken('google', code, state));
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, location } = nextProps;
-    dispatch(exchangeToken('google', location.query.code, location.query.state));
+    const { code, error, state } = location.query;
+    if (!error) {
+      dispatch(exchangeToken('google', code, state));
+    }
   }
 
   render() {
+    const { location } = this.props;
+
+    if (location.query.error) {
+      return (
+        <div className="GoogleAuthContainer container">
+          <nav className="navbar navbar-fixed-top navbar-light bg-faded">
+            <Link className="navbar-brand" to={'/papers'}>Papernet</Link>
+          </nav>
+          <div className="GoogleAuthContainer__Content jumbotron">
+            <h1 className="display-3">Failure</h1>
+            <p className="lead">
+              It seems you did not grant Papernet access to your Google information. You can click the button below
+              to go back to the home page if you want to retry. To verify the apps you have authorized and refused
+              click <a href="https://myaccount.google.com/u/permissions" target="_blank" rel="noopener noreferrer">
+              here</a>
+            </p>
+            <p className="lead">
+              <Link className="btn btn-primary btn-lg" to={'/papers'} role="button">
+                Let&#39;s head back home
+              </Link>
+            </p>
+            <p>
+              Error: {location.query.error}
+            </p>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="GoogleAuthContainer container">
         <nav className="navbar navbar-fixed-top navbar-light bg-faded">
