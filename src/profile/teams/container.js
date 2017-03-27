@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import { loadCookie, me } from 'auth/actions';
 import { userPropType } from 'utils/constants';
 
-import { TEAMS_FETCH, TEAMS_INVITE, TEAMS_KICK, teamPropType } from './constants';
+import TextInput from 'components/input/text';
+
+import { TEAMS_CREATE, TEAMS_DELETE, TEAMS_FETCH, TEAMS_INVITE, TEAMS_KICK, teamPropType } from './constants';
 import TeamView from './team-view';
 
 import './teams.scss';
@@ -25,16 +27,36 @@ class TeamsContainer extends Component {
   constructor(props) {
     super(props);
 
+    this.onChange = ::this.onChange;
+    this.onDelete = ::this.onDelete;
+    this.onKeyPress = ::this.onKeyPress;
     this.onInvite = ::this.onInvite;
     this.onKick = ::this.onKick;
 
     this.props.dispatch(loadCookie());
     this.props.dispatch(me());
+
+    this.state = { newTeamName: '' };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.user !== this.props.user) {
       this.props.dispatch({ type: TEAMS_FETCH });
+    }
+  }
+
+  onChange(text) {
+    this.setState({ newTeamName: text });
+  }
+
+  onDelete(teamID) {
+    this.props.dispatch({ type: TEAMS_DELETE, teamID });
+  }
+
+  onKeyPress(e) {
+    if (e.key === 'Enter') {
+      this.props.dispatch({ type: TEAMS_CREATE, name: this.state.newTeamName });
+      this.setState({ newTeamName: '' });
     }
   }
 
@@ -56,12 +78,20 @@ class TeamsContainer extends Component {
           {teams.map(t => (
             <TeamView
               key={t.get('id')}
-              team={t}
-              user={user}
+              onDelete={this.onDelete}
               onInvite={this.onInvite}
               onKick={this.onKick}
+              team={t}
+              user={user}
             />
             )).toJS()}
+          <TextInput
+            className="TeamsContainer__NewTeamInput"
+            onChange={this.onChange}
+            onKeyPress={this.onKeyPress}
+            placeholder="Name of the new team"
+            value={this.state.newTeamName}
+          />
         </div>
       </div>
     );

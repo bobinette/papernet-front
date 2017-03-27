@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 
-import { paperPropType } from 'utils/constants';
 import { loadCookie, me } from 'auth/actions';
+import { TEAMS_FETCH, TEAMS_SHARE, teamPropType } from 'profile/teams/constants';
+import { paperPropType, userPropType } from 'utils/constants';
 
 import { getPaper } from '../actions';
 import NotFoundView from '../notfound';
@@ -12,6 +14,8 @@ const mapStateToProps = state => ({
   found: state.paper.get('found'),
   loading: state.paper.get('loading'),
   paper: state.paper.get('paper'),
+  teams: state.profile.get('teams'),
+  user: state.user.get('user'),
 });
 
 class PaperViewContainer extends Component {
@@ -23,10 +27,14 @@ class PaperViewContainer extends Component {
     params: PropTypes.shape({
       id: PropTypes.string,
     }).isRequired,
+    teams: ImmutablePropTypes.listOf(teamPropType),
+    user: userPropType.isRequired,
   };
 
   constructor(props) {
     super(props);
+
+    this.onShare = ::this.onShare;
 
     this.props.dispatch(loadCookie());
     this.props.dispatch(me());
@@ -35,6 +43,7 @@ class PaperViewContainer extends Component {
   componentWillMount() {
     const { dispatch, params } = this.props;
     dispatch(getPaper(params.id));
+    this.props.dispatch({ type: TEAMS_FETCH });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -43,10 +52,18 @@ class PaperViewContainer extends Component {
     if (nextProps.params.id !== this.props.params.id) {
       dispatch(getPaper(nextProps.params.id));
     }
+
+    if (nextProps.user !== this.props.user) {
+      this.props.dispatch({ type: TEAMS_FETCH });
+    }
+  }
+
+  onShare(paperID, teamIDs) {
+    teamIDs.forEach(teamID => this.props.dispatch({ type: TEAMS_SHARE, teamID, paperID }));
   }
 
   render() {
-    const { found, loading, paper } = this.props;
+    const { found, loading, paper, teams } = this.props;
 
     // Dangerous. Replace with a loading page.
     if (loading) return null;
@@ -55,7 +72,7 @@ class PaperViewContainer extends Component {
 
     return (
       <div className="PaperContainer container">
-        <PaperView paper={paper} />
+        <PaperView onShare={this.onShare} paper={paper} teams={teams} />
       </div>
     );
   }

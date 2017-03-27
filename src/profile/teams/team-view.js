@@ -7,6 +7,7 @@ import { teamPropType } from './constants';
 
 class TeamView extends Component {
   static propTypes = {
+    onDelete: PropTypes.func.isRequired,
     onInvite: PropTypes.func.isRequired,
     onKick: PropTypes.func.isRequired,
     team: teamPropType,
@@ -53,20 +54,32 @@ class TeamView extends Component {
     const { admin, email } = this.state;
 
     return (
-      <div>
-        <h5 className="ProfileViewTeam__Name">{team.get('name')}</h5>
+      <div className="TeamView">
+        <h5 className="TeamView__Name">
+          {team.get('name')}
+          {admin &&
+            <button
+              className="btn btn-link TeamView__DeleteButton"
+              onClick={() => this.props.onDelete(team.get('id'))}
+            >
+              <i className="fa fa-trash" />
+            </button>
+          }
+        </h5>
         <ul className="list-group">
           {
             team.get('members').map(m => (
-              <li className="list-group-item ProfileViewTeam__Member" key={m.get('id')}>
+              <li className="list-group-item TeamView__Member" key={m.get('id')}>
                 {m.get('name')}
                 <span>
                   {
                     m.get('admin') && <span className="tag tag-primary tag-pill">admin</span>
                   }
-                  <button className="btn btn-link" onClick={this.onKick(m.get('id'))}>
-                    <i className="fa fa-trash" />
-                  </button>
+                  {admin &&
+                    <button className="btn btn-link" onClick={this.onKick(m.get('id'))}>
+                      <i className="fa fa-trash" />
+                    </button>
+                  }
                 </span>
               </li>
             )).toJS()
@@ -75,9 +88,9 @@ class TeamView extends Component {
             admin &&
             <li className="list-group-item">
               <TextInput
-                placeholder="enter email to invite a new member..."
                 onChange={this.onChange}
                 onKeyPress={this.onKeyPress}
+                placeholder="enter email to invite a new member..."
                 value={email}
               />
               <small className="TeamView__InviteText text-muted">

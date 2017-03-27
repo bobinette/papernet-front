@@ -88,6 +88,7 @@
     "react-cookie": "^1.0.4",
     "react-dom": "^15.2.0",
     "react-immutable-proptypes": "^2.1.0",
+    "react-modal": "^1.7.3",
     "react-onclickoutside": "^5.7.1",
     "react-redux": "^4.4.6",
     "react-redux-toastr": "^4.4.2",

@@ -10,11 +10,11 @@
 		flex-wrap: wrap;
 
 		.TagList__Tag {
-			border: 1px solid $gray-light;
+			border: 1px solid $brand-primary;
 			border-radius: $border-radius;
 
 			background: $body-bg;
-			color: $body-color;
+			color: $brand-primary;
 
 			margin: 2.5px;
 			padding: 5px 10px;

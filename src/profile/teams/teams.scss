@@ -1,3 +1,31 @@
+@import "~bootstrap/scss/_variables.scss";
+
+.TeamView:not(:first-child) {
+    margin-top: 2rem;
+}
+
+.TeamView__Name {
+    margin-left: 2rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .TeamView__InviteText {
     margin-left: 1rem;
+}
+
+.TeamsContainer__NewTeamInput {
+    margin-top: 2rem;
+}
+
+.TeamView__Member {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn.TeamView__DeleteButton {
+    color: $brand-danger;
 }

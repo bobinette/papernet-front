@@ -1,16 +1,20 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import React, { Component, PropTypes } from 'react';
+import { Link, browserHistory } from 'react-router';
 import { List } from 'immutable';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import moment from 'moment';
 
+import Modal from 'react-modal';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
 
+import SplittedDropdown from 'components/dropdown/splitted';
 import Markdown from 'components/markdown';
 import NavBar from 'components/navbar';
 import TagList from 'components/taglist';
 
+import { teamPropType } from 'profile/teams/constants';
 import { paperPropType } from 'utils/constants';
 
 import './view.scss';
@@ -22,8 +26,51 @@ const urlRegex = new RegExp(
 class PaperView extends Component {
 
   static propTypes = {
+    onShare: PropTypes.func.isRequired,
     paper: paperPropType.isRequired,
+    teams: ImmutablePropTypes.listOf(teamPropType),
   };
+
+  constructor(props) {
+    super(props);
+
+    this.onCloseShareDialog = ::this.onCloseShareDialog;
+    this.onOpenShareDialog = ::this.onOpenShareDialog;
+    this.onShare = ::this.onShare;
+
+    this.state = { shareDialogOpen: false, shareWith: List() };
+  }
+
+  onOpenShareDialog() {
+    this.setState({ shareDialogOpen: true });
+  }
+
+  onCloseShareDialog() {
+    this.setState({ shareDialogOpen: false, shareWith: List() });
+  }
+
+  onSelectTeam(teamID) {
+    return (e) => {
+      const { shareWith } = this.state;
+      if (e.target.checked) {
+        if (shareWith.indexOf(teamID) === -1) {
+          this.setState({ shareWith: shareWith.push(teamID) });
+        }
+      } else {
+        const index = shareWith.indexOf(teamID);
+        if (index >= 0) {
+          this.setState({ shareWith: shareWith.delete(index) });
+        }
+      }
+    };
+  }
+
+  onShare() {
+    const { onShare, paper } = this.props;
+    const { shareWith } = this.state;
+    onShare(paper.get('id'), shareWith.toJS());
+    this.onCloseShareDialog();
+  }
 
   renderReferences() {
     const { paper } = this.props;
@@ -64,7 +111,8 @@ class PaperView extends Component {
   }
 
   render() {
-    const { paper } = this.props;
+    const { paper, teams } = this.props;
+    const { shareWith } = this.state;
 
     if (!paper.get('id')) return null;
 
@@ -78,7 +126,16 @@ class PaperView extends Component {
             { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: false },
           ]}
           rightItems={[
-            { element: <Link className="btn btn-outline-primary" to={`/papers/${paper.get('id')}/edit`}>Edit</Link> },
+            { element: (
+              <SplittedDropdown
+                btnStyle="outline-primary"
+                onClick={() => browserHistory.push(`/papers/${paper.get('id')}/edit`)}
+                menu={[
+                  <button key="share" className="btn dropdown-item" onClick={this.onOpenShareDialog}>Share</button>,
+                ]}
+                title="Edit"
+              />
+            ) },
           ]}
         />
         <div className="PaperView__Content row">
@@ -105,6 +162,38 @@ class PaperView extends Component {
             {this.renderAuthors()}
           </div>
         </div>
+        <Modal
+          className="Modal"
+          isOpen={this.state.shareDialogOpen}
+          onRequestClose={this.onCloseShareDialog}
+          closeTimeoutMS={0}
+          contentLabel="Share-paper-modal"
+        >
+          <h1>Share paper with teams</h1>
+          <div>
+            <p>Share with:</p>
+            {
+              teams.map(team => (
+                <div key={team.get('id')}>
+                  <label className="form-check-label" htmlFor={`form-check-input-team-${team.get('id')}`}>
+                    <input
+                      id={`form-check-input-team-${team.get('id')}`}
+                      className="form-check-input"
+                      type="checkbox"
+                      checked={shareWith.contains(team.get('id'))}
+                      onChange={this.onSelectTeam(team.get('id'))}
+                    />
+                    {team.get('name')}
+                  </label>
+                </div>
+              ))
+            }
+          </div>
+          <div className="Modal__Footer">
+            <button type="button" className="btn btn-link" onClick={this.onCloseShareDialog}>Cancel</button>
+            <button type="button" className="btn btn-primary" onClick={this.onShare}>Share</button>
+          </div>
+        </Modal>
       </div>
     );
   }
