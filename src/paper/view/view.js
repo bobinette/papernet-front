@@ -9,7 +9,7 @@ import Modal from 'react-modal';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
 
-import SplittedDropdown from 'components/dropdown/splitted';
+import SplitDropdown from 'components/dropdown/split';
 import Markdown from 'components/markdown';
 import NavBar from 'components/navbar';
 import TagList from 'components/taglist';
@@ -26,6 +26,7 @@ const urlRegex = new RegExp(
 class PaperView extends Component {
 
   static propTypes = {
+    onDelete: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     paper: paperPropType.isRequired,
     teams: ImmutablePropTypes.listOf(teamPropType),
@@ -111,7 +112,7 @@ class PaperView extends Component {
   }
 
   render() {
-    const { paper, teams } = this.props;
+    const { onDelete, paper, teams } = this.props;
     const { shareWith } = this.state;
 
     if (!paper.get('id')) return null;
@@ -127,11 +128,13 @@ class PaperView extends Component {
           ]}
           rightItems={[
             { element: (
-              <SplittedDropdown
+              <SplitDropdown
                 btnStyle="outline-primary"
                 onClick={() => browserHistory.push(`/papers/${paper.get('id')}/edit`)}
                 menu={[
                   <button key="share" className="btn dropdown-item" onClick={this.onOpenShareDialog}>Share</button>,
+                  <div key="dropdown-divider-1" className="dropdown-divider" />,
+                  <button key="delete" className="btn dropdown-item" onClick={onDelete}>Delete</button>,
                 ]}
                 title="Edit"
               />

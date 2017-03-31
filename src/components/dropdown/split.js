@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import './dropdown.scss';
 
-class Dropdown extends Component {
+class SplitDropdown extends Component {
   static propTypes = {
     btnStyle: PropTypes.string,
     className: PropTypes.string,
@@ -67,11 +67,11 @@ class Dropdown extends Component {
           aria-labelledby="profile-dropdown"
           onClick={this.onButtonsClicked}
         >
-          {menu}
+          {menu.map(e => e)}
         </div>
       </div>
     );
   }
 }
 
-export default listensToClickOutside(Dropdown);
+export default listensToClickOutside(SplitDropdown);

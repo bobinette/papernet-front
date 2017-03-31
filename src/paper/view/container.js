@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import { loadCookie, me } from 'auth/actions';
 import { TEAMS_FETCH, TEAMS_SHARE, teamPropType } from 'profile/teams/constants';
 import { paperPropType, userPropType } from 'utils/constants';
 
-import { getPaper } from '../actions';
+import { deletePaper, getPaper } from '../actions';
 import NotFoundView from '../notfound';
 import PaperView from './view';
 
@@ -34,6 +35,7 @@ class PaperViewContainer extends Component {
   constructor(props) {
     super(props);
 
+    this.onDelete = ::this.onDelete;
     this.onShare = ::this.onShare;
 
     this.props.dispatch(loadCookie());
@@ -62,6 +64,12 @@ class PaperViewContainer extends Component {
     teamIDs.forEach(teamID => this.props.dispatch({ type: TEAMS_SHARE, teamID, paperID }));
   }
 
+  onDelete() {
+    this.props.dispatch(deletePaper()).then(
+      () => { browserHistory.push('/papers'); }
+    );
+  }
+
   render() {
     const { found, loading, paper, teams } = this.props;
 
@@ -72,7 +80,7 @@ class PaperViewContainer extends Component {
 
     return (
       <div className="PaperContainer container">
-        <PaperView onShare={this.onShare} paper={paper} teams={teams} />
+        <PaperView onDelete={this.onDelete} onShare={this.onShare} paper={paper} teams={teams} />
       </div>
     );
   }
