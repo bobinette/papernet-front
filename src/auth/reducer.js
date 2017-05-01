@@ -11,6 +11,7 @@ const initialState = fromJS({
     canSee: [],
   },
   token: '',
+  loading: false,
   tokenLoaded: false,
 });
 

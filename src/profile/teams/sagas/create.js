@@ -13,7 +13,7 @@ function* create(token, name) {
     });
 
     yield fetch(
-      `${papernetURL}/teams`,
+      `${papernetURL}/auth/v2/teams`,
       { method: 'POST', headers, body: JSON.stringify({ name }) }
     );
     yield put({ type: TEAMS_FETCH });

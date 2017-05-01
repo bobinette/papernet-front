@@ -3,15 +3,13 @@ import cookie from 'react-cookie';
 
 import 'whatwg-fetch';
 
-import qs from 'qs';
-
 import handleJSON from 'utils/actions/handleResponse';
 import { papernetURL } from 'utils/constants';
 
 import { LOADED_TOKEN, RECEIVE_TOKEN, RECEIVE_USER } from './constants';
 
 export const login = () => () => {
-  const url = `${papernetURL}/auth`;
+  const url = `${papernetURL}/login/google`;
   return fetch(url, {}).then(handleJSON).then(
     (response) => {
       window.location.href = response.url;
@@ -22,10 +20,10 @@ export const login = () => () => {
   );
 };
 
-export const exchangeToken = (provider, code, state) => (dispatch) => {
+export const exchangeToken = (code, state) => (dispatch) => {
   const params = { code, state };
-  const url = `${papernetURL}/auth/${provider}?${qs.stringify(params, { skipNulls: true })}`;
-  return fetch(url, {}).then(handleJSON).then(
+  const url = `${papernetURL}/login/google`;
+  return fetch(url, { method: 'POST', body: JSON.stringify(params) }).then(handleJSON).then(
     (response) => {
       cookie.save('access_token', response.access_token, { path: '/' });
       dispatch({ type: RECEIVE_TOKEN, token: response.access_token });
@@ -53,9 +51,9 @@ export const me = () => (dispatch, getState) => {
     Authorization: `Bearer ${token}`,
   });
 
-  const url = `${papernetURL}/me`;
+  const url = `${papernetURL}/auth/v2/me`;
   return fetch(url, { headers }).then(handleJSON).then(
-    response => dispatch({ type: RECEIVE_USER, user: response.data }),
+    user => dispatch({ type: RECEIVE_USER, user }),
     (err) => {
       toastr.error('', `Could not load your profile: ${err.message ? err.message : null}`);
     }

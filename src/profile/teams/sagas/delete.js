@@ -13,7 +13,7 @@ function* deleteGen(token, teamID) {
     });
 
     yield fetch(
-      `${papernetURL}/teams/${teamID}`,
+      `${papernetURL}/auth/v2/teams/${teamID}`,
       { method: 'DELETE', headers }
     );
     yield put({ type: TEAMS_FETCH });

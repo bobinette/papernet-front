@@ -24,7 +24,7 @@ class GoogleLogIn extends Component {
     const { dispatch, location } = this.props;
     const { code, error, state } = location.query;
     if (!error) {
-      dispatch(exchangeToken('google', code, state));
+      dispatch(exchangeToken(code, state));
     }
   }
 
@@ -32,7 +32,7 @@ class GoogleLogIn extends Component {
     const { dispatch, location } = nextProps;
     const { code, error, state } = location.query;
     if (!error) {
-      dispatch(exchangeToken('google', code, state));
+      dispatch(exchangeToken(code, state));
     }
   }
 

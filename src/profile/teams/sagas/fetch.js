@@ -14,7 +14,7 @@ const fetchTeams = (token) => {
   });
 
   // dispatch({ type: FECTH_PAPER });
-  return fetch(`${papernetURL}/teams`, { headers });
+  return fetch(`${papernetURL}/auth/v2/teams`, { headers });
   // .then(
   //   (response) => {
   //     const paper = response.data;
@@ -33,6 +33,6 @@ const fetchTeams = (token) => {
 export default function* fetchTeamsSaga() {
   const token = yield select(state => (state.user.get('token')));
   // try catch
-  const response = yield call(fetchTeams, token);
-  yield put({ type: TEAMS_RECEIVE, teams: response.data });
+  const teams = yield call(fetchTeams, token);
+  yield put({ type: TEAMS_RECEIVE, teams });
 }
