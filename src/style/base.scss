@@ -42,3 +42,8 @@ blockquote {
     color: $gray-light;
     border-left: 0.25em solid $gray-lighter;
 }
+
+// Remove bottom margin for paragraphs in lists
+li > p {
+    margin-bottom: 0;
+}
