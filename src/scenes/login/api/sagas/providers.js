@@ -1,6 +1,6 @@
 import { call, fork, put, take } from 'redux-saga/effects';
 
-import loginApi from 'data/login';
+import loginApi from 'scenes/login/api';
 
 import { PROVIDERS_FETCH, PROVIDERS_RECEIVE } from 'scenes/login/api/constants';
 

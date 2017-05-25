@@ -1,4 +1,4 @@
-import fetch from 'data';
+import fetch from 'api';
 
 export default {
   async fetchProviders() {

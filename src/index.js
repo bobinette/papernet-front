@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { IndexRedirect, Router, Route, browserHistory } from 'react-router';
+import { IndexRedirect, IndexRoute, Router, Route, browserHistory } from 'react-router';
 
 // Redux
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
@@ -41,13 +41,17 @@ import { Privacy, TermsOfUse } from 'legal';
 import Footer from 'components/footer';
 
 // Login scene
-import LoginContainer, { loginReducer } from 'scenes/login';
+import LoginContainer, { GoogleLogin, loginReducer } from 'scenes/login';
+
+// Reducers
+import authReducer from 'services/auth/reducer';
 
 // Sagas
 import rootSaga from 'sagas';
 
 // Create store
 const reducers = {
+  auth: authReducer,
   arxiv: arxivReducer,
   home: homeReducer,
   login: loginReducer,
@@ -76,7 +80,10 @@ ReactDOM.render(
           <Route path="papers/new" component={PaperEditContainer} />
           <Route path="papers/:id" component={PaperViewContainer} />
           <Route path="papers/:id/edit" component={PaperEditContainer} />
-          <Route path="login" component={LoginContainer} />
+          <Route path="login">
+            <IndexRoute component={LoginContainer} />
+            <Route path="google" component={GoogleLogin} />
+          </Route>
           <Route path="auth">
             <IndexRedirect to="/auth/google" />
             <Route path="google" component={GoogleLoggedIn} />
