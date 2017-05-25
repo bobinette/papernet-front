@@ -1,0 +1,25 @@
+@import '../../style/_colors.scss';
+@import "~bootstrap/scss/_variables.scss";
+
+
+.LoginView {
+    margin-top: 70px;
+}
+
+.LoginView__Or {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    display: flex;
+    align-items: center;
+
+    color: $gray-light;
+}
+
+.LoginView__Separator {
+    flex: 1;
+    height: 1px;
+    background: $gray-lighter;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}

@@ -49,7 +49,7 @@ module.exports = {
   },
   resolve: {
     modulesDirectories: ['./node_modules', './src', './assets'],
-    extensions: ['', '.js', '.jsx', '.json', '.scss', '.png']
+    extensions: ['', '.js', '.jsx', '.json', '.scss', '.png', '.svg']
   },
   output: {
     path: path.join(__dirname, '/app'),

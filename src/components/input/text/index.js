@@ -8,6 +8,7 @@ class Text extends Component {
     onChange: PropTypes.func.isRequired,
     onKeyPress: PropTypes.func,
     onFocus: PropTypes.func,
+    password: PropTypes.bool,
     placeholder: PropTypes.string,
     value: PropTypes.string,
   }
@@ -16,6 +17,7 @@ class Text extends Component {
     className: '',
     onKeyPress: null,
     onFocus: null,
+    password: false,
     placeholder: '',
     value: '',
   }
@@ -48,8 +50,9 @@ class Text extends Component {
   }
 
   render() {
-    const { className, onKeyPress, placeholder, value } = this.props;
+    const { className, onKeyPress, password, placeholder, value } = this.props;
 
+    const inputType = password ? 'password' : 'text';
     return (
       <div className={`Text ${className}`}>
         <input
@@ -59,7 +62,7 @@ class Text extends Component {
           onFocus={this.onFocus}
           onKeyPress={onKeyPress}
           placeholder={placeholder}
-          type="text"
+          type={inputType}
           value={value}
         />
       </div>

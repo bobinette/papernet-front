@@ -40,13 +40,17 @@ import { Privacy, TermsOfUse } from 'legal';
 // Components
 import Footer from 'components/footer';
 
+// Login scene
+import LoginContainer, { loginReducer } from 'scenes/login';
+
 // Sagas
 import rootSaga from 'sagas';
 
 // Create store
 const reducers = {
-  home: homeReducer,
   arxiv: arxivReducer,
+  home: homeReducer,
+  login: loginReducer,
   paper: paperReducer,
   profile: profileReducer,
   toastr: toastrReducer,
@@ -72,6 +76,7 @@ ReactDOM.render(
           <Route path="papers/new" component={PaperEditContainer} />
           <Route path="papers/:id" component={PaperViewContainer} />
           <Route path="papers/:id/edit" component={PaperEditContainer} />
+          <Route path="login" component={LoginContainer} />
           <Route path="auth">
             <IndexRedirect to="/auth/google" />
             <Route path="google" component={GoogleLoggedIn} />
