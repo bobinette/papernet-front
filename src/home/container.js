@@ -20,7 +20,7 @@ const mapStateToProps = state => ({
   pagination: state.home.get('pagination'),
   papers: state.home.get('papers'),
   search: state.home.get('search'),
-  user: state.user,
+  user: state.auth,
 });
 
 class HomeContainer extends Component {

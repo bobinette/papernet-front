@@ -26,7 +26,7 @@ export default function* watchDeleteSaga() {
   // eslint-disable-next-line no-constant-condition
   while (true) {
     const { teamID } = yield take(TEAMS_DELETE);
-    const token = yield select(state => (state.user.get('token')));
+    const token = yield select(state => (state.auth.get('token')));
     yield fork(deleteGen, token, teamID);
   }
 }

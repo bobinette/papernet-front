@@ -10,7 +10,7 @@ import NavBar from 'components/navbar';
 import './legal.scss';
 
 const mapStateToProps = state => ({
-  user: state.user,
+  user: state.auth,
 });
 
 class PrivacyPolicy extends PureComponent {

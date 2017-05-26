@@ -26,7 +26,7 @@ export default function* watchCreateSaga() {
   // eslint-disable-next-line no-constant-condition
   while (true) {
     const { name } = yield take(TEAMS_CREATE);
-    const token = yield select(state => (state.user.get('token')));
+    const token = yield select(state => (state.auth.get('token')));
     yield fork(create, token, name);
   }
 }

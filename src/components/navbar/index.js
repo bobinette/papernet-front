@@ -12,7 +12,7 @@ import Dropdown from './dropdown';
 import './navbar.scss';
 
 const mapStateToProps = state => ({
-  user: state.user,
+  user: state.auth,
 });
 
 const mapDispatchToProps = dispatch => ({

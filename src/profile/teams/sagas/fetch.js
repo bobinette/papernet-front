@@ -31,7 +31,7 @@ const fetchTeams = (token) => {
 };
 
 export default function* fetchTeamsSaga() {
-  const token = yield select(state => (state.user.get('token')));
+  const token = yield select(state => (state.auth.get('token')));
   // try catch
   const teams = yield call(fetchTeams, token);
   yield put({ type: TEAMS_RECEIVE, teams });

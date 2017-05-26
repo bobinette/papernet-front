@@ -12,7 +12,7 @@ import ImportView from './view';
 
 const mapStateToProps = state => ({
   arxiv: state.arxiv,
-  user: state.user,
+  user: state.auth,
 });
 
 class ImportContainer extends PureComponent {

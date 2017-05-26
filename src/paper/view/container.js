@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
   loading: state.paper.get('loading'),
   paper: state.paper.get('paper'),
   teams: state.profile.get('teams'),
-  user: state.user.get('user'),
+  user: state.auth.get('user'),
 });
 
 class PaperViewContainer extends Component {

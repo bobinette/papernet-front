@@ -26,7 +26,7 @@ export default function* watchShareSaga() {
   // eslint-disable-next-line no-constant-condition
   while (true) {
     const { teamID, paperID } = yield take(TEAMS_SHARE);
-    const token = yield select(state => (state.user.get('token')));
+    const token = yield select(state => (state.auth.get('token')));
     yield fork(share, token, teamID, paperID);
   }
 }

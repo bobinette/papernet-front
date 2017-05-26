@@ -13,7 +13,7 @@ import ProfileView from './view';
 import { TeamsContainer } from './teams';
 
 const mapStateToProps = state => ({
-  user: state.user.get('user'),
+  user: state.auth.get('user'),
   teams: state.profile.get('teams'),
 });
 

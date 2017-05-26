@@ -13,7 +13,7 @@ import TeamView from './team-view';
 import './teams.scss';
 
 const mapStateToProps = state => ({
-  user: state.user.get('user'),
+  user: state.auth.get('user'),
   teams: state.profile.get('teams'),
 });
 
