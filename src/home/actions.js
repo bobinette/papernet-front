@@ -20,7 +20,7 @@ export const getPaperList = () => (dispatch, getState) => {
   };
   const url = `${papernetURL}/papers?${qs.stringify(params, { skipNulls: true, indices: false })}`;
 
-  const token = getState().user.get('token');
+  const token = getState().auth.getIn(['token', 'token']);
   if (!token) return null;
 
   const headers = new Headers({
@@ -41,15 +41,15 @@ export const getPaperList = () => (dispatch, getState) => {
 };
 
 export const bookmark = id => (dispatch, getState) => {
-  const token = getState().user.get('token');
+  const token = getState().auth.getIn(['token', 'token']);
   if (!token) return null;
 
   const headers = new Headers({
     Authorization: `Bearer ${token}`,
   });
 
-  const url = `${papernetURL}/bookmarks`;
-  return fetch(url, { method: 'POST', headers, body: JSON.stringify({ add: [id] }) })
+  const url = `${papernetURL}/auth/v2/bookmarks`;
+  return fetch(url, { method: 'POST', headers, body: JSON.stringify({ paperID: id, bookmark: true }) })
   .then(handleJSON).then(
     (response) => {
       const user = response.data;
@@ -62,15 +62,15 @@ export const bookmark = id => (dispatch, getState) => {
 };
 
 export const unbookmark = id => (dispatch, getState) => {
-  const token = getState().user.get('token');
+  const token = getState().auth.getIn(['token', 'token']);
   if (!token) return null;
 
   const headers = new Headers({
     Authorization: `Bearer ${token}`,
   });
 
-  const url = `${papernetURL}/bookmarks`;
-  return fetch(url, { method: 'POST', headers, body: JSON.stringify({ remove: [id] }) })
+  const url = `${papernetURL}/auth/v2/bookmarks`;
+  return fetch(url, { method: 'POST', headers, body: JSON.stringify({ paperID: id, bookmark: false }) })
   .then(handleJSON).then(
     (response) => {
       const user = response.data;

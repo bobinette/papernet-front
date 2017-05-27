@@ -14,7 +14,7 @@ function* share(token, teamID, paperID) {
 
     yield fetch(
       `${papernetURL}/auth/v2/teams/${teamID}/share`,
-      { method: 'POST', headers, body: JSON.stringify({ id: paperID, canEdit: true }) }
+      { method: 'POST', headers, body: JSON.stringify({ paperID, canEdit: true }) }
     );
     yield put({ type: TEAMS_FETCH });
   } catch (error) {
@@ -26,7 +26,7 @@ export default function* watchShareSaga() {
   // eslint-disable-next-line no-constant-condition
   while (true) {
     const { teamID, paperID } = yield take(TEAMS_SHARE);
-    const token = yield select(state => (state.auth.get('token')));
+    const token = yield select(state => (state.auth.getIn(['token', 'token'])));
     yield fork(share, token, teamID, paperID);
   }
 }

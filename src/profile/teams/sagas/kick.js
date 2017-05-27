@@ -25,7 +25,7 @@ export default function* watchKickSaga() {
   // eslint-disable-next-line no-constant-condition
   while (true) {
     const { teamID, userID } = yield take(TEAMS_KICK);
-    const token = yield select(state => (state.auth.get('token')));
+    const token = yield select(state => (state.auth.getIn(['token', 'token'])));
     yield fork(kick, token, teamID, userID);
   }
 }

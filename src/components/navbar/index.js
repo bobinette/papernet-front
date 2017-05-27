@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 import classNames from 'classnames';
 
-import { login, logout } from 'auth/actions';
+import { logout } from 'auth/actions';
 import { userPropType } from 'utils/constants';
 
 import Dropdown from './dropdown';
@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLogin: () => dispatch(login()),
+  onLogin: () => browserHistory.push('/login'),
   onLogout: () => dispatch(logout()),
 });
 
@@ -43,7 +43,7 @@ const NavBar = ({ items, rightItems, onLogin, onLogout, user }) => (
           <NavBar.Element active={item.active} element={item.element} key={i} />
         ))}
         {
-          user.get('token') ?
+          user.getIn(['token', 'token']) ?
             <Dropdown
               className="NavBar__DropDown"
               title={user.getIn(['user', 'name']) || 'John Doe'}

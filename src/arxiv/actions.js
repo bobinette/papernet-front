@@ -28,7 +28,7 @@ export const search = () => (dispatch, getState) => {
   };
   const url = `${papernetURL}/arxiv?${qs.stringify(params, { skipNulls: true })}`;
 
-  const token = getState().user.get('token');
+  const token = getState().auth.getIn(['token', 'token']);
   if (!token) return null;
 
   const headers = new Headers({

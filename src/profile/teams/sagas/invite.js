@@ -26,7 +26,7 @@ export default function* watchInviteSaga() {
   // eslint-disable-next-line no-constant-condition
   while (true) {
     const { teamID, email } = yield take(TEAMS_INVITE);
-    const token = yield select(state => (state.auth.get('token')));
+    const token = yield select(state => (state.auth.getIn(['token', 'token'])));
     yield fork(invite, token, teamID, email);
   }
 }

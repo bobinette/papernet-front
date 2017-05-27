@@ -8,7 +8,7 @@ function loadCookie() {
 }
 
 function saveCookie(token) {
-  cookie.save('token', token, { path: '/' });
+  cookie.save('access_token', token, { path: '/' });
 }
 
 export function* watchLoadCookieSaga() {

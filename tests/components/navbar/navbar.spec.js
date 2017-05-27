@@ -7,13 +7,13 @@ import proxyquire from 'proxyquire';
 import sinon from 'sinon';
 
 const dispatch = sinon.spy();
-const login = sinon.spy();
 const logout = sinon.spy();
+const browserHistoryPush = sinon.spy();
 
-const createStore = user => ({
+const createStore = auth => ({
   dispatch,
   getState: () => ({
-    user: fromJS(user),
+    auth: fromJS(auth),
   }),
   subscribe: () => {},
 });
@@ -23,13 +23,14 @@ describe('<NavBar />', () => {
 
   before(() => {
     NavBar = proxyquire('src/components/navbar', {
-      'auth/actions': { login, logout },
+      'auth/actions': { logout },
+      'react-router': { browserHistory: { push: browserHistoryPush } },
     }).default;
   });
 
   it('should have the login button when no user, and call onLogin when clicked', () => {
     const comp = mount(<NavBar
-      store={createStore({})}
+      store={createStore({ token: { loaded: false, token: '' } })}
     />);
 
     const dropdown = comp.find('.NavBar__DropDown');
@@ -38,14 +39,13 @@ describe('<NavBar />', () => {
     expect(button).to.be.present();
 
     button.simulate('click');
-    expect(dispatch.called).to.be.true();
-    expect(login.called).to.be.true();
     expect(logout.called).to.be.false();
+    expect(browserHistoryPush.called).to.be.true();
   });
 
   it('should have the dropdown when there is a user', () => {
     const comp = mount(<NavBar
-      store={createStore({ token: 'abc' })}
+      store={createStore({ token: { loaded: true, token: 'abc' } })}
     />);
 
     const dropdown = comp.find('.NavBar__DropDown');

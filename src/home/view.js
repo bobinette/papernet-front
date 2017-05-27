@@ -78,7 +78,9 @@ class HomeView extends PureComponent {
     pagination: paginationPropType.isRequired,
     papers: ImmutablePropTypes.listOf(paperPropType).isRequired,
     user: ImmutablePropTypes.contains({
-      token: PropTypes.string,
+      token: ImmutablePropTypes.contains({
+        token: PropTypes.string,
+      }),
       user: userPropType,
     }).isRequired,
   };
@@ -112,9 +114,14 @@ class HomeView extends PureComponent {
     // If the token is not loaded, do not display anything to avoid glitches
     // If the token is loaded and there actually was a token but there is no user id
     // it means we are waiting for the 'me' API to respond, so same: do no display anything to avoid glitches
-    if (!user.get('tokenLoaded') || (user.get('token') && user.getIn(['user', 'id']) === '')) return null;
+    if (
+      !user.getIn(['token', 'loaded'])
+      || (user.getIn(['token', 'token']) && user.getIn(['user', 'id']) === '')
+    ) {
+      return null;
+    }
 
-    if (!user.get('token')) {
+    if (!user.getIn(['token', 'token'])) {
       return (
         <div className="HomeView container">
           <NoUserView className="col-md-8 offset-md-2" />

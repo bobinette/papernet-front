@@ -6,7 +6,7 @@ import { papernetURL } from 'utils/constants';
 import { FECTH_PAPER, NOT_FOUND_PAPER, RECEIVE_PAPER, UPDATE_PAPER } from './constants';
 
 export const getPaper = id => (dispatch, getState) => {
-  const token = getState().user.get('token');
+  const token = getState().auth.getIn(['token', 'token']);
   if (!token) return null;
 
   const headers = new Headers({
@@ -41,7 +41,7 @@ export const savePaper = paper => (dispatch, getState) => {
     method = 'PUT';
   }
 
-  const token = getState().user.get('token');
+  const token = getState().auth.getIn(['token', 'token']);
   if (!token) return null;
 
   const headers = new Headers({
@@ -69,7 +69,7 @@ export const deletePaper = () => (dispatch, getState) => {
 
   if (!paper.get('id')) return new Promise();
 
-  const token = getState().user.get('token');
+  const token = getState().auth.getIn(['token', 'token']);
   if (!token) return null;
 
   const headers = new Headers({

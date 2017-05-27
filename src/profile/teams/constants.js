@@ -13,7 +13,7 @@ export const teamPropType = ImmutablePropTypes.contains({
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   members: ImmutablePropTypes.listOf(ImmutablePropTypes.contains({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string,
     admin: PropTypes.bool.isRequired,

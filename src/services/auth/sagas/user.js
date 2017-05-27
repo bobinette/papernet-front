@@ -20,6 +20,7 @@ function* fetchUser(token) {
   yield put({ type: RECEIVE_USER, user });
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export function* watchFetchUserSaga() {
   // eslint-disable-next-line no-constant-condition
   while (true) {

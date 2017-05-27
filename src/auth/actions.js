@@ -6,6 +6,7 @@ import 'whatwg-fetch';
 import handleJSON from 'utils/actions/handleResponse';
 import { papernetURL } from 'utils/constants';
 
+import { TOKEN_RECEIVE, USER_SIGN_OUT } from 'services/auth/constants';
 import { LOADED_TOKEN, RECEIVE_TOKEN, RECEIVE_USER } from './constants';
 
 export const login = () => () => {
@@ -40,11 +41,15 @@ export const loadCookie = () => (dispatch) => {
   if (!token) return dispatch({ type: LOADED_TOKEN });
 
   dispatch({ type: LOADED_TOKEN });
+
+  // Load in new state as well
+  dispatch({ type: TOKEN_RECEIVE, token });
+
   return dispatch({ type: RECEIVE_TOKEN, token });
 };
 
 export const me = () => (dispatch, getState) => {
-  const token = getState().user.get('token');
+  const token = getState().auth.getIn(['token', 'token']);
   if (!token) return null;
 
   const headers = new Headers({
@@ -64,4 +69,7 @@ export const logout = () => (dispatch) => {
   cookie.remove('access_token', { path: '/' });
   dispatch({ type: RECEIVE_TOKEN, token: '' });
   dispatch({ type: RECEIVE_USER, user: {} });
+
+  // New service
+  dispatch({ type: USER_SIGN_OUT });
 };
