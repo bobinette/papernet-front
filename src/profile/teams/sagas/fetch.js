@@ -7,7 +7,7 @@ import { TEAMS_RECEIVE } from '../constants';
 
 const fetchTeams = (token) => {
   // const token = getState().user.get('token');
-  if (!token) return null;
+  if (!token) return [];
 
   const headers = new Headers({
     Authorization: `Bearer ${token}`,

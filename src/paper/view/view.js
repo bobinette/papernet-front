@@ -115,8 +115,6 @@ class PaperView extends Component {
     const { onDelete, paper, teams } = this.props;
     const { shareWith } = this.state;
 
-    if (!paper.get('id')) return null;
-
     const tags = paper.get('tags') || List();
 
     return (
@@ -128,7 +126,7 @@ class PaperView extends Component {
           ]}
           rightItems={[
             { element: (
-              <SplitDropdown
+              paper.get('id') && <SplitDropdown
                 btnStyle="outline-primary"
                 onClick={() => browserHistory.push(`/papers/${paper.get('id')}/edit`)}
                 menu={[
@@ -141,62 +139,66 @@ class PaperView extends Component {
             ) },
           ]}
         />
-        <div className="PaperView__Content row">
-          <TagList className="col-md-10 offset-md-1" tags={tags} />
-          <div className="col-md-10 offset-md-1" >
-            <small
-              className="text-muted"
-              data-for={paper.get('id').toString()}
-              data-tip
-            >
-              <Tooltip
-                placement="bottom"
-                mouseEnterDelay={0.3}
-                overlay={<small>{moment(paper.get('updatedAt')).format('LLL')}</small>}
-              >
-                <span>Modified {moment(paper.get('updatedAt')).fromNow()}</span>
-              </Tooltip>
-            </small>
-          </div>
-          <div className="col-md-10 offset-md-1">
-            <h1 className="display-4">{paper.get('title')}</h1>
-            <Markdown text={paper.get('summary')} />
-            {this.renderReferences()}
-            {this.renderAuthors()}
-          </div>
-        </div>
-        <Modal
-          className="Modal"
-          isOpen={this.state.shareDialogOpen}
-          onRequestClose={this.onCloseShareDialog}
-          closeTimeoutMS={0}
-          contentLabel="Share-paper-modal"
-        >
-          <h1>Share paper with teams</h1>
+        { paper.get('id') &&
           <div>
-            <p>Share with:</p>
-            {
-              teams.map(team => (
-                <div key={team.get('id')}>
-                  <label className="form-check-label" htmlFor={`form-check-input-team-${team.get('id')}`}>
-                    <input
-                      id={`form-check-input-team-${team.get('id')}`}
-                      className="form-check-input"
-                      type="checkbox"
-                      checked={shareWith.contains(team.get('id'))}
-                      onChange={this.onSelectTeam(team.get('id'))}
-                    />
-                    {team.get('name')}
-                  </label>
-                </div>
-              ))
-            }
+            <div className="PaperView__Content row">
+              <TagList className="col-md-10 offset-md-1" tags={tags} />
+              <div className="col-md-10 offset-md-1" >
+                <small
+                  className="text-muted"
+                  data-for={paper.get('id').toString()}
+                  data-tip
+                >
+                  <Tooltip
+                    placement="bottom"
+                    mouseEnterDelay={0.3}
+                    overlay={<small>{moment(paper.get('updatedAt')).format('LLL')}</small>}
+                  >
+                    <span>Modified {moment(paper.get('updatedAt')).fromNow()}</span>
+                  </Tooltip>
+                </small>
+              </div>
+              <div className="col-md-10 offset-md-1">
+                <h1 className="display-4">{paper.get('title')}</h1>
+                <Markdown text={paper.get('summary')} />
+                {this.renderReferences()}
+                {this.renderAuthors()}
+              </div>
+            </div>
+            <Modal
+              className="Modal"
+              isOpen={this.state.shareDialogOpen}
+              onRequestClose={this.onCloseShareDialog}
+              closeTimeoutMS={0}
+              contentLabel="Share-paper-modal"
+            >
+              <h1>Share paper with teams</h1>
+              <div>
+                <p>Share with:</p>
+                {
+                  teams.map(team => (
+                    <div key={team.get('id')}>
+                      <label className="form-check-label" htmlFor={`form-check-input-team-${team.get('id')}`}>
+                        <input
+                          id={`form-check-input-team-${team.get('id')}`}
+                          className="form-check-input"
+                          type="checkbox"
+                          checked={shareWith.contains(team.get('id'))}
+                          onChange={this.onSelectTeam(team.get('id'))}
+                        />
+                        {team.get('name')}
+                      </label>
+                    </div>
+                  ))
+                }
+              </div>
+              <div className="Modal__Footer">
+                <button type="button" className="btn btn-link" onClick={this.onCloseShareDialog}>Cancel</button>
+                <button type="button" className="btn btn-primary" onClick={this.onShare}>Share</button>
+              </div>
+            </Modal>
           </div>
-          <div className="Modal__Footer">
-            <button type="button" className="btn btn-link" onClick={this.onCloseShareDialog}>Cancel</button>
-            <button type="button" className="btn btn-primary" onClick={this.onShare}>Share</button>
-          </div>
-        </Modal>
+        }
       </div>
     );
   }
