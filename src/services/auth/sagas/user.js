@@ -7,6 +7,8 @@ import { RECEIVE_USER } from 'auth/constants';
 import { TOKEN_RECEIVE, USER_RECEIVE } from '../constants';
 
 function* fetchUser(token) {
+  if (!token) return;
+
   const { user, error } = yield call(authApi.fetchUser, token);
 
   if (error) {

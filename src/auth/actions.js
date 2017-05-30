@@ -37,9 +37,9 @@ export const exchangeToken = (code, state) => (dispatch) => {
 };
 
 export const loadCookie = () => (dispatch) => {
-  const token = cookie.load('access_token');
+  const token = cookie.load('access_token', true);
   // Load in new state as well
-  dispatch({ type: TOKEN_RECEIVE, token });
+  dispatch({ type: TOKEN_RECEIVE, token: token || '' });
 
   if (!token) return dispatch({ type: LOADED_TOKEN });
 

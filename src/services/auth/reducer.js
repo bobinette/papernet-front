@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
       newState = newState.set('user', fromJS(action.user));
       break;
     case USER_SIGN_OUT:
-      newState = initialState;
+      newState = initialState.setIn(['token', 'loaded'], true);
       break;
     default:
   }

@@ -54,7 +54,7 @@ const NavBar = ({ items, rightItems, onLogin, onLogout, user }) => (
                 className="nav-link btn btn-link NavBar__LoginButton"
                 onClick={onLogin}
               >
-                Login
+                Sign in
               </button>
             </li>
         }

@@ -1,33 +1,24 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-
-import { login } from 'auth/actions';
-
-import googleSignIn from 'google-sign-in.png';
+import { Link } from 'react-router';
 
 import './nouser.scss';
 
-const mapDispatchToProps = dispatch => ({
-  onLogin: () => dispatch(login()),
-});
-
-const NoUserView = ({ className, onLogin }) => (
+const NoUserView = ({ className }) => (
   <div className={className}>
     <h3>Welcome to Papernet!</h3>
-    <p>To be able to use this platform you need to login via Google. Do not worry, your informations
-    are safe! The only thing Papernet needs is your name.</p>
+    <p>To be able to use this platform you need to sign in. Do not worry, your informations
+    are safe! Nothing is done with your data</p>
 
-    <input className="NoUserView__SignIn" type="image" src={googleSignIn} onClick={onLogin} />
+    <Link to="login" className="btn btn-primary">Sign in</Link>
   </div>
 );
 
 NoUserView.propTypes = {
   className: PropTypes.string,
-  onLogin: PropTypes.func.isRequired,
 };
 
 NoUserView.defaultProps = {
   className: '',
 };
 
-export default connect(null, mapDispatchToProps)(NoUserView);
+export default NoUserView;

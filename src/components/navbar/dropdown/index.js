@@ -62,7 +62,7 @@ class Dropdown extends Component {
           onClick={this.onButtonsClicked}
         >
           <Link className="btn dropdown-item NavBar__DropdownItem" to="/profile">Profile</Link>
-          <button className="dropdown-item NavBar__DropdownItem" onClick={onLogout}>Logout</button>
+          <button className="dropdown-item NavBar__DropdownItem" onClick={onLogout}>Sign out</button>
         </div>
       </li>
     );

@@ -93,7 +93,7 @@ class HomeContainer extends Component {
             { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: false },
           ]}
           rightItems={[
-            { element: user.get('token') !== '' ?
+            { element: user.getIn(['token', 'token']) ?
               <Link className="btn btn-outline-primary" to={'/papers/new'}>New</Link>
               : null,
             },
