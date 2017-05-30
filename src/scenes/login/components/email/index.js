@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import InputText from 'components/input/text';
 
+import { EMAIL_LOGIN_SIGN_IN, EMAIL_LOGIN_SIGN_UP } from './api/constants';
+
 import './email.scss';
 
 class EmailLogin extends PureComponent {
@@ -15,7 +17,7 @@ class EmailLogin extends PureComponent {
 
     this.onEmailChange = ::this.onEmailChange;
     this.onPasswordChange = ::this.onPasswordChange;
-    this.onLogin = ::this.onLogin;
+    this.onSignIn = ::this.onSignIn;
     this.onSignUp = ::this.onSignUp;
 
     this.state = {
@@ -28,8 +30,9 @@ class EmailLogin extends PureComponent {
     this.setState({ email });
   }
 
-  onLogin() {
-    console.log(this.state);
+  onSignIn() {
+    const { email, password } = this.state;
+    this.props.dispatch({ type: EMAIL_LOGIN_SIGN_IN, email, password });
   }
 
   onPasswordChange(password) {
@@ -37,7 +40,8 @@ class EmailLogin extends PureComponent {
   }
 
   onSignUp() {
-    console.log(this.state);
+    const { email, password } = this.state;
+    this.props.dispatch({ type: EMAIL_LOGIN_SIGN_UP, email, password });
   }
 
   render() {
@@ -63,7 +67,7 @@ class EmailLogin extends PureComponent {
           <div className="EmailLogin__Buttons">
             <button
               className="btn btn-primary"
-              onClick={this.onLogin}
+              onClick={this.onSignIn}
             >
               Sign in
             </button>

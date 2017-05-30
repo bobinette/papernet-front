@@ -7,6 +7,7 @@ import watchProvidersSaga from './providers';
 import googleLoginSagas from '../../scenes/google/api/sagas';
 
 // Gather the sub-components sagas
+import emailSagas from '../../components/email/api/sagas';
 import googleSagas from '../../components/google/api/sagas';
 
 export default function* sagas() {
@@ -17,6 +18,7 @@ export default function* sagas() {
     fork(googleLoginSagas),
 
     // Sub-components
+    fork(emailSagas),
     fork(googleSagas),
   ];
 }
