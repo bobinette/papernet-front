@@ -1,7 +1,7 @@
 import { fork } from 'redux-saga/effects';
 
 import { watchLoadCookieSaga, watchSaveCookieSaga } from './cookie';
-import { watchFetchUserSaga } from './user';
+import { watchFetchUserSaga, watchSignOutSaga } from './user';
 
 export default function* sagas() {
   yield [
@@ -11,5 +11,6 @@ export default function* sagas() {
 
     // User
     fork(watchFetchUserSaga),
+    fork(watchSignOutSaga),
   ];
 }

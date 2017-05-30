@@ -111,8 +111,6 @@ class HomeView extends PureComponent {
     const { facets, filters, onBookmark, onFilterChange, onOffsetChange, pagination, papers, user } = this.props;
     const { search } = this.state;
 
-    console.log(user.toJS())
-
     // If the token is not loaded, do not display anything to avoid glitches
     // If the token is loaded and there actually was a token but there is no user id
     // it means we are waiting for the 'me' API to respond, so same: do no display anything to avoid glitches
