@@ -8,7 +8,7 @@ import { loadCookie, me } from 'auth/actions';
 
 import { importPaper, search } from './actions';
 import { SEARCH_ARXIV, UPDATE_ARXIV_OFFSET } from './constants';
-import ImportView from './view';
+import ArxivView from './view';
 
 const mapStateToProps = state => ({
   arxiv: state.arxiv,
@@ -123,7 +123,7 @@ class ImportContainer extends PureComponent {
 
     return (
       <div className="ImportContainer">
-        <ImportView
+        <ArxivView
           arxiv={arxiv}
           onChange={this.onChange}
           onImport={this.onImport}

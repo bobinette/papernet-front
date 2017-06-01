@@ -63,16 +63,17 @@ ArxivList.propTypes = {
   onOffsetChange: PropTypes.func.isRequired,
 };
 
-const ImportView = ({ arxiv, onChange, onImport, onOffsetChange, onSearch, search }) => (
+const ArxivView = ({ arxiv, onChange, onImport, onOffsetChange, onSearch, search }) => (
   <div className="container">
     <NavBar
       items={[
         { element: <Link className="nav-link" to={'/papers'}>Home</Link>, active: false },
         { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: true },
+        { element: <Link className="nav-link" to={'/imports'}>Imports</Link>, active: false },
       ]}
     />
-    <div className="ImportView__Content">
-      <div className="ImportView__Search col-md-8 offset-md-2">
+    <div className="ArxivView__Content">
+      <div className="ArxivView__Search col-md-8 offset-md-2">
         <SearchBar
           onChange={onChange}
           onKeyPress={(e) => {
@@ -82,7 +83,7 @@ const ImportView = ({ arxiv, onChange, onImport, onOffsetChange, onSearch, searc
           value={search}
         />
         <button
-          className="btn btn-primary ImportView__Search"
+          className="btn btn-primary ArxivView__Search"
           onClick={onSearch}
         >
           Search
@@ -90,7 +91,7 @@ const ImportView = ({ arxiv, onChange, onImport, onOffsetChange, onSearch, searc
       </div>
       <div className="col-md-10 offset-md-1">
         {arxiv.get('loading') &&
-          <div className="ImportView__Spinner">
+          <div className="ArxivView__Spinner">
             <Spinner text="Fetching arXiv..." />
           </div>
         }
@@ -100,7 +101,7 @@ const ImportView = ({ arxiv, onChange, onImport, onOffsetChange, onSearch, searc
   </div>
 );
 
-ImportView.propTypes = {
+ArxivView.propTypes = {
   arxiv: ImmutablePropTypes.contains({
     filters: ImmutablePropTypes.contains({
       q: PropTypes.string,
@@ -114,8 +115,8 @@ ImportView.propTypes = {
   search: PropTypes.string,
 };
 
-ImportView.defaultProps = {
+ArxivView.defaultProps = {
   search: '',
 };
 
-export default ImportView;
+export default ArxivView;
