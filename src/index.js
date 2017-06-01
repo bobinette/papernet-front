@@ -40,7 +40,8 @@ import { Privacy, TermsOfUse } from 'legal';
 // Components
 import Footer from 'components/footer';
 
-// Login scene
+// Scenes
+import ImportContainer, { importsReducer } from 'scenes/imports';
 import LoginContainer, { GoogleLogin, loginReducer } from 'scenes/login';
 
 // Reducers
@@ -54,6 +55,7 @@ const reducers = {
   auth: authReducer,
   arxiv: arxivReducer,
   home: homeReducer,
+  imports: importsReducer,
   login: loginReducer,
   paper: paperReducer,
   profile: profileReducer,
@@ -89,6 +91,7 @@ ReactDOM.render(
             <Route path="google" component={GoogleLoggedIn} />
           </Route>
           <Route path="arxiv" component={ArxivContainer} />
+          <Route path="imports" component={ImportContainer} />
           <Route path="privacy" component={Privacy} />
           <Route path="terms-of-use" component={TermsOfUse} />
           <Route path="profile" component={ProfileContainer} />

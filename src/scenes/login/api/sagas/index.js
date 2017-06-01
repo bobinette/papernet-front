@@ -12,6 +12,7 @@ import googleSagas from '../../components/google/api/sagas';
 
 export default function* sagas() {
   yield [
+    // Scene
     fork(watchProvidersSaga),
 
     // Sub-scenes

@@ -1,0 +1,32 @@
+.ImportView {
+    margin-top: 70px;
+
+    ul {
+        list-style-type: none;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+.ImportView__Input {
+    text-align: center;
+}
+
+.ImportView__Input__Help {
+    margin-bottom: 0.5rem;
+}
+
+.ImportView__List {
+    margin-top: 1rem;
+}
+
+.ImportView__ImportButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ImportView__ButtonIcon {
+    margin-left: 0.25rem;
+    font-size: 1rem;
+}

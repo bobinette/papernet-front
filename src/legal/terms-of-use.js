@@ -40,6 +40,7 @@ class TermsOfUse extends PureComponent {
           items={[
             { element: <Link className="nav-link" to={'/papers'}>Home</Link>, active: true },
             { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: false },
+            { element: <Link className="nav-link" to={'/imports'}>Imports</Link>, active: false },
           ]}
         />
         <div className="Legal container col-md-8 offset-md-2">
