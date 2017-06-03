@@ -4,8 +4,8 @@ import { Link, browserHistory } from 'react-router';
 
 import classNames from 'classnames';
 
-import { logout } from 'auth/actions';
 import { userPropType } from 'utils/constants';
+import { USER_SIGN_OUT } from 'services/auth/constants';
 
 import Dropdown from './dropdown';
 
@@ -15,6 +15,9 @@ import {
   NAVBAR_IMPORTS,
   NAVBAR_NONE,
 } from './constants';
+
+
+import logo from './logo.png';
 
 import './navbar.scss';
 
@@ -42,16 +45,16 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLogin: () => browserHistory.push('/login'),
-  onLogout: () => dispatch(logout()),
+  onLogout: () => dispatch({ type: USER_SIGN_OUT }),
 });
 
 const NavBar = ({ activeTab, rightItems, onLogin, onLogout, user }) => (
   <nav className="navbar navbar-fixed-top navbar-light">
     <div className="container">
-      <Link className="navbar-brand" to={'/papers'}>
+      <Link className="navbar-brand NavBar__Brand" to={'/papers'}>
         <img
           className="d-inline-block align-top"
-          src="https://papernet.bobi.space/app/assets/H2O.png"
+          src={logo}
           width="30"
           height="30"
           alt=""
@@ -130,4 +133,5 @@ NavBar.Element.propTypes = {
   element: PropTypes.element,
 };
 
+export { NavBar };
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
