@@ -8,8 +8,6 @@ import NavBar from 'components/navbar';
 // Old school
 import { savePaper } from 'paper/actions';
 
-import { loadCookie, me } from 'auth/actions';
-
 import { paperPropType } from 'utils/constants';
 
 import { IMPORTS_IMPORT_START, IMPORTS_IMPORT_DONE } from './api/constants';
@@ -33,9 +31,6 @@ class ImportContainer extends Component {
     super(props);
 
     this.onImport = ::this.onImport;
-
-    this.props.dispatch(loadCookie());
-    this.props.dispatch(me());
   }
 
   onImport() {

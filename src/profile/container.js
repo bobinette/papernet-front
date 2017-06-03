@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import { loadCookie, me } from 'auth/actions';
-
 import NavBar from 'components/navbar';
 import { userPropType } from 'utils/constants';
 
@@ -23,13 +21,6 @@ class ProfileContainer extends Component {
     user: userPropType.isRequired,
     teams: ImmutablePropTypes.list.isRequired,
   };
-
-  constructor(props) {
-    super(props);
-
-    this.props.dispatch(loadCookie());
-    this.props.dispatch(me());
-  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.user !== this.props.user) {

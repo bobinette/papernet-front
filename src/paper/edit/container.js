@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 
-import { loadCookie, me } from 'auth/actions';
 import { paperPropType } from 'utils/constants';
 
 import { getPaper, savePaper, updatePaper } from '../actions';
@@ -30,9 +29,6 @@ class PaperEditContainer extends Component {
 
     this.onChange = ::this.onChange;
     this.onSave = ::this.onSave;
-
-    this.props.dispatch(loadCookie());
-    this.props.dispatch(me());
   }
 
   componentWillMount() {

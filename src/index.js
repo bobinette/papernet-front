@@ -18,6 +18,9 @@ import 'katex/dist/katex.min.css';
 import 'react-redux-toastr/src/styles/index.scss';
 import 'style/toastr.scss';
 
+// App wrapper
+import App from 'app';
+
 // Paper list page
 import HomeContainer, { homeReducer } from 'home';
 
@@ -74,7 +77,7 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <div>
+    <App>
       <Router history={browserHistory}>
         <Route path="/">
           <IndexRedirect to="/papers" />
@@ -106,7 +109,7 @@ ReactDOM.render(
         transitionIn="fadeIn"
         transitionOut="fadeOut"
       />
-    </div>
+    </App>
   </Provider>,
   document.getElementById('app')
 );

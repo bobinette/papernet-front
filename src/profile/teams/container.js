@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 
-import { loadCookie, me } from 'auth/actions';
 import { userPropType } from 'utils/constants';
 
 import TextInput from 'components/input/text';
@@ -32,9 +31,6 @@ class TeamsContainer extends Component {
     this.onKeyPress = ::this.onKeyPress;
     this.onInvite = ::this.onInvite;
     this.onKick = ::this.onKick;
-
-    this.props.dispatch(loadCookie());
-    this.props.dispatch(me());
 
     this.state = { newTeamName: '' };
   }

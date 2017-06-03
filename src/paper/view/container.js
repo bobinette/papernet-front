@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import { loadCookie, me } from 'auth/actions';
 import { TEAMS_FETCH, TEAMS_SHARE, teamPropType } from 'profile/teams/constants';
 import { paperPropType, userPropType } from 'utils/constants';
 
@@ -37,9 +36,6 @@ class PaperViewContainer extends Component {
 
     this.onDelete = ::this.onDelete;
     this.onShare = ::this.onShare;
-
-    this.props.dispatch(loadCookie());
-    this.props.dispatch(me());
   }
 
   componentWillMount() {

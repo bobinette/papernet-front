@@ -1,10 +1,11 @@
-import { fork, take } from 'redux-saga/effects';
+import { fork, put, take } from 'redux-saga/effects';
 import cookie from 'react-cookie';
 
 import { TOKEN_COOKIE_LOAD, TOKEN_RECEIVE } from '../constants';
 
-function loadCookie() {
-  console.log('loadCookie');
+function* loadCookie() {
+  const token = cookie.load('access_token', true);
+  yield put({ type: TOKEN_RECEIVE, token: token || '' });
 }
 
 function saveCookie(token) {

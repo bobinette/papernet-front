@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 
 import { browserHistory } from 'react-router';
 
-import { loadCookie, me } from 'auth/actions';
-
 import { importPaper, search } from './actions';
 import { SEARCH_ARXIV, UPDATE_ARXIV_OFFSET } from './constants';
 import ArxivView from './view';
@@ -30,7 +28,6 @@ class ImportContainer extends PureComponent {
         offset: PropTypes.string,
       }),
     }),
-    user: ImmutablePropTypes.map.isRequired,
   };
 
   static defaultProps = {
@@ -50,9 +47,6 @@ class ImportContainer extends PureComponent {
     this.onOffsetChange = ::this.onOffsetChange;
     this.onSearch = ::this.onSearch;
 
-    this.props.dispatch(loadCookie());
-    this.props.dispatch(me());
-
     this.state = { search: this.props.location.query.q || '' };
   }
 
@@ -67,10 +61,6 @@ class ImportContainer extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch } = this.props;
-
-    if (nextProps.user.get('token') !== this.props.user.get('token')) {
-      dispatch(me());
-    }
 
     if (nextProps.location !== this.props.location) {
       const offset = parseInt(nextProps.location.query.offset, 10);

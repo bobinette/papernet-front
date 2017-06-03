@@ -6,8 +6,8 @@ import 'whatwg-fetch';
 import handleJSON from 'utils/actions/handleResponse';
 import { papernetURL } from 'utils/constants';
 
-import { TOKEN_RECEIVE, USER_SIGN_OUT } from 'services/auth/constants';
-import { LOADED_TOKEN, RECEIVE_TOKEN, RECEIVE_USER } from './constants';
+import { USER_SIGN_OUT } from 'services/auth/constants';
+import { RECEIVE_TOKEN, RECEIVE_USER } from './constants';
 
 export const login = () => () => {
   const url = `${papernetURL}/login/google`;
@@ -36,16 +36,8 @@ export const exchangeToken = (code, state) => (dispatch) => {
   );
 };
 
-export const loadCookie = () => (dispatch) => {
-  const token = cookie.load('access_token', true);
-  // Load in new state as well
-  dispatch({ type: TOKEN_RECEIVE, token: token || '' });
-
-  if (!token) return dispatch({ type: LOADED_TOKEN });
-
-  dispatch({ type: LOADED_TOKEN });
-
-  return dispatch({ type: RECEIVE_TOKEN, token });
+export const loadCookie = () => () => {
+  console.warn('auth.actions.loadCookie is deprecated');
 };
 
 export const me = () => (dispatch, getState) => {

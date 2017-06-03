@@ -4,8 +4,6 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { List } from 'immutable';
 
-import { loadCookie, me } from 'auth/actions';
-
 import { paginationPropType } from 'utils/constants';
 
 import NavBar from 'components/navbar';
@@ -42,9 +40,6 @@ class HomeContainer extends Component {
     this.onBookmark = ::this.onBookmark;
     this.onFilterChange = ::this.onFilterChange;
     this.onOffsetChange = ::this.onOffsetChange;
-
-    this.props.dispatch(loadCookie());
-    this.props.dispatch(me());
   }
 
   componentDidMount() {
@@ -57,10 +52,6 @@ class HomeContainer extends Component {
 
     if (nextProps.search !== this.props.search || nextProps.filters !== this.props.filters) {
       dispatch(getPaperList());
-    }
-
-    if (nextProps.user.get('token') !== this.props.user.get('token')) {
-      dispatch(me());
     }
   }
 
