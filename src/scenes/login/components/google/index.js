@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { GOOGLE_LOGIN_URL_FETCH } from './api/constants';

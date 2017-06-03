@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
@@ -6,6 +6,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import moment from 'moment';
 
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
 

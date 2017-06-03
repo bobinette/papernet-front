@@ -1,9 +1,11 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 import { List } from 'immutable';
 
 import classNames from 'classnames';
 import moment from 'moment';
+
+import PropTypes from 'prop-types';
 
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';

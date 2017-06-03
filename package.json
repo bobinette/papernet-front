@@ -14,8 +14,14 @@
     "test": "npm run lint && npm run jest"
   },
   "jest": {
-    "moduleFileExtensions": ["js", "jsx"],
-    "moduleDirectories": ["node_modules", "src"],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
       "\\.(css|less|scss)$": "<rootDir>/mocks/styleMock.js"
@@ -96,9 +102,10 @@
     "mdi": "^1.6.50",
     "moment": "^2.17.1",
     "node-sass": "^3.12.2",
+    "prop-types": "^15.5.10",
     "qs": "^6.2.0",
     "rc-tooltip": "^3.4.2",
-    "react": "^15.4.0",
+    "react": "^15.5.4",
     "react-autosuggest": "^7.0.1",
     "react-clipboard.js": "^1.0.1",
     "react-cookie": "^1.0.4",

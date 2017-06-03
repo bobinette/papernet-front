@@ -1,9 +1,11 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 import ClipboardButton from 'react-clipboard.js';
 
 import classNames from 'classnames';
 import katex from 'katex';
+
+import PropTypes from 'prop-types';
 
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';

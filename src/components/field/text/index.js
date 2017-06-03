@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import Text from 'components/input/text';

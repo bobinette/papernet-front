@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import { toastr } from 'react-redux-toastr';
@@ -6,6 +6,7 @@ import { toastr } from 'react-redux-toastr';
 import Autosuggest from 'react-autosuggest';
 
 import 'whatwg-fetch';
+import PropTypes from 'prop-types';
 import qs from 'qs';
 import handleJSON from 'utils/actions/handleResponse';
 import { papernetURL } from 'utils/constants';
