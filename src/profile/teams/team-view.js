@@ -28,7 +28,7 @@ class TeamView extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.user !== this.props.user || nextProps.team !== this.props.team) {
       const userID = nextProps.user.get('id');
-      const admin = nextProps.team.get('members').find(m => m.get('id') === userID);
+      const admin = nextProps.team.get('members').find(m => m.get('id') === userID).get('admin');
       this.setState({ admin });
     }
   }
