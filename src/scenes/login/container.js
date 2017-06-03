@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
 import NavBar from 'components/navbar';
 
@@ -31,13 +29,7 @@ class LoginContainer extends Component {
 
     return (
       <div className="LoginContainer">
-        <NavBar
-          items={[
-            { element: <Link className="nav-link" to={'/papers'}>Home</Link>, active: true },
-            { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: false },
-            { element: <Link className="nav-link" to={'/imports'}>Imports</Link>, active: false },
-          ]}
-        />
+        <NavBar />
         <div className="LoginContainer container">
           <div className="col-md-10 offset-md-1">
             <LoginView

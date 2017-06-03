@@ -6,7 +6,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Link } from 'react-router';
 
 import FormField from 'components/field/form';
-import NavBar from 'components/navbar';
+import NavBar, { NAVBAR_HOME } from 'components/navbar';
 import TagList from 'components/input/taglist';
 
 import './view.scss';
@@ -102,11 +102,7 @@ class PaperEdit extends Component {
     return (
       <div className="PaperEdit container">
         <NavBar
-          items={[
-            { element: <Link className="nav-link" to={'/papers'}>Home</Link>, active: true },
-            { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: false },
-            { element: <Link className="nav-link" to={'/imports'}>Imports</Link>, active: false },
-          ]}
+          activeTab={NAVBAR_HOME}
           rightItems={[
             {
               element: (

@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { Link } from 'react-router';
 
 import { paperPropType } from 'utils/constants';
 
 import SearchBar from 'components/input/text/search-bar';
-import NavBar from 'components/navbar';
+import NavBar, { NAVBAR_ARXIV } from 'components/navbar';
 import Pagination from 'components/pagination';
 import Spinner from 'components/spinner';
 
@@ -66,11 +65,7 @@ ArxivList.propTypes = {
 const ArxivView = ({ arxiv, onChange, onImport, onOffsetChange, onSearch, search }) => (
   <div className="container">
     <NavBar
-      items={[
-        { element: <Link className="nav-link" to={'/papers'}>Home</Link>, active: false },
-        { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: true },
-        { element: <Link className="nav-link" to={'/imports'}>Imports</Link>, active: false },
-      ]}
+      activeTab={NAVBAR_ARXIV}
     />
     <div className="ArxivView__Content">
       <div className="ArxivView__Search col-md-8 offset-md-2">

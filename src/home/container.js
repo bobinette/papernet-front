@@ -6,7 +6,7 @@ import { List } from 'immutable';
 
 import { paginationPropType } from 'utils/constants';
 
-import NavBar from 'components/navbar';
+import NavBar, { NAVBAR_HOME } from 'components/navbar';
 
 import { bookmark, getPaperList, unbookmark } from './actions';
 import { UPDATE_FILTERS, UPDATE_HOME_OFFSET } from './constants';
@@ -79,11 +79,7 @@ class HomeContainer extends Component {
     return (
       <div className="HomeContainer">
         <NavBar
-          items={[
-            { element: <Link className="nav-link" to={'/papers'}>Home</Link>, active: true },
-            { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: false },
-            { element: <Link className="nav-link" to={'/imports'}>Imports</Link>, active: false },
-          ]}
+          activeTab={NAVBAR_HOME}
           rightItems={[
             { element: user.getIn(['token', 'token']) ?
               <Link className="btn btn-outline-primary" to={'/papers/new'}>New</Link>

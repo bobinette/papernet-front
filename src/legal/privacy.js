@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 import NavBar from 'components/navbar';
 
@@ -7,13 +6,7 @@ import './legal.scss';
 
 const PrivacyPolicy = () => (
   <div>
-    <NavBar
-      items={[
-        { element: <Link className="nav-link" to={'/papers'}>Home</Link>, active: true },
-        { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: false },
-        { element: <Link className="nav-link" to={'/imports'}>Imports</Link>, active: false },
-      ]}
-    />
+    <NavBar />
     <div className="Legal container col-md-8 offset-md-2">
       <h1>Papernet Privacy Policy</h1>
       <h6>Effective date: 2017/02/20</h6>

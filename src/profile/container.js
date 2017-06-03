@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import NavBar from 'components/navbar';
@@ -33,13 +32,7 @@ class ProfileContainer extends Component {
 
     return (
       <div className="ProfileContainer">
-        <NavBar
-          items={[
-            { element: <Link className="nav-link" to={'/papers'}>Home</Link>, active: true },
-            { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: false },
-            { element: <Link className="nav-link" to={'/imports'}>Imports</Link>, active: false },
-          ]}
-        />
+        <NavBar />
         <div className="ProfileContainer container">
           <div className="col-md-10 offset-md-1">
             <ProfileView

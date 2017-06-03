@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link, browserHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
@@ -11,7 +11,7 @@ import 'rc-tooltip/assets/bootstrap.css';
 
 import SplitDropdown from 'components/dropdown/split';
 import Markdown from 'components/markdown';
-import NavBar from 'components/navbar';
+import NavBar, { NAVBAR_HOME } from 'components/navbar';
 import TagList from 'components/taglist';
 
 import { teamPropType } from 'profile/teams/constants';
@@ -120,11 +120,7 @@ class PaperView extends Component {
     return (
       <div className="PaperView">
         <NavBar
-          items={[
-            { element: <Link className="nav-link" to={'/papers'}>Home</Link>, active: true },
-            { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: false },
-            { element: <Link className="nav-link" to={'/imports'}>Imports</Link>, active: false },
-          ]}
+          activeTab={NAVBAR_HOME}
           rightItems={[
             { element: (
               paper.get('id') && <SplitDropdown

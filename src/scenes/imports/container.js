@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
-import NavBar from 'components/navbar';
+import NavBar, { NAVBAR_IMPORTS } from 'components/navbar';
 
 // Old school
 import { savePaper } from 'paper/actions';
@@ -49,13 +48,7 @@ class ImportContainer extends Component {
     const { loading, imported, papers } = this.props;
     return (
       <div className="ImportContainer">
-        <NavBar
-          items={[
-        { element: <Link className="nav-link" to={'/papers'}>Home</Link>, active: false },
-        { element: <Link className="nav-link" to={'/arxiv'}>Arxiv</Link>, active: false },
-        { element: <Link className="nav-link" to={'/imports'}>Imports</Link>, active: true },
-          ]}
-        />
+        <NavBar activeTab={NAVBAR_IMPORTS} />
         <div className="container">
           <ImportView
             loading={loading}
