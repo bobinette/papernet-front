@@ -78,15 +78,9 @@ class HomeContainer extends Component {
 
     return (
       <div className="HomeContainer">
-        <NavBar
-          activeTab={NAVBAR_HOME}
-          rightItems={[
-            { element: user.getIn(['token', 'token']) ?
-              <Link className="btn btn-outline-primary" to={'/papers/new'}>New</Link>
-              : null,
-            },
-          ]}
-        />
+        <NavBar activeTab={NAVBAR_HOME}>
+          <Link className="btn btn-outline-primary" to={'/papers/new'}>New</Link>
+        </NavBar>
         <HomeView
           facets={facets}
           filters={filters}

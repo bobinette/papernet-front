@@ -48,7 +48,7 @@ const mapDispatchToProps = dispatch => ({
   onLogout: () => dispatch({ type: USER_SIGN_OUT }),
 });
 
-const NavBar = ({ activeTab, rightItems, onLogin, onLogout, user }) => (
+const NavBar = ({ activeTab, children, onLogin, onLogout, user }) => (
   <nav className="navbar navbar-fixed-top navbar-light">
     <div className="container">
       <Link className="navbar-brand NavBar__Brand" to={'/papers'}>
@@ -73,9 +73,6 @@ const NavBar = ({ activeTab, rightItems, onLogin, onLogout, user }) => (
         }
       </ul>
       <ul className="nav navbar-nav pull-xs-right NavBar__RightItems">
-        {rightItems.map((item, i) => (
-          <NavBar.Element active={item.active} element={item.element} key={i} />
-        ))}
         {
           user.getIn(['token', 'token']) ?
             <Dropdown
@@ -93,6 +90,9 @@ const NavBar = ({ activeTab, rightItems, onLogin, onLogout, user }) => (
             </li>
         }
       </ul>
+      <div className="nav navbar-nav pull-xs-right NavBar__Children">
+        {children}
+      </div>
     </div>
   </nav>
 );
@@ -104,10 +104,7 @@ NavBar.propTypes = {
     NAVBAR_IMPORTS,
     NAVBAR_NONE,
   ]),
-  rightItems: PropTypes.arrayOf(PropTypes.shape({
-    element: PropTypes.element,
-    active: PropTypes.bool,
-  })),
+  children: PropTypes.node,
   onLogin: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
   user: userPropType.isRequired,
@@ -115,7 +112,7 @@ NavBar.propTypes = {
 
 NavBar.defaultProps = {
   items: [],
-  rightItems: [],
+  children: null,
 };
 
 NavBar.Element = ({ active, element }) => {

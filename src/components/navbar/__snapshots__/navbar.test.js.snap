@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render children 1`] = `
+<nav
+  className="navbar navbar-fixed-top navbar-light"
+>
+  <div
+    className="container"
+  >
+    <a
+      className="navbar-brand NavBar__Brand"
+      onClick={[Function]}
+      style={Object {}}
+    >
+      <img
+        alt=""
+        className="d-inline-block align-top"
+        height="30"
+        src="test-file-stub"
+        width="30"
+      />
+      Papernet
+    </a>
+    <ul
+      className="nav navbar-nav NavBar__LeftItems"
+    >
+      <li
+        className="nav-item"
+      >
+        <a
+          className="nav-link"
+          onClick={[Function]}
+          style={Object {}}
+        >
+          Home
+        </a>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <a
+          className="nav-link"
+          onClick={[Function]}
+          style={Object {}}
+        >
+          Arxiv
+        </a>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <a
+          className="nav-link"
+          onClick={[Function]}
+          style={Object {}}
+        >
+          Imports
+        </a>
+      </li>
+    </ul>
+    <ul
+      className="nav navbar-nav pull-xs-right NavBar__RightItems"
+    >
+      <li
+        className="nav-item active"
+      >
+        <button
+          className="nav-link btn btn-link NavBar__LoginButton"
+          onClick={[Function]}
+        >
+          Sign in
+        </button>
+      </li>
+    </ul>
+    <div
+      className="nav navbar-nav pull-xs-right NavBar__Children"
+    >
+      <div
+        className="test"
+      >
+        This is a test
+      </div>
+      <a
+        className="link"
+        href="there"
+      >
+        Zelda
+      </a>
+    </div>
+  </div>
+</nav>
+`;

@@ -73,6 +73,20 @@ class PaperView extends Component {
     this.onCloseShareDialog();
   }
 
+  renderAuthors() {
+    const { paper } = this.props;
+    const authors = paper.get('authors') || List();
+
+    if (authors.size === 0) return null;
+
+    return (
+      <div>
+        <h2>Authors</h2>
+        <ul>{authors.map((author, i) => <li key={i}>{author}</li>)}</ul>
+      </div>
+    );
+  }
+
   renderReferences() {
     const { paper } = this.props;
     const references = paper.get('references') || List();
@@ -97,45 +111,36 @@ class PaperView extends Component {
     );
   }
 
-  renderAuthors() {
-    const { paper } = this.props;
-    const authors = paper.get('authors') || List();
+  renderSplitButton() {
+    const { onDelete, paper } = this.props;
 
-    if (authors.size === 0) return null;
+    if (!paper.get('id')) return null;
 
     return (
-      <div>
-        <h2>Authors</h2>
-        <ul>{authors.map((author, i) => <li key={i}>{author}</li>)}</ul>
-      </div>
+      <SplitDropdown
+        btnStyle="outline-primary"
+        onClick={() => browserHistory.push(`/papers/${paper.get('id')}/edit`)}
+        menu={[
+          <button key="share" className="btn dropdown-item" onClick={this.onOpenShareDialog}>Share</button>,
+          <div key="dropdown-divider-1" className="dropdown-divider" />,
+          <button key="delete" className="btn dropdown-item" onClick={onDelete}>Delete</button>,
+        ]}
+        title="Edit"
+      />
     );
   }
 
   render() {
-    const { onDelete, paper, teams } = this.props;
+    const { paper, teams } = this.props;
     const { shareWith } = this.state;
 
     const tags = paper.get('tags') || List();
 
     return (
       <div className="PaperView">
-        <NavBar
-          activeTab={NAVBAR_HOME}
-          rightItems={[
-            { element: (
-              paper.get('id') && <SplitDropdown
-                btnStyle="outline-primary"
-                onClick={() => browserHistory.push(`/papers/${paper.get('id')}/edit`)}
-                menu={[
-                  <button key="share" className="btn dropdown-item" onClick={this.onOpenShareDialog}>Share</button>,
-                  <div key="dropdown-divider-1" className="dropdown-divider" />,
-                  <button key="delete" className="btn dropdown-item" onClick={onDelete}>Delete</button>,
-                ]}
-                title="Edit"
-              />
-            ) },
-          ]}
-        />
+        <NavBar activeTab={NAVBAR_HOME}>
+          {this.renderSplitButton()}
+        </NavBar>
         { paper.get('id') &&
           <div>
             <div className="PaperView__Content row">

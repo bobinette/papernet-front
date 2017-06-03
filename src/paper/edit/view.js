@@ -99,26 +99,14 @@ class PaperEdit extends Component {
     const { paper, onChange, onSave } = this.props;
     const tags = paper.get('tags') || List();
 
+    const cancelUrl = paper.get('id') ? `/papers/${paper.get('id')}` : '/papers';
+
     return (
       <div className="PaperEdit container">
-        <NavBar
-          activeTab={NAVBAR_HOME}
-          rightItems={[
-            {
-              element: (
-                <Link
-                  className="nav-link"
-                  to={paper.get('id') ? `/papers/${paper.get('id')}` : 'papers'}
-                >
-                  Cancel
-                </Link>
-              ),
-            },
-            {
-              element: <button className="btn btn-outline-success" onClick={onSave}>Save</button>,
-            },
-          ]}
-        />
+        <NavBar activeTab={NAVBAR_HOME}>
+          <Link className="nav-link" to={cancelUrl}>Cancel</Link>
+          <button className="btn btn-outline-success" onClick={onSave}>Save</button>
+        </NavBar>
         <div className="PaperEdit__Content row">
           <TagList
             className="col-md-10 offset-md-1"

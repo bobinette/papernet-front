@@ -8,3 +8,11 @@
 .NavBar__Brand img {
     margin-right: 0.25rem;
 }
+
+.NavBar__Children {
+    display: flex;
+
+    > *:not(:last-child) {
+        margin-right: 0.5rem;
+    }
+}
