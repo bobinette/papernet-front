@@ -52,3 +52,14 @@ blockquote {
 li > p {
     margin-bottom: 0;
 }
+
+.btn-inverse-primary {
+    color: $body-bg;
+    border-color: $body-bg;
+    background: transparent;
+
+    &:hover {
+        color: $brand-primary;
+        background: $body-bg;
+    }
+}

@@ -105,8 +105,8 @@ class PaperEdit extends Component {
     return (
       <div className="PaperEdit container">
         <NavBar activeTab={NAVBAR_HOME}>
-          <Link className="nav-link" to={cancelUrl}>Cancel</Link>
-          <button className="btn btn-outline-success" onClick={onSave}>Save</button>
+          <Link className="nav-link btn btn-link" to={cancelUrl}>Cancel</Link>
+          <button className="btn btn-inverse-primary" onClick={onSave}>Save</button>
         </NavBar>
         <div className="PaperEdit__Content row">
           <TagList

@@ -118,7 +118,7 @@ class PaperView extends Component {
 
     return (
       <SplitDropdown
-        btnStyle="outline-primary"
+        btnStyle="inverse-primary"
         onClick={() => browserHistory.push(`/papers/${paper.get('id')}/edit`)}
         menu={[
           <button key="share" className="btn dropdown-item" onClick={this.onOpenShareDialog}>Share</button>,

@@ -1,8 +1,20 @@
+@import '../../style/_colors.scss';
 @import "~bootstrap/scss/_variables.scss";
 
-.navbar {
-	background: $body-bg;
-	box-shadow: 0 -2px 2px 2px $gray-dark;
+.nav-item > .nav-link{
+    color: lighten($gray-light, 30);
+
+    &:hover, &:focus {
+        color: $body-bg;
+    }
+}
+
+.navbar-brand, .nav-item.active > .nav-link {
+    color: $body-bg;
+
+    &:hover {
+        color: $body-bg;
+    }
 }
 
 .NavBar__Brand img {

@@ -2,7 +2,7 @@
 
 exports[`Render children 1`] = `
 <nav
-  className="navbar navbar-fixed-top navbar-light"
+  className="navbar navbar-fixed-top navbar-inverse bg-primary"
 >
   <div
     className="container"
@@ -73,7 +73,7 @@ exports[`Render children 1`] = `
       </li>
     </ul>
     <div
-      className="nav navbar-nav pull-xs-right NavBar__Children"
+      className="nav nav-item navbar-nav pull-xs-right NavBar__Children"
     >
       <div
         className="test"

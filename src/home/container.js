@@ -80,7 +80,7 @@ class HomeContainer extends Component {
     return (
       <div className="HomeContainer">
         <NavBar activeTab={NAVBAR_HOME}>
-          <Link className="btn btn-outline-primary" to={'/papers/new'}>New</Link>
+          <Link className="btn btn-inverse-primary" to={'/papers/new'}>New</Link>
         </NavBar>
         <HomeView
           facets={facets}

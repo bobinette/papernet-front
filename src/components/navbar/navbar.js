@@ -18,7 +18,7 @@ import {
 } from './constants';
 
 
-import logo from './logo.png';
+import logo from './logo-reversed.png';
 
 import './navbar.scss';
 
@@ -50,7 +50,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const NavBar = ({ activeTab, children, onLogin, onLogout, user }) => (
-  <nav className="navbar navbar-fixed-top navbar-light">
+  <nav className="navbar navbar-fixed-top navbar-inverse bg-primary">
     <div className="container">
       <Link className="navbar-brand NavBar__Brand" to={'/papers'}>
         <img
@@ -91,7 +91,7 @@ const NavBar = ({ activeTab, children, onLogin, onLogout, user }) => (
             </li>
         }
       </ul>
-      <div className="nav navbar-nav pull-xs-right NavBar__Children">
+      <div className="nav nav-item navbar-nav pull-xs-right NavBar__Children">
         {children}
       </div>
     </div>
