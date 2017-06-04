@@ -17,7 +17,7 @@ export const login = () => () => {
     },
     (err) => {
       toastr.error('', `Could not get auth urls: ${err.message ? err.message : null}`);
-    }
+    },
   );
 };
 
@@ -32,7 +32,7 @@ export const exchangeToken = (code, state) => (dispatch) => {
     },
     (err) => {
       toastr.error('', `Could not exchange token: ${err.message ? err.message : null}`);
-    }
+    },
   );
 };
 
@@ -53,7 +53,7 @@ export const me = () => (dispatch, getState) => {
     user => dispatch({ type: RECEIVE_USER, user }),
     (err) => {
       toastr.error('', `Could not load your profile: ${err.message ? err.message : null}`);
-    }
+    },
   );
 };
 

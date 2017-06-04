@@ -26,17 +26,17 @@ const tabs = [
   {
     label: 'Home',
     to: '/papers',
-    const: NAVBAR_HOME,
+    id: NAVBAR_HOME,
   },
   {
     label: 'Arxiv',
     to: '/arxiv',
-    const: NAVBAR_ARXIV,
+    id: NAVBAR_ARXIV,
   },
   {
     label: 'Imports',
     to: '/imports',
-    const: NAVBAR_IMPORTS,
+    id: NAVBAR_IMPORTS,
   },
 ];
 
@@ -64,10 +64,10 @@ const NavBar = ({ activeTab, children, onLogin, onLogout, user }) => (
       </Link>
       <ul className="nav navbar-nav NavBar__LeftItems">
         {
-          tabs.map((tab, i) => (
+          tabs.map(tab => (
             <NavBar.Element
-              key={i}
-              active={activeTab === tab.const}
+              key={tab.id}
+              active={activeTab === tab.id}
               element={<Link className="nav-link" to={tab.to}>{tab.label}</Link>}
             />
           ))
@@ -112,6 +112,7 @@ NavBar.propTypes = {
 };
 
 NavBar.defaultProps = {
+  activeTab: null,
   items: [],
   children: null,
 };
@@ -127,8 +128,8 @@ NavBar.Element = ({ active, element }) => {
 };
 
 NavBar.Element.propTypes = {
-  active: PropTypes.bool,
-  element: PropTypes.element,
+  active: PropTypes.bool.isRequired,
+  element: PropTypes.element.isRequired,
 };
 
 export { NavBar };

@@ -21,7 +21,7 @@ class TeamsContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     user: userPropType.isRequired,
-    teams: ImmutablePropTypes.listOf(teamPropType),
+    teams: ImmutablePropTypes.listOf(teamPropType).isRequired,
   };
 
   constructor(props) {

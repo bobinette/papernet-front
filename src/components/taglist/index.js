@@ -15,8 +15,8 @@ const TagList = ({ className, tags, max }) => {
   return (
     <div className={`TagList ${className}`}>
       <div className="TagList__Tags">
-        {maxedTags.map((tag, i) => (
-          <div className="TagList__Tag" key={i}>
+        {maxedTags.map(tag => (
+          <div className="TagList__Tag" key={tag}>
             <div>{tag}</div>
           </div>
         ))}

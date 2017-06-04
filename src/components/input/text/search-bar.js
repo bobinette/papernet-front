@@ -30,6 +30,7 @@ SearchBar.propTypes = {
 
 SearchBar.defaultProps = {
   className: '',
+  onKeyPress: null,
   placeholder: '',
 };
 

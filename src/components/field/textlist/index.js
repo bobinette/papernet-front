@@ -78,7 +78,7 @@ class TextList extends Component {
         />
         <ul className="TextList__Elements">
           {values.map((elt, i) => (
-            <li className="TextList__Element" key={i}>
+            <li className="TextList__Element" key={elt}>
               <span>{elt}</span>
               <button
                 className="fa fa-times"

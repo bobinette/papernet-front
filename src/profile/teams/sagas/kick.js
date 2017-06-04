@@ -13,7 +13,7 @@ function* kick(token, teamID, userID) {
 
     yield fetch(
       `${papernetURL}/auth/v2/teams/${teamID}/kick`,
-      { method: 'POST', headers, body: JSON.stringify({ userID }) }
+      { method: 'POST', headers, body: JSON.stringify({ userID }) },
     );
     yield put({ type: TEAMS_FETCH });
   } catch (error) {

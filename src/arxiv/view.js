@@ -34,7 +34,7 @@ const ArxivList = ({ arxiv, onImport, onOffsetChange }) => (
         :
         <ul className="container">
           {arxiv.get('list').map((paper, i) => (
-            <li className="col-md-12" key={i} >
+            <li className="col-md-12" key={paper.get('title')} >
               <ImportCard
                 onImport={() => onImport(i)}
                 paper={paper}

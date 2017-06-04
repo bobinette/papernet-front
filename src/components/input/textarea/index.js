@@ -34,7 +34,8 @@ class TextArea extends Component {
     return (
       <div className={`TextArea ${className}`}>
         <textarea
-          is autoresize={autoresize}
+          is
+          autoresize={autoresize}
           className="TextArea__InputField"
           onChange={this.onChange}
           placeholder={placeholder}

@@ -19,8 +19,8 @@ import './view.scss';
 const HomeList = ({ className, onBookmark, onOffsetChange, pagination, papers, user }) => (
   <div className={classNames(className, 'container')}>
     <ul className="HomeList col-md-12">
-      {papers.map((paper, i) => (
-        <li className="col-md-12" key={i} >
+      {papers.map(paper => (
+        <li className="col-md-12" key={paper.get('title')} >
           <PaperListViewRow paper={paper} user={user.get('user')} onBookmark={onBookmark} />
         </li>
       ))}

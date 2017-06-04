@@ -25,7 +25,7 @@ const mapStateToProps = state => ({
 class HomeContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    facets: ImmutablePropTypes.map,
+    facets: ImmutablePropTypes.map.isRequired,
     filters: ImmutablePropTypes.contains({
       bookmarked: PropTypes.bool,
     }).isRequired,

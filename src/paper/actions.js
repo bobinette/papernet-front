@@ -25,7 +25,7 @@ export const getPaper = id => (dispatch, getState) => {
       }
       toastr.error('', `Could not get paper: ${json.message ? json.message : null}`);
       return null;
-    }
+    },
   );
 };
 
@@ -60,7 +60,7 @@ export const savePaper = paper => (dispatch, getState) => {
     },
     ({ json }) => {
       toastr.error('', `Could not save paper: ${json.message ? json.message : null}`);
-    }
+    },
   );
 };
 
@@ -83,6 +83,6 @@ export const deletePaper = () => (dispatch, getState) => {
     },
     ({ json }) => {
       toastr.error('', `Could not delete paper: ${json.message ? json.message : null}`);
-    }
+    },
   );
 };

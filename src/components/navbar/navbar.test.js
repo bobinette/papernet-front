@@ -23,7 +23,7 @@ test('Render children', () => {
     >
       <div className="test">This is a test</div>
       <a className="link" href="there">Zelda</a>
-    </NavBar>
+    </NavBar>,
   );
 
   const tree = navbar.toJSON();
@@ -44,7 +44,7 @@ test('No user: should render the login button', () => {
       onLogin={onLogin}
       onLogout={onLogout}
       user={user}
-    />
+    />,
   );
 
   const dropdown = navbar.find('.NavBar__DropDown');
@@ -71,7 +71,7 @@ test('With user: should render the dropdown', () => {
       onLogin={onLogin}
       onLogout={onLogout}
       user={user}
-    />
+    />,
   );
 
   const button = navbar.find('.NavBar__LoginButton');

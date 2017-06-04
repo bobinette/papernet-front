@@ -21,16 +21,15 @@ import { paperPropType } from 'utils/constants';
 import './view.scss';
 
 const urlRegex = new RegExp(
-  /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/
+  /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/,
 );
 
 class PaperView extends Component {
-
   static propTypes = {
     onDelete: PropTypes.func.isRequired,
     onShare: PropTypes.func.isRequired,
     paper: paperPropType.isRequired,
-    teams: ImmutablePropTypes.listOf(teamPropType),
+    teams: ImmutablePropTypes.listOf(teamPropType).isRequired,
   };
 
   constructor(props) {
@@ -83,7 +82,7 @@ class PaperView extends Component {
     return (
       <div>
         <h2>Authors</h2>
-        <ul>{authors.map((author, i) => <li key={i}>{author}</li>)}</ul>
+        <ul>{authors.map(author => <li key={author}>{author}</li>)}</ul>
       </div>
     );
   }
@@ -99,12 +98,12 @@ class PaperView extends Component {
         <h2>References</h2>
         <ul>
           {
-            references.map((ref, i) => {
+            references.map((ref) => {
               let elt = ref;
               if (elt.match(urlRegex)) {
                 elt = <a href={ref}>{ref}</a>;
               }
-              return <li key={i}>{elt}</li>;
+              return <li key={ref}>{elt}</li>;
             })
           }
         </ul>

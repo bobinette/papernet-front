@@ -38,7 +38,7 @@ class ImportContainer extends Component {
 
     dispatch({ type: IMPORTS_IMPORT_START });
     Promise.all(papers.map(paper =>
-      dispatch(savePaper(paper))
+      dispatch(savePaper(paper)),
     )).then(
       () => dispatch({ type: IMPORTS_IMPORT_DONE }),
       () => dispatch({ type: IMPORTS_IMPORT_DONE }),

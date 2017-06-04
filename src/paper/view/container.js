@@ -28,7 +28,7 @@ class PaperViewContainer extends Component {
     params: PropTypes.shape({
       id: PropTypes.string,
     }).isRequired,
-    teams: ImmutablePropTypes.listOf(teamPropType),
+    teams: ImmutablePropTypes.listOf(teamPropType).isRequired,
     user: userPropType.isRequired,
   };
 
@@ -63,7 +63,7 @@ class PaperViewContainer extends Component {
 
   onDelete() {
     this.props.dispatch(deletePaper()).then(
-      () => { browserHistory.push('/papers'); }
+      () => { browserHistory.push('/papers'); },
     );
   }
 

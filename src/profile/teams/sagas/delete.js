@@ -14,7 +14,7 @@ function* deleteGen(token, teamID) {
 
     yield fetch(
       `${papernetURL}/auth/v2/teams/${teamID}`,
-      { method: 'DELETE', headers }
+      { method: 'DELETE', headers },
     );
     yield put({ type: TEAMS_FETCH });
   } catch (error) {

@@ -49,8 +49,8 @@ const ImportView = ({ loading, imported, onImport, papers }) => {
             </button>
           </div>
           <ul>{
-              papers.map((paper, i) => (
-                <li key={i}>
+              papers.map(paper => (
+                <li key={paper.get('title')}>
                   <ImportViewRow paper={paper} />
                 </li>
               ))

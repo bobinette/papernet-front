@@ -85,7 +85,8 @@ class MarkdownInput extends Component {
           <Markdown text={value} />
           :
           <TextArea
-            is autoresize={autoresize}
+            is
+            autoresize={autoresize}
             className="TextArea__InputField"
             onChange={onChange}
             placeholder={placeholder}

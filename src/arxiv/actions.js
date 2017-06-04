@@ -45,7 +45,7 @@ export const search = () => (dispatch, getState) => {
     (err) => {
       dispatch({ type: STOP_LOADING });
       toastr.error('', `Could not search: ${err.message ? err.message : null}`);
-    }
+    },
   );
 };
 
@@ -57,6 +57,6 @@ export const importPaper = index => (dispatch, getState) => {
     (id) => {
       const list = getState().arxiv.get('list').setIn([index, 'id'], id);
       return dispatch({ type: RECEIVE_ARXIV, list, total: getState().arxiv.getIn(['pagination', 'total']) });
-    }
+    },
   );
 };

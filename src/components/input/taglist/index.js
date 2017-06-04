@@ -74,7 +74,7 @@ class TagList extends Component {
       },
       (err) => {
         toastr.error('', `Could not retrieve tags: ${err.message ? err.message : null}`);
-      }
+      },
     );
   }
 
@@ -111,7 +111,7 @@ class TagList extends Component {
         />
         <div className="TagList__Tags">
           {value.map((tag, i) => (
-            <div className="TagList__Tag" key={i}>
+            <div className="TagList__Tag" key={tag}>
               <div>{tag}</div>
               <button
                 className="fa fa-times"

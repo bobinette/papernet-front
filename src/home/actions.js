@@ -36,7 +36,7 @@ export const getPaperList = () => (dispatch, getState) => {
     },
     (err) => {
       toastr.error('', `Could not load your papers: ${err.message ? err.message : null}`);
-    }
+    },
   );
 };
 
@@ -57,7 +57,7 @@ export const bookmark = id => (dispatch, getState) => {
     },
     (err) => {
       toastr.error('', `Could not bookmark: ${err.message ? err.message : null}`);
-    }
+    },
   );
 };
 
@@ -78,6 +78,6 @@ export const unbookmark = id => (dispatch, getState) => {
     },
     (err) => {
       toastr.error('', `Could not unbookmark: ${err.message ? err.message : null}`);
-    }
+    },
   );
 };

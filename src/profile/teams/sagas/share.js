@@ -14,7 +14,7 @@ function* share(token, teamID, paperID) {
 
     yield fetch(
       `${papernetURL}/auth/v2/teams/${teamID}/share`,
-      { method: 'POST', headers, body: JSON.stringify({ paperID, canEdit: true }) }
+      { method: 'POST', headers, body: JSON.stringify({ paperID, canEdit: true }) },
     );
     yield put({ type: TEAMS_FETCH });
   } catch (error) {

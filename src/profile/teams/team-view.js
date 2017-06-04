@@ -11,8 +11,8 @@ class TeamView extends Component {
     onDelete: PropTypes.func.isRequired,
     onInvite: PropTypes.func.isRequired,
     onKick: PropTypes.func.isRequired,
-    team: teamPropType,
-    user: userPropType,
+    team: teamPropType.isRequired,
+    user: userPropType.isRequired,
   };
 
   constructor(props) {

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import classNames from 'classnames';
@@ -28,83 +28,80 @@ LabelledField.propTypes = {
   form: FormPropType.isRequired,
 };
 
-class FormField extends Component {
-  static propTypes = {
-    form: FormPropType.isRequired,
-    onChange: PropTypes.func.isRequired,
-    value: ImmutablePropTypes.map.isRequired,
-  };
-
-  render() {
-    const { form, onChange, value } = this.props;
-
-    let component;
-    switch (form.type) {
-      case 'button':
-        return (
-          <button
-            className={classNames('btn btn-primary', form.extra.className)}
-            onClick={form.extra.onClick}
-          >
-            {form.extra.label}
-          </button>
-        );
-      case 'list':
-        component = (
-          <div className={form.extra.className ? form.extra.className : ''}>
-            {form.children.map((child, key) => (
-              <FormField
-                key={key}
-                form={child}
-                onChange={onChange}
-                value={value}
-              />
-            ))}
-          </div>
-        );
-        break;
-      case 'markdown':
-        component = (
-          <MarkdownForm
-            extra={form.extra}
-            onChange={onChange}
-            value={value}
-            valueKey={form.valueKey}
-          />
-        );
-        break;
-      case 'text':
-        component = (
-          <TextForm
-            extra={form.extra}
-            onChange={onChange}
-            value={value}
-            valueKey={form.valueKey}
-          />
-        );
-        break;
-      case 'textlist':
-        component = (
-          <TextListForm
-            extra={form.extra}
-            onChange={onChange}
-            value={value}
-            valueKey={form.valueKey}
-          />
-        );
-        break;
-      default:
-        console.error(`Invalid form type: "${form.type}" for key "${form.valueKey}"`); // eslint-disable-line no-console
-        return null;
-    }
-
-    return (
-      <LabelledField
-        component={component}
-        form={form}
-      />
-    );
+const FormField = ({ form, onChange, value }) => {
+  let component;
+  switch (form.type) {
+    case 'button':
+      return (
+        <button
+          className={classNames('btn btn-primary', form.extra.className)}
+          onClick={form.extra.onClick}
+        >
+          {form.extra.label}
+        </button>
+      );
+    case 'list':
+      component = (
+        <div className={form.extra.className ? form.extra.className : ''}>
+          {form.children.map(child => (
+            <FormField
+              key={child.valueKey.join('.')}
+              form={child}
+              onChange={onChange}
+              value={value}
+            />
+          ))}
+        </div>
+      );
+      break;
+    case 'markdown':
+      component = (
+        <MarkdownForm
+          extra={form.extra}
+          onChange={onChange}
+          value={value}
+          valueKey={form.valueKey}
+        />
+      );
+      break;
+    case 'text':
+      component = (
+        <TextForm
+          extra={form.extra}
+          onChange={onChange}
+          value={value}
+          valueKey={form.valueKey}
+        />
+      );
+      break;
+    case 'textlist':
+      component = (
+        <TextListForm
+          extra={form.extra}
+          onChange={onChange}
+          value={value}
+          valueKey={form.valueKey}
+        />
+      );
+      break;
+    default:
+      console.error(`Invalid form type: "${form.type}" for key "${form.valueKey}"`); // eslint-disable-line no-console
+      return null;
   }
-}
+
+  return (
+    <LabelledField
+      component={component}
+      form={form}
+    />
+  );
+};
+
+
+FormField.propTypes = {
+  form: FormPropType.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: ImmutablePropTypes.map.isRequired,
+};
 
 export default FormField;

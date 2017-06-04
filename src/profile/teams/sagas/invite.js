@@ -14,7 +14,7 @@ function* invite(token, teamID, email) {
 
     yield fetch(
       `${papernetURL}/auth/v2/teams/${teamID}/invite`,
-      { method: 'POST', headers, body: JSON.stringify({ email }) }
+      { method: 'POST', headers, body: JSON.stringify({ email }) },
     );
     yield put({ type: TEAMS_FETCH });
   } catch (error) {

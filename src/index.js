@@ -70,7 +70,7 @@ const sagaMiddleware = createSagaMiddleware();
 const middlewares = compose(
   applyMiddleware(thunkMiddleware),
   applyMiddleware(sagaMiddleware),
-  window.devToolsExtension ? window.devToolsExtension() : f => f
+  window.devToolsExtension ? window.devToolsExtension() : f => f,
 );
 const store = createStore(reducer, middlewares);
 sagaMiddleware.run(rootSaga);
@@ -111,5 +111,5 @@ ReactDOM.render(
       />
     </App>
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('app'),
 );

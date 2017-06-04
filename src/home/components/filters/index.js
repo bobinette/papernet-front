@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 
 import classNames from 'classnames';
 
@@ -74,6 +74,7 @@ HomeFilters.propTypes = {
 
 HomeFilters.defaultProps = {
   className: '',
+  facets: Map(),
 };
 
 export default HomeFilters;

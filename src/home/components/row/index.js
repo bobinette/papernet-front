@@ -87,9 +87,9 @@ const PaperListViewRow = ({ onBookmark, paper, user }) => {
 };
 
 PaperListViewRow.propTypes = {
-  onBookmark: PropTypes.func,
+  onBookmark: PropTypes.func.isRequired,
   paper: paperPropType.isRequired,
-  user: userPropType,
+  user: userPropType.isRequired,
 };
 
 export default PaperListViewRow;

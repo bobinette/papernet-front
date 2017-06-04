@@ -61,7 +61,7 @@ class PaperEditContainer extends Component {
   onSave() {
     const { dispatch, paper } = this.props;
     dispatch(savePaper(paper)).then(
-      (paperId) => { browserHistory.push(`/papers/${paperId}`); }
+      (paperId) => { browserHistory.push(`/papers/${paperId}`); },
     );
   }
 
