@@ -9,8 +9,6 @@
     "jest": "jest src",
     "jest:u": "jest -u src",
     "lint": "eslint ./src",
-    "mocha": "BABEL_ENV=test NODE_PATH=\"$PWD:$PWD/src\" mocha --opts mocha.opts",
-    "mocha:watch": "npm run test -- --watch --watch-extensions js",
     "test": "npm run lint && npm run jest"
   },
   "jest": {

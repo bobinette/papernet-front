@@ -1,4 +1,0 @@
---compilers scss:tests/compiler,js:babel-core/register
---require tests/setup
---require tests/chai
-tests/**/*.spec.js
