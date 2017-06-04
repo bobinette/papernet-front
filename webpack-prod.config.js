@@ -1,66 +1,31 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
 
-module.exports = {
-  devtool: null,
-  entry: [
-    'babel-polyfill',
-    './src/index.js'
-  ],
-  output: {
-    path: path.join(__dirname, 'app'),
-    filename: 'bundle.js',
-    publicPath: '/app/',
-  },
-  module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'babel'
-    }, {
-      test: /\.css$/,
-      loader: 'style!css'
-    }, {
-      test: /\.scss$/,
-      loaders: ['style', 'css', 'sass']
-    }, {
-      test: /\.less$/,
-      loader: 'style!css!less'
-    }, {
-      test: /\.json$/,
-      loader: 'json-loader'
-    },
-    {
-      test: /\.(png|jpg)$/,
-      loader: 'file-loader?name=assets/[name].[ext]',
-    },
-    {
-      test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'url?limit=10000&mimetype=application/font-woff'
-    },
-    {
-      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'url?limit=10000&mimetype=application/octet-stream'
-    },
-    {
-      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'file',
-    },
-    {
-      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-      loader: 'url?limit=10000&mimetype=image/svg+xml'
-    }],
-  },
-  resolve: {
-    modulesDirectories: ['./node_modules', './src', './assets'],
-    extensions: ['', '.js', '.jsx', '.json', '.scss', '.png']
-  },
+const webpackMerge = require('webpack-merge');
+const commonConfig = require('./webpack.common');
+
+module.exports = webpackMerge(commonConfig, {
+  devtool: false,
   plugins: [
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false,
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
       },
       'process.env.PAPERNET_HOST': JSON.stringify('https://bobi.space'),
     }),
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true,
+      },
+      compress: {
+        screw_ie8: true,
+      },
+      comments: false,
+    }),
   ],
-};
+});
