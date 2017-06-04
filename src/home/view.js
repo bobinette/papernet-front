@@ -89,23 +89,16 @@ class HomeView extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.onSearch = ::this.onSearch;
     this.onSearchChange = ::this.onSearchChange;
 
     this.state = { search: props.filters.get('q') };
   }
 
   onSearchChange(search) {
+    const { onFilterChange } = this.props;
+    onFilterChange('q', search);
+
     this.setState({ search });
-  }
-
-  onSearch(e) {
-    if (e.key === 'Enter') {
-      const { onFilterChange } = this.props;
-      const { search } = this.state;
-
-      onFilterChange('q', search);
-    }
   }
 
   render() {
@@ -145,7 +138,6 @@ class HomeView extends PureComponent {
           <SearchBar
             className="col-md-8 offset-md-2"
             onChange={this.onSearchChange}
-            onKeyPress={this.onSearch}
             placeholder="Search by title or tags..."
             value={search}
           />
