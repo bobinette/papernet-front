@@ -1,6 +1,6 @@
 const webpack = require('webpack');
-
 const webpackMerge = require('webpack-merge');
+
 const commonConfig = require('./webpack.common');
 
 module.exports = webpackMerge(commonConfig, {
@@ -14,7 +14,6 @@ module.exports = webpackMerge(commonConfig, {
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
       },
-      'process.env.PAPERNET_HOST': JSON.stringify('https://bobi.space'),
     }),
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,

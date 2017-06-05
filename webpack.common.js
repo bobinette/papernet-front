@@ -7,27 +7,22 @@ const chalk = require('chalk');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 module.exports = {
-  entry: [
-    'babel-polyfill',
-    'webpack-dev-server/client?http://0.0.0.0:8080',
-    './src/index.js',
-  ],
+  entry: {
+    bundle: [
+      'babel-polyfill',
+      './src/index.js',
+    ],
+  },
   output: {
     path: path.join(__dirname, '/app'),
-    publicPath: '/app',
+    publicPath: '/app/',
     sourceMapFilename: '[file].map',
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
   resolve: {
     modules: ['./node_modules', './src', './assets'],
     extensions: ['.js', '.jsx', '.json', '.scss', '.png', '.svg'],
   },
-  devServer: {
-    contentBase: './src',
-    hot: true,
-    historyApiFallback: true,
-  },
-  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -73,13 +68,31 @@ module.exports = {
     ],
   },
   plugins: [
+    // Nicer display when building
     new ProgressBarPlugin({
       format: `  build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
       clear: false,
     }),
-    new ExtractTextPlugin('styles.css'),
-    new webpack.DefinePlugin({
-      'process.env.PAPERNET_HOST': JSON.stringify('http://127.0.0.1:1705'),
+
+    // Code splitting
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.js',
+      minChunks(module) {
+        // this assumes your vendor imports exist in the node_modules directory
+        return module.context && module.context.indexOf('node_modules') !== -1;
+      },
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      // But since there are no more common modules between them we end up with just the runtime code included
+      // in the manifest file
+      name: 'manifest',
+    }),
+
+    // Extract css files to have a lighter bundle
+    new ExtractTextPlugin({
+      filename: '[name].css',
+      allChunks: true,
     }),
   ],
 };
