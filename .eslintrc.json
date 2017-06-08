@@ -6,7 +6,11 @@
   ],
   "settings": {
     "import/parser": "babel-eslint",
-    "import/resolver": "webpack"
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.dev.js"
+      }
+    }
   },
   "parser": "babel-eslint",
   "env": {
