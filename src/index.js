@@ -46,6 +46,7 @@ import Footer from 'components/footer';
 // Scenes
 import ImportContainer, { importsReducer } from 'scenes/imports';
 import LoginContainer, { GoogleLogin, loginReducer } from 'scenes/login';
+import SearchScene, { searchReducer } from 'scenes/search';
 
 // Reducers
 import authReducer from 'services/auth/reducer';
@@ -62,6 +63,7 @@ const reducers = {
   login: loginReducer,
   paper: paperReducer,
   profile: profileReducer,
+  search: searchReducer,
   toastr: toastrReducer,
   user: userReducer,
 };
@@ -94,6 +96,7 @@ ReactDOM.render(
             <Route path="google" component={GoogleLoggedIn} />
           </Route>
           <Route path="arxiv" component={ArxivContainer} />
+          <Route path="search" component={SearchScene} />
           <Route path="imports" component={ImportContainer} />
           <Route path="privacy" component={Privacy} />
           <Route path="terms-of-use" component={TermsOfUse} />

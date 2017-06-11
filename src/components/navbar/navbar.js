@@ -14,6 +14,7 @@ import {
   NAVBAR_ARXIV,
   NAVBAR_HOME,
   NAVBAR_IMPORTS,
+  NAVBAR_SEARCH,
   NAVBAR_NONE,
 } from './constants';
 
@@ -32,6 +33,11 @@ const tabs = [
     label: 'Arxiv',
     to: '/arxiv',
     id: NAVBAR_ARXIV,
+  },
+  {
+    label: 'Search',
+    to: '/search',
+    id: NAVBAR_SEARCH,
   },
   {
     label: 'Imports',
