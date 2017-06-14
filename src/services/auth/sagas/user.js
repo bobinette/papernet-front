@@ -1,5 +1,6 @@
 import { call, fork, put, take } from 'redux-saga/effects';
 import { browserHistory } from 'react-router';
+import cookie from 'react-cookie';
 
 import authApi from 'api/auth';
 
@@ -25,6 +26,7 @@ function* fetchUser(token) {
 
 function signOut() {
   browserHistory.push('/');
+  cookie.remove('access_token', { path: '/' });
 }
 
 // eslint-disable-next-line import/prefer-default-export

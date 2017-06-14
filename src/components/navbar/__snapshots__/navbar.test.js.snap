@@ -54,6 +54,17 @@ exports[`Render children 1`] = `
           onClick={[Function]}
           style={Object {}}
         >
+          Search
+        </a>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <a
+          className="nav-link"
+          onClick={[Function]}
+          style={Object {}}
+        >
           Imports
         </a>
       </li>

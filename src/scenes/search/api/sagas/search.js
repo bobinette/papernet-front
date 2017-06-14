@@ -9,9 +9,9 @@ import {
   SEARCH_UPDATE_OFFSET,
 } from '../constants';
 
-function* search(q, limit, offset, sources) {
+function* search(token, q, limit, offset, sources) {
   yield put({ type: SEARCH_LOADING_START });
-  const { response, error } = yield call(searchApi.search, q, limit, offset, sources);
+  const { response, error } = yield call(searchApi.search, token, q, limit, offset, sources);
   yield put({ type: SEARCH_LOADING_STOP });
 
   if (error) {
@@ -26,7 +26,8 @@ export function* watchSearchSaga() {
   // eslint-disable-next-line no-constant-condition
   while (true) {
     const { q, limit, offset, sources } = yield take(SEARCH_GO);
-    yield fork(search, q, limit, offset, sources);
+    const token = yield select(state => (state.auth.getIn(['token', 'token'])));
+    yield fork(search, token, q, limit, offset, sources);
   }
 }
 
@@ -34,7 +35,8 @@ export function* watchUpdateOffsetSaga() {
   // eslint-disable-next-line no-constant-condition
   while (true) {
     const { offset, source } = yield take(SEARCH_UPDATE_OFFSET);
+    const token = yield select(state => (state.auth.getIn(['token', 'token'])));
     const q = yield select(state => state.search.get('q'));
-    yield fork(search, q, 0, offset, [source]);
+    yield fork(search, token, q, 0, offset, [source]);
   }
 }
