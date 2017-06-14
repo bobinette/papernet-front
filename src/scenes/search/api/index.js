@@ -11,4 +11,19 @@ export default {
       return { error };
     }
   },
+  async importPaper(token, paper) {
+    const headers = new Headers({
+      Authorization: `Bearer ${token}`,
+    });
+
+    try {
+      const response = await fetch(
+        '/imports/v2/import',
+        { method: 'POST', headers, body: JSON.stringify(paper.toJS()) },
+      );
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
 };

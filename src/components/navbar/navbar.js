@@ -109,6 +109,7 @@ NavBar.propTypes = {
     NAVBAR_ARXIV,
     NAVBAR_HOME,
     NAVBAR_IMPORTS,
+    NAVBAR_SEARCH,
     NAVBAR_NONE,
   ]),
   children: PropTypes.node,

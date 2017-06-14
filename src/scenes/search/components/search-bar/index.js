@@ -2,9 +2,13 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import Input from 'components/input/text/search-bar';
+import classNames from 'classnames';
+
+import Text from 'components/input/text';
 
 import { SEARCH_GO, SEARCH_UPDATE_Q } from '../../api/constants';
+
+import './search-bar.scss';
 
 const mapDispatchToProps = dispatch => ({
   onChange: q => dispatch({ type: SEARCH_UPDATE_Q, q }),
@@ -36,14 +40,28 @@ class SearchBar extends PureComponent {
 
   render() {
     const { q, onChange } = this.props;
+
     return (
-      <div>
-        <Input
-          onChange={onChange}
-          onKeyPress={this.onKeyPress}
-          placeholder="Search..."
-          value={q}
-        />
+      <div className="container">
+        <div className="col-md-10 offset-md-1">
+          <div className="SearchBar">
+            <Text
+              className="SearchBar__Input"
+              onChange={onChange}
+              onKeyPress={this.onKeyPress}
+              placeholder={'Search...'}
+              value={q}
+            />
+            <i className={classNames('fa', { 'fa-search': !q, 'fa-level-down fa-rotate-90': q })} />
+          </div>
+          <div className={classNames(
+            'text-muted SearchScene__SearchBar__Help',
+            { 'SearchScene__SearchBar__Help--show': q },
+          )}
+          >
+            <small>Press enter to search</small>
+          </div>
+        </div>
       </div>
     );
   }

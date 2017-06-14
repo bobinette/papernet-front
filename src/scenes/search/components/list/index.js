@@ -1,8 +1,12 @@
-import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import Pagination from 'components/pagination';
+
+import SearchListRow from './components/row';
+
+import './list.scss';
 
 const arxivLimit = 50000;
 
@@ -12,8 +16,8 @@ const paperPropType = ImmutablePropTypes.contains({
   reference: PropTypes.string.isRequired,
   source: PropTypes.string.isRequired,
 
-  title: ImmutablePropTypes.string.isRequired,
-  summary: ImmutablePropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  summary: PropTypes.string.isRequired,
   authors: ImmutablePropTypes.listOf(PropTypes.string),
   tags: ImmutablePropTypes.listOf(PropTypes.string),
   references: ImmutablePropTypes.listOf(PropTypes.string),
@@ -45,8 +49,10 @@ class SearchList extends PureComponent {
   render() {
     const { pagination, papers } = this.props;
 
+    if (!pagination || !papers) return null;
+
     return (
-      <div>
+      <div className="SearchList">
         <Pagination
           pagination={pagination}
           onChange={this.onOffsetChange}
@@ -62,10 +68,10 @@ class SearchList extends PureComponent {
               <a href="https://groups.google.com/forum/#!msg/arxiv-api/DCfTl4jj7j0/WN6l6MG-tz4J">here</a>
             </large>
             :
-            <ul className="container">
+            <ul className="container row">
               {papers.map(paper => (
-                <li className="col-md-12" key={paper.get('title')} >
-                  {paper.get('title')}
+                <li key={paper.get('title')} >
+                  <SearchListRow paper={paper} />
                 </li>
               ))}
             </ul>

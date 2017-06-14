@@ -1,7 +1,7 @@
 import { call, fork, put, take } from 'redux-saga/effects';
 
 import searchApi from '../.';
-import { SEARCH_GO } from '../constants';
+import { SEARCH_GO, SEARCH_RECEIVE } from '../constants';
 
 function* search(q, limit, offset, sources) {
   const { response, error } = yield call(searchApi.search, q, limit, offset, sources);
@@ -10,8 +10,7 @@ function* search(q, limit, offset, sources) {
     return;
   }
 
-  console.log(response);
-  // yield put({ type: IMPORTS_PAPERS_RECEIVED, papers });
+  yield put({ type: SEARCH_RECEIVE, results: response });
 }
 
 // eslint-disable-next-line import/prefer-default-export

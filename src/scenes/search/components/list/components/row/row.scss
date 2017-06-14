@@ -1,0 +1,43 @@
+@import "~bootstrap/scss/_variables.scss";
+
+.SearchListRow {
+	a {
+		&:visited {
+			text-decoration: none;
+		}
+
+		&:hover {
+			text-decoration: none;
+			cursor: pointer;
+		}
+	}
+
+	p {
+		margin-bottom: 0;
+	}
+
+	.SearchListRow__Tags {
+		display: flex;
+		align-items: center;
+		flex: 1;
+
+		.fa-tag {
+			margin-left: 3px;
+		}
+	}
+
+	.card-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.SearchListRow__Links {
+		margin-top: 5px;
+		margin-bottom: 5px;
+
+		.btn:not(:last-child) {
+			margin-right: 10px;
+		}
+	}
+}
