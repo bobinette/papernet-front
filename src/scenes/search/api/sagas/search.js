@@ -1,10 +1,19 @@
 import { call, fork, put, select, take } from 'redux-saga/effects';
 
 import searchApi from '../.';
-import { SEARCH_GO, SEARCH_RECEIVE, SEARCH_UPDATE_OFFSET } from '../constants';
+import {
+  SEARCH_GO,
+  SEARCH_LOADING_START,
+  SEARCH_LOADING_STOP,
+  SEARCH_RECEIVE,
+  SEARCH_UPDATE_OFFSET,
+} from '../constants';
 
 function* search(q, limit, offset, sources) {
+  yield put({ type: SEARCH_LOADING_START });
   const { response, error } = yield call(searchApi.search, q, limit, offset, sources);
+  yield put({ type: SEARCH_LOADING_STOP });
+
   if (error) {
     console.error(error);
     return;

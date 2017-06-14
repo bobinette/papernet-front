@@ -1,9 +1,16 @@
 import { fromJS } from 'immutable';
 
-import { SEARCH_IMPORTED, SEARCH_UPDATE_Q, SEARCH_RECEIVE } from './constants';
+import {
+  SEARCH_IMPORTED,
+  SEARCH_LOADING_START,
+  SEARCH_LOADING_STOP,
+  SEARCH_UPDATE_Q,
+  SEARCH_RECEIVE,
+} from './constants';
 
 const initialState = fromJS({
   q: '',
+  loading: false,
   results: {},
 });
 
@@ -30,6 +37,12 @@ export default (state = initialState, action) => {
       break;
     case SEARCH_UPDATE_Q:
       newState = newState.set('q', action.q);
+      break;
+    case SEARCH_LOADING_START:
+      newState = newState.set('loading', true);
+      break;
+    case SEARCH_LOADING_STOP:
+      newState = newState.set('loading', false);
       break;
     default:
   }
