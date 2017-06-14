@@ -1,5 +1,9 @@
 .Pagination {
-	text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .Pagination__Pages {

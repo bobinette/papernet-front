@@ -42,7 +42,7 @@ class SearchBar extends PureComponent {
     const { q, onChange } = this.props;
 
     return (
-      <div className="container">
+      <div className="container SearchScene__SearchBar">
         <div className="col-md-10 offset-md-1">
           <div className="SearchBar">
             <Text
