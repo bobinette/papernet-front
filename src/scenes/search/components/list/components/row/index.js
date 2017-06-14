@@ -15,7 +15,7 @@ import TagList from 'components/taglist';
 
 import { paperPropType } from 'utils/constants';
 
-import { SEARCH_IMPORT } from 'scenes/search/api/constants';
+import { SEARCH_IMPORT } from '../../../../api/constants';
 
 import './row.scss';
 

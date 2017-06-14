@@ -13,7 +13,6 @@ function* importPaper(token, paper) {
   yield put({ type: SEARCH_IMPORTED, paper: response });
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export default function* watchImportPaperSaga() {
   // eslint-disable-next-line no-constant-condition
   while (true) {

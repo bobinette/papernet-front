@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { connect } from 'react-redux';
 
 import Pagination from 'components/pagination';
 
 import SearchListRow from './components/row';
+
+import { SEARCH_UPDATE_OFFSET } from '../../api/constants';
 
 import './list.scss';
 
@@ -23,9 +26,14 @@ const paperPropType = ImmutablePropTypes.contains({
   references: ImmutablePropTypes.listOf(PropTypes.string),
 });
 
+const mapDispatchToProps = dispatch => ({
+  onChangeOffset: (source, offset) => dispatch({ type: SEARCH_UPDATE_OFFSET, source, offset }),
+});
+
 class SearchList extends PureComponent {
 
   static propTypes = {
+    onChangeOffset: PropTypes.func.isRequired,
     papers: ImmutablePropTypes.listOf(paperPropType).isRequired,
     pagination: ImmutablePropTypes.contains({
       limit: PropTypes.number,
@@ -42,8 +50,8 @@ class SearchList extends PureComponent {
   }
 
   onOffsetChange(offset) {
-    const { source } = this.props;
-    console.log(offset, source);
+    const { onChangeOffset, source } = this.props;
+    onChangeOffset(source, offset);
   }
 
   render() {
@@ -85,4 +93,4 @@ class SearchList extends PureComponent {
   }
 }
 
-export default SearchList;
+export default connect(null, mapDispatchToProps)(SearchList);

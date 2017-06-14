@@ -1,8 +1,8 @@
 import { fork } from 'redux-saga/effects';
 
 // Gather the scene sagas
-import watchImportPaperSagas from './import';
-import watchSearchSagas from './search';
+import watchImportPaperSaga from './import';
+import { watchSearchSaga, watchUpdateOffsetSaga } from './search';
 
 // Gather the sub-scenes sagas
 
@@ -11,8 +11,9 @@ import watchSearchSagas from './search';
 export default function* sagas() {
   yield [
     // Scene
-    fork(watchImportPaperSagas),
-    fork(watchSearchSagas),
+    fork(watchImportPaperSaga),
+    fork(watchSearchSaga),
+    fork(watchUpdateOffsetSaga),
 
     // Sub-scenes
 

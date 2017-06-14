@@ -18,7 +18,15 @@ export default (state = initialState, action) => {
       break;
     }
     case SEARCH_RECEIVE:
-      newState = newState.set('results', fromJS(action.results));
+      if (action.sources) {
+        newState = newState.withMutations((s) => {
+          action.sources.forEach((source) => {
+            s.setIn(['results', source], fromJS(action.results[source]));
+          });
+        });
+      } else {
+        newState = newState.set('results', fromJS(action.results));
+      }
       break;
     case SEARCH_UPDATE_Q:
       newState = newState.set('q', action.q);
