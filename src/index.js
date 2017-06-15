@@ -80,29 +80,31 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
   <Provider store={store}>
     <App>
-      <Router history={browserHistory}>
-        <Route path="/">
-          <IndexRedirect to="/papers" />
-          <Route path="papers" component={HomeContainer} />
-          <Route path="papers/new" component={PaperEditContainer} />
-          <Route path="papers/:id" component={PaperViewContainer} />
-          <Route path="papers/:id/edit" component={PaperEditContainer} />
-          <Route path="login">
-            <IndexRoute component={LoginContainer} />
-            <Route path="google" component={GoogleLogin} />
+      <div className="Router">
+        <Router history={browserHistory}>
+          <Route path="/">
+            <IndexRedirect to="/papers" />
+            <Route path="papers" component={HomeContainer} />
+            <Route path="papers/new" component={PaperEditContainer} />
+            <Route path="papers/:id" component={PaperViewContainer} />
+            <Route path="papers/:id/edit" component={PaperEditContainer} />
+            <Route path="login">
+              <IndexRoute component={LoginContainer} />
+              <Route path="google" component={GoogleLogin} />
+            </Route>
+            <Route path="auth">
+              <IndexRedirect to="/auth/google" />
+              <Route path="google" component={GoogleLoggedIn} />
+            </Route>
+            <Route path="arxiv" component={ArxivContainer} />
+            <Route path="search" component={SearchScene} />
+            <Route path="imports" component={ImportContainer} />
+            <Route path="privacy" component={Privacy} />
+            <Route path="terms-of-use" component={TermsOfUse} />
+            <Route path="profile" component={ProfileContainer} />
           </Route>
-          <Route path="auth">
-            <IndexRedirect to="/auth/google" />
-            <Route path="google" component={GoogleLoggedIn} />
-          </Route>
-          <Route path="arxiv" component={ArxivContainer} />
-          <Route path="search" component={SearchScene} />
-          <Route path="imports" component={ImportContainer} />
-          <Route path="privacy" component={Privacy} />
-          <Route path="terms-of-use" component={TermsOfUse} />
-          <Route path="profile" component={ProfileContainer} />
-        </Route>
-      </Router>
+        </Router>
+      </div>
       <Footer />
 
       <ReduxToastr

@@ -1,0 +1,9 @@
+.Papernet {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    .Router {
+        flex: 1;
+    }
+}

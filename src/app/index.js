@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { TOKEN_COOKIE_LOAD } from 'services/auth/constants';
 
+import './app.scss';
+
 class App extends PureComponent {
   static propTypes = {
     children: PropTypes.arrayOf(PropTypes.node).isRequired,
@@ -20,7 +22,7 @@ class App extends PureComponent {
     const { children } = this.props;
 
     return (
-      <div>
+      <div className="Papernet">
         {children}
       </div>
     );
