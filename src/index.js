@@ -34,9 +34,6 @@ import { ProfileContainer, profileReducer } from 'profile';
 import GoogleLoggedIn from 'auth/google';
 import userReducer from 'auth/reducer';
 
-// Arxiv
-import ArxivContainer, { arxivReducer } from 'arxiv';
-
 // Privacy policy
 import { Privacy, TermsOfUse } from 'legal';
 
@@ -57,7 +54,6 @@ import rootSaga from 'sagas';
 // Create store
 const reducers = {
   auth: authReducer,
-  arxiv: arxivReducer,
   home: homeReducer,
   imports: importsReducer,
   login: loginReducer,
@@ -96,7 +92,6 @@ ReactDOM.render(
               <IndexRedirect to="/auth/google" />
               <Route path="google" component={GoogleLoggedIn} />
             </Route>
-            <Route path="arxiv" component={ArxivContainer} />
             <Route path="search" component={SearchScene} />
             <Route path="imports" component={ImportContainer} />
             <Route path="privacy" component={Privacy} />
