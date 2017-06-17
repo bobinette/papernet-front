@@ -11,18 +11,22 @@ import { RESET_PAPER } from '../constants';
 import PaperEditView from './view';
 
 const mapStateToProps = state => ({
+  canLeave: state.paper.get('canLeave'),
   paper: state.paper.get('paper'),
   loading: state.paper.get('loading'),
 });
 
 class PaperEditContainer extends Component {
   static propTypes = {
+    canLeave: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     paper: paperPropType.isRequired,
     params: PropTypes.shape({
       id: PropTypes.string,
     }).isRequired,
+    router: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    route: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   };
 
   constructor(props) {
@@ -30,6 +34,8 @@ class PaperEditContainer extends Component {
 
     this.onChange = ::this.onChange;
     this.onSave = ::this.onSave;
+
+    this.routerWillLeave = ::this.routerWillLeave;
   }
 
   componentWillMount() {
@@ -40,6 +46,13 @@ class PaperEditContainer extends Component {
     } else {
       dispatch({ type: RESET_PAPER });
     }
+  }
+
+  componentDidMount() {
+    this.props.router.setRouteLeaveHook(
+      this.props.route,
+      this.routerWillLeave,
+    );
   }
 
   componentWillReceiveProps(nextProps) {
@@ -63,6 +76,10 @@ class PaperEditContainer extends Component {
     dispatch(savePaper(paper)).then(
       (paperId) => { browserHistory.push(`/papers/${paperId}`); },
     );
+  }
+
+  routerWillLeave() {
+    return this.props.canLeave ? true : 'You are leaving this page. Unsaved changes will be lost';
   }
 
   render() {

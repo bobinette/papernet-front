@@ -64,7 +64,6 @@ const autoresizeListener = (event) => {
   if (!target) return;
 
   autoresize(target);
-  window.scrollTo(window.scrollLeft, (target.scrollTop + target.scrollHeight));
 };
 
 class PaperEdit extends Component {

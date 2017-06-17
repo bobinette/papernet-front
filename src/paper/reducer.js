@@ -9,6 +9,7 @@ const initialState = fromJS({
     tags: [],
     references: [],
   },
+  canLeave: true,
   loading: false,
   found: true,
 });
@@ -25,10 +26,12 @@ export default (state = initialState, action) => {
       break;
     case RECEIVE_PAPER:
       newState = newState.set('paper', fromJS(action.paper));
+      newState = newState.set('canLeave', true);
       newState = newState.set('loading', false);
       newState = newState.set('found', true);
       break;
     case UPDATE_PAPER:
+      newState = newState.set('canLeave', false);
       newState = newState.setIn(['paper'], action.value);
       break;
     case RESET_PAPER:
