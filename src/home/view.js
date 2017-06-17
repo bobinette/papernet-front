@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import classNames from 'classnames';
-
 import { paginationPropType, paperPropType, userPropType } from 'utils/constants';
 
 import Pagination from 'components/pagination';
@@ -17,8 +15,8 @@ import PaperListViewRow from './components/row';
 import './view.scss';
 
 const HomeList = ({ className, onBookmark, onOffsetChange, pagination, papers, user }) => (
-  <div className={classNames(className, 'container')}>
-    <ul className="HomeList col-md-12">
+  <div className={className}>
+    <ul className="HomeList container">
       {papers.map(paper => (
         <li className="col-md-12" key={paper.get('title')} >
           <PaperListViewRow paper={paper} user={user.get('user')} onBookmark={onBookmark} />

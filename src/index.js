@@ -34,9 +34,6 @@ import { ProfileContainer, profileReducer } from 'profile';
 import GoogleLoggedIn from 'auth/google';
 import userReducer from 'auth/reducer';
 
-// Arxiv
-import ArxivContainer, { arxivReducer } from 'arxiv';
-
 // Privacy policy
 import { Privacy, TermsOfUse } from 'legal';
 
@@ -46,6 +43,7 @@ import Footer from 'components/footer';
 // Scenes
 import ImportContainer, { importsReducer } from 'scenes/imports';
 import LoginContainer, { GoogleLogin, loginReducer } from 'scenes/login';
+import SearchScene, { searchReducer } from 'scenes/search';
 
 // Reducers
 import authReducer from 'services/auth/reducer';
@@ -56,12 +54,12 @@ import rootSaga from 'sagas';
 // Create store
 const reducers = {
   auth: authReducer,
-  arxiv: arxivReducer,
   home: homeReducer,
   imports: importsReducer,
   login: loginReducer,
   paper: paperReducer,
   profile: profileReducer,
+  search: searchReducer,
   toastr: toastrReducer,
   user: userReducer,
 };
@@ -78,28 +76,30 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
   <Provider store={store}>
     <App>
-      <Router history={browserHistory}>
-        <Route path="/">
-          <IndexRedirect to="/papers" />
-          <Route path="papers" component={HomeContainer} />
-          <Route path="papers/new" component={PaperEditContainer} />
-          <Route path="papers/:id" component={PaperViewContainer} />
-          <Route path="papers/:id/edit" component={PaperEditContainer} />
-          <Route path="login">
-            <IndexRoute component={LoginContainer} />
-            <Route path="google" component={GoogleLogin} />
+      <div className="Router">
+        <Router history={browserHistory}>
+          <Route path="/">
+            <IndexRedirect to="/papers" />
+            <Route path="papers" component={HomeContainer} />
+            <Route path="papers/new" component={PaperEditContainer} />
+            <Route path="papers/:id" component={PaperViewContainer} />
+            <Route path="papers/:id/edit" component={PaperEditContainer} />
+            <Route path="login">
+              <IndexRoute component={LoginContainer} />
+              <Route path="google" component={GoogleLogin} />
+            </Route>
+            <Route path="auth">
+              <IndexRedirect to="/auth/google" />
+              <Route path="google" component={GoogleLoggedIn} />
+            </Route>
+            <Route path="search" component={SearchScene} />
+            <Route path="imports" component={ImportContainer} />
+            <Route path="privacy" component={Privacy} />
+            <Route path="terms-of-use" component={TermsOfUse} />
+            <Route path="profile" component={ProfileContainer} />
           </Route>
-          <Route path="auth">
-            <IndexRedirect to="/auth/google" />
-            <Route path="google" component={GoogleLoggedIn} />
-          </Route>
-          <Route path="arxiv" component={ArxivContainer} />
-          <Route path="imports" component={ImportContainer} />
-          <Route path="privacy" component={Privacy} />
-          <Route path="terms-of-use" component={TermsOfUse} />
-          <Route path="profile" component={ProfileContainer} />
-        </Route>
-      </Router>
+        </Router>
+      </div>
       <Footer />
 
       <ReduxToastr

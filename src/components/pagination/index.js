@@ -59,6 +59,7 @@ const Pagination = ({ pagination, onChange }) => {
 
   return (
     <div className="Pagination">
+      <span>{pagination.get('total')} results / {limit} per page</span>
       <nav>
         <ul className="Pagination__Pages pagination">
           {
@@ -97,7 +98,6 @@ const Pagination = ({ pagination, onChange }) => {
           }
         </ul>
       </nav>
-      <small>{pagination.get('total')} results / {limit} per page</small>
     </div>
   );
 };

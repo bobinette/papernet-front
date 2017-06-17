@@ -1,6 +1,6 @@
 @import "~bootstrap/scss/_variables.scss";
 
-.ImportRow {
+.SearchListRow {
 	a {
 		&:visited {
 			text-decoration: none;
@@ -16,7 +16,7 @@
 		margin-bottom: 0;
 	}
 
-	.ImportRow__Tags {
+	.SearchListRow__Tags {
 		display: flex;
 		align-items: center;
 		flex: 1;
@@ -32,7 +32,7 @@
 		justify-content: space-between;
 	}
 
-	.ImportRow__Links {
+	.SearchListRow__Links {
 		margin-top: 5px;
 		margin-bottom: 5px;
 

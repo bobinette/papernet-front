@@ -43,7 +43,7 @@ exports[`Render children 1`] = `
           onClick={[Function]}
           style={Object {}}
         >
-          Arxiv
+          Search
         </a>
       </li>
       <li

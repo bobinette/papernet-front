@@ -11,9 +11,9 @@ import { USER_SIGN_OUT } from 'services/auth/constants';
 import Dropdown from './dropdown';
 
 import {
-  NAVBAR_ARXIV,
   NAVBAR_HOME,
   NAVBAR_IMPORTS,
+  NAVBAR_SEARCH,
   NAVBAR_NONE,
 } from './constants';
 
@@ -29,9 +29,9 @@ const tabs = [
     id: NAVBAR_HOME,
   },
   {
-    label: 'Arxiv',
-    to: '/arxiv',
-    id: NAVBAR_ARXIV,
+    label: 'Search',
+    to: '/search',
+    id: NAVBAR_SEARCH,
   },
   {
     label: 'Imports',
@@ -100,9 +100,9 @@ const NavBar = ({ activeTab, children, onLogin, onLogout, user }) => (
 
 NavBar.propTypes = {
   activeTab: PropTypes.oneOf([
-    NAVBAR_ARXIV,
     NAVBAR_HOME,
     NAVBAR_IMPORTS,
+    NAVBAR_SEARCH,
     NAVBAR_NONE,
   ]),
   children: PropTypes.node,

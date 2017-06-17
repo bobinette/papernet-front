@@ -1,6 +1,7 @@
 import React from 'react';
 import { List } from 'immutable';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 import moment from 'moment';
 
@@ -13,6 +14,8 @@ import ReadMoreMarkdown from 'components/markdown/read-more';
 import TagList from 'components/taglist';
 
 import { paperPropType } from 'utils/constants';
+
+import { SEARCH_IMPORT } from '../../../../api/constants';
 
 import './row.scss';
 
@@ -29,7 +32,7 @@ const extractAbstract = (text) => {
   return text.substring(0, end);
 };
 
-const ImportButtonOrLink = ({ paperID, onImport }) => {
+const ImportButton = ({ paperID, onImport }) => {
   if (paperID !== 0) {
     return (
       <Link
@@ -48,23 +51,27 @@ const ImportButtonOrLink = ({ paperID, onImport }) => {
   );
 };
 
-ImportButtonOrLink.propTypes = {
+ImportButton.propTypes = {
   paperID: PropTypes.number.isRequired,
   onImport: PropTypes.func.isRequired,
 };
 
-const ImportRow = ({ onImport, paper }) => {
+const mapDispatchToProps = dispatch => ({
+  onImport: paper => dispatch({ type: SEARCH_IMPORT, paper }),
+});
+
+const SearchListRow = ({ onImport, paper }) => {
   const abstract = extractAbstract(paper.get('summary'));
 
   const tags = paper.get('tags') || List();
 
   return (
-    <div className="ImportRow card">
+    <div className="SearchListRow card">
       <div className="card-block">
         <h5 className="card-title">{paper.get('title')}</h5>
         <ReadMoreMarkdown text={abstract} />
-        <div className="card-text ImportRow__Links">
-          <ImportButtonOrLink paperID={paper.get('id')} onImport={onImport} />
+        <div className="card-text SearchListRow__Links">
+          <ImportButton paperID={paper.get('id')} onImport={() => onImport(paper)} />
           <a
             href={paper.getIn(['references', 0])}
             className="btn btn-sm btn-outline-primary"
@@ -99,7 +106,7 @@ const ImportRow = ({ onImport, paper }) => {
         </p>
       </div>
       <div className="card-footer">
-        <div className="ImportRow__Tags">
+        <div className="SearchListRow__Tags">
           <i className="fa fa-tag" />
           <TagList tags={tags} max={5} />
         </div>
@@ -108,9 +115,9 @@ const ImportRow = ({ onImport, paper }) => {
   );
 };
 
-ImportRow.propTypes = {
+SearchListRow.propTypes = {
   onImport: PropTypes.func.isRequired,
   paper: paperPropType.isRequired,
 };
 
-export default ImportRow;
+export default connect(null, mapDispatchToProps)(SearchListRow);

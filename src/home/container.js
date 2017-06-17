@@ -80,7 +80,9 @@ class HomeContainer extends Component {
     return (
       <div className="HomeContainer">
         <NavBar activeTab={NAVBAR_HOME}>
-          <Link className="btn btn-inverse-primary" to={'/papers/new'}>New</Link>
+          {user.getIn(['token', 'token']) &&
+            <Link className="btn btn-inverse-primary" to={'/papers/new'}>New</Link>
+          }
         </NavBar>
         <HomeView
           facets={facets}
