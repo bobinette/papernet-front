@@ -6,29 +6,3 @@
 		margin-bottom: 10px;
 	}
 }
-
-.Modal {
-    border: 1px solid #ccc;
-    background: #fff;
-    overflow: auto;
-    border-radius: 4px;
-    outline: none;
-    padding: 20px;
-
-    // Center the modal
-    position: absolute;
-    top: 170px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%; /* Need a specific value to work */
-}
-
-.Modal__Footer {
-    text-align: right;
-}
-
-.ReactModal__Body--open {
-    overflow: hidden;
-}

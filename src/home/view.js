@@ -18,7 +18,7 @@ const HomeList = ({ className, onBookmark, onOffsetChange, pagination, papers, u
   <div className={className}>
     <ul className="HomeList container">
       {papers.map(paper => (
-        <li className="col-md-12" key={paper.get('title')} >
+        <li className="col-md-12" key={paper.get('id')} >
           <PaperListViewRow paper={paper} user={user.get('user')} onBookmark={onBookmark} />
         </li>
       ))}

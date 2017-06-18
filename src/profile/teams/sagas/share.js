@@ -6,15 +6,15 @@ import { papernetURL } from 'utils/constants';
 
 import { TEAMS_SHARE, TEAMS_FETCH } from '../constants';
 
-function* share(token, teamID, paperID) {
+function* share(token, teamId, paperId, canEdit) {
   try {
     const headers = new Headers({
       Authorization: `Bearer ${token}`,
     });
 
     yield fetch(
-      `${papernetURL}/auth/v2/teams/${teamID}/share`,
-      { method: 'POST', headers, body: JSON.stringify({ paperID, canEdit: true }) },
+      `${papernetURL}/auth/v2/teams/${teamId}/share`,
+      { method: 'POST', headers, body: JSON.stringify({ paperId, canEdit }) },
     );
     yield put({ type: TEAMS_FETCH });
   } catch (error) {
@@ -25,8 +25,8 @@ function* share(token, teamID, paperID) {
 export default function* watchShareSaga() {
   // eslint-disable-next-line no-constant-condition
   while (true) {
-    const { teamID, paperID } = yield take(TEAMS_SHARE);
+    const { teamId, paperId, canEdit } = yield take(TEAMS_SHARE);
     const token = yield select(state => (state.auth.getIn(['token', 'token'])));
-    yield fork(share, token, teamID, paperID);
+    yield fork(share, token, teamId, paperId, canEdit);
   }
 }

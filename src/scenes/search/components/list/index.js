@@ -78,7 +78,7 @@ class SearchList extends PureComponent {
             :
             <ul className="container row">
               {papers.map(paper => (
-                <li key={paper.get('title')} >
+                <li key={`${paper.get('source')}-${paper.get('reference')}`} >
                   <SearchListRow paper={paper} />
                 </li>
               ))}

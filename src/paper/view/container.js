@@ -57,8 +57,18 @@ class PaperViewContainer extends Component {
     }
   }
 
-  onShare(paperID, teamIDs) {
-    teamIDs.forEach(teamID => this.props.dispatch({ type: TEAMS_SHARE, teamID, paperID }));
+  onShare(teams) {
+    const { paper } = this.props;
+    teams.forEach((team, teamId) => {
+      if (team.get('canSee')) {
+        this.props.dispatch({
+          type: TEAMS_SHARE,
+          teamId,
+          paperId: paper.get('id'),
+          canEdit: team.get('canEdit'),
+        });
+      }
+    });
   }
 
   onDelete() {
