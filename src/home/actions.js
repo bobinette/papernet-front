@@ -8,7 +8,10 @@ import handleJSON from 'utils/actions/handleResponse';
 import { papernetURL } from 'utils/constants';
 
 import { RECEIVE_USER } from 'auth/constants';
+import { USER_RECEIVE } from 'services/auth/constants';
+
 import { RECEIVE_PAPER_LIST } from './constants';
+
 
 export const getPaperList = () => (dispatch, getState) => {
   const search = getState().home.getIn(['filters', 'q']);
@@ -18,7 +21,7 @@ export const getPaperList = () => (dispatch, getState) => {
     bookmarked: filters.get('bookmarked') ? true : null,
     tags: filters.get('tags').toJS() || null,
   };
-  const url = `${papernetURL}/papers?${qs.stringify(params, { skipNulls: true, indices: false })}`;
+  const url = `${papernetURL}/paper/v2/papers?${qs.stringify(params, { skipNulls: true, indices: false })}`;
 
   const token = getState().auth.getIn(['token', 'token']);
   if (!token) return null;
@@ -52,7 +55,8 @@ export const bookmark = id => (dispatch, getState) => {
   return fetch(url, { method: 'POST', headers, body: JSON.stringify({ paperID: id, bookmark: true }) })
   .then(handleJSON).then(
     (response) => {
-      const user = response.data;
+      const user = response;
+      dispatch({ type: USER_RECEIVE, user });
       return dispatch({ type: RECEIVE_USER, user });
     },
     (err) => {
@@ -73,7 +77,8 @@ export const unbookmark = id => (dispatch, getState) => {
   return fetch(url, { method: 'POST', headers, body: JSON.stringify({ paperID: id, bookmark: false }) })
   .then(handleJSON).then(
     (response) => {
-      const user = response.data;
+      const user = response;
+      dispatch({ type: USER_RECEIVE, user });
       return dispatch({ type: RECEIVE_USER, user });
     },
     (err) => {
