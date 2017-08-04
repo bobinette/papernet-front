@@ -5,7 +5,6 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import moment from 'moment';
 
-import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
@@ -17,6 +16,8 @@ import TagList from 'components/taglist';
 
 import { teamPropType } from 'profile/teams/constants';
 import { paperPropType } from 'utils/constants';
+
+import ShareModal from './components/share-modal';
 
 import './view.scss';
 
@@ -39,15 +40,15 @@ class PaperView extends Component {
     this.onOpenShareDialog = ::this.onOpenShareDialog;
     this.onShare = ::this.onShare;
 
-    this.state = { shareDialogOpen: false, shareWith: List() };
+    this.state = { shareModalIsOpen: false };
   }
 
   onOpenShareDialog() {
-    this.setState({ shareDialogOpen: true });
+    this.setState({ shareModalIsOpen: true });
   }
 
   onCloseShareDialog() {
-    this.setState({ shareDialogOpen: false, shareWith: List() });
+    this.setState({ shareModalIsOpen: false });
   }
 
   onSelectTeam(teamID) {
@@ -66,10 +67,8 @@ class PaperView extends Component {
     };
   }
 
-  onShare() {
-    const { onShare, paper } = this.props;
-    const { shareWith } = this.state;
-    onShare(paper.get('id'), shareWith.toJS());
+  onShare(teams) {
+    this.props.onShare(teams);
     this.onCloseShareDialog();
   }
 
@@ -132,7 +131,7 @@ class PaperView extends Component {
 
   render() {
     const { paper, teams } = this.props;
-    const { shareWith } = this.state;
+    const { shareModalIsOpen } = this.state;
 
     const tags = paper.get('tags') || List();
 
@@ -167,38 +166,13 @@ class PaperView extends Component {
                 {this.renderAuthors()}
               </div>
             </div>
-            <Modal
-              className="Modal"
-              isOpen={this.state.shareDialogOpen}
-              onRequestClose={this.onCloseShareDialog}
-              closeTimeoutMS={0}
-              contentLabel="Share-paper-modal"
-            >
-              <h1>Share paper with teams</h1>
-              <div>
-                <p>Share with:</p>
-                {
-                  teams.map(team => (
-                    <div key={team.get('id')}>
-                      <label className="form-check-label" htmlFor={`form-check-input-team-${team.get('id')}`}>
-                        <input
-                          id={`form-check-input-team-${team.get('id')}`}
-                          className="form-check-input"
-                          type="checkbox"
-                          checked={shareWith.contains(team.get('id'))}
-                          onChange={this.onSelectTeam(team.get('id'))}
-                        />
-                        {team.get('name')}
-                      </label>
-                    </div>
-                  ))
-                }
-              </div>
-              <div className="Modal__Footer">
-                <button type="button" className="btn btn-link" onClick={this.onCloseShareDialog}>Cancel</button>
-                <button type="button" className="btn btn-primary" onClick={this.onShare}>Share</button>
-              </div>
-            </Modal>
+            <ShareModal
+              isOpen={shareModalIsOpen}
+              onClose={this.onCloseShareDialog}
+              onShare={this.onShare}
+              paper={paper}
+              teams={teams}
+            />
           </div>
         }
       </div>

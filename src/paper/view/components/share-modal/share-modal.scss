@@ -1,0 +1,53 @@
+@import "~bootstrap/scss/_variables.scss";
+
+.ShareModalOverlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba($gray-light, 0.75);
+    z-index: 1050;
+}
+
+.ShareModal {
+    border: 1px solid $gray-lighter;
+    background: $body-bg;
+
+    overflow: auto;
+
+    border-radius: 4px;
+    outline: none;
+
+    // Center the modal
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; /* Need a specific value to work */
+}
+
+.ShareModal__Header {
+    padding: 1rem;
+    border-bottom: 1px solid $gray-lighter;
+}
+
+.ShareModal__Content {
+    padding: 1rem;
+}
+
+.ShareModal__TeamCheckbox__EditPermission {
+    margin-left: 1rem;
+}
+
+.ShareModal__Footer {
+    text-align: right;
+    padding: 1rem;
+    border-top: 1px solid $gray-lighter;
+}
+
+.ReactModal__Body--open {
+    overflow: hidden;
+}

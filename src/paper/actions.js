@@ -14,7 +14,7 @@ export const getPaper = id => (dispatch, getState) => {
   });
 
   dispatch({ type: FECTH_PAPER });
-  return fetch(`${papernetURL}/papers/${id}`, { headers }).then(
+  return fetch(`${papernetURL}/paper/v2/papers/${id}`, { headers }).then(
     (response) => {
       const paper = response.data;
       return dispatch({ type: RECEIVE_PAPER, paper });
@@ -34,7 +34,7 @@ export const updatePaper = value => dispatch => (
 );
 
 export const savePaper = paper => (dispatch, getState) => {
-  let saveURL = `${papernetURL}/papers`;
+  let saveURL = `${papernetURL}/paper/v2/papers`;
   let method = 'POST';
   if (paper.get('id')) {
     saveURL += `/${paper.get('id')}`;
@@ -76,7 +76,7 @@ export const deletePaper = () => (dispatch, getState) => {
     Authorization: `Bearer ${token}`,
   });
 
-  const deleteURL = `${papernetURL}/papers/${paper.get('id')}`;
+  const deleteURL = `${papernetURL}/paper/v2/papers/${paper.get('id')}`;
   return fetch(deleteURL, { method: 'DELETE', headers }).then(
     () => {
       dispatch({ type: RECEIVE_PAPER, paper: {} });
