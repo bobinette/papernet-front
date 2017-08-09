@@ -2,7 +2,6 @@ import { call, put, select, take } from 'redux-saga/effects';
 
 import authApi from 'api/auth';
 
-import { RECEIVE_USER } from 'auth/constants';
 import { USER_BOOKMARK, USER_RECEIVE } from 'services/auth/constants';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -19,6 +18,5 @@ export function* watchBookmarkSaga() {
     }
 
     yield put({ type: USER_RECEIVE, user });
-    yield put({ type: RECEIVE_USER, user }); // Tmp: still use the old auth reducer
   }
 }

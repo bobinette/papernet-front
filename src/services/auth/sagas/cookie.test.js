@@ -42,7 +42,7 @@ describe('cookie saga', () => {
       expect(options).toEqual({ path: '/' });
     });
 
-    return expectSaga(saveCookie, 'pizza.yolo')
+    return expectSaga(saveCookie, { token: 'pizza.yolo' })
       .run();
   });
 });

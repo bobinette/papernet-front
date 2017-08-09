@@ -4,8 +4,6 @@ import cookie from 'react-cookie';
 
 import authApi from 'api/auth';
 
-import { RECEIVE_USER } from 'auth/constants';
-
 import { TOKEN_RECEIVE, USER_RECEIVE, USER_SIGN_OUT } from '../constants';
 
 function* fetchUser(token) {
@@ -19,9 +17,6 @@ function* fetchUser(token) {
   }
 
   yield put({ type: USER_RECEIVE, user });
-
-  // Tmp: still use the old auth reducer
-  yield put({ type: RECEIVE_USER, user });
 }
 
 function signOut() {

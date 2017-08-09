@@ -30,10 +30,6 @@ import { PaperEditContainer, PaperViewContainer, paperReducer } from 'paper';
 // Profile page
 import { ProfileContainer, profileReducer } from 'profile';
 
-// Auth page
-import GoogleLoggedIn from 'auth/google';
-import userReducer from 'auth/reducer';
-
 // Privacy policy
 import { Privacy, TermsOfUse } from 'legal';
 
@@ -62,7 +58,6 @@ const reducers = {
   profile: profileReducer,
   search: searchReducer,
   toastr: toastrReducer,
-  user: userReducer,
 };
 const reducer = combineReducers(reducers);
 const sagaMiddleware = createSagaMiddleware();
@@ -88,10 +83,6 @@ ReactDOM.render(
             <Route path="login">
               <IndexRoute component={LoginContainer} />
               <Route path="google" component={GoogleLogin} />
-            </Route>
-            <Route path="auth">
-              <IndexRedirect to="/auth/google" />
-              <Route path="google" component={GoogleLoggedIn} />
             </Route>
             <Route path="search" component={SearchScene} />
             <Route path="imports" component={ImportContainer} />
