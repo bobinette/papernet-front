@@ -1,4 +1,5 @@
 import { call, fork, put, select, take } from 'redux-saga/effects';
+import { toastr } from 'react-redux-toastr';
 
 import { TOKEN_RECEIVE, USER_SIGN_OUT } from 'services/auth/constants';
 
@@ -19,7 +20,7 @@ function* fetchList(token, filters, pagination) {
   yield put({ type: PAPER_LIST_LOADING_STOP });
 
   if (error) {
-    console.error(error);
+    toastr.error('Error loading papers', `Errors: ${error}`);
     return;
   }
 

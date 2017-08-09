@@ -1,4 +1,5 @@
 import { call, fork, put, take } from 'redux-saga/effects';
+import { toastr } from 'react-redux-toastr';
 
 import importApi from '../.';
 import { IMPORTS_FILE_LOADED, IMPORTS_PAPERS_RECEIVED } from '../constants';
@@ -13,7 +14,7 @@ function* importPapers(content, source) {
 
   const { papers, error } = yield call(importFunc, content);
   if (error) {
-    console.error(error);
+    toastr.error('Error importing papers', `Errors: ${error}`);
     return;
   }
 

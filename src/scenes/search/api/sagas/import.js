@@ -1,4 +1,5 @@
 import { call, fork, put, select, take } from 'redux-saga/effects';
+import { toastr } from 'react-redux-toastr';
 
 import searchApi from '../.';
 import { SEARCH_IMPORT, SEARCH_IMPORTED } from '../constants';
@@ -6,7 +7,7 @@ import { SEARCH_IMPORT, SEARCH_IMPORTED } from '../constants';
 function* importPaper(token, paper) {
   const { response, error } = yield call(searchApi.importPaper, token, paper);
   if (error) {
-    console.error(error);
+    toastr.error('Error importing paper', `Error: ${error}`);
     return;
   }
 

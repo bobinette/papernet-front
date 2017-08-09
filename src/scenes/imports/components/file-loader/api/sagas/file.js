@@ -1,4 +1,5 @@
 import { call, fork, put, take } from 'redux-saga/effects';
+import { toastr } from 'react-redux-toastr';
 
 import { IMPORTS_FILE_LOADED } from '../../../../api/constants';
 import { FILE_LOADER_LOAD } from '../constants';
@@ -8,7 +9,7 @@ import fileLoaderApi from '../.';
 function* loadFile(file) {
   const { content, error } = yield call(fileLoaderApi.loadFile, file);
   if (error) {
-    console.error(error);
+    toastr.error('Error loading file', `Error: ${error}`);
     return;
   }
 

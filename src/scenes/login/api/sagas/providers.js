@@ -1,4 +1,5 @@
 import { call, fork, put, take } from 'redux-saga/effects';
+import { toastr } from 'react-redux-toastr';
 
 import loginApi from 'scenes/login/api';
 
@@ -7,7 +8,7 @@ import { PROVIDERS_FETCH, PROVIDERS_RECEIVE } from 'scenes/login/api/constants';
 function* fetchProviders() {
   const { providers, error } = yield call(loginApi.fetchProviders);
   if (error) {
-    console.error(error);
+    toastr.error('Error fetching login providers', `Error: ${error}`);
     return;
   }
   yield put({ type: PROVIDERS_RECEIVE, providers });

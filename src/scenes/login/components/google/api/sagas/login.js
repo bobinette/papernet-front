@@ -1,4 +1,5 @@
 import { call, fork, take } from 'redux-saga/effects';
+import { toastr } from 'react-redux-toastr';
 
 import googleApi from 'scenes/login/components/google/api';
 import { GOOGLE_LOGIN_URL_FETCH } from 'scenes/login/components/google/api/constants';
@@ -6,7 +7,7 @@ import { GOOGLE_LOGIN_URL_FETCH } from 'scenes/login/components/google/api/const
 function* gotoLoginURL() {
   const { url, error } = yield call(googleApi.fetchLoginUrl);
   if (error) {
-    console.error(error);
+    toastr.error('Error calling google API', `Error: ${error}`);
     return;
   }
 

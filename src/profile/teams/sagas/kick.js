@@ -1,4 +1,5 @@
 import { put, fork, select, take } from 'redux-saga/effects';
+import { toastr } from 'react-redux-toastr';
 
 import fetch from 'utils/fetch';
 import { papernetURL } from 'utils/constants';
@@ -17,7 +18,7 @@ function* kick(token, teamID, userID) {
     );
     yield put({ type: TEAMS_FETCH });
   } catch (error) {
-    console.log(error);
+    toastr.error('Could not kick user', `Error: ${error}`);
   }
 }
 
