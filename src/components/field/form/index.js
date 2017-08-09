@@ -85,7 +85,6 @@ const FormField = ({ form, onChange, value }) => {
       );
       break;
     default:
-      console.error(`Invalid form type: "${form.type}" for key "${form.valueKey}"`); // eslint-disable-line no-console
       return null;
   }
 

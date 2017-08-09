@@ -1,3 +1,5 @@
+import { toastr } from 'react-redux-toastr';
+
 function readFile(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -8,7 +10,7 @@ function readFile(file) {
     try {
       reader.readAsText(file);
     } catch (error) {
-      console.log(error);
+      toastr.error('Error reading file', `Error: ${error}`);
       reject(error);
     }
   });

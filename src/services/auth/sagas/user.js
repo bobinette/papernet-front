@@ -1,6 +1,7 @@
 import { call, fork, put, take } from 'redux-saga/effects';
 import { browserHistory } from 'react-router';
 import cookie from 'react-cookie';
+import { toastr } from 'react-redux-toastr';
 
 import authApi from 'api/auth';
 
@@ -12,7 +13,7 @@ function* fetchUser(token) {
   const { user, error } = yield call(authApi.fetchUser, token);
 
   if (error) {
-    console.error(error);
+    toastr.error('Error authenticating', `Error: ${error}`);
     return;
   }
 

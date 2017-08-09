@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { toastr } from 'react-redux-toastr';
 
 import remark from 'remark';
 import remarkReact from 'remark-react';
@@ -60,7 +61,7 @@ const renderCode = (code, lang, key) => {
     try {
       escapedCode = hljs.highlight(lang, code).value;
     } catch (e) {
-      console.error(e); // eslint-disable-line no-console
+      toastr.error('', `Error highlighting syntax: ${e}`);
     }
   } else {
     escapedCode = escape(code, true);

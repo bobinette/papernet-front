@@ -1,4 +1,5 @@
 import { call, put, select, take } from 'redux-saga/effects';
+import { toastr } from 'react-redux-toastr';
 
 import authApi from 'api/auth';
 
@@ -13,7 +14,7 @@ export function* watchBookmarkSaga() {
     const { user, error } = yield call(authApi.bookmark, token, paperId, bookmark);
 
     if (error) {
-      console.log(error);
+      toastr.error('Error bookmarking', `Error: ${error}`);
       return;
     }
 

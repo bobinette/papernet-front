@@ -1,4 +1,5 @@
 import { call, fork, put, take } from 'redux-saga/effects';
+import { toastr } from 'react-redux-toastr';
 
 import { TOKEN_RECEIVE } from 'services/auth/constants';
 
@@ -8,7 +9,7 @@ import { TOKEN_FETCH_GOOGLE } from '../constants';
 function* fetchToken(code, state) {
   const { token, error } = yield call(googleApi.fetchToken, code, state);
   if (error) {
-    console.error(error);
+    toastr.error('Error fetching token', `Error: ${error}`);
     return;
   }
 

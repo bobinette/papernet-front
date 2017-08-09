@@ -1,4 +1,5 @@
 import { call, fork, put, select, take } from 'redux-saga/effects';
+import { toastr } from 'react-redux-toastr';
 
 import searchApi from '../.';
 import {
@@ -15,7 +16,7 @@ function* search(token, q, limit, offset, sources) {
   yield put({ type: SEARCH_LOADING_STOP });
 
   if (error) {
-    console.error(error);
+    toastr.error('Error getting search results', `Error: ${error}`);
     return;
   }
 
