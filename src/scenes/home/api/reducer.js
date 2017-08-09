@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 
-import { RECEIVE_PAPER_LIST, UPDATE_FILTERS, UPDATE_HOME_OFFSET } from './constants';
+import { PAPER_LIST_RECEIVED, PAPER_LIST_UPDATE_FILTERS } from './constants';
 
 const initialState = fromJS({
   facets: {
@@ -12,7 +12,6 @@ const initialState = fromJS({
     tags: [],
   },
   papers: [],
-  search: '',
   pagination: {
     limit: 20,
     offset: 0,
@@ -23,16 +22,15 @@ const initialState = fromJS({
 export default (state = initialState, action) => {
   let newState = state;
   switch (action.type) {
-    case RECEIVE_PAPER_LIST:
-      newState = newState.set('papers', fromJS(action.papers));
-      newState = newState.set('facets', fromJS(action.facets));
-      newState = newState.setIn(['pagination', 'total'], action.total);
+    case PAPER_LIST_RECEIVED:
+      newState = newState.withMutations((s) => {
+        s.set('papers', fromJS(action.results.data));
+        s.set('facets', fromJS(action.results.facets));
+        s.set('pagination', fromJS(action.results.pagination));
+      });
       break;
-    case UPDATE_FILTERS:
+    case PAPER_LIST_UPDATE_FILTERS:
       newState = newState.setIn(['filters', action.key], action.value);
-      break;
-    case UPDATE_HOME_OFFSET:
-      newState = newState.setIn(['pagination', 'offset'], action.offset);
       break;
     default:
   }

@@ -30,15 +30,15 @@ const extractAbstract = (text) => {
   return text.substring(0, end);
 };
 
-const PaperListViewRow = ({ onBookmark, paper, user }) => {
+const HomeListRow = ({ onBookmark, paper, user }) => {
   const tags = paper.get('tags') || List();
   const abstract = extractAbstract(paper.get('summary'));
 
+  const bookmarks = user.get('bookmarks') || List();
+  const bookmarked = bookmarks.includes(paper.get('id'));
   let bookmarkClasses = {};
-  if (user && onBookmark) {
-    const bookmarks = user.get('bookmarks') || List();
-    const bookmarked = bookmarks.includes(paper.get('id'));
 
+  if (user && onBookmark) {
     bookmarkClasses = {
       fa: true,
       'fa-bookmark-o': !bookmarked,
@@ -47,7 +47,7 @@ const PaperListViewRow = ({ onBookmark, paper, user }) => {
   }
 
   return (
-    <div className="PaperListViewRow card">
+    <div className="HomeListRow card">
       <div className="card-block">
         <Link to={`/papers/${paper.get('id')}`}>
           <h5 className="card-title">{paper.get('title')}</h5>
@@ -70,13 +70,13 @@ const PaperListViewRow = ({ onBookmark, paper, user }) => {
         </Link>
       </div>
       <div className="card-footer">
-        <div className="PaperListViewRow__Tags">
+        <div className="HomeListRow__Tags">
           <i className="fa fa-tag" />
           <TagList tags={tags} max={5} />
         </div>
         {user && onBookmark &&
-          <div className="PaperListViewRow__Bookmark">
-            <button onClick={() => onBookmark(paper.get('id'))}>
+          <div className="HomeListRow__Bookmark">
+            <button onClick={() => onBookmark(paper.get('id'), !bookmarked)}>
               <i className={classNames(bookmarkClasses)} />
             </button>
           </div>
@@ -86,10 +86,10 @@ const PaperListViewRow = ({ onBookmark, paper, user }) => {
   );
 };
 
-PaperListViewRow.propTypes = {
+HomeListRow.propTypes = {
   onBookmark: PropTypes.func.isRequired,
   paper: paperPropType.isRequired,
   user: userPropType.isRequired,
 };
 
-export default PaperListViewRow;
+export default HomeListRow;

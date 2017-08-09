@@ -1,8 +1,12 @@
-@import '../../../style/_colors.scss';
+@import '../../../../style/_colors.scss';
 @import "~bootstrap/scss/_variables.scss";
 
-.HomeFilters__Filters {
+.HomeFilters {
+    padding-left: 0;
+    padding-right: 0;
+}
 
+.HomeFilters__Filters {
     input {
         margin-right: 5px;
     }
@@ -10,6 +14,8 @@
     ul {
         padding: 0;
         margin-bottom: 0;
+
+        list-style-type: none;
     }
 
     li {

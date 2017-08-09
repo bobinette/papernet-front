@@ -52,7 +52,11 @@ const HomeFilters = ({ className, facets, filters, onFilterChange }) => (
                   onClick={f(tag.get('tag'), filters, onFilterChange)}
                 >
                   <div className="HomeFilters__Tags__TagText">{tag.get('tag')}</div>
-                  <div><strong>{tag.get('count')}</strong></div>
+                  <div>{i === -1 ?
+                    <strong>{tag.get('count')}</strong>
+                    :
+                    <i className="fa fa-times" />
+                  }</div>
                 </button>
               </li>
             );

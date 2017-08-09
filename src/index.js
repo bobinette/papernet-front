@@ -22,7 +22,7 @@ import 'style/toastr.scss';
 import App from 'app';
 
 // Paper list page
-import HomeContainer, { homeReducer } from 'home';
+// import HomeContainer, { homeReducer } from 'home';
 
 // Paper page
 import { PaperEditContainer, PaperViewContainer, paperReducer } from 'paper';
@@ -41,6 +41,7 @@ import { Privacy, TermsOfUse } from 'legal';
 import Footer from 'components/footer';
 
 // Scenes
+import HomeContainer, { homeReducer } from 'scenes/home';
 import ImportContainer, { importsReducer } from 'scenes/imports';
 import LoginContainer, { GoogleLogin, loginReducer } from 'scenes/login';
 import SearchScene, { searchReducer } from 'scenes/search';

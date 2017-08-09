@@ -1,29 +1,17 @@
-import { fork, put, take } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import cookie from 'react-cookie';
 
-import { TOKEN_COOKIE_LOAD, TOKEN_RECEIVE } from '../constants';
+import { TOKEN_COOKIE_LOADED, TOKEN_RECEIVE } from '../constants';
 
-function* loadCookie() {
+export function* loadCookie() {
   const token = cookie.load('access_token', true);
-  yield put({ type: TOKEN_RECEIVE, token: token || '' });
-}
-
-function saveCookie(token) {
-  cookie.save('access_token', token, { path: '/' });
-}
-
-export function* watchLoadCookieSaga() {
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    yield take(TOKEN_COOKIE_LOAD);
-    yield fork(loadCookie);
+  if (token) {
+    yield put({ type: TOKEN_RECEIVE, token });
+  } else {
+    yield put({ type: TOKEN_COOKIE_LOADED });
   }
 }
 
-export function* watchSaveCookieSaga() {
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    const { token } = yield take(TOKEN_RECEIVE);
-    yield fork(saveCookie, token);
-  }
+export function* saveCookie(token) {
+  yield call(cookie.save, 'access_token', token: token.token, { path: '/' });
 }

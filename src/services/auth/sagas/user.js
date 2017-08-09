@@ -26,10 +26,10 @@ function* fetchUser(token) {
 
 function signOut() {
   browserHistory.push('/');
+  // TODO: move to cookie.js
   cookie.remove('access_token', { path: '/' });
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export function* watchFetchUserSaga() {
   // eslint-disable-next-line no-constant-condition
   while (true) {
