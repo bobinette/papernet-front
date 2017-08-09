@@ -26,6 +26,7 @@ function* fetchUser(token) {
 
 function signOut() {
   browserHistory.push('/');
+  // TODO: move to cookie.js
   cookie.remove('access_token', { path: '/' });
 }
 
