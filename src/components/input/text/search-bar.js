@@ -7,16 +7,31 @@ import Text from 'components/input/text';
 
 import './search-bar.scss';
 
-const SearchBar = ({ className, onChange, onKeyPress, placeholder, value }) => (
-  <div className={classNames(className, 'SearchBar')}>
-    <Text
-      className="SearchBar__Input"
-      onChange={onChange}
-      onKeyPress={onKeyPress}
-      placeholder={placeholder}
-      value={value}
-    />
-    <i className="fa fa-search" />
+const SearchBar = ({
+  // Mandatory
+  onChange,
+  value,
+  // Optional
+  className,
+  onKeyPress,
+  placeholder,
+}) => (
+  <div>
+    <div className={classNames(className, 'SearchBar')}>
+      <Text
+        className="SearchBar__Input"
+        onChange={onChange}
+        onKeyPress={onKeyPress}
+        placeholder={placeholder}
+        value={value}
+      />
+      <i className={classNames('fa', { 'fa-search': !value, 'fa-level-down fa-rotate-90': value })} />
+    </div>
+    {value &&
+      <div className="text-muted SearchBar__Help">
+        <small>Press enter to search</small>
+      </div>
+    }
   </div>
 );
 

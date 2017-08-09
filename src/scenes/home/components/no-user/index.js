@@ -2,9 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router';
 
-import './nouser.scss';
-
-const NoUserView = ({ className }) => (
+const NoUserState = ({ className }) => (
   <div className={className}>
     <h3>Welcome to Papernet!</h3>
     <p>To be able to use this platform you need to sign in. Do not worry, your informations
@@ -14,12 +12,12 @@ const NoUserView = ({ className }) => (
   </div>
 );
 
-NoUserView.propTypes = {
+NoUserState.propTypes = {
   className: PropTypes.string,
 };
 
-NoUserView.defaultProps = {
+NoUserState.defaultProps = {
   className: '',
 };
 
-export default NoUserView;
+export default NoUserState;

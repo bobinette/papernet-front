@@ -1,7 +1,7 @@
-@import '../../../style/_colors.scss';
+@import '../../../../../../style/_colors.scss';
 @import "~bootstrap/scss/_variables.scss";
 
-.PaperListViewRow {
+.HomeListRow {
 	a {
 		color: $body-color;
 
@@ -21,7 +21,7 @@
 		margin-bottom: 0;
 	}
 
-	.PaperListViewRow__Tags {
+	.HomeListRow__Tags {
 		display: flex;
 		align-items: center;
 		flex: 1;
@@ -41,7 +41,7 @@
 		}
 	}
 
-	.PaperListViewRow__Bookmark {
+	.HomeListRow__Bookmark {
 		font-size: 1.2em;
 		margin: 0 5px;
 
