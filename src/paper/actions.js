@@ -56,6 +56,7 @@ export const savePaper = paper => (dispatch, getState) => {
     (response) => {
       const respPaper = response.data;
       dispatch({ type: RECEIVE_PAPER, paper: respPaper });
+      toastr.success('Saved!', 'Paper successfully saved');
       return respPaper.id;
     },
     ({ json }) => {

@@ -6,6 +6,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import { Link } from 'react-router';
 
+import SplitDropdown from 'components/dropdown/split';
 import FormField from 'components/field/form';
 import NavBar, { NAVBAR_HOME } from 'components/navbar';
 import TagList from 'components/input/taglist';
@@ -67,11 +68,31 @@ class PaperEdit extends Component {
     super(props);
 
     this.onTagsChange = ::this.onTagsChange;
+    this.handleKey = ::this.handleKey;
+  }
+
+  componentWillMount() {
+    document.addEventListener('keydown', this.handleKey, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKey, false);
   }
 
   onTagsChange(tags) {
     const { onChange, paper } = this.props;
     onChange(paper.set('tags', tags));
+  }
+
+  handleKey(event) {
+    if ((event.ctrlKey || event.metaKey) && event.keyCode === 83) { // 83 = s
+      event.preventDefault();
+      const { onSave } = this.props;
+      const leave = event.shiftKey;
+      onSave(leave);
+      return false;
+    }
+    return true;
   }
 
   render() {
@@ -83,8 +104,18 @@ class PaperEdit extends Component {
     return (
       <div className="PaperEdit container">
         <NavBar activeTab={NAVBAR_HOME}>
-          <Link className="nav-link btn btn-link" to={cancelUrl}>Cancel</Link>
-          <button className="btn btn-inverse-primary" onClick={onSave}>Save</button>
+          <SplitDropdown
+            btnStyle="inverse-primary"
+            onClick={() => onSave(true)}
+            menu={[
+              <button key="save-and-stay" className="btn dropdown-item" onClick={() => onSave(false)}>
+                Save (stay)
+              </button>,
+              <div key="dropdown-divider-1" className="dropdown-divider" />,
+              <Link key="cancel" className="btn dropdown-item" to={cancelUrl}>Cancel</Link>,
+            ]}
+            title="Save"
+          />
         </NavBar>
         <div className="PaperEdit__Content row">
           <TagList
