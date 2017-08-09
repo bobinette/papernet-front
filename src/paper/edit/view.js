@@ -53,19 +53,6 @@ const form = {
   ],
 };
 
-const autoresize = (elt) => {
-  elt.style.height = 'auto'; // eslint-disable-line no-param-reassign
-  elt.style.height = `${elt.scrollHeight}px`; // eslint-disable-line no-param-reassign
-  elt.scrollTop = elt.scrollHeight; // eslint-disable-line no-param-reassign
-};
-
-const autoresizeListener = (event) => {
-  const target = event.target;
-  if (!target) return;
-
-  autoresize(target);
-};
-
 class PaperEdit extends Component {
 
   static propTypes = {
@@ -80,14 +67,6 @@ class PaperEdit extends Component {
     super(props);
 
     this.onTagsChange = ::this.onTagsChange;
-  }
-
-  componentDidMount() {
-    const resizingTextareas = [].slice.call(document.querySelectorAll('textarea[autoresize]'));
-    resizingTextareas.forEach((textarea) => {
-      textarea.addEventListener('input', autoresizeListener, false);
-      autoresize(textarea);
-    });
   }
 
   onTagsChange(tags) {

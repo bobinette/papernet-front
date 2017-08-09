@@ -92,9 +92,15 @@ class HomeScene extends PureComponent {
   }
 
   render() {
+    const { user } = this.props;
+
     return (
       <div className="container">
-        <NavBar activeTab={NAVBAR_HOME} />
+        <NavBar activeTab={NAVBAR_HOME}>
+          {user.getIn(['token', 'token']) &&
+            <a className="btn btn-inverse-primary" href="/papers/new">New</a>
+          }
+        </NavBar>
         <div className="HomeScene container">
           {this.renderScene()}
         </div>

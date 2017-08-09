@@ -30,17 +30,6 @@ class MarkdownInput extends Component {
     this.state = { preview: false };
   }
 
-  componentDidUpdate() {
-    if (!this.state.preview) {
-      const resizingTextareas = [].slice.call(document.querySelectorAll('textarea[autoresize]'));
-      resizingTextareas.forEach((textarea) => {
-        textarea.style.height = 'auto'; // eslint-disable-line no-param-reassign
-        textarea.style.height = `${textarea.scrollHeight}px`; // eslint-disable-line no-param-reassign
-        textarea.scrollTop = textarea.scrollHeight; // eslint-disable-line no-param-reassign
-      });
-    }
-  }
-
   onPreview() {
     this.setState({ preview: true });
   }
