@@ -71,11 +71,14 @@ class PaperEditContainer extends Component {
     this.props.dispatch(updatePaper(value));
   }
 
-  onSave() {
+  onSave(leave) {
     const { dispatch, paper } = this.props;
-    dispatch(savePaper(paper)).then(
-      (paperId) => { browserHistory.push(`/papers/${paperId}`); },
-    );
+    const promise = dispatch(savePaper(paper));
+    if (leave) {
+      promise.then(
+        (paperId) => { browserHistory.push(`/papers/${paperId}`); },
+      );
+    }
   }
 
   routerWillLeave() {
