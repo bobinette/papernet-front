@@ -13,5 +13,5 @@ export function* loadCookie() {
 }
 
 export function* saveCookie(token) {
-  yield call(cookie.save, 'access_token', token: token.token, { path: '/' });
+  yield call(cookie.save, 'access_token', token.token, { path: '/' });
 }
