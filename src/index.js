@@ -21,9 +21,6 @@ import 'style/toastr.scss';
 // App wrapper
 import App from 'app';
 
-// Paper list page
-// import HomeContainer, { homeReducer } from 'home';
-
 // Paper page
 import { PaperEditContainer, PaperViewContainer, paperReducer } from 'paper';
 

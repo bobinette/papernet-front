@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
+import Textarea from 'react-textarea-autosize';
+
 class TextArea extends Component {
   static propTypes = {
     autoresize: PropTypes.bool,
@@ -33,14 +35,21 @@ class TextArea extends Component {
 
     return (
       <div className={`TextArea ${className}`}>
-        <textarea
-          is
-          autoresize={autoresize}
-          className="TextArea__InputField"
-          onChange={this.onChange}
-          placeholder={placeholder}
-          value={value}
-        />
+        {autoresize ?
+          <Textarea
+            className="TextArea__InputField"
+            onChange={this.onChange}
+            placeholder={placeholder}
+            value={value}
+          />
+          :
+          <textarea
+            className="TextArea__InputField"
+            onChange={this.onChange}
+            placeholder={placeholder}
+            value={value}
+          />
+        }
       </div>
     );
   }
