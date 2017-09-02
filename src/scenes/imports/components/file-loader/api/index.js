@@ -10,7 +10,7 @@ function readFile(file) {
     try {
       reader.readAsText(file);
     } catch (error) {
-      toastr.error('Error reading file', `Error: ${error}`);
+      toastr.error('Error reading file', `Error: ${error.json.error}`);
       reject(error);
     }
   });

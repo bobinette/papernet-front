@@ -9,7 +9,7 @@ import { TOKEN_FETCH_GOOGLE } from '../constants';
 function* fetchToken(code, state) {
   const { token, error } = yield call(googleApi.fetchToken, code, state);
   if (error) {
-    toastr.error('Error fetching token', `Error: ${error}`);
+    toastr.error('Error fetching token', `Error: ${error.json.error}`);
     return;
   }
 

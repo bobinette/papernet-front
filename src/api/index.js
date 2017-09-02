@@ -31,7 +31,7 @@ export default function (path, options) {
         return reject({ status: response.status, json: response.json });
       })
       .catch(error => reject({
-        networkError: error.message,
+        json: { error: error.message },
       }));
   });
 }

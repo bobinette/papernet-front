@@ -10,7 +10,7 @@ import { EMAIL_LOGIN_SIGN_IN, EMAIL_LOGIN_SIGN_UP } from '../constants';
 function* signIn(email, password) {
   const { token, error } = yield call(emailApi.signIn, email, password);
   if (error) {
-    toastr.error('Error signing in', `Error: ${error}`);
+    toastr.error('Error signing in', `Error: ${error.json.error}`);
     return;
   }
 
@@ -21,7 +21,7 @@ function* signIn(email, password) {
 function* signUp(email, password) {
   const { token, error } = yield call(emailApi.signUp, email, password);
   if (error) {
-    toastr.error('Error signing up', `Error: ${error}`);
+    toastr.error('Error signing up', `Error: ${error.json.error}`);
     return;
   }
 

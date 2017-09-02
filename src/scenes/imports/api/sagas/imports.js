@@ -14,7 +14,7 @@ function* importPapers(content, source) {
 
   const { papers, error } = yield call(importFunc, content);
   if (error) {
-    toastr.error('Error importing papers', `Errors: ${error}`);
+    toastr.error('Error importing papers', `Errors: ${error.json.error}`);
     return;
   }
 

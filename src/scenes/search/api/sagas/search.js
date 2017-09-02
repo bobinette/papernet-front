@@ -16,7 +16,7 @@ function* search(token, q, limit, offset, sources) {
   yield put({ type: SEARCH_LOADING_STOP });
 
   if (error) {
-    toastr.error('Error getting search results', `Error: ${error}`);
+    toastr.error('Error getting search results', `Error: ${error.json.error}`);
     return;
   }
 
