@@ -7,7 +7,7 @@ import { SEARCH_IMPORT, SEARCH_IMPORTED } from '../constants';
 function* importPaper(token, paper) {
   const { response, error } = yield call(searchApi.importPaper, token, paper);
   if (error) {
-    toastr.error('Error importing paper', `Error: ${error}`);
+    toastr.error('Error importing paper', `Error: ${error.json.error}`);
     return;
   }
 

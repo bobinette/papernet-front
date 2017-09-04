@@ -18,7 +18,7 @@ function* kick(token, teamID, userID) {
     );
     yield put({ type: TEAMS_FETCH });
   } catch (error) {
-    toastr.error('Could not kick user', `Error: ${error}`);
+    toastr.error('Could not kick user', `Error: ${error.json.error}`);
   }
 }
 

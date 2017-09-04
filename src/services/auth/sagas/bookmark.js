@@ -14,7 +14,7 @@ export function* watchBookmarkSaga() {
     const { user, error } = yield call(authApi.bookmark, token, paperId, bookmark);
 
     if (error) {
-      toastr.error('Error bookmarking', `Error: ${error}`);
+      toastr.error('Error bookmarking', `Error: ${error.json.error}`);
       return;
     }
 

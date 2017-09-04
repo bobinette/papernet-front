@@ -18,7 +18,7 @@ function* deleteGen(token, teamID) {
     );
     yield put({ type: TEAMS_FETCH });
   } catch (error) {
-    toastr.error('', `Error deleting team: ${error.json && error.json.message ? error.json.message : null}`);
+    toastr.error('', `Error deleting team: ${error.json && error.json.error ? error.json.error : null}`);
   }
 }
 

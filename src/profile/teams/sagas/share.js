@@ -18,7 +18,7 @@ function* share(token, teamId, paperId, canEdit) {
     );
     yield put({ type: TEAMS_FETCH });
   } catch (error) {
-    toastr.error('', `Error inviting: ${error.json && error.json.message ? error.json.message : null}`);
+    toastr.error('', `Error inviting: ${error.json && error.json.error ? error.json.error : null}`);
   }
 }
 

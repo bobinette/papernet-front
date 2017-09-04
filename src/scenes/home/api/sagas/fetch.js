@@ -3,7 +3,7 @@ import { toastr } from 'react-redux-toastr';
 
 import { TOKEN_RECEIVE, USER_SIGN_OUT } from 'services/auth/constants';
 
-import fetchApi from '../.';
+import homeApi from '../.';
 import {
   PAPER_LIST_FETCH,
   PAPER_LIST_LOADING_START,
@@ -16,11 +16,11 @@ import {
 
 function* fetchList(token, filters, pagination) {
   yield put({ type: PAPER_LIST_LOADING_START });
-  const { response, error } = yield call(fetchApi.fetchList, token, filters, pagination);
+  const { response, error } = yield call(homeApi.fetchList, token, filters, pagination);
   yield put({ type: PAPER_LIST_LOADING_STOP });
 
   if (error) {
-    toastr.error('Error loading papers', `Errors: ${error}`);
+    toastr.error('Error loading papers', `Errors: ${error.json.error}`);
     return;
   }
 

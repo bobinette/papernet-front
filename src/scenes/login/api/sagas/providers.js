@@ -8,7 +8,7 @@ import { PROVIDERS_FETCH, PROVIDERS_RECEIVE } from 'scenes/login/api/constants';
 function* fetchProviders() {
   const { providers, error } = yield call(loginApi.fetchProviders);
   if (error) {
-    toastr.error('Error fetching login providers', `Error: ${error}`);
+    toastr.error('Error fetching login providers', `Error: ${error.json.error}`);
     return;
   }
   yield put({ type: PROVIDERS_RECEIVE, providers });

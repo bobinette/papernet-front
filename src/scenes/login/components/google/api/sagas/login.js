@@ -7,7 +7,7 @@ import { GOOGLE_LOGIN_URL_FETCH } from 'scenes/login/components/google/api/const
 function* gotoLoginURL() {
   const { url, error } = yield call(googleApi.fetchLoginUrl);
   if (error) {
-    toastr.error('Error calling google API', `Error: ${error}`);
+    toastr.error('Error calling google API', `Error: ${error.json.error}`);
     return;
   }
 

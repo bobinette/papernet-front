@@ -9,7 +9,7 @@ import fileLoaderApi from '../.';
 function* loadFile(file) {
   const { content, error } = yield call(fileLoaderApi.loadFile, file);
   if (error) {
-    toastr.error('Error loading file', `Error: ${error}`);
+    toastr.error('Error loading file', `Error: ${error.json.error}`);
     return;
   }
 

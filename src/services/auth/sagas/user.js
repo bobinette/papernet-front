@@ -13,7 +13,7 @@ function* fetchUser(token) {
   const { user, error } = yield call(authApi.fetchUser, token);
 
   if (error) {
-    toastr.error('Error authenticating', `Error: ${error}`);
+    toastr.error('Error authenticating', `Error: ${error.json.error}`);
     return;
   }
 
