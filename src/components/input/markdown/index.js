@@ -5,6 +5,8 @@ import classNames from 'classnames';
 import TextArea from 'components/input/textarea';
 import Markdown from 'components/markdown';
 
+import './markdown.scss';
+
 class MarkdownInput extends Component {
   static propTypes = {
     autoresize: PropTypes.bool,
@@ -74,9 +76,8 @@ class MarkdownInput extends Component {
           <Markdown text={value} />
           :
           <TextArea
-            is
             autoresize={autoresize}
-            className="TextArea__InputField"
+            className="MarkdownInput__TextArea"
             onChange={onChange}
             placeholder={placeholder}
             value={value}

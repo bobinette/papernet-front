@@ -22,7 +22,7 @@ import 'style/toastr.scss';
 import App from 'app';
 
 // Paper page
-import { PaperEditContainer, PaperViewContainer, paperReducer } from 'paper';
+import { PaperViewContainer, paperReducer } from 'paper';
 
 // Profile page
 import { ProfileContainer, profileReducer } from 'profile';
@@ -34,9 +34,10 @@ import { Privacy, TermsOfUse } from 'legal';
 import Footer from 'components/footer';
 
 // Scenes
-import HomeContainer, { homeReducer } from 'scenes/home';
-import ImportContainer, { importsReducer } from 'scenes/imports';
-import LoginContainer, { GoogleLogin, loginReducer } from 'scenes/login';
+import EditPaperScene, { editPaperReducer } from 'scenes/edit-paper';
+import HomeScene, { homeReducer } from 'scenes/home';
+import ImportScene, { importsReducer } from 'scenes/imports';
+import LoginScene, { GoogleLogin, loginReducer } from 'scenes/login';
 import SearchScene, { searchReducer } from 'scenes/search';
 
 // Reducers
@@ -48,6 +49,7 @@ import rootSaga from 'sagas';
 // Create store
 const reducers = {
   auth: authReducer,
+  editPaper: editPaperReducer,
   home: homeReducer,
   imports: importsReducer,
   login: loginReducer,
@@ -73,16 +75,16 @@ ReactDOM.render(
         <Router history={browserHistory}>
           <Route path="/">
             <IndexRedirect to="/papers" />
-            <Route path="papers" component={HomeContainer} />
-            <Route path="papers/new" component={PaperEditContainer} />
+            <Route path="papers" component={HomeScene} />
+            <Route path="papers/new" component={EditPaperScene} />
             <Route path="papers/:id" component={PaperViewContainer} />
-            <Route path="papers/:id/edit" component={PaperEditContainer} />
+            <Route path="papers/:id/edit" component={EditPaperScene} />
             <Route path="login">
-              <IndexRoute component={LoginContainer} />
+              <IndexRoute component={LoginScene} />
               <Route path="google" component={GoogleLogin} />
             </Route>
             <Route path="search" component={SearchScene} />
-            <Route path="imports" component={ImportContainer} />
+            <Route path="imports" component={ImportScene} />
             <Route path="privacy" component={Privacy} />
             <Route path="terms-of-use" component={TermsOfUse} />
             <Route path="profile" component={ProfileContainer} />
