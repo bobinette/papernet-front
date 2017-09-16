@@ -29,6 +29,7 @@ export default (state = initialState, action) => {
       break;
     case EDIT_PAPER_RECEIVE:
       newState = newState.set('loading', false);
+      newState = newState.set('canLeave', true);
       newState = newState.set('paper', fromJS(action.paper));
       break;
     case EDIT_PAPER_RESET:

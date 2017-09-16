@@ -17,7 +17,13 @@ import MarkdownEdit from 'components/input/markdown';
 import GoogleDriveModal from './components/google-drive-modal';
 import ReferencesList from './components/references';
 
-import { EDIT_PAPER_FETCH, EDIT_PAPER_RESET, EDIT_PAPER_UPDATE, EDIT_PAPER_REQUIRE_DRIVE } from './api/constants';
+import {
+  EDIT_PAPER_FETCH,
+  EDIT_PAPER_RESET,
+  EDIT_PAPER_UPDATE,
+  EDIT_PAPER_SAVE,
+  EDIT_PAPER_REQUIRE_DRIVE,
+} from './api/constants';
 
 import './scene.scss';
 
@@ -25,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
   fetchPaper: id => dispatch({ type: EDIT_PAPER_FETCH, id }),
   requireDrive: url => dispatch({ type: EDIT_PAPER_REQUIRE_DRIVE, currentURL: url }),
   onChange: (key, value) => dispatch({ type: EDIT_PAPER_UPDATE, key, value }),
-  onSave: () => console.log('save'),
+  onSave: stay => dispatch({ type: EDIT_PAPER_SAVE, stay }),
   resetPaper: () => dispatch({ type: EDIT_PAPER_RESET }),
 });
 
@@ -76,7 +82,7 @@ class EditPaperScene extends PureComponent {
     this.onCloseModal = this.onCloseModal.bind(this);
     this.onGoogleDrive = this.onGoogleDrive.bind(this);
 
-    this.state = { modalOpen: true };
+    this.state = { modalOpen: false };
   }
 
   componentWillMount() {
@@ -104,8 +110,11 @@ class EditPaperScene extends PureComponent {
   }
 
   onCloseModal(references) {
-    const { paper } = this.props;
-    this.onChange('references', paper.get('references').concat(references));
+    if (references.size > 0) {
+      const { paper } = this.props;
+      this.onChange('references', paper.get('references').concat(references));
+    }
+
     this.setState({ modalOpen: false });
   }
 
@@ -149,9 +158,9 @@ class EditPaperScene extends PureComponent {
         <NavBar activeTab={NAVBAR_HOME}>
           <SplitDropdown
             btnStyle="inverse-primary"
-            onClick={() => onSave(true)}
+            onClick={() => onSave(false)}
             menu={[
-              <button key="save-and-stay" className="btn dropdown-item" onClick={() => onSave(false)}>
+              <button key="save-and-stay" className="btn dropdown-item" onClick={() => onSave(true)}>
                 Save (stay)
               </button>,
               <div key="dropdown-divider-1" className="dropdown-divider" />,

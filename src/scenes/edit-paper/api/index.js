@@ -16,6 +16,20 @@ export default {
     }
   },
 
+  async save(token, paper) {
+    const headers = new Headers({
+      Authorization: `Bearer ${token}`,
+    });
+
+    try {
+      const url = paper.get('id') ? `/paper/v2/papers/${paper.get('id')}` : '/paper/v2/papers';
+      const response = await fetch(url, { method: 'POST', headers, body: JSON.stringify(paper.toJS()) });
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
   async checkDriveAccess(token) {
     const headers = new Headers({
       Authorization: `Bearer ${token}`,

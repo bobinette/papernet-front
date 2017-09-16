@@ -56,8 +56,10 @@ class GoogleDriveModal extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    this.props.loadFiles('');
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isOpen && !this.props.isOpen) {
+      this.props.loadFiles('');
+    }
   }
 
   onAddReferences() {
