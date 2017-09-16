@@ -17,7 +17,7 @@ const GoogleLogin = ({ onLogin }) => (
       className="GoogleLogin__Content btn btn-link offset-md-3 col-md-6"
       onClick={onLogin}
     >
-      <img className="GoogleLogin__Logo" height="30" src={googleLogo} alt="google loge" />
+      <img className="GoogleLogin__Logo" height="30" src={googleLogo} alt="google login" />
       <span className="GoogleLogin__Text">Sign in with Google</span>
     </button>
   </div>

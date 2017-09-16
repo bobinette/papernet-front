@@ -1,4 +1,5 @@
 import fetch from 'api';
+import qs from 'qs';
 
 export default {
   async fetchPaper(token, id) {
@@ -15,13 +16,27 @@ export default {
     }
   },
 
-  async requireDrive(token) {
+  async checkDriveAccess(token) {
     const headers = new Headers({
       Authorization: `Bearer ${token}`,
     });
 
     try {
-      const url = '/google/drive/require';
+      const url = '/google/drive';
+      const response = await fetch(url, { method: 'GET', headers });
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
+  async requireDrive(token, currentURL) {
+    const headers = new Headers({
+      Authorization: `Bearer ${token}`,
+    });
+
+    try {
+      const url = `/google/drive/require?${qs.stringify({ fromURL: currentURL }, { skipNulls: true })}`;
       const response = await fetch(url, { method: 'GET', headers });
       return { response };
     } catch (error) {

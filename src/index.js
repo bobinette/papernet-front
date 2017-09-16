@@ -35,6 +35,7 @@ import Footer from 'components/footer';
 
 // Scenes
 import EditPaperScene, { editPaperReducer } from 'scenes/edit-paper';
+import googleDriveReducer from 'scenes/edit-paper/components/google-drive-modal/api/reducer';
 import HomeScene, { homeReducer } from 'scenes/home';
 import ImportScene, { importsReducer } from 'scenes/imports';
 import LoginScene, { GoogleLogin, loginReducer } from 'scenes/login';
@@ -50,6 +51,7 @@ import rootSaga from 'sagas';
 const reducers = {
   auth: authReducer,
   editPaper: editPaperReducer,
+  googleDrive: googleDriveReducer,
   home: homeReducer,
   imports: importsReducer,
   login: loginReducer,
@@ -63,7 +65,7 @@ const sagaMiddleware = createSagaMiddleware();
 const middlewares = compose(
   applyMiddleware(thunkMiddleware),
   applyMiddleware(sagaMiddleware),
-  window.devToolsExtension ? window.devToolsExtension() : f => f,
+  window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 const store = createStore(reducer, middlewares);
 sagaMiddleware.run(rootSaga);
@@ -93,14 +95,8 @@ ReactDOM.render(
       </div>
       <Footer />
 
-      <ReduxToastr
-        newestOnTop
-        preventDuplicates
-        timeOut={5000}
-        transitionIn="fadeIn"
-        transitionOut="fadeOut"
-      />
+      <ReduxToastr newestOnTop preventDuplicates timeOut={5000} transitionIn="fadeIn" transitionOut="fadeOut" />
     </App>
   </Provider>,
-  document.getElementById('app'),
+  document.getElementById('app')
 );

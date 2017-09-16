@@ -1,0 +1,15 @@
+.CheckBox {
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.CheckBox__Tick {
+    width: 16px;
+    height: 16px;
+
+    margin-right: 0.2rem;
+}
+
+.CheckBox__Input {
+    display: none;
+}
