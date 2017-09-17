@@ -7,16 +7,16 @@ import { watchFetchUserSaga, watchSignOutSaga } from './user';
 import { watchBookmarkSaga } from './bookmark';
 
 export default function* sagas() {
-    yield [
-        // Cookie
-        takeEvery(TOKEN_COOKIE_LOAD, loadCookie),
-        takeEvery(TOKEN_RECEIVE, saveCookie),
+  yield [
+    // Cookie
+    takeEvery(TOKEN_COOKIE_LOAD, loadCookie),
+    takeEvery(TOKEN_RECEIVE, saveCookie),
 
-        // User
-        fork(watchFetchUserSaga),
-        fork(watchSignOutSaga),
+    // User
+    fork(watchFetchUserSaga),
+    fork(watchSignOutSaga),
 
-        // Bookmark
-        fork(watchBookmarkSaga),
-    ];
+    // Bookmark
+    fork(watchBookmarkSaga),
+  ];
 }

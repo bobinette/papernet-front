@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
+import { Link, browserHistory } from 'react-router';
 
+import SplitDropdown from 'components/dropdown/split';
 import NavBar, { NAVBAR_HOME } from 'components/navbar';
 
 import { USER_BOOKMARK } from 'services/auth/constants';
@@ -58,13 +60,7 @@ class HomeScene extends PureComponent {
       return <NoUserState />;
     }
 
-    if (
-      user.getIn(['user', 'id'])
-      && (
-        !user.getIn(['user', 'canSee'])
-        || user.getIn(['user', 'canSee']).size === 0
-      )
-    ) {
+    if (user.getIn(['user', 'id']) && (!user.getIn(['user', 'canSee']) || user.getIn(['user', 'canSee']).size === 0)) {
       return <HomeEmptyState />;
     }
 
@@ -72,12 +68,7 @@ class HomeScene extends PureComponent {
       <div>
         <SearchBar />
         <div className="HomeView__Content row">
-          <HomeFilters
-            className="col-md-3"
-            facets={facets}
-            filters={filters}
-            onFilterChange={onFilterChange}
-          />
+          <HomeFilters className="col-md-3" facets={facets} filters={filters} onFilterChange={onFilterChange} />
           <HomeList
             className="col-md-9"
             pagination={pagination}
@@ -97,13 +88,20 @@ class HomeScene extends PureComponent {
     return (
       <div className="container">
         <NavBar activeTab={NAVBAR_HOME}>
-          {user.getIn(['token', 'token']) &&
-            <a className="btn btn-inverse-primary" href="/papers/new">New</a>
-          }
+          {user.getIn(['token', 'token']) && (
+            <SplitDropdown
+              btnStyle="inverse-primary"
+              onClick={() => browserHistory.push('/papers/new')}
+              menu={[
+                <Link key="cancel" className="btn dropdown-item" to="/imports">
+                  Import
+                </Link>,
+              ]}
+              title="New"
+            />
+          )}
         </NavBar>
-        <div className="HomeScene container">
-          {this.renderScene()}
-        </div>
+        <div className="HomeScene container">{this.renderScene()}</div>
       </div>
     );
   }
