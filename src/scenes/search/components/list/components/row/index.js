@@ -8,7 +8,6 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import Tooltip from 'rc-tooltip';
-import 'rc-tooltip/assets/bootstrap.css';
 
 import ReadMoreMarkdown from 'components/markdown/read-more';
 import TagList from 'components/taglist';
@@ -19,10 +18,10 @@ import { SEARCH_IMPORT } from '../../../../api/constants';
 
 import './row.scss';
 
-const extractAbstract = (text) => {
+const extractAbstract = text => {
   const stops = ['#', '\n'];
   let end = text.length;
-  stops.forEach((stop) => {
+  stops.forEach(stop => {
     const i = text.indexOf(stop);
     if (i > 0 && i < end) {
       end = i;
@@ -35,10 +34,7 @@ const extractAbstract = (text) => {
 const ImportButton = ({ paperID, onImport }) => {
   if (paperID !== 0) {
     return (
-      <Link
-        className="btn btn-sm btn-outline-primary"
-        to={`papers/${paperID}`}
-      >
+      <Link className="btn btn-sm btn-outline-primary" to={`papers/${paperID}`}>
         See on Papernet
       </Link>
     );
@@ -90,11 +86,7 @@ const SearchListRow = ({ onImport, paper }) => {
           </a>
         </div>
         <p className="card-text">
-          <small
-            className="text-muted"
-            data-for={paper.get('id').toString()}
-            data-tip
-          >
+          <small className="text-muted" data-for={paper.get('id').toString()} data-tip>
             <Tooltip
               placement="bottom"
               mouseEnterDelay={0.3}

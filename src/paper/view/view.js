@@ -7,7 +7,6 @@ import moment from 'moment';
 
 import PropTypes from 'prop-types';
 import Tooltip from 'rc-tooltip';
-import 'rc-tooltip/assets/bootstrap.css';
 
 import SplitDropdown from 'components/dropdown/split';
 import Markdown from 'components/markdown';
@@ -52,7 +51,7 @@ class PaperView extends Component {
   }
 
   onSelectTeam(teamID) {
-    return (e) => {
+    return e => {
       const { shareWith } = this.state;
       if (e.target.checked) {
         if (shareWith.indexOf(teamID) === -1) {
@@ -96,15 +95,13 @@ class PaperView extends Component {
       <div>
         <h2>References</h2>
         <ul>
-          {
-            references.map((ref) => {
-              let elt = ref;
-              if (elt.match(urlRegex)) {
-                elt = <a href={ref}>{ref}</a>;
-              }
-              return <li key={ref}>{elt}</li>;
-            })
-          }
+          {references.map(ref => {
+            let elt = ref;
+            if (elt.match(urlRegex)) {
+              elt = <a href={ref}>{ref}</a>;
+            }
+            return <li key={ref}>{elt}</li>;
+          })}
         </ul>
       </div>
     );
@@ -120,9 +117,13 @@ class PaperView extends Component {
         btnStyle="inverse-primary"
         onClick={() => browserHistory.push(`/papers/${paper.get('id')}/edit`)}
         menu={[
-          <button key="share" className="btn dropdown-item" onClick={this.onOpenShareDialog}>Share</button>,
+          <button key="share" className="btn dropdown-item" onClick={this.onOpenShareDialog}>
+            Share
+          </button>,
           <div key="dropdown-divider-1" className="dropdown-divider" />,
-          <button key="delete" className="btn dropdown-item" onClick={onDelete}>Delete</button>,
+          <button key="delete" className="btn dropdown-item" onClick={onDelete}>
+            Delete
+          </button>,
         ]}
         title="Edit"
       />
@@ -137,19 +138,13 @@ class PaperView extends Component {
 
     return (
       <div className="PaperView">
-        <NavBar activeTab={NAVBAR_HOME}>
-          {this.renderSplitButton()}
-        </NavBar>
-        { paper.get('id') &&
+        <NavBar activeTab={NAVBAR_HOME}>{this.renderSplitButton()}</NavBar>
+        {paper.get('id') && (
           <div>
             <div className="PaperView__Content row">
               <TagList className="col-md-10 offset-md-1" tags={tags} />
-              <div className="col-md-10 offset-md-1" >
-                <small
-                  className="text-muted"
-                  data-for={paper.get('id').toString()}
-                  data-tip
-                >
+              <div className="col-md-10 offset-md-1">
+                <small className="text-muted" data-for={paper.get('id').toString()} data-tip>
                   <Tooltip
                     placement="bottom"
                     mouseEnterDelay={0.3}
@@ -174,7 +169,7 @@ class PaperView extends Component {
               teams={teams}
             />
           </div>
-        }
+        )}
       </div>
     );
   }

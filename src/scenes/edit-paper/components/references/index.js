@@ -24,8 +24,7 @@ const ReferencesList = ({ className, hasAccessToDrive, onChange, onGoogleDrive, 
         mouseEnterDelay={0.3}
         overlay={
           <small>
-            Reference files from your Google Drive
-            {!hasAccessToDrive && ' (you will need to give Papernet the permission to access your Google Drive)'}
+            {hasAccessToDrive ? 'Reference files from your Google Drive' : 'Allow access to your Google Drive'}
           </small>
         }
       >
