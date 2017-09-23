@@ -1,5 +1,3 @@
-import { toastr } from 'react-redux-toastr';
-
 function readFile(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -8,19 +6,22 @@ function readFile(file) {
     };
 
     try {
-      reader.readAsText(file);
+      reader.readAsDataURL(file);
     } catch (error) {
-      toastr.error('Error reading file', `Error: ${error.message}`);
       reject(error);
     }
   });
 }
 
 export default {
-  async loadFile(file) {
+  async load(file) {
     try {
       const content = await readFile(file);
-      return { content };
+      const re = /data:([a-zA-Z]+\/[a-zA-Z]+)?;base64,(.+)/;
+      const matches = re.exec(content);
+      const filetype = matches[1];
+      const data = matches[2];
+      return { filetype, data };
     } catch (error) {
       return { error };
     }

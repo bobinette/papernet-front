@@ -1,9 +1,6 @@
 {
   "extends": "eslint-config-airbnb",
-  "plugins": [
-    "react",
-    "import"
-  ],
+  "plugins": ["react", "import"],
   "settings": {
     "import/parser": "babel-eslint",
     "import/resolver": {
@@ -18,11 +15,13 @@
     "jest": true
   },
   "rules": {
-    "new-cap": [2, {"capIsNewExceptions": ["List", "Map", "OrderedSet", "Range"]}],
-    "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}],
-    "react/no-unused-prop-types": [1, {"skipShapeProps": true}],
-    "max-len": [1, {"ignoreTrailingComments": true, "code": 120}],
+    "arrow-parens": [0],
+    "new-cap": [2, { "capIsNewExceptions": ["List", "Map", "OrderedSet", "Range"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/no-unused-prop-types": [1, { "skipShapeProps": true }],
+    "max-len": [1, { "ignoreTrailingComments": true, "code": 120 }],
     "no-continue": [0],
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js"]}]
+    "import/prefer-default-export": [0],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.test.js"] }]
   }
 }

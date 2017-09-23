@@ -1,6 +1,8 @@
 @import "~bootstrap/scss/_variables.scss";
 
-.TagList {
+.TagListInput {
+	font-size: 0.8rem;
+
 	input {
 		background: transparent;
 
@@ -13,5 +15,96 @@
 		}
 
 		width: 100%;
+	}
+
+	.TagListInput__Tags {
+		display: flex;
+		flex-wrap: wrap;
+		padding: 5px;
+
+		.TagListInput__Tag {
+			border: 1px solid $gray-light;
+			border-radius: $border-radius;
+
+			background: $body-bg;
+			color: $body-color;
+
+			margin: 2.5px;
+			padding: 5px 10px;
+
+			display: flex;
+			align-items: baseline;
+
+			.fa {
+				padding-top: 2px;
+				margin: 0;
+				margin-left: 2.5px;
+
+				cursor: pointer;
+			}
+
+			button {
+				background: none;
+				border: none;
+
+				&:hover {
+					color: $brand-danger;
+				}
+			}
+		}
+	}
+
+	input {
+		background: transparent;
+
+		outline: none;
+		border: none;
+		border-bottom: 1px solid $gray-lighter;
+
+		&:hover, &:focus {
+			border-color: $gray-light;
+		}
+
+		width: 100%;
+	}
+
+	.react-autosuggest__container {
+	  position: relative;
+
+	  ul {
+		padding: 0;
+		margin: 0;
+		list-style-type: none;
+	  }
+	}
+
+	.react-autosuggest__suggestions-container {
+	  display: none;
+	}
+
+	.react-autosuggest__container--open .react-autosuggest__suggestions-container {
+		display: block;
+		position: absolute;
+		top: 96%;
+		width: 100%;
+		border: 1px solid $gray-lighter;
+		background-color: $body-bg;
+		color: $body-color;
+		border-bottom-left-radius: 4px;
+		border-bottom-right-radius: 4px;
+		z-index: 2;
+	}
+
+	.react-autosuggest__suggestion {
+		cursor: pointer;
+		padding: 10px 10px;
+	}
+
+	.react-autosuggest__suggestion--focused {
+		background-color: $gray-lighter;
+	}
+
+	.react-autosuggest__section-container:first-child .react-autosuggest__section-title {
+	  border-top: 0;
 	}
 }

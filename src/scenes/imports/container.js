@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 
-import NavBar, { NAVBAR_IMPORTS } from 'components/navbar';
+import NavBar, { NAVBAR_NONE } from 'components/navbar';
 
 // Old school
 import { savePaper } from 'paper/actions';
@@ -37,9 +37,7 @@ class ImportContainer extends Component {
     const { dispatch, papers } = this.props;
 
     dispatch({ type: IMPORTS_IMPORT_START });
-    Promise.all(papers.map(paper =>
-      dispatch(savePaper(paper)),
-    )).then(
+    Promise.all(papers.map(paper => dispatch(savePaper(paper)))).then(
       () => dispatch({ type: IMPORTS_IMPORT_DONE }),
       () => dispatch({ type: IMPORTS_IMPORT_DONE }),
     );
@@ -49,14 +47,9 @@ class ImportContainer extends Component {
     const { loading, imported, papers } = this.props;
     return (
       <div className="ImportContainer">
-        <NavBar activeTab={NAVBAR_IMPORTS} />
+        <NavBar activeTab={NAVBAR_NONE} />
         <div className="container">
-          <ImportView
-            loading={loading}
-            imported={imported}
-            papers={papers}
-            onImport={this.onImport}
-          />
+          <ImportView loading={loading} imported={imported} papers={papers} onImport={this.onImport} />
         </div>
       </div>
     );

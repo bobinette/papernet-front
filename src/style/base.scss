@@ -1,35 +1,44 @@
 @import 'colors.scss';
 @import 'variables.scss';
 
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/bootstrap';
+
+@import '~rc-tooltip/assets/bootstrap.css';
 
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
 body {
-	font-family: 'Source Sans Pro', 'Roboto', Arial, sans-serif;
+    font-family: 'Source Sans Pro', 'Roboto', Arial, sans-serif;
 
     // Make readability great again
     font-size: 1.1rem;
     line-height: 1.7rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	font-family: 'Lato', Arial, sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Lato', Arial, sans-serif;
 }
 
 a:focus {
-	text-decoration: none;
-	outline: none;
+    text-decoration: none;
+    outline: none;
 }
 
-.btn:focus, .btn:focus:active {
-	outline: none;
+.btn:focus,
+.btn:focus:active {
+    outline: none;
 }
 
 .btn.btn-link {
-    &:focus:active, &:focus {
+    &:focus:active,
+    &:focus {
         outline: none;
     }
 }

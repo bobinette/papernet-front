@@ -4,6 +4,7 @@ import { fork } from 'redux-saga/effects';
 import authSagas from 'services/auth/sagas';
 
 // Scenes
+import editPaperSagas from 'scenes/edit-paper/api/sagas';
 import homeSagas from 'scenes/home/api/sagas';
 import importsSagas from 'scenes/imports/api/sagas';
 import loginSagas from 'scenes/login/api/sagas';
@@ -18,6 +19,7 @@ export default function* rootSaga() {
     fork(authSagas),
 
     // Scenes
+    fork(editPaperSagas),
     fork(homeSagas),
     fork(importsSagas),
     fork(loginSagas),

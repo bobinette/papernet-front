@@ -8,7 +8,6 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import Tooltip from 'rc-tooltip';
-import 'rc-tooltip/assets/bootstrap.css';
 
 import TagList from 'components/taglist';
 import ReadMoreMarkdown from 'components/markdown/read-more';
@@ -17,10 +16,10 @@ import { paperPropType, userPropType } from 'utils/constants';
 
 import './row.scss';
 
-const extractAbstract = (text) => {
+const extractAbstract = text => {
   const stops = ['#', '\n'];
   let end = text.length;
-  stops.forEach((stop) => {
+  stops.forEach(stop => {
     const i = text.indexOf(stop);
     if (i >= 0 && i < end) {
       end = i;
@@ -53,11 +52,7 @@ const HomeListRow = ({ onBookmark, paper, user }) => {
           <h5 className="card-title">{paper.get('title')}</h5>
           <ReadMoreMarkdown text={abstract} />
           <p className="card-text">
-            <small
-              className="text-muted"
-              data-for={paper.get('id').toString()}
-              data-tip
-            >
+            <small className="text-muted" data-for={paper.get('id').toString()} data-tip>
               <Tooltip
                 placement="bottom"
                 mouseEnterDelay={0.3}
@@ -74,13 +69,14 @@ const HomeListRow = ({ onBookmark, paper, user }) => {
           <i className="fa fa-tag" />
           <TagList tags={tags} max={5} />
         </div>
-        {user && onBookmark &&
+        {user &&
+        onBookmark && (
           <div className="HomeListRow__Bookmark">
             <button onClick={() => onBookmark(paper.get('id'), !bookmarked)}>
               <i className={classNames(bookmarkClasses)} />
             </button>
           </div>
-        }
+        )}
       </div>
     </div>
   );

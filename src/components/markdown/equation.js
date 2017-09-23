@@ -8,7 +8,6 @@ import katex from 'katex';
 import PropTypes from 'prop-types';
 
 import Tooltip from 'rc-tooltip';
-import 'rc-tooltip/assets/bootstrap.css';
 
 const Equation = ({ equation }) => {
   let elt;
@@ -17,7 +16,8 @@ const Equation = ({ equation }) => {
     elt = (
       <span
         className="Equation__Equation"
-        dangerouslySetInnerHTML={{  // eslint-disable-line react/no-danger
+        dangerouslySetInnerHTML={{
+          // eslint-disable-line react/no-danger
           __html: katex.renderToString(equation, { displayMode: true }),
         }}
       />
@@ -39,12 +39,7 @@ const Equation = ({ equation }) => {
       {elt}
       <div>
         <ClipboardButton className="btn btn-outline-primary btn-sm" data-clipboard-text={equation}>
-          <Tooltip
-            placement="top"
-            trigger={['click']}
-            mouseEnterDelay={0.1}
-            overlay="Copied!"
-          >
+          <Tooltip placement="top" trigger={['click']} mouseEnterDelay={0.1} overlay="Copied!">
             <i className="fa fa-clipboard" />
           </Tooltip>
         </ClipboardButton>
@@ -62,7 +57,8 @@ const InlineEquation = ({ equation }) => {
   try {
     elt = (
       <span
-        dangerouslySetInnerHTML={{  // eslint-disable-line react/no-danger
+        dangerouslySetInnerHTML={{
+          // eslint-disable-line react/no-danger
           __html: katex.renderToString(equation, { displayMode: false }),
         }}
       />
@@ -70,11 +66,7 @@ const InlineEquation = ({ equation }) => {
   } catch (e) {
     elt = (
       <span>
-        <Tooltip
-          placement="bottom"
-          mouseEnterDelay={0.3}
-          overlay={`Could not render equation: ${e.message}`}
-        >
+        <Tooltip placement="bottom" mouseEnterDelay={0.3} overlay={`Could not render equation: ${e.message}`}>
           <code>{equation}</code>
         </Tooltip>
       </span>

@@ -1,0 +1,103 @@
+@import 'src/style/_colors.scss';
+@import '~bootstrap/scss/_variables.scss';
+
+.GoogleDriveModalOverlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba($gray-light, 0.75);
+    z-index: 1050;
+}
+
+.GoogleDriveModal {
+    border: 1px solid $gray-lighter;
+    background: $body-bg;
+
+    overflow: auto;
+
+    border-radius: 4px;
+    outline: none;
+
+    // Center the modal
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; /* Need a specific value to work */
+}
+
+.GoogleDriveModal__Header {
+    padding: 1rem;
+    border-bottom: 1px solid $gray-lighter;
+}
+
+.GoogleDriveModal__SearchAndUpload {
+    display: flex;
+    padding: 0 1rem;
+}
+
+.GoogleDriveModal__SearchBar {
+    width: 100%;
+}
+
+.GoogleDriveModal__FileButton {
+    margin-left: 0.5rem;
+    flex: 0.5;
+}
+
+.GoogleDriveModal__Loading {
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.GoogleDriveModal__Rows {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.GoogleDriveModal__Row {
+    padding: 0.1rem 1rem;
+
+    &:hover {
+        background: lighten($brand-primary, 55%);
+    }
+
+    .CheckBox {
+        width: 100%;
+    }
+}
+
+.GoogleDriveModal__Row__Checkbox {
+    margin-right: 0.5rem;
+}
+
+.GoogleDriveModal__FileButton {
+    text-align: center;
+    width: 100%;
+
+    .fa.fa-upload {
+        margin-right: 0.2rem;
+    }
+}
+
+.GoogleDriveModal__PageInfo {
+    text-align: right;
+    margin: 0 1rem;
+}
+
+.GoogleDriveModal__Footer {
+    text-align: right;
+    padding: 0.5rem;
+    border-top: 1px solid $gray-lighter;
+}
+
+.ReactModal__Body--open {
+    overflow: hidden;
+}

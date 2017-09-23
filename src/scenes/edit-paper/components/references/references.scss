@@ -1,0 +1,24 @@
+.ReferencesList {
+    display: flex;
+
+    margin-top: 1rem;
+}
+
+.ReferencesList__TextList {
+    flex: 1;
+}
+
+.ReferencesList__GoogleDriveButton {
+    width: 32px;
+    height: 32px;
+    padding: 3px;
+    margin-left: 1rem;
+}
+
+.ReferencesList__GoogleToolTip {
+    max-width: 200px;
+}
+
+.desaturate {
+    filter: grayscale(100%);
+}

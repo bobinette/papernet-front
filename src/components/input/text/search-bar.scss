@@ -1,15 +1,13 @@
-@import "~bootstrap/scss/_variables.scss";
+@import '~bootstrap/scss/_variables.scss';
 
 .SearchBar {
 	display: flex;
 	align-items: center;
-	padding: 2.5px;
+	padding: 2.5px 5px;
 
 	background: $body-bg;
 	border: 1px solid lighten($gray-light, 20);
 	border-radius: $border-radius;
-
-	padding: 5px;
 
 	.fa {
 		margin: 0 2px;
@@ -26,4 +24,13 @@
 		border: none;
 		background: transparent;
 	}
+}
+
+.SearchBar__Help {
+	text-align: right;
+	visibility: hidden;
+}
+
+.SearchBar__Help--show {
+	visibility: visible;
 }

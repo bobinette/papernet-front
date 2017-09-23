@@ -11,14 +11,12 @@ const mapDispatchToProps = dispatch => ({
 class FileLoader extends PureComponent {
   static propTypes = {
     onLoadFile: PropTypes.func.isRequired,
-  }
+  };
 
   constructor(props) {
     super(props);
 
     this.onLoadFile = ::this.onLoadFile;
-
-    this.state = { file: '' };
   }
 
   onLoadFile(evt) {
@@ -31,10 +29,7 @@ class FileLoader extends PureComponent {
   render() {
     return (
       <div className="FileLoader">
-        <input
-          type="file"
-          onChange={this.onLoadFile}
-        />
+        <input type="file" onChange={this.onLoadFile} />
       </div>
     );
   }

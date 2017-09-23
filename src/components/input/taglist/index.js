@@ -99,7 +99,7 @@ class TagList extends Component {
     };
 
     return (
-      <div className={`TagList ${className}`}>
+      <div className={`TagListInput ${className}`}>
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -109,9 +109,9 @@ class TagList extends Component {
           inputProps={inputProps}
           onSuggestionSelected={this.onSuggestionSelected}
         />
-        <div className="TagList__Tags">
+        <div className="TagListInput__Tags">
           {value.map((tag, i) => (
-            <div className="TagList__Tag" key={tag}>
+            <div className="TagListInput__Tag" key={tag}>
               <div>{tag}</div>
               <button
                 className="fa fa-times"
