@@ -12,6 +12,7 @@ import NavBar, { NAVBAR_HOME } from 'components/navbar';
 
 import TagList from 'components/input/taglist';
 import TextEdit from 'components/input/text';
+import TextList from 'components/input/textlist';
 import MarkdownEdit from 'components/input/markdown';
 
 import GoogleDriveModal from './components/google-drive-modal';
@@ -78,6 +79,7 @@ class EditPaperScene extends PureComponent {
     this.onTitleChange = this.onChange.bind(this, 'title');
     this.onSummaryChange = this.onChange.bind(this, 'summary');
     this.onReferencesChange = this.onChange.bind(this, 'references');
+    this.onAuthorsChange = this.onChange.bind(this, 'authors');
 
     this.onCloseModal = this.onCloseModal.bind(this);
     this.onGoogleDrive = this.onGoogleDrive.bind(this);
@@ -187,6 +189,12 @@ class EditPaperScene extends PureComponent {
             onGoogleDrive={this.onGoogleDrive}
             placeholder="Add reference..."
             value={paper.get('references')}
+          />
+          <TextList
+            className="ReferencesList__TextList"
+            onChange={this.onAuthorsChange}
+            placeholder="Authors..."
+            value={paper.get('authors')}
           />
         </div>
         <GoogleDriveModal isOpen={modalOpen} onClose={this.onCloseModal} />

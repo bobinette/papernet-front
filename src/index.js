@@ -95,7 +95,7 @@ ReactDOM.render(
       </div>
       <Footer />
 
-      <ReduxToastr newestOnTop preventDuplicates timeOut={5000} transitionIn="fadeIn" transitionOut="fadeOut" />
+      <ReduxToastr newestOnTop preventDuplicates timeOut={2000} transitionIn="fadeIn" transitionOut="fadeOut" />
     </App>
   </Provider>,
   document.getElementById('app'),

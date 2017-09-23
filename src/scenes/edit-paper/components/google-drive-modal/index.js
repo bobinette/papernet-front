@@ -20,6 +20,7 @@ import './google-drive-modal.scss';
 const mapStateToProps = state => ({
   files: state.googleDrive.get('files'),
   loading: state.googleDrive.get('loading'),
+  nextPageToken: state.googleDrive.get('nextPageToken'),
   uploading: state.googleDrive.get('uploading'),
   q: state.googleDrive.get('q'),
 });
@@ -36,12 +37,17 @@ class GoogleDriveModal extends PureComponent {
     isOpen: PropTypes.bool.isRequired,
     loadFiles: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
+    nextPageToken: PropTypes.string,
     onClose: PropTypes.func.isRequired,
     onUploadFile: PropTypes.func.isRequired,
     uploading: PropTypes.bool.isRequired,
     q: ImmutablePropTypes.shape({
       name: PropTypes.string.isRequired,
     }).isRequired,
+  };
+
+  static defaultProps = {
+    nextPageToken: '',
   };
 
   constructor(props) {
@@ -96,7 +102,7 @@ class GoogleDriveModal extends PureComponent {
   }
 
   render() {
-    const { files, isOpen, loading, q, uploading } = this.props;
+    const { files, isOpen, loading, nextPageToken, q, uploading } = this.props;
     const { selected } = this.state;
 
     return (
@@ -148,6 +154,13 @@ class GoogleDriveModal extends PureComponent {
               ))}
             </ul>
           )}
+          <div className="text-muted GoogleDriveModal__PageInfo">
+            {nextPageToken !== '' && (
+              <small>
+                Showing only {files.size} results. If you do not see the file you want please use the search bar
+              </small>
+            )}
+          </div>
         </div>
         <div className="GoogleDriveModal__Footer">
           <button type="button" className="btn btn-link" onClick={this.onCancel}>

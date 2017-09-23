@@ -16,6 +16,7 @@ const initialState = fromJS({
   files: [],
   loading: false,
   uploading: false,
+  nextPageToken: '',
 });
 
 export default (state = initialState, action) => {
@@ -29,9 +30,11 @@ export default (state = initialState, action) => {
       break;
     case GOOGLE_DRIVE_FILES_RECEIVED:
       newState = newState.set('files', fromJS(action.files));
+      newState = newState.set('nextPageToken', action.nextPageToken);
       break;
     case GOOGLE_DRIVE_LIST_FILES_LOADING:
       newState = newState.set('loading', action.loading);
+      newState = newState.set('nextPageToken', '');
       break;
     case GOOGLE_DRIVE_UPLOAD_FILE_LOADING:
       newState = newState.set('uploading', action.uploading);

@@ -14,6 +14,7 @@ const initialState = fromJS({
     summary: '',
     tags: [],
     references: [],
+    authors: [],
   },
   canLeave: true,
   loading: false,

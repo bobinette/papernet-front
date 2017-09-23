@@ -59,6 +59,7 @@
 .GoogleDriveModal__Rows {
     list-style: none;
     padding-left: 0;
+    margin-bottom: 0;
 }
 
 .GoogleDriveModal__Row {
@@ -84,6 +85,11 @@
     .fa.fa-upload {
         margin-right: 0.2rem;
     }
+}
+
+.GoogleDriveModal__PageInfo {
+    text-align: right;
+    margin: 0 1rem;
 }
 
 .GoogleDriveModal__Footer {

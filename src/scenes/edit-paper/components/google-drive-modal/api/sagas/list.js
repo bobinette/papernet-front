@@ -19,5 +19,5 @@ export function* listFiles({ name }) {
     return;
   }
 
-  yield put({ type: GOOGLE_DRIVE_FILES_RECEIVED, files: response.data });
+  yield put({ type: GOOGLE_DRIVE_FILES_RECEIVED, files: response.data, nextPageToken: response.nextPageToken });
 }
