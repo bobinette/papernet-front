@@ -156,7 +156,7 @@ class EditPaperScene extends PureComponent {
     const cancelUrl = paper.get('id') ? `/papers/${paper.get('id')}` : '/papers';
 
     return (
-      <div className="EditPaper container">
+      <div className="EditPaper">
         <NavBar activeTab={NAVBAR_HOME}>
           <SplitDropdown
             btnStyle="inverse-primary"
@@ -173,31 +173,33 @@ class EditPaperScene extends PureComponent {
             title="Save"
           />
         </NavBar>
-        <div className="EditPaper__Content col-md-10 offset-md-1">
-          <TagList onChange={this.onTagsChange} placeholder="Add tag..." value={tags || List()} />
-          <TextEdit className="h3" onChange={this.onTitleChange} placeholder="Title..." value={paper.get('title')} />
-          <MarkdownEdit
-            autoresize
-            onChange={this.onSummaryChange}
-            placeholder="Summary, in markdown format..."
-            value={paper.get('summary')}
-          />
-          <ReferencesList
-            className="EditPaper__References"
-            hasAccessToDrive={hasAccessToDrive}
-            onChange={this.onReferencesChange}
-            onGoogleDrive={this.onGoogleDrive}
-            placeholder="Add reference..."
-            value={paper.get('references') || List()}
-          />
-          <TextList
-            className="ReferencesList__TextList"
-            onChange={this.onAuthorsChange}
-            placeholder="Authors..."
-            value={paper.get('authors') || List()}
-          />
+        <div className="container">
+          <div className="EditPaper__Content col-md-10 offset-md-1">
+            <TagList onChange={this.onTagsChange} placeholder="Add tag..." value={tags || List()} />
+            <TextEdit className="h3" onChange={this.onTitleChange} placeholder="Title..." value={paper.get('title')} />
+            <MarkdownEdit
+              autoresize
+              onChange={this.onSummaryChange}
+              placeholder="Summary, in markdown format..."
+              value={paper.get('summary')}
+            />
+            <ReferencesList
+              className="EditPaper__References"
+              hasAccessToDrive={hasAccessToDrive}
+              onChange={this.onReferencesChange}
+              onGoogleDrive={this.onGoogleDrive}
+              placeholder="Add reference..."
+              value={paper.get('references') || List()}
+            />
+            <TextList
+              className="ReferencesList__TextList"
+              onChange={this.onAuthorsChange}
+              placeholder="Authors..."
+              value={paper.get('authors') || List()}
+            />
+          </div>
+          <GoogleDriveModal isOpen={modalOpen} onClose={this.onCloseModal} />
         </div>
-        <GoogleDriveModal isOpen={modalOpen} onClose={this.onCloseModal} />
       </div>
     );
   }

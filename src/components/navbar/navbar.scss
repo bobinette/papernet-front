@@ -1,15 +1,22 @@
 @import '../../style/_colors.scss';
-@import "~bootstrap/scss/_variables.scss";
+@import '~bootstrap/scss/_variables.scss';
 
-.nav-item > .nav-link{
+.NavBar {
+    margin-bottom: 1rem;
+    border-radius: 0;
+}
+
+.nav-item > .nav-link {
     color: lighten($gray-light, 30);
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         color: $body-bg;
     }
 }
 
-.navbar-brand, .nav-item.active > .nav-link {
+.navbar-brand,
+.nav-item.active > .nav-link {
     color: $body-bg;
 
     &:hover {

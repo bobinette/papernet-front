@@ -17,22 +17,25 @@ const mapStateToProps = state => ({
 });
 
 const SearchScene = ({ loading, results }) => (
-  <div className="container">
+  <div>
     <NavBar activeTab={NAVBAR_SEARCH} />
-    <div className="SearchScene col-md-10 offset-md-1">
-      <SearchBar />
-      {loading &&
-        <div className="SearchScene__Spinner">
-          <Spinner text="Fetching..." />
-        </div>
-      }
-      {!loading && results.get('arxiv') &&
-        <SearchList
-          papers={results.getIn(['arxiv', 'papers'])}
-          pagination={results.getIn(['arxiv', 'pagination'])}
-          source={'arxiv'}
-        />
-      }
+    <div className="container">
+      <div className="SearchScene col-md-10 offset-md-1">
+        <SearchBar />
+        {loading && (
+          <div className="SearchScene__Spinner">
+            <Spinner text="Fetching..." />
+          </div>
+        )}
+        {!loading &&
+        results.get('arxiv') && (
+          <SearchList
+            papers={results.getIn(['arxiv', 'papers'])}
+            pagination={results.getIn(['arxiv', 'pagination'])}
+            source={'arxiv'}
+          />
+        )}
+      </div>
     </div>
   </div>
 );
