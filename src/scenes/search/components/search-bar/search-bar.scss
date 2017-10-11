@@ -3,10 +3,11 @@
 }
 
 .SearchScene__SearchBar__Help {
-    text-align: right;
-    visibility: hidden;
+    display: flex;
+    justify-content: space-between;
+    visibility: visible;
 }
 
-.SearchScene__SearchBar__Help--show {
-    visibility: visible;
+.SearchScene__SearchBar__Help--hide {
+    visibility: hidden;
 }

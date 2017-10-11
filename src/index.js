@@ -34,6 +34,7 @@ import { Privacy, TermsOfUse } from 'legal';
 import Footer from 'components/footer';
 
 // Scenes
+import CronsScene, { cronsReducer } from 'scenes/crons';
 import EditPaperScene, { editPaperReducer } from 'scenes/edit-paper';
 import googleDriveReducer from 'scenes/edit-paper/components/google-drive-modal/api/reducer';
 import HomeScene, { homeReducer } from 'scenes/home';
@@ -50,6 +51,7 @@ import rootSaga from 'sagas';
 // Create store
 const reducers = {
   auth: authReducer,
+  crons: cronsReducer,
   editPaper: editPaperReducer,
   googleDrive: googleDriveReducer,
   home: homeReducer,
@@ -86,6 +88,7 @@ ReactDOM.render(
               <Route path="google" component={GoogleLogin} />
             </Route>
             <Route path="search" component={SearchScene} />
+            <Route path="search/crons" component={CronsScene} />
             <Route path="imports" component={ImportScene} />
             <Route path="privacy" component={Privacy} />
             <Route path="terms-of-use" component={TermsOfUse} />

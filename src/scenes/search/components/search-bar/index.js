@@ -54,16 +54,18 @@ class SearchBar extends PureComponent {
             />
             <i className={classNames('fa', { 'fa-search': !q, 'fa-level-down fa-rotate-90': q })} />
           </div>
-          <div
-            className={classNames('text-muted SearchScene__SearchBar__Help', {
-              'SearchScene__SearchBar__Help--show': q,
-            })}
-          >
-            <small>
-              Press enter to search &#124;
-              <button className="btn btn-sm btn-link" onClick={() => console.log(q)}>
-                Save as cron
-              </button>
+          <div className="text-muted">
+            <small className="SearchScene__SearchBar__Help">
+              <span>
+                <a href="/search/crons">See my crons</a>
+              </span>
+              <span
+                className={classNames({
+                  'SearchScene__SearchBar__Help--hide': !q,
+                })}
+              >
+                Press enter to search
+              </span>
             </small>
           </div>
         </div>
