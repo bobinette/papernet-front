@@ -2,7 +2,7 @@
 
 exports[`Render children 1`] = `
 <nav
-  className="navbar navbar-fixed-top navbar-inverse bg-primary"
+  className="navbar navbar-top navbar-inverse bg-primary NavBar"
 >
   <div
     className="container"

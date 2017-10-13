@@ -72,9 +72,9 @@ class PaperViewContainer extends Component {
   }
 
   onDelete() {
-    this.props.dispatch(deletePaper()).then(
-      () => { browserHistory.push('/papers'); },
-    );
+    this.props.dispatch(deletePaper()).then(() => {
+      browserHistory.push('/papers');
+    });
   }
 
   render() {
@@ -86,7 +86,7 @@ class PaperViewContainer extends Component {
     if (!found) return <NotFoundView />;
 
     return (
-      <div className="PaperContainer container">
+      <div className="PaperContainer">
         <PaperView onDelete={this.onDelete} onShare={this.onShare} paper={paper} teams={teams} />
       </div>
     );

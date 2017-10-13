@@ -140,10 +140,10 @@ class PaperView extends Component {
       <div className="PaperView">
         <NavBar activeTab={NAVBAR_HOME}>{this.renderSplitButton()}</NavBar>
         {paper.get('id') && (
-          <div>
-            <div className="PaperView__Content row">
-              <TagList className="col-md-10 offset-md-1" tags={tags} />
-              <div className="col-md-10 offset-md-1">
+          <div className="container">
+            <div className="PaperView__Content row col-md-10 offset-md-1">
+              <TagList tags={tags} />
+              <div>
                 <small className="text-muted" data-for={paper.get('id').toString()} data-tip>
                   <Tooltip
                     placement="bottom"
@@ -154,7 +154,7 @@ class PaperView extends Component {
                   </Tooltip>
                 </small>
               </div>
-              <div className="col-md-10 offset-md-1">
+              <div>
                 <h1 className="display-4">{paper.get('title')}</h1>
                 <Markdown text={paper.get('summary')} />
                 {this.renderReferences()}

@@ -86,7 +86,7 @@ class HomeScene extends PureComponent {
     const { user } = this.props;
 
     return (
-      <div className="container">
+      <div>
         <NavBar activeTab={NAVBAR_HOME}>
           {user.getIn(['token', 'token']) && (
             <SplitDropdown

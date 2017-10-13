@@ -39,7 +39,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const NavBar = ({ activeTab, children, onLogin, onLogout, user }) => (
-  <nav className="navbar navbar-fixed-top navbar-inverse bg-primary">
+  <nav className="navbar navbar-top navbar-inverse bg-primary NavBar">
     <div className="container">
       <Link className="navbar-brand NavBar__Brand" to={'/papers'}>
         <img className="d-inline-block align-top" src={logo} width="30" height="30" alt="" />
